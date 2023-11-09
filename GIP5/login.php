@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require("startphp.php");
+require("startphp.php");  
 
 $showAlert = false;
 

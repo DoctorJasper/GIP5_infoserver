@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <?php
+require("startphp.php");
 
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php");
+    exit;
+}
+
+require("header.php");
 ?>
 
-<?php require("header.php"); ?>
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-sm-6">

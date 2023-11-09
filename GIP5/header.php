@@ -59,7 +59,15 @@
         <li class="nav-item">
           <a class="nav-link" href="https://go-ao.smartschool.be/helpdesk#!tickets/list/4ca0ce7d-eeb0-4842-802e-8c5701705bcf" target="_blank">Contact</a>
         </li>
-        
+        <?php if (!isset($_SESSION["username"])): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="login.php">login</a>
+            </li>
+        <?php else: ?>
+            <li class="nav-item">
+                <a class="nav-link" href="logout.php">logout</a>
+            </li>
+        <?php endif; ?>
       </ul>
     </div>
   </div>
