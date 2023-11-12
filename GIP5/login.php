@@ -2,6 +2,14 @@
 <?php
 require("startphp.php");  
 
+if (isset($_SESSION["username"]) && isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {
+  header("Location: adminpage.php");
+  exit();
+} elseif (isset($_SESSION["username"])) {
+  header("Location: About.php");
+  exit();
+}
+
 $showAlert = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

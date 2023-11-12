@@ -23,7 +23,6 @@
     {  
         /* PDO object creation. */
         $pdo = new PDO($dsn, $user, $passwd, $options);
-        echo "Database connection OK";
     }
     catch (PDOException $e)
     {
