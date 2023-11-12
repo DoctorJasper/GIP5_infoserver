@@ -3,7 +3,7 @@
 require("startphp.php");
 
 if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
-    header("Location: login.php");
+    header("Location: login.php");  
     exit;
 } elseif (isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
     header("Location: About.php");
