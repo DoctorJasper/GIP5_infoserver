@@ -2,11 +2,14 @@
 <?php 
     require('startphp.php');
 
-    if (!isset($_SESSION['username']) && $_SESSION["admin"] == 0) {
-        //user is reeds aangemeld
+    if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
         header("Location: login.php");
         exit;
+    } elseif (isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
+        header("Location: About.php");
+        exit();
     }
+    
     require('pdo.php');
 
     $query = "SELECT `idGeb`,`GUID`,`userName`,`naam`,`voornaam`,`active`, `admin`, `email`
@@ -52,7 +55,7 @@
                                                             '<i class="bi bi-square"></i>';?> </td>
                             <td>
                                 <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="bi bi-pencil-square text-warning"></i></a>
-                                <i class="bi bi-x-square text-danger"></i>
+                                <a href="userDelete.php?id=<?php echo $row['idGeb']; ?>"><i class="bi bi-x-square text-danger"></i></a>
                                 <i class="bi bi-arrow-clockwise text-info"></i>
                             </td>
                         </tr>

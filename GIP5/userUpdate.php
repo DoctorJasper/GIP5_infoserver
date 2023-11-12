@@ -2,10 +2,12 @@
 <?php
 require("startphp.php");
 
-if (!isset($_SESSION['username'])) {
-    //user is reeds aangemeld
+if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
     header("Location: login.php");
     exit;
+} elseif (isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
+    header("Location: About.php");
+    exit();
 }
 
 require("pdo.php");
