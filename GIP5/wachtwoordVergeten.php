@@ -14,22 +14,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //Update query template
     $query = "SELECT `idGeb`
-    FROM `tblGebruiker` 
-    WHERE `userName`= '$username', `email` = '$email'";
+              FROM `tblGebruiker` 
+              WHERE `userName`= :UN AND `email` = :E";
+
+    $values = [":UN" => $username, ":E" => $email];
 
     //Execute the query
     try {
         $res = $pdo->prepare($query);
-        var_dump($res);
-        die();
-        $res->execute();
-        $showError = false;
-        echo "Connection ok";
+        $res->execute($values);
     } catch (PDOException $e) 
     {
         echo "Query error";
         $showError = true;
         $errorMessage = "Uw username of email kan niet gevonden worden.";
+    }
+
+    if (!$showError) {
+        $rnNumber = password_hash(rand(0000, 9999));
     }
 }
 require("header.php");
