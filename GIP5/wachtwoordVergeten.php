@@ -9,9 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $email = trim($_POST["email"]); 
 
-    //create GUID
-    $GUID = sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
-
     //Update query template
     $query = "SELECT `idGeb`
               FROM `tblGebruiker` 
@@ -31,7 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (!$showError) {
-        $rnNumber = password_hash(rand(0000, 9999));
+        $chars = "abcdefgthi...aABC Z0139";
+        $code = "";
+        for ($i=0; $i<5; $i++) {
+            $randGetal = rand(max length van $chars);
+            $code = $code + $chars[$randGetal];
+        }
     }
 }
 require("header.php");
@@ -52,7 +54,7 @@ require("header.php");
                         <p class="text-danger"><?php if($showError) echo $errorMessage;?></p>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-success">S</button>
+                    <button type="submit" class="btn btn-success">Stuur code</button>
                 </form>
             </div>
             <div class="col-sm-6">
