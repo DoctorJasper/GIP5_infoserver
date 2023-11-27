@@ -64,8 +64,10 @@ require("header.php");
               </div>
               <br>
               <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" required>              
+                <label for="Password">Password:</label>
+                <input type="password" class="form-control" id="Password" name="password" required>   
+                &nbsp;&nbsp;
+                <img src="Images/show.png" alt="eye" style="width: 20px;" id="oogje">           
               </div>
               <a class="nav-link text-primary" href="wachtwoordVergeten.php">wachtwoord vergeten</a>
               <br>
@@ -76,5 +78,20 @@ require("header.php");
       </div>
     </div>
   </div>
+  <script>
+        let teller = 0;
+        let oogje = document.querySelector("#oogje");
+        oogje.addEventListener("click", wwToon);
+        function wwToon() {
+            teller++;
+            if (teller % 2 == 1) {
+                document.getElementById("Password").type = "text";
+                this.src = "Images/hide.png";
+            } else {
+                document.getElementById("Password").type = "password";
+                this.src = "Images/show.png";
+            }
+        }
+    </script>
   </body>
 </html>

@@ -23,8 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $GUID = sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
 
     //Update query template
-    $query = "INSERT INTO `tblGebruiker`(`GUID`,`userName`,`naam`,`voornaam`,`email`,`userPassword`,`admin`)
-              VALUES (:ID, :userName, :naam, :voornaam, :email, :userPassword, :adm)";
+    $query = "UPDATE `tblGebruiker`
+              SET 
+              WHERE ";
 
     //Values array for PDO
     $values = [":ID" => $GUID, ":userName" => $username, ":naam" => $naam, ":voornaam" => $voornaam,
@@ -47,7 +48,9 @@ require("header.php");
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-6">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <a class="btn btn-outline-primary" role="button" href="adminpage.php">Terug</a>
+                <br><br>
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="mb-3">
                         <label for="Username" class="form-label">Gebruikersnaam</label>
                         <input type="text" class="form-control" id="Username" name="username" required>

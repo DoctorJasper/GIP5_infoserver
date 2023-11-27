@@ -12,9 +12,15 @@
     
     require('pdo.php');
 
-    $query = "SELECT `idGeb`,`GUID`,`userName`,`naam`,`voornaam`,`active`, `admin`, `email`
-    FROM `tblGebruiker` 
-    WHERE `active`= 1";//variabele (:username)
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["deleted"])) {  
+        //Update query template
+        $query = "SELECT `idGeb`,`GUID`,`userName`,`naam`,`voornaam`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 0";
+        $deleted = true;
+    } else {
+        //Update query template
+        $query = "SELECT `idGeb`,`GUID`,`userName`,`naam`,`voornaam`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 1";
+        $deleted = false;
+    }
 
     try{
         $res = $pdo->prepare($query);
@@ -32,11 +38,19 @@
         <div class="row">
             <div class="col-sm-12">
                 <a class="btn btn-outline-primary" role="button" href="adminpage.php">Terug</a>
-                <p></p>
-                <h3>Overzicht gerbuikers</h3>
+                <br><br>
+                <span class=float-end>
+                    <?php if ($deleted): ?>
+                        <a href="userOverview.php"><i class="bi bi-person-heart fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>
+                    <?php else: ?>
+                        <a href="userNew.php"><i class="bi bi-person-plus-fill fs-3" data-bs-toggle="tooltip" data-bs-placement="top" title="nieuwe gebruiker"></i></a>                
+                        &nbsp;
+                        <a href="userOverview.php?deleted"><i class="bi bi-person-fill-slash fs-3 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>
+                    <?php endif; ?>
+                </span>
+                <h3>Overzicht <?php if ($deleted) echo "verwijderde"; ?> gebruikers</h3>
                 <table class="table table-hover table-striped">
-            
-               
+                <table class="table table-hover table-striped">
                     <tr>
                         <th>Gebruikersnaam</th>
                         <th>Naam</th>
@@ -55,7 +69,7 @@
                                                             '<i class="bi bi-square"></i>';?> </td>
                             <td>
                                 <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="bi bi-pencil-square text-warning"></i></a>
-                                <a href="userDelete.php?id=<?php echo $row['idGeb']; ?>"><i class="bi bi-x-square text-danger"></i></a>
+                                <i id="Delete" class="bi bi-x-square text-danger" onclick='showModalDelete("<?php echo $row["userName"]; ?>","<?php echo $row["GUID"]; ?>")' data-bs-toggle="modal" data-bs-target="#DeleteUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijder gebruiker"></i>
                                 <i class="bi bi-arrow-clockwise text-info"></i>
                             </td>
                         </tr>
@@ -67,3 +81,59 @@
     </div>
 </div>       
 
+<!-- Modal -->
+<div class="modal fade" id="DeleteUser">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Verwijder gebruiker</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                Ben je zeker dat je gebruiker '<span id="userDEL"></span>' wil verwijderen? 
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuleer</button>
+                <button type="button" value="" id="knopVerwijder" class="btn btn-danger"
+                onclick="deactivateUser(this.value)">Verwijder</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="userDelete.php" method="post" style="display:none" id="userDeleteForm">
+    <input type="hidden" id="userId" name="GUID">
+</form>
+
+
+<script>
+    //DEACTIVEREN
+    function showModalDelete(username, guid) {
+        document.getElementById("userDEL").innerHTML = username;
+        document.getElementById("knopVerwijder").value = guid;
+    }
+
+    function deactivateUser(id) {
+        
+        let idInput = document.querySelector("#userId");
+        idInput.value = id;
+        let form = document.querySelector("#userDeleteForm");
+        form.submit();
+        /*
+        console.log(id);
+        let ajx = new XMLHttpRequest();
+        ajx.onreadystatechange = function () {
+            if (ajx.readyState == 4 && ajx.status == 200) {
+                //console.log(ajx.responseText);
+                location.reload();
+            }
+        };
+        ajx.open("POST", "userDelete.php", true);
+        ajx.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        ajx.send("GUID=" + id);
+        */
+    }
+</script>
