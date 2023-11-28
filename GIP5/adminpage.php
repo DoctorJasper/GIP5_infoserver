@@ -32,29 +32,26 @@ require("HeaderAdminpage.php");
     <div class="row">
         <nav class="col-md-2 d-none d-md-block sidebar">
             <div class="sidebar-sticky">
-            <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="About.php">Over ons &nbsp; <i class="bi bi-info-circle"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://go-ao.smartschool.be/helpdesk#!tickets/list/4ca0ce7d-eeb0-4842-802e-8c5701705bcf" target="_blank">Contact &nbsp; <i class="bi bi-telephone"></i> </a>
-          </li>
-          <?php if (!isset($_SESSION["username"])): ?>
-              <li class="nav-item">
-                  <a class="nav-link" href="login.php">login</a>
-              </li>
-          <?php else: ?>
-              <li class="nav-item">
-                  <a class="nav-link" href="logout.php">logout &nbsp; <i class="bi bi-box-arrow-right"></i></a>
-              </li>
-          <?php endif; ?>
-          <li class="nav-item">
-                  <a class="nav-link" href="userOverview.php">Overvieuw &nbsp;<i class="bi bi-database"></i></a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="usernew.php">Nieuwe User &nbsp; <i class="bi bi-person-plus"></i></a>
-              </li>
-        </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="About.php"><i class="bi bi-info-circle">&nbsp; Over ons</i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://go-ao.smartschool.be/helpdesk#!tickets/list/4ca0ce7d-eeb0-4842-802e-8c5701705bcf" target="_blank"><i class="bi bi-telephone">&nbsp; Contact</i> </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php"><i class="bi bi-box-arrow-right">&nbsp; logout</i></a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="userOverview.php"><i class="bi bi-database">&nbsp; Overview</i></a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="klasOverview.php"><i class="bi bi-people">&nbsp; Klassen</i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="usernew.php"><i class="bi bi-person-plus"> &nbsp; Nieuwe User</i></a>
+                    </li>
+                </ul>
             </div>
         </nav>
 

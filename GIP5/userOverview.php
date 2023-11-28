@@ -66,15 +66,15 @@
                                 <td><?php echo$row["naam"]; ?> </td>
                                 <td><?php echo$row["voornaam"]; ?> </td>
                                 <td><?php echo$row["email"]; ?> </td>
-                                <td><?php echo$row["admin"] ? '<i class="bi-check-square-fill text-success"></i>':
-                                                                '<i class="bi bi-square"></i>';?> </td>
+                                <td><?php echo$row["admin"] ? '<i class="bi-check-square-fill text-success fs-5"></i>':
+                                                                '<i class="bi bi-square fs-5"></i>';?> </td>
                                 <td>
                                     <?php if ($deleted) : ?>
                                         <i id="Reactivate" class="bi bi-person-up text-success fs-5" onclick='showModalReactivate("<?php echo $row["userName"]; ?>","<?php echo $row["GUID"]; ?>")' data-bs-toggle="modal" data-bs-target="#Activate" data-bs-toggle="tooltip" data-bs-placement="top" title="Heractiveer gebruiker"></i>
                                     <?php else : ?>
-                                        <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="bi bi-pencil-square text-warning"></i></a>
-                                        <i id="Delete" class="bi bi-x-square text-danger" onclick='showModalDelete("<?php echo $row["userName"]; ?>","<?php echo $row["GUID"]; ?>")' data-bs-toggle="modal" data-bs-target="#DeleteUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijder gebruiker"></i>
-                                        <i class="bi bi-arrow-clockwise text-info"></i>
+                                        <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="bi bi-pencil-square text-warning  fs-5"  data-bs-toggle="tooltip" data-bs-placement="top" title="Wijzig gebruiker"></i></a>
+                                        <i id="Delete" class="bi bi-x-square text-danger  fs-5" onclick='showModalDelete("<?php echo $row["userName"]; ?>","<?php echo $row["GUID"]; ?>")' data-bs-toggle="modal" data-bs-target="#DeleteUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijder gebruiker"></i>
+                                        <i class="bi bi-arrow-clockwise text-info fs-5"></i>
                                     <?php endif; ?>
                                 </td>
                             </tr>
