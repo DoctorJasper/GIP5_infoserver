@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<?php require("header.php"); ?>
+<?php
+require("startphp.php");
+
+require("header.php"); 
+?>
+
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-sm-12">

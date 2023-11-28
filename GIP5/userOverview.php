@@ -59,21 +59,29 @@
                         <th>admin</th>
                         <th>acties</th>
                     </tr>
-                    <?php while($row = $res->fetch(PDO::FETCH_ASSOC)) : ?>
-                        <tr>
-                            <td><?php echo$row["userName"]; ?> </td>
-                            <td><?php echo$row["naam"]; ?> </td>
-                            <td><?php echo$row["voornaam"]; ?> </td>
-                            <td><?php echo$row["email"]; ?> </td>
-                            <td><?php echo$row["admin"] ? '<i class="bi-check-square-fill text-success"></i>':
-                                                            '<i class="bi bi-square"></i>';?> </td>
-                            <td>
-                                <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="bi bi-pencil-square text-warning"></i></a>
-                                <i id="Delete" class="bi bi-x-square text-danger" onclick='showModalDelete("<?php echo $row["userName"]; ?>","<?php echo $row["GUID"]; ?>")' data-bs-toggle="modal" data-bs-target="#DeleteUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijder gebruiker"></i>
-                                <i class="bi bi-arrow-clockwise text-info"></i>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
+                    <?php if ($res->rowCount() != 0) : ?>
+                        <?php while($row = $res->fetch(PDO::FETCH_ASSOC)) : ?>
+                            <tr>
+                                <td><?php echo$row["userName"]; ?> </td>
+                                <td><?php echo$row["naam"]; ?> </td>
+                                <td><?php echo$row["voornaam"]; ?> </td>
+                                <td><?php echo$row["email"]; ?> </td>
+                                <td><?php echo$row["admin"] ? '<i class="bi-check-square-fill text-success"></i>':
+                                                                '<i class="bi bi-square"></i>';?> </td>
+                                <td>
+                                    <?php if ($deleted) : ?>
+                                        <i id="Reactivate" class="bi bi-person-up text-success fs-5" onclick='showModalReactivate("<?php echo $row["userName"]; ?>","<?php echo $row["GUID"]; ?>")' data-bs-toggle="modal" data-bs-target="#Activate" data-bs-toggle="tooltip" data-bs-placement="top" title="Heractiveer gebruiker"></i>
+                                    <?php else : ?>
+                                        <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="bi bi-pencil-square text-warning"></i></a>
+                                        <i id="Delete" class="bi bi-x-square text-danger" onclick='showModalDelete("<?php echo $row["userName"]; ?>","<?php echo $row["GUID"]; ?>")' data-bs-toggle="modal" data-bs-target="#DeleteUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijder gebruiker"></i>
+                                        <i class="bi bi-arrow-clockwise text-info"></i>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else : ?>
+                        <tr><td colspan="6">Geen gegevens gevonden</td></tr>
+                    <?php endif; ?>
                 </table>
             </div>
         </div>
@@ -104,8 +112,38 @@
     </div>
 </div>
 
+
+<!-- ------------------------------------------------------------------------------------------------------- -->
+
+<!-- Modal activate -->
+<div class="modal fade" id="Activate">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Heractiveer gebruiker</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                Ben je zeker dat je gebruiker '<span id="userREA"></span>' wil heractiveren? 
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuleer</button>
+                <button type="button" value="" id="knopHeractiveren" class="btn btn-success"
+                onclick="reactivateUser(this.value)">Heractiveren</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <form action="userDelete.php" method="post" style="display:none" id="userDeleteForm">
     <input type="hidden" id="userId" name="GUID">
+</form>
+<form action="userReactivate.php" method="post" style="display:none" id="userReactivateRorm">
+    <input type="hidden" id="userId2" name="GUID">
 </form>
 
 
@@ -117,23 +155,24 @@
     }
 
     function deactivateUser(id) {
-        
         let idInput = document.querySelector("#userId");
         idInput.value = id;
         let form = document.querySelector("#userDeleteForm");
         form.submit();
-        /*
-        console.log(id);
-        let ajx = new XMLHttpRequest();
-        ajx.onreadystatechange = function () {
-            if (ajx.readyState == 4 && ajx.status == 200) {
-                //console.log(ajx.responseText);
-                location.reload();
-            }
-        };
-        ajx.open("POST", "userDelete.php", true);
-        ajx.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajx.send("GUID=" + id);
-        */
+    }
+
+    //----------------------------------------------------------------------------------------------------------------
+
+    //HERACTIVEREN
+    function showModalReactivate(username, guid) {
+        document.getElementById("userREA").innerHTML = username;
+        document.getElementById("knopHeractiveren").value = guid;
+    }
+
+    function reactivateUser(id) {
+        let idInput = document.querySelector("#userId2");
+        idInput.value = id;
+        let form = document.querySelector("#userReactivateRorm");
+        form.submit();
     }
 </script>
