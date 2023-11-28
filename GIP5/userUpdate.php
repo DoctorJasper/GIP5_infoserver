@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
    
 }
 else {
+    var_dump($_POST);
     $post = true;
     $idGeb = $_POST["idGeb"];
     $username = trim($_POST["username"]);
@@ -86,7 +87,7 @@ require("header.php");
                         <input type="email" class="form-control" id="Email" name="email" value="<?php if (!$post) echo $row['email']; ?>" required>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" <?php if (!$post) { if(isset($row["admin"]) && $row["admin"] == 1) echo "checked"; };?>>
+                        <input class="form-check-input" name="admin" type="checkbox" role="switch" id="flexSwitchCheckDefault" <?php if (!$post) { if(isset($row["admin"]) && $row["admin"] == 1) echo "checked"; };?>>
                         <label class="form-check-label" for="flexSwitchCheckDefault">Admin</label>
                     </div>
                     <br>
