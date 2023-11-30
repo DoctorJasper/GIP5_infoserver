@@ -31,12 +31,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['CREATED'] = time();
             $_SESSION['GUID'] = $row["GUID"];
             $_SESSION["admin"] = $row["admin"];
-            if ($_SESSION["admin"] == 1) {
-              header("Location: adminpage.php");
-              exit;
-            } else {
+            if ($_SESSION["admin"] == 0) {
               header("Location: About.php");
-              exit;
+              die();
+            } else {
+              header("Location: adminpage.php");
+              die();
             }
         } else {
             //userID en ww komen niet overeen

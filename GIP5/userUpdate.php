@@ -4,7 +4,7 @@ require("startphp.php");
 
 $showAlert = false;
 
-if (!isset($_SESSION["admin"]) && $_SESSION["admin"] == 0) {
+if (!isset($_SESSION["admin"]) || $_SESSION["admin"] == 0) {
     header("Location: login.php");  
     exit;
 }

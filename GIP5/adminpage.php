@@ -2,13 +2,11 @@
 <?php
 require("startphp.php");
 
-if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
+if (!isset($_SESSION["admin"]) || $_SESSION["admin"] == 0) {
     header("Location: login.php");
     exit;
-} elseif (isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
-    header("Location: About.php");
-    exit();
-}   
+} 
+
 require("HeaderAdminpage.php");
 
 ?>

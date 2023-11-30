@@ -2,23 +2,20 @@
 <?php 
     require('startphp.php');
 
-    if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
+    if (!isset($_SESSION["admin"]) || $_SESSION["admin"] == 0) {
         header("Location: login.php");
         exit;
-    } elseif (isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
-        header("Location: About.php");
-        exit();
     }
     
     require('pdo.php');
 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["deleted"])) {  
         //Update query template
-        $query = "SELECT `idGeb`,`GUID`,`userName`,`naam`,`voornaam`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 0";
+        $query = "SELECT `idGeb`,`GUID`,`userName`,`naam`,`voornaam`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 0 ORDER BY `admin` DESC";
         $deleted = true;
     } else {
         //Update query template
-        $query = "SELECT `idGeb`,`GUID`,`userName`,`naam`,`voornaam`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 1";
+        $query = "SELECT `idGeb`,`GUID`,`userName`,`naam`,`voornaam`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 1 ORDER BY `admin` DESC";
         $deleted = false;
     }
 
