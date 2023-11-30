@@ -2,12 +2,11 @@
 <?php
 require("startphp.php");
 
-if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
+$showAlert = false;
+
+if (!isset($_SESSION["admin"]) && $_SESSION["admin"] == 0) {
     header("Location: login.php");  
     exit;
-} elseif (isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
-    header("Location: About.php");
-    exit();
 }
 
 require("pdo.php");
@@ -43,21 +42,26 @@ else {
     $email = trim($_POST["email"]);
     $admin = isset($_POST["admin"]) ? 1 : 0;
 
-    //Update query template
-    $query = "UPDATE `tblGebruiker`
-              SET `userName` = '$username', `naam` = '$naam',`voornaam` = '$voornaam',`email` = '$email',`admin` = '$admin'
-              WHERE `idGeb` = '$idGeb'";
+    if (strlen($naam) >= 2 || strlen($voornaam) >= 2) {
+        //Update query template
+        $query = "UPDATE `tblGebruiker`
+                SET `userName` = '$username', `naam` = '$naam',`voornaam` = '$voornaam',`email` = '$email',`admin` = '$admin'
+                WHERE `idGeb` = '$idGeb'";
 
-    //Execute the query
-    try {
-        $res2 = $pdo->prepare($query);
-        $res2->execute();
-        header("Location: userOverview.php");
-        exit;
-    } catch (PDOException $e) 
-    {
-        echo "Guery error.<br>".$e;
-        die();
+        //Execute the query
+        try {
+            $res2 = $pdo->prepare($query);
+            $res2->execute();
+            header("Location: userOverview.php");
+            exit;
+        } catch (PDOException $e) 
+        {
+            echo "Guery error.<br>".$e;
+            die();
+        }
+    } else {
+        $TextAlert = "<strong> FOUT! </strong> de ingegeven informatie is te kort of mogelijks fout.";
+        $showAlert = true;
     }
 }
 
@@ -67,6 +71,11 @@ require("header.php");
         <div class="row">
             <div class="col-sm-6">
                 <a class="btn btn-outline-primary" role="button" href="userOverview.php">Terug</a>
+                <?php if ($showAlert) : ?>
+                    <div class="alert alert-danger float-end">
+                        <?php echo $TextAlert; ?>
+                    </div>
+                <?php endif; ?>
                 <p><br></p>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="mb-3">

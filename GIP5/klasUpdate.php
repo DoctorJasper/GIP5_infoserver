@@ -2,6 +2,8 @@
 <?php
 require("startphp.php");
 
+$showAlert = false;
+
 if (!isset($_SESSION["admin"]) && $_SESSION["admin"] == 0) {
     header("Location: login.php");  
     exit;
@@ -34,32 +36,41 @@ else {
     $post = true;
     $idKlas = $_POST["id"];
     $klas = $_POST["klas"];
+    if (strlen($klas) >= 2) {
+        //Update query template
+        $query = "UPDATE `tblKlassen`
+                SET `klas` = '$klas'
+                WHERE `idKlas` = '$idKlas'";
 
-    //Update query template
-    $query = "UPDATE `tblKlassen`
-              SET `klas` = '$klas'
-              WHERE `idKlas` = '$idKlas'";
-
-    //Execute the query
-    try {
-        $res = $pdo->prepare($query);
-        $res->execute();
-        header("Location: klasOverview.php");
-        exit;
-    } catch (PDOException $e) 
-    {
-        echo "Guery error.<br>".$e;
-        die();
+        //Execute the query
+        try {
+            $res = $pdo->prepare($query);
+            $res->execute();
+            header("Location: klasOverview.php");
+            exit;
+        } catch (PDOException $e) 
+        {
+            echo "Guery error.<br>".$e;
+            die();
+        }
+    } else {
+        $TextAlert = "<strong> FOUT! </strong> de klas moet minstens 2 tekens bevatten.";
+        $showAlert = true;
     }
-}
+} 
 
 require("header.php");
 ?>
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-6">
-                <a class="btn btn-outline-primary" role="button" href="userOverview.php">Terug</a>
-                <p><br></p>
+                <a class="btn btn-outline-primary" role="button" href="klasOverview.php">Terug</a>
+                <?php if ($showAlert) : ?>
+                    <div class="alert alert-danger float-end">
+                        <?php echo $TextAlert; ?>
+                    </div>
+                <?php endif; ?>
+                <br><br>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="mb-3">
                         <input type="hidden" class="from-control" name="id" value="<?php if(!$post) echo $id ;?>">

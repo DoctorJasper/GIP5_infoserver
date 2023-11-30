@@ -2,6 +2,8 @@
 <?php
 require("startphp.php");
 
+$showAlert = false;
+
 if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
     header("Location: login.php");
     exit;
@@ -19,27 +21,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $admin = isset($_POST["admin"]) ? 1 : 0;
     $password = password_hash(trim($_POST["password"]), PASSWORD_DEFAULT);
 
-    //create GUID
-    $GUID = sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
+    if (strlen($naam) >= 2 || strlen($voornaam) >= 2) {
+        //create GUID
+        $GUID = sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
 
-    //Update query template
-    $query = "INSERT INTO `tblGebruiker`(`GUID`,`userName`,`naam`,`voornaam`,`email`,`userPassword`,`admin`)
-              VALUES (:ID, :userName, :naam, :voornaam, :email, :userPassword, :adm)";
+        //Update query template
+        $query = "INSERT INTO `tblGebruiker`(`GUID`,`userName`,`naam`,`voornaam`,`email`,`userPassword`,`admin`)
+                VALUES (:ID, :userName, :naam, :voornaam, :email, :userPassword, :adm)";
 
-    //Values array for PDO
-    $values = [":ID" => $GUID, ":userName" => $username, ":naam" => $naam, ":voornaam" => $voornaam,
-               ":email" => $email, ":userPassword" => $password, ":adm" => $admin];
+        //Values array for PDO
+        $values = [":ID" => $GUID, ":userName" => $username, ":naam" => $naam, ":voornaam" => $voornaam,
+                ":email" => $email, ":userPassword" => $password, ":adm" => $admin];
 
-    //Execute the query
-    try {
-        $res = $pdo->prepare($query);
-        $res->execute($values);
-        header("Location: adminpage.php");
-        exit;
-    } catch (PDOException $e) 
-    {
-        echo "Guery error.<br>".$e;
-        die();
+        //Execute the query
+        try {
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+            header("Location: adminpage.php");
+            exit;
+        } catch (PDOException $e) 
+        {
+            echo "Guery error.<br>".$e;
+            die();
+        }
+    } else {
+        $TextAlert = "<strong> FOUT! </strong> de ingegeven informatie is te kort of mogelijks fout.";
+        $showAlert = true;
     }
 }
 require("header.php");
@@ -47,7 +54,12 @@ require("header.php");
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-6">
-                <a class="btn btn-outline-primary" role="button" href="adminpage.php">Terug</a>
+                <a class="btn btn-outline-primary" role="button" href="userOverview.php">Terug</a>
+                <?php if ($showAlert) : ?>
+                    <div class="alert alert-danger float-end">
+                        <?php echo $TextAlert; ?>
+                    </div>
+                <?php endif; ?>
                 <br><br>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="mb-3">
