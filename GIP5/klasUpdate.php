@@ -37,7 +37,7 @@ else {
 
     //Update query template
     $query = "UPDATE `tblKlassen`
-              SET `Klas` = '$klas'
+              SET `klas` = '$klas'
               WHERE `idKlas` = '$idKlas'";
 
     //Execute the query
@@ -64,7 +64,7 @@ require("header.php");
                     <div class="mb-3">
                         <input type="hidden" class="from-control" name="id" value="<?php if(!$post) echo $id ;?>">
                         <label for="Klas" class="form-label">klas</label>
-                        <input type="text" class="form-control" id="Klas" name="klas" value="<?php if (!$post) echo $row['Klas']; ?>" required>
+                        <input type="text" class="form-control" id="Klas" name="klas" value="<?php if (!$post) echo $row['klas']; ?>" required>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-success">Gebruiker updaten</button>

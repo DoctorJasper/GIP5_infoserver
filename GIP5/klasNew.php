@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $klas = $_POST["klas"];
 
     //Update query template
-    $query = "INSERT INTO `tblKlassen`(`Klas`) VALUES ('$klas')";
+    $query = "INSERT INTO `tblKlassen`(`klas`) VALUES ('$klas')";
 
     //Execute the query
     try {
