@@ -18,16 +18,6 @@
         $query = "SELECT `idGeb`,`GUID`,`userName`,`naam`,`voornaam`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 1 ORDER BY `admin` DESC";
         $deleted = false;
     }
-
-    try{
-        $res = $pdo->prepare($query);
-        $res->execute();
-    }catch(PDOException $e){
-        //error in de query
-        echo 'Query error';
-        die();
-    }
-
     require('header.php');
     
     ?>
@@ -69,7 +59,7 @@
                                     <?php if ($deleted) : ?>
                                         <i id="Reactivate" class="bi bi-person-up text-success fs-5" onclick='showModalReactivate("<?php echo $row["userName"]; ?>","<?php echo $row["GUID"]; ?>")' data-bs-toggle="modal" data-bs-target="#Activate" data-bs-toggle="tooltip" data-bs-placement="top" title="Heractiveer gebruiker"></i>
                                     <?php else : ?>
-                                        <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="bi bi-pencil-square text-warning  fs-5"  data-bs-toggle="tooltip" data-bs-placement="top" title="Wijzig gebruiker"></i></a>
+                                        <a href="userUpdate.php?guid=<?php echo $row['GUID']; ?>"><i class="bi bi-pencil-square text-warning  fs-5"  data-bs-toggle="tooltip" data-bs-placement="top" title="Wijzig gebruiker"></i></a>
                                         <i id="Delete" class="bi bi-x-square text-danger  fs-5" onclick='showModalDelete("<?php echo $row["userName"]; ?>","<?php echo $row["GUID"]; ?>")' data-bs-toggle="modal" data-bs-target="#DeleteUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijder gebruiker"></i>
                                         <i class="bi bi-arrow-clockwise text-info fs-5"></i>
                                     <?php endif; ?>

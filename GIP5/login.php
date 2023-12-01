@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['GUID'] = $row["GUID"];
             $_SESSION["admin"] = $row["admin"];
             if ($_SESSION["admin"] == 0) {
-              header("Location: About.php");
+              header("Location: userpage.php?GUID=".$_SESSION["GUID"]);
               die();
             } else {
               header("Location: adminpage.php");
