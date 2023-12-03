@@ -118,7 +118,7 @@ require("HeaderAdminpage.php");
                 <div class="sidebar-sticky">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="About.php"><i class="bi bi-info-circle">&nbsp; Over ons</i></a>
+                            <a class="nav-link" href="About.php"  target="_blank"><i class="bi bi-info-circle">&nbsp; Over ons</i></a>
                         </li>
                         
                         <li class="nav-item">

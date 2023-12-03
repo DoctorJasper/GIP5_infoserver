@@ -53,7 +53,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="About.php">About</a>
+          <a class="nav-link" href="About.php"  target="_blank">About</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://go-ao.smartschool.be/helpdesk#!tickets/list/4ca0ce7d-eeb0-4842-802e-8c5701705bcf" target="_blank">Contact</a>

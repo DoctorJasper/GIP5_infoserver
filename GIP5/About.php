@@ -49,8 +49,6 @@ require("header.php");
                 Wij hebben hoge verwachtingen voor dit project en streven ernaar te voldoen aan de eisen van onze opdrachtgever. Persoonlijk kijken we uit naar het opdoen van waardevolle inzichten en competenties en het versterken van onze samenwerking. Dit project zal naar verwachting een positieve impact hebben op de school en een verbetering betekenen voor beheerders en gebruikers.</p>
 
                 <br>
-
-                <a class="nav-link" href="adminpage.php">Terug</a>
           </form>
         </div>
       </div>
