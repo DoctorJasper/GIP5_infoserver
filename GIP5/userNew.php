@@ -37,12 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $res = $pdo->prepare($query);
             $res->execute($values);
-            header("Location: userOverview.php");
+            header("Location: adminpage.php");
             exit;
         } catch (PDOException $e) 
         {
-            $TextAlert = "<strong> FOUT! </strong> de ingegeven informatie is te kort, fout of mogelijks al in gebruik.";
-            $showAlert = true;
+            echo "Guery error.<br>".$e;
+            die();
         }
     } else {
         $TextAlert = "<strong> FOUT! </strong> de ingegeven informatie is te kort of mogelijks fout.";

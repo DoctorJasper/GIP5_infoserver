@@ -8,12 +8,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require("pdo.php");
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
+    
     //query klaarzetten
     $query = "SELECT `GUID`,`userName`,`userPassword`,`passwordReset`,`active`,`admin` 
               FROM `tblGebruiker` 
               WHERE `userName` = :userName";
+    
     //values voor de PDO
     $values = [":userName" => $username];
+    
     try {
         $res = $pdo->prepare($query);
         $res->execute($values);
@@ -22,36 +25,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Query error<br>".$e;
         die();
     }
+    
     //haal rij op uit resultaat
     $row = $res->fetch(PDO::FETCH_ASSOC);
 
     if ($row["active"] == true) {
-        if ($username == $row["userName"] && password_verify($password, $row["userPassword"])) {
-            $_SESSION["username"] = $username;
-            $_SESSION['CREATED'] = time();
-            $_SESSION['GUID'] = $row["GUID"];
-            $_SESSION["admin"] = $row["admin"];
-            if ($_SESSION["admin"] == 0) {
+      if ($username == $row["userName"] && password_verify($password, $row["userPassword"])) {
+          $_SESSION["username"] = $username;
+          $_SESSION['CREATED'] = time();
+          $_SESSION['GUID'] = $row["GUID"];
+  
+          // Check if the "admin" key exists in the $row array
+          $_SESSION["admin"] = isset($row["admin"]) ? ($row["admin"] == 1 ? 1 : 0) : 0;
+  
+          if ($_SESSION["admin"] == 0) {
               header("Location: userpage.php?GUID=".$_SESSION["GUID"]);
               die();
-            } else {
+          } else {
               header("Location: adminpage.php");
               die();
-            }
-        } else {
-            //userID en ww komen niet overeen
-            $showAlert = true;
-        }
-    } else {
-        //geen active user
-        $showAlert = true;
-    }
+          }
+      } else {
+          //userID en ww komen niet overeen
+          $showAlert = true;
+          $alertText = '<strong>FOUT!</strong> Gebruikersnaam en wachtwoord komen niet overeen';
+      }
+  } else {
+      //geen active user
+      $showAlert = true;
+      $alertText = '<strong>FOUT!</strong> Gebruikersnaam en wachtwoord komen niet overeen';
+  }
+  
 }
 require("header.php");
 ?>
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-sm-4">
+        <?php if ($showAlert) : ?>
+            <div class="alert alert-danger">
+                <?php echo $alertText; ?>
+            </div>
+        <?php endif; ?>
         <div class="card">
           <div class="card-header">          
               Log in
@@ -92,6 +107,6 @@ require("header.php");
                 this.src = "Images/show.png";
             }
         }
-    </script>
-  </body>
+  </script>
+</body>
 </html>

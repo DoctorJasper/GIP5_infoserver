@@ -4,7 +4,7 @@ require("startphp.php");
 
 $showAlert = false;
 
-if (!isset($_SESSION["admin"]) || $_SESSION["admin"] == 0) {
+if (!isset($_SESSION["admin"]) && $_SESSION["admin"] == 0) {
     header("Location: login.php");  
     exit;
 }
@@ -14,18 +14,16 @@ $post = false;
 
 //UPDATE USER
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    $guid = $_GET['guid'];
+    $id = $_GET['id'];
     //Update query template
-    $query = "SELECT `userName`,`naam`,`voornaam`,`email`,`admin` 
+    $query = "SELECT `idGeb`,`userName`,`naam`,`voornaam`,`email`,`admin` 
     FROM `tblGebruiker` 
-    WHERE `GUID` = :ID";
-
-    $values = [":ID" => $guid];
+    WHERE `idGeb` = $id";
 
     //Execute the query
     try {
         $res = $pdo->prepare($query);
-        $res->execute($values);    
+        $res->execute();    
         $row = $res->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) 
     {
@@ -37,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 else {
     var_dump($_POST);
     $post = true;
-    $guid = $_POST["guid"];
+    $idGeb = $_POST["idGeb"];
     $username = trim($_POST["username"]);
     $naam = trim($_POST["naam"]); 
     $voornaam = trim($_POST["voornaam"]);
@@ -48,14 +46,12 @@ else {
         //Update query template
         $query = "UPDATE `tblGebruiker`
                 SET `userName` = '$username', `naam` = '$naam',`voornaam` = '$voornaam',`email` = '$email',`admin` = '$admin'
-                WHERE `GUID` = :ID";
-
-        $values = [":ID" => $guid];
+                WHERE `idGeb` = '$idGeb'";
 
         //Execute the query
         try {
             $res2 = $pdo->prepare($query);
-            $res2->execute($values);
+            $res2->execute();
             header("Location: userOverview.php");
             exit;
         } catch (PDOException $e) 
@@ -83,7 +79,7 @@ require("header.php");
                 <p><br></p>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="mb-3">
-                        <input type="hidden" class="from-control" name="guid" value="<?php if(!$post) echo $guid ;?>">
+                        <input type="hidden" class="from-control" name="idGeb" value="<?php if(!$post) echo $id ;?>">
                         <label for="Username" class="form-label">Gebruikersnaam</label>
                         <input type="text" class="form-control" id="Username" name="username" value="<?php if (!$post) echo $row['userName']; ?>" required>
                     </div>

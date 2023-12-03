@@ -50,7 +50,7 @@ require("header.php");
 
                 <br>
 
-                <a class="nav-link" href="Index.php">Terug</a>
+                <a class="nav-link" href="adminpage.php">Terug</a>
           </form>
         </div>
       </div>
