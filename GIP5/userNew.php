@@ -12,6 +12,32 @@ if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
     exit();
 }
 
+$dir = "JSON/";
+$files = scandir($dir);
+$klasFiles = [];
+$leerlingen = [];
+foreach ($files as $file) {
+    if ($file != "." && $file != "..") {
+        $parts = explode(".", $file);
+        $klasFiles[] = $parts[0];
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["klas"])) {
+    $klas = $_GET["klas"];
+    $content = file_get_contents("JSON/".$klas.".json");
+    $data = json_decode($content, true);
+
+    foreach ($data as $record) {
+        $leerling = [
+            "naam" => $record["naam"],
+            "voornaam" => $record["voornaam"],
+            "internnummer" => $record["internnummer"]
+        ];
+        $leerlingen[] = $leerling;
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require("pdo.php");
     $username = trim($_POST["username"]);
@@ -53,7 +79,7 @@ require("header.php");
 ?>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <a class="btn btn-outline-primary" role="button" href="userOverview.php">Terug</a>
                 <?php if ($showAlert) : ?>
                     <div class="alert alert-danger float-end">
@@ -90,7 +116,26 @@ require("header.php");
                     <button type="submit" class="btn btn-success">Gebruiker aanmaken</button>
                 </form>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-1">   
+            </div>    
+            <div class="col-sm-7">
+                <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    <select name="klas" class="form-select" aria-label="Default select example">
+                        <option value="" selected disabled>Selecteer klas</option>
+                        <?php foreach ($klasFiles as $klas) : ?>
+                            <option value="<?php echo $klas; ?>"><?php echo $klas; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+                <?php foreach ($leerlingen as $leerling) : ?>
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="mb-0 mt-0 fw-bold"><?php echo $leerling["naam"];?></p>
+                            <p class="mb-0 mt-0"><?php echo $leerling["voornaam"];?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
