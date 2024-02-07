@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <?php 
     require('startphp.php');
-
-    
-    
     require('pdo.php');
+    require('./Smartschool/config.php');
+    require('./classes/class.smartschool.php');
+
+    $ss = new Smartschool();
+    $klasarray = $ss->ophalenKlassen();
 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["deleted"])) {  
         //Update query template
@@ -28,6 +30,20 @@
     require('header.php');
     
     ?>
+    <style>
+        .sidebar {
+            background-color: #8E0037;
+            color: #05072b;
+            height: 100vh;
+            padding-top: 20px;
+    }
+    .sidebar a {
+            color: #ecf0f1;
+    }
+    .sidebar a:hover {
+            color: #d3e2e6;
+    }
+    </style>
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-6">
@@ -67,8 +83,21 @@
                     <?php endif; ?>
                 </table>
             </div>
+        <div class="col-sm-6">
+        <div class="card-body" id="SideCardKlas">
+            <!--<form method="post" action="klaslijst2.php">-->
+                <select name="klas" class="select" data-mdb-select-init data-mdb-filter="true" onchange="this.form.submit()"> 
+                    <option disabled selected>Kies een klas</option>
+                        <?php foreach ($klasarray as $klas) : ?>
+                            <?php echo "<option value='" . $klas['code'] . "'>" . $klas['code'] . "</option>"; ?>
+                            <div>
+                            <p class="mb-0 mt-0 fw-bold"><?php echo $row["naam"];?></p>
+                                <p class="mb-0 mt-0"><?php echo $row["voornaam"];?></p>
+                            </div> 
+                        <?php endforeach; ?>
+                </select>
+            <!--</form>-->
         </div>
-
     </div>
 </div>       
 
@@ -159,3 +188,4 @@
         form.submit();
     }
 </script>
+<!---->

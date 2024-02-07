@@ -6,7 +6,6 @@
         exit;
     }
     
-
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['GUID'])) {
         $GUID = $_POST['GUID'];
         require("pdo.php");
@@ -16,7 +15,7 @@
         WHERE `GUID` = :ID";
 
         $values = [":ID" => $GUID];
-
+        
         //Execute the query
         try {
             $res = $pdo->prepare($query);

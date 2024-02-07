@@ -2,11 +2,11 @@
 <?php
 require("startphp.php");
 
-if (!isset($_SESSION["username"]) || $_SESSION["admin"] == 1) {
+if (!isset($_SESSION["username"]) /*|| $_SESSION["admin"] == 1*/) {
     header("Location: login.php");
     exit;
 } 
-    
+
 require('pdo.php');
 
 //Update query template
@@ -62,7 +62,7 @@ require("headerUsers.php");
           <br>
             <div class="card">
                 <div class="card-header">
-                    <h1>Welkom USER</h1>
+                    <h1>Welkom <?php echo $row['Username']; ?></h1>
                 </div>
                 <div class="card-body">
                     <h4>Uw user gegevens</h4>

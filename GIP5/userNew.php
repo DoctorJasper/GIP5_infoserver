@@ -77,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 require("header.php");
 ?>
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-4">
@@ -116,27 +117,29 @@ require("header.php");
                     <button type="submit" class="btn btn-success">Gebruiker aanmaken</button>
                 </form>
             </div>
-            <div class="col-sm-1">   
-            </div>    
-            <div class="col-sm-7">
-                <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <select name="klas" class="form-select" aria-label="Default select example">
-                        <option value="" selected disabled>Selecteer klas</option>
-                        <?php foreach ($klasFiles as $klas) : ?>
-                            <option value="<?php echo $klas; ?>"><?php echo $klas; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </form>
-                <?php foreach ($leerlingen as $leerling) : ?>
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="mb-0 mt-0 fw-bold"><?php echo $leerling["naam"];?></p>
-                            <p class="mb-0 mt-0"><?php echo $leerling["voornaam"];?></p>
+             
+            <div class="col-sm-8">
+                <div class="col-sm-8">
+                    <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <select name="klas" class="form-select" aria-label="Default select example">
+                            <option value="" selected disabled>Selecteer klas</option>
+                            <?php foreach ($klasFiles as $klas) : ?>
+                                <option value="<?php echo $klas; ?>"><?php echo $klas; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                    <?php foreach ($leerlingen as $leerling) : ?>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="mb-0 mt-0 fw-bold"><?php echo $leerling["naam"];?></p>
+                                <p class="mb-0 mt-0"><?php echo $leerling["voornaam"];?></p>
+                            </div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
+                
         </div>
     </div>
 </body>

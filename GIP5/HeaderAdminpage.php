@@ -18,15 +18,15 @@
       z-index: 1000; /* Ensure the header is above other elements */
     }
     .btn-primary {
-      background-color: #1a3b9e; 
-      border-color: #1a3b9e;
+      background-color: #8E0037; 
+      border-color: #8E0037;
     }
     .btn-primary:hover {
       background-color: #993399; 
       border-color: #993399;
     }
     .navbar {
-      background: linear-gradient(to right, #000000, #1a3b9e); 
+      background: linear-gradient(to right, #000000, #8E0037); 
     }
         .navbar-dark .navbar-nav .nav-link {
         color: #ffffff;
@@ -39,14 +39,14 @@
       color: #000000;
     }
     .card-header {
-      background: linear-gradient(to right, #000000, #1a3b9e);
+      background: linear-gradient(to right, #000000, #8E0037);
       color: #ffffff;
     }
     .card-body {
       color: #000000;
     }
     .sidebar {
-            background-color: #05072b;
+            background-color: #8E0037;
             color: #05072b;
             height: 100vh;
             padding-top: 20px;
@@ -55,7 +55,7 @@
             color: #ecf0f1;
     }
     .sidebar a:hover {
-            color: #ecf0f1;
+            color: #d3e2e6;
     }
     
   </style>

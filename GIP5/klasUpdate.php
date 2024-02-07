@@ -4,10 +4,6 @@ require("startphp.php");
 
 $showAlert = false;
 
-
-
-
-
 require("pdo.php");
 $post = false;
 

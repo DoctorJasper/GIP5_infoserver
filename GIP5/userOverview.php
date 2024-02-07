@@ -2,6 +2,10 @@
 <?php 
     require('startphp.php');
 
+    /*$content = file_get_contents("./JSON/6INFO.json");
+    $data = json_decode($content,true);
+    var_dump($data);*/
+
     if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
         header("Location: login.php");
         exit;
@@ -32,12 +36,35 @@
     }
 
     require('header.php');
-    
     ?>
+    <style>
+        #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
+
+        #customers td, #customers th {
+        border: 2px solid #000000;
+        padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #8E0037;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #8E0037;
+        color: white;
+        }
+    </style>
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-12">
-                <a class="btn btn-outline-primary" role="button" href="adminpage.php">Terug</a>
+                <a class="btn btn-outline-primary" id="ReturnButton" role="button" href="adminpage.php">Terug</a>
                 <br><br>
                 <span class=float-end>
                     <?php if ($deleted): ?>
@@ -50,7 +77,8 @@
                 </span>
                 <h3>Overzicht <?php if ($deleted) echo "verwijderde"; ?> gebruikers</h3>
                 <table class="table table-hover table-striped">
-                <table class="table table-hover table-striped">
+                    
+                <table class="table table-hover table-striped" id="customers">
                     <tr>
                         <th>Gebruikersnaam</th>
                         <th>Naam</th>
@@ -85,7 +113,6 @@
                 </table>
             </div>
         </div>
-
     </div>
 </div>       
 
@@ -176,3 +203,49 @@
         form.submit();
     }
 </script>
+<!--<table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>Name</th>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Position</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="d-flex align-items-center">
+          <img
+              src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+              alt=""
+              style="width: 45px; height: 45px"
+              class="rounded-circle"
+              />
+          <div class="ms-3">
+            <p class="fw-bold mb-1">John Doe</p>
+            <p class="text-muted mb-0">john.doe@gmail.com</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">Software engineer</p>
+        <p class="text-muted mb-0">IT department</p>
+      </td>
+      <td>
+        <span class="badge badge-success rounded-pill d-inline">Active</span>
+      </td>
+      <td>Senior</td>
+      <td>
+        <button type="button" class="btn btn-link btn-sm btn-rounded">
+          Edit
+        </button>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>-
+
+
+->

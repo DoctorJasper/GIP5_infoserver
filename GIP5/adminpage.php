@@ -58,7 +58,7 @@ require("HeaderAdminpage.php");
                 position: absolute;
                 width: 0;
                 height: 200px;
-                background: linear-gradient(to right, #000000, #1a3b9e, #000000);
+                background: linear-gradient(to right, #000000, #8E0037 , #000000);
                 text-shadow: 20px;
                 animation: slideBar 1s ease-in-out forwards;
             }
@@ -114,7 +114,7 @@ require("HeaderAdminpage.php");
     <?php endif; ?>
 
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Infoserver</a>
+        <a class="navbar-brand" >Infoserver</a>
     </nav>
 
     <div class="container-fluid">
@@ -122,10 +122,6 @@ require("HeaderAdminpage.php");
             <nav class="col-md-2 d-none d-md-block sidebar">
                 <div class="sidebar-sticky">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="About.php"  target="_blank"><i class="bi bi-info-circle">&nbsp; Over ons</i></a>
-                        </li>
-                        
                         <li class="nav-item">
                             <a class="nav-link" href="logout.php"><i class="bi bi-box-arrow-right">&nbsp; logout</i></a>
                         </li>
@@ -148,9 +144,7 @@ require("HeaderAdminpage.php");
                     <div class="card-header">
                         <h1>Welkom ADMIN</h1>
                     </div>
-                    <div class="col-md-4 mx-auto text-center">
-                        <img src="./Images/Pfp.jpg" class="img-fluid" alt="Sample Image">
-                    </div>
+                    
                     <div class="card-body">
                         <h5 class="card-title text-center">Dashboard Overview</h5>
                         <p class="card-text text-center">Op deze pagina kan u de leerlingen beheren</p>
