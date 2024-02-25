@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <?php
 require("startphp.php");
+require('pdo.php');
+require('./Smartschool/config.php');
+require('./classes/class.smartschool.php');
 
+$ss = new Smartschool();
+$klasarray = $ss->ophalenKlassen();
 $showAlert = false;
+$leerlingen = [];
 
 if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
     header("Location: login.php");
@@ -12,42 +18,38 @@ if (!isset($_SESSION["username"]) && $_SESSION["admin"] != 1) {
     exit();
 }
 
-$dir = "JSON/";
-$files = scandir($dir);
-$klasFiles = [];
-$leerlingen = [];
-foreach ($files as $file) {
-    if ($file != "." && $file != "..") {
-        $parts = explode(".", $file);
-        $klasFiles[] = $parts[0];
-    }
-}
-
+//--- GET --------------------------------------------------------------------------------------------------------------------------------
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["klas"])) {
     $klas = $_GET["klas"];
-    $content = file_get_contents("JSON/".$klas.".json");
-    $data = json_decode($content, true);
-
-    foreach ($data as $record) {
-        $leerling = [
-            "naam" => $record["naam"],
-            "voornaam" => $record["voornaam"],
-            "internnummer" => $record["internnummer"]
-        ];
-        $leerlingen[] = $leerling;
+    $result = $ss->ophalenLeerlingen($klas);
+    $resultArray = json_decode($result,true);
+    $csvLeerlingen = [];
+    foreach ($resultArray['account'] as $key => $row) {
+        $naam[$key] = $row['naam'];
+        $voornaam[$key] = $row['voornaam'];
+        $csvLeerlingen[] = implode(",", [$row['internnummer'], $row['naam'], $row['voornaam']]);
     }
+    file_put_contents('leerlingen.csv', implode(PHP_EOL, $csvLeerlingen));
+    array_multisort($naam, SORT_ASC, $voornaam, SORT_ASC, $resultArray['account']);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require("pdo.php");
-    $username = trim($_POST["username"]);
-    $naam = trim($_POST["naam"]);
-    $voornaam = trim($_POST["voornaam"]);
-    $email = trim($_POST["email"]);
-    $admin = isset($_POST["admin"]) ? 1 : 0;
-    $password = password_hash(trim($_POST["password"]), PASSWORD_DEFAULT);
+//--- POST --------------------------------------------------------------------------------------------------------------------------------
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["leerlingen"])) {
+    $lines = explode(PHP_EOL, file_get_contents('leerlingen.csv'));
+    $intNummers = $_POST["leerlingen"];
+    $klas = [];
 
-    if (strlen($naam) >= 2 || strlen($voornaam) >= 2) {
+    foreach($lines as $line) {
+        $parts = explode(",", $line);
+        $klas[$parts[0]] = $parts;
+    }
+
+    foreach($intNummers as $intNr) {
+        var_dump($klas[$intNr]);
+        $naam = $klas[$intNr][1];
+        $voornaam = $klas[$intNr][2];
+        $email = $voornaam . $naam . "@leerling.go-ao.be";
+
         //create GUID
         $GUID = sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
 
@@ -57,14 +59,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         //Values array for PDO
         $values = [":ID" => $GUID, ":userName" => $username, ":naam" => $naam, ":voornaam" => $voornaam,
-                ":email" => $email, ":userPassword" => $password, ":adm" => $admin];
+        ":email" => $email, ":userPassword" => $password, ":adm" => $admin];
 
         //Execute the query
         try {
             $res = $pdo->prepare($query);
             $res->execute($values);
-            header("Location: adminpage.php");
-            exit;
+        } catch (PDOException $e) 
+        {
+
+        }
+    }
+}
+elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST["username"]);
+    $naam = trim($_POST["naam"]);
+    $voornaam = trim($_POST["voornaam"]);
+    $email = trim($_POST["email"]);
+    $admin = isset($_POST["admin"]) ? 1 : 0;
+    $password = password_hash(trim($_POST["password"]), PASSWORD_DEFAULT);
+
+    if (strlen($naam) >= 2 || strlen($voornaam) >= 2) {
+        $GUID = sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
+
+        $query = "INSERT INTO `tblGebruiker`(`GUID`,`userName`,`naam`,`voornaam`,`email`,`userPassword`,`admin`)
+                VALUES (:ID, :userName, :naam, :voornaam, :email, :userPassword, :adm)";
+
+        $values = [":ID" => $GUID, ":userName" => $username, ":naam" => $naam, ":voornaam" => $voornaam,
+                ":email" => $email, ":userPassword" => $password, ":adm" => $admin];
+
+        try {
+            $res = $pdo->prepare($query);
+            $res->execute($values);
         } catch (PDOException $e) 
         {
             $TextAlert = "<strong> FOUT! </strong> de ingegeven informatie is te kort, mogelijks fout of al in gebruik.";
@@ -77,11 +103,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 require("header.php");
 ?>
-
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-4">
-                <a class="btn btn-outline-primary" role="button" href="userOverview.php">Terug</a>
+                <a class="btn btn-outline-danger" role="button" href="userOverview.php">Terug</a>
+
+                <!-- GEBRUIKER TOEVOEGEN -->
                 <?php if ($showAlert) : ?>
                     <div class="alert alert-danger float-end">
                         <?php echo $TextAlert; ?>
@@ -119,27 +146,74 @@ require("header.php");
             </div>
              
             <div class="col-sm-8">
-                <div class="col-sm-8">
+                <!-- SELECT KLAS -->
+                <div class="col-sm-2">
                     <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                        <select name="klas" class="form-select" aria-label="Default select example">
-                            <option value="" selected disabled>Selecteer klas</option>
-                            <?php foreach ($klasFiles as $klas) : ?>
-                                <option value="<?php echo $klas; ?>"><?php echo $klas; ?></option>
+                        <select name="klas" class="form-select" data-mdb-select-init data-mdb-filter="true" onchange="this.form.submit()"> 
+                            <option disabled selected>Kies een klas</option>
+                            <?php foreach ($klasarray as $klas) : ?>
+                                <?php echo "<option value='" . $klas['code'] . "'>" . $klas['code'] . "</option>"; ?>
                             <?php endforeach; ?>
                         </select>
-                        <button type="submit" class="btn btn-success">Submit</button>
                     </form>
-                    <?php foreach ($leerlingen as $leerling) : ?>
-                        <div class="card">
-                            <div class="card-body">
-                                <p class="mb-0 mt-0 fw-bold"><?php echo $leerling["naam"];?></p>
-                                <p class="mb-0 mt-0"><?php echo $leerling["voornaam"];?></p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
                 </div>
-            </div>
-                
+
+                <!-- KLASLIJST -->
+                <?php if(isset($_GET["klas"])) : ?>
+                    <br><br>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <h3 class="d-inline"><i class="fas fa-clipboard-list"></i>&nbsp;Klaslijst van <?php echo $_GET["klas"]; ?></h3>
+                        <button type="submit" class="btn btn-success float-end d-inline">Gebruikers aanmaken</button>
+                        <br><br>
+                        <div class="card-body">
+                            <table class="table align-middle mb-0 bg-white">
+                                <thead class="bg-light">
+                                    <tr>
+                                    <th>Name</th>
+                                    <th>Internnr</th>
+                                    <th>Status</th>
+                                    <th>Selecteer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        foreach ($resultArray['account'] as $key => $row) : ?>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <?php $foto = $ss->ophalenfoto($row['internnummer']); ?>
+                                            <img
+                                            src="data:image/png;base64,<?php echo $foto; ?>" 
+                                            class="rounded-circle" 
+                                            height="100px" 
+                                            width="100px"
+                                            />
+                                                        <div class="ms-3">
+                                                            <p class="fw-bold mb-1"><?php echo $row['naam']; ?></p>
+                                                            <p class="text-muted mb-0"><?php echo $row['voornaam']; ?></p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td> 
+                                                    <p class="fw-normal mb-1"><?php echo $row['internnummer']; ?></p>
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-success rounded-pill d-inline">
+                                                        <?php echo $row['@attributes']['status']; ?>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" id="flexCheckDefault" checked>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endif; ?>
+                    </form>
+                </div>
+            </div>            
         </div>
     </div>
 </body>
