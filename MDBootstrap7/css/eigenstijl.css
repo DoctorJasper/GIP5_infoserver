@@ -1,0 +1,35 @@
+/* kleuren school */
+
+.bg-donkerrood {
+  background-color: #8E0037 !important;
+}
+
+.bg-lichtgroen {
+  background-color: #6200EA !important;
+}
+.text-donkerrood {
+  color: #8E0037 !important;
+}
+
+.bg-middelrood {
+  background-color: #AE0046  !important;
+}
+
+.text-middelrood {
+  color: #AE0046 !important;
+}
+
+.bg-lichtrood {
+  background-color: #C50751  !important;
+}
+
+.text-lichtrood {
+  color: #C50751  !important;
+}
+
+a {
+  color: white;
+}
+
+
+
