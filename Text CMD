@@ -27,3 +27,5 @@ escape + i = (insert)
 
 git:
 ssh-keygen 
+
+
