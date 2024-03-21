@@ -1,5 +1,11 @@
 185.115.218.47
 
+login
+-  cd .ssh
+-  ssh ubuntu@jasper_dev.go-ao.be -i leerlingendev.pem
+-  cd /var/www/html
+-  
+
 Voorbeelden:
 php script maken:
 - sudo vim create_user.php
