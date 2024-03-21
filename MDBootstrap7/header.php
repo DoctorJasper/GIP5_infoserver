@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 setlocale(LC_ALL, 'nl_BE');
 session_start();
 
-$path = "//kyan.go-ao.be/MDBootstrap7/";
+$path = "//MDBootstrap7/";
 
 //indien nog niemand is aangemeld ga naar impersonte
 if (!isset($_SESSION["internalnr"])) {
@@ -15,3 +15,4 @@ if (!isset($_SESSION["internalnr"])) {
 
 require_once 'classes/class.toastr.php';
 $toast = new toast();
+
