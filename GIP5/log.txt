@@ -1,0 +1,45 @@
+aanmaken van user -> Calin Claudiu-Stefan - 2024-04-17
+aanmaken van user -> De Mil Mattias - 2024-04-17
+aanmaken van user -> De Moor Seppe - 2024-04-17
+aanmaken van user -> De Nijs Milan - 2024-04-17
+aanmaken van user -> Iemants Joppe - 2024-04-17
+aanmaken van user -> Mortier Karen - 2024-04-17
+aanmaken van user -> Van der Meiren Yorben - 2024-04-17
+verwijderd users met internnummer '115489, 112079, 113781, 112013, 115448, 59293, 113786' - 2024-04-17
+verwijderd users met internnummer '115489' - 2024-04-17
+verwijderd users met internnummer '115489, 112079, 113781' - 2024-04-17
+verwijderd users met internnummer '112079, 113781, 112013, 115448, 59293, 113786' - 2024-04-17
+verwijderd users met internnummer '115489, 112079, 113781, 112013, 115448, 59293, 113786' - 2024-04-17
+aanmaken van user -> Calin Claudiu-Stefan - 2024-04-17
+aanmaken van user -> De Mil Mattias - 2024-04-17
+aanmaken van user -> De Moor Seppe - 2024-04-17
+aanmaken van user -> De Nijs Milan - 2024-04-17
+aanmaken van user -> Iemants Joppe - 2024-04-17
+aanmaken van user -> Mortier Karen - 2024-04-17
+aanmaken van user -> Van der Meiren Yorben - 2024-04-17
+aanmaken van user -> Waelkens Brieuc - 2024-04-17
+aanmaken van user -> van der Linden Liam - 2024-04-17
+verwijderd users met internnummer '115448, 59293, 113786, 115758, 118123' - 2024-04-17
+verwijderd users met internnummer '115489, 112079, 113781, 112013' - 2024-04-17
+aanmaken van user -> Calin Claudiu-Stefan - 2024-04-17
+aanmaken van user -> De Mil Mattias - 2024-04-17
+aanmaken van user -> De Moor Seppe - 2024-04-17
+aanmaken van user -> De Nijs Milan - 2024-04-17
+aanmaken van user -> Iemants Joppe - 2024-04-17
+aanmaken van user -> Mortier Karen - 2024-04-17
+aanmaken van user -> Van der Meiren Yorben - 2024-04-17
+aanmaken van user -> Waelkens Brieuc - 2024-04-17
+aanmaken van user -> van der Linden Liam - 2024-04-17
+verwijderd users met internnummer '115489, 112079, 113781, 112013, 115448, 59293, 113786, 115758, 118123' - 2024-04-17
+verwijderd users met internnummer '115489, 112079, 113781, 112013, 115448, 59293, 113786, 115758, 118123' - 2024-04-17
+aanmaken van klas mislukt
+aanmaken van klas mislukt
+aanmaken van user -> Calin Claudiu-Stefan - 2024-04-17
+aanmaken van user -> De Mil Mattias - 2024-04-17
+aanmaken van user -> De Moor Seppe - 2024-04-17
+aanmaken van user -> De Nijs Milan - 2024-04-17
+aanmaken van user -> Iemants Joppe - 2024-04-17
+aanmaken van user -> Mortier Karen - 2024-04-17
+aanmaken van user -> Van der Meiren Yorben - 2024-04-17
+aanmaken van user -> Waelkens Brieuc - 2024-04-17
+aanmaken van user -> van der Linden Liam - 2024-04-17
