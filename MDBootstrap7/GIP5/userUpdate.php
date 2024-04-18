@@ -16,38 +16,35 @@
     $klasarray = $ss->ophalenKlassen();
 
     require('../startHTML.php');
-    //require('../navbar.php');
+    require('../navbar.php');
 
 $showAlert = false;
 
 $post = false;
 
 //UPDATE USER
-// Check if the request method is not POST
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    // Get the 'idGeb' parameter from the GET request
-    $internNr = $_GET['interNr'];
-    // Update query template to select user data based on 'idGeb'
+    $id = $_GET['id'];
+    //Update query template
     $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`email`,`admin` 
     FROM `tblGebruiker` 
-    WHERE `idGeb` = $idGeb";
+    WHERE `idGeb` = $id";
 
-    // Execute the query
+    //Execute the query
     try {
         $res = $pdo->prepare($query);
         $res->execute();    
-        // Fetch the user data
         $row = $res->fetch(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        // Handle query error
-        echo "Query error.<br>".$e;
+    } catch (PDOException $e) 
+    {
+        echo "Guery error.<br>".$e;
         die();
     }
-} else {
-    // Debug: display the contents of the POST request
+   
+}
+else {
     var_dump($_POST);
     $post = true;
-    // Retrieve data from the POST request
     $idGeb = $_POST["idGeb"];
     $internNr = trim($_POST["internNr"]);
     $naam = trim($_POST["naam"]); 
@@ -55,27 +52,24 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     $email = trim($_POST["email"]);
     $admin = isset($_POST["admin"]) ? 1 : 0;
 
-    // Check if the length of 'naam' or 'voornaam' is at least 2 characters
     if (strlen($naam) >= 2 || strlen($voornaam) >= 2) {
-        // Update query template to update user data based on 'idGeb'
+        //Update query template
         $query = "UPDATE `tblGebruiker`
                 SET `internNr` = '$internNr', `naam` = '$naam',`voornaam` = '$voornaam',`email` = '$email',`admin` = '$admin'
                 WHERE `idGeb` = '$idGeb'";
 
-        // Execute the update query
+        //Execute the query
         try {
             $res2 = $pdo->prepare($query);
             $res2->execute();
-            // Redirect to user overview page after successful update
             header("Location: userOverview.php");
             exit;
-        } catch (PDOException $e) {
-            // Handle query error
-            echo "Query error.<br>".$e;
+        } catch (PDOException $e) 
+        {
+            echo "Guery error.<br>".$e;
             die();
         }
     } else {
-        // Alert message if 'naam' or 'voornaam' is too short
         $TextAlert = "<strong> FOUT! </strong> de ingegeven informatie is te kort of mogelijks fout.";
         $showAlert = true;
     }

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php 
     require('../header.php');
    
@@ -13,10 +12,10 @@
 
     $ss = new Smartschool();
     $klasarray = $ss->ophalenKlassen();
+    $isChecked = 0;
+    $teller = 0;
+    $deleted = false;
 
-    require('../startHTML.php');
-    require('../navbar.php');
-    
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["deleted"])) {  
         //Update query template
         $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`klas`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 0";
@@ -34,58 +33,57 @@
         //error in de query
         die();
     }
-    ?>
-    <style>
-        #customers {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        border: 1px solid #000000;
-        width: 100%;
-        }
+    require('../startHTML.php');
+?>
+<style>
+    .card {
+        margin-left: 75px;
+        margin-right: 75px; 
+        margin-top: 40px;
+    }
+    .logos{
+        height: 150px;
+        width: 300px;
+        margin: 25px;
+    }
+</style>
+<?php require('../navbar.php') ;?>
+<br><br>
+<div class="card" id="card">
+    <div class="col-sm-12">
+        <div class="card-header bg-<?php echo (!$deleted) ? "primary" : "danger";?> bg-gradient text-white">
+            <h3 class="ml-5">Overzicht <?php if ($deleted) echo "verwijderde"; ?> gebruikers</h3>
+        </div>    
+        <div class="card-body">
+       
+            <!-- BUTTON: KIEZEN WELK ACCOUNT --> 
+            <button type="button" class="btn btn-success" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts">accounts aanmaken</button>
 
-        #customers tr:nth-child(even){background-color: #8E0037;}
-
-        #customers tr:hover {background-color: #ddd;}
-
-        #customers th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #8E0037;
-        color: white;
-        }
-    </style>
-    <br><br>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-sm-12">
-                <a class="btn btn-outline-danger" id="ReturnButton" role="button" href="../index.php">Terug</a>
-                <br><br>
-                <span class=float-end>
-                    <?php if ($deleted): ?>
-                        <a href="userOverview.php"><i class="bi bi-person-heart fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>
-                    <?php else: ?>
-                        <a href="userNew.php"><i class="fas fa-user-plus fs-3 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="nieuwe gebruiker"></i></a>                
-                        &nbsp;
-                        <a href="userOverview.php?deleted"><i class="fas fa-user-xmark fs-3 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>
-                    <?php endif; ?>
-                </span>
-                <h3>Overzicht <?php if ($deleted) echo "verwijderde"; ?> gebruikers</h3>
-                <table class="table table-hover table-striped">
-                    
-                <table class="table table-hover table-striped" id="customers">
+            <span class="float-end">
+                <?php if ($deleted): ?>
+                    <a href="userOverview.php"><i class="fas fa-user-group fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="actieve gebruikers"></i></a>  
+                <?php else: ?>
+                    <a href="userNew.php"><i class="fas fa-user-plus fs-3 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="nieuwe gebruiker"></i></a>                
+                    &nbsp;
+                    <a href="userOverview.php?deleted"><i class="fas fa-user-xmark fs-3 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>               
+                <?php endif; ?>
+            </span>
+            <br><br>
+            <table class="table table-hover table-striped">
                 <tr>
-                        <th class="fw-bold">Gebruikers</th>
-                        <th class="fw-bold">Email</th>
-                        <th class="fw-bold">Admin</th>
-                        <th class="fw-bold">Acties</th>
-                    </tr>
+                    <th class="fw-bold">Gebruikers</th>
+                    <th class="fw-bold">Email</th>
+                    <th class="fw-bold">Admin</th>
+                    <th class="fw-bold">Update</th>
+                </tr>
+                <form  method="post" action="userActies.php">
                     <?php if ($res->rowCount() != 0) : ?>
                         <?php while($row = $res->fetch(PDO::FETCH_ASSOC)) : ?>
+                            <?php $teller++;?>
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <input class="form-check-input shadow-sm rounded float-end" type="checkbox" name="leerlingen[]" value="<?php echo $row['internNr']?>" id="flexCheckDefault">&ensp;
+                                        <input class="form-check-input shadow-sm rounded float-end" type="checkbox" name="leerlingen[]" value="<?php echo $row['internNr']?>" id="<?php echo $teller;?>" onclick="myFunction(this.id)">&ensp;
                                         <?php $foto = $ss->ophalenfoto($row['internNr']); ?>
                                         <img
                                         src="data:image/png;base64,<?php echo $foto; ?>" 
@@ -103,110 +101,74 @@
                                 <td><?php echo$row["admin"] ? '<i class="fas fa-square-check text-success fs-5"></i>':
                                                                 '<i class="far fa-square fs-5"></i>';?> </td>
                                 <td>
-                                    <?php if ($deleted) : ?>
-                                        <i id="Reactivate" class="bi bi-person-up text-success fs-5" onclick='showModalReactivate("<?php echo $row["voornaam"]; ?>","<?php echo $row["internNr"]; ?>")' data-bs-toggle="modal" data-bs-target="#Activate" data-bs-toggle="tooltip" data-bs-placement="top" title="Heractiveer gebruiker"></i>                                       
-                                    <?php else : ?>
-                                        <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="fas fa-pen-to-square text-warning fs-5"  data-bs-toggle="tooltip" data-bs-placement="top" title="Wijzig gebruiker"></i></a>
-                                        <i id="Delete" class="fas fa-square-xmark text-danger fs-5" onclick='showModalDelete("<?php echo $row["voornaam"]; ?>","<?php echo $row["internNr"]; ?>")' data-bs-toggle="modal" data-bs-target="#DeleteUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijder gebruiker"></i>                                     
-                                    <?php endif; ?>
+                                    <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="fas fa-pen-to-square text-warning fs-5"  data-bs-toggle="tooltip" data-bs-placement="top" title="Wijzig gebruiker"></i></a>    
                                 </td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else : ?>
                         <tr><td colspan="6">Geen gegevens gevonden</td></tr>
                     <?php endif; ?>
-                </table>
-            </div>
+            </table>
+            <button type="submit" id="delete" name="btnDeleteUsers" class="btn btn-danger" style="display: none">verwijderen</button>
+            <button type="submit" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>
+            </form>
         </div>
     </div>
 </div>       
 
-<!-- Modal -->
-<div class="modal fade" id="DeleteUser">
-    <div class="modal-dialog">
+<!-- ACCOUNTS ------------------------------------------------------------------------------------------------------- -->
+<div class="modal fade" id="Accounts" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Verwijder gebruiker</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Kies een account</h5>
+                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                Ben je zeker dat je gebruiker '<span id="userDEL"></span>' wil verwijderen? 
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuleer</button>
-                <button type="button" value="" id="knopVerwijder" class="btn btn-danger"
-                onclick="deactivateUser(this.value)">Verwijder</button>
+            <div class="modal-body p-4 text-center">
+                <a data-mdb-ripple-init href="<?php echo $path;?>GIP5/userLinux.php">
+                    <img
+                        src="<?php echo $path;?>/img/Linux_logo.png"
+                        class="img-fluid shadow p-2 rounded logos"
+                        alt="Linux"
+                    />
+                </a>
+                
+                <a data-mdb-ripple-init href="<?php echo $path;?>GIP5/userMySql.php">
+                    <img
+                        src="<?php echo $path;?>/img/MySql_logo.png"
+                        class="img-fluid shadow p-2 rounded logos"
+                        alt="PhpMyAdmin"
+                    />
+                </a>
             </div>
         </div>
     </div>
 </div>
 
-
-<!-- ------------------------------------------------------------------------------------------------------- -->
-
-<!-- Modal activate -->
-<div class="modal fade" id="Activate">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Heractiveer gebruiker</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                Ben je zeker dat je gebruiker '<span id="userREA"></span>' wil heractiveren? 
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuleer</button>
-                <button type="button" value="" id="knopHeractiveren" class="btn btn-success"
-                onclick="reactivateUser(this.value)">Heractiveren</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<form action="userDelete.php" method="post" style="display:none" id="userDeleteForm">
-    <input type="hidden" id="userId" name="internNr">
-</form>
-<form action="userReactivate.php" method="post" style="display:none" id="userReactivateRorm">
-    <input type="hidden" id="userId2" name="internNr">
-</form>
-
-
+<?php require('../footer1.php');?>
 <script>
-    //DEACTIVEREN
-    function showModalDelete(voornaam, internNr) {
-        console.log(voornaam);
-        document.getElementById("userDEL").innerHTML = voornaam;
-        document.getElementById("knopVerwijder").value = internNr;
-        
-    }
+    let button1 = document.querySelector("#delete");
+    let button2 = document.querySelector("#activeer");
 
-    function deactivateUser(id) {
-        let idInput = document.querySelector("#userId");
-        idInput.value = id;
-        let form = document.querySelector("#userDeleteForm");
-        form.submit();
-    }
+    function myFunction(nummer) {
+        let idCheckbox = nummer;
+        let checkbox = document.getElementById(idCheckbox);
 
-    //----------------------------------------------------------------------------------------------------------------
+        if(checkbox.checked == true) {
+            <?php if(!$deleted) : ?>
+                button1.style.display = "block";
+                console.log("ok, <?php echo $isChecked;?>");
+            <?php else : ?>
+                button2.style.display = "block";
+                console.log("ok, <?php echo $isChecked;?>");
+            <?php endif; ?>
+        } else {
+            button1.style.display = "none";
+            console.log("niet ok, <?php echo $isChecked;?>");
 
-    //HERACTIVEREN
-    function showModalReactivate(voornaam, internNr) {
-        document.getElementById("userREA").innerHTML = voornaam;
-        document.getElementById("knopHeractiveren").value = internNr;
-    }
-
-    function reactivateUser(id) {
-        let idInput = document.querySelector("#userId2");
-        idInput.value = id;
-        let form = document.querySelector("#userReactivateRorm");
-        form.submit();
+            button2.style.display = "none";
+            console.log("ok, <?php echo $isChecked;?>");
+        }
     }
 </script>
+<?php require('../footer2.php');?>

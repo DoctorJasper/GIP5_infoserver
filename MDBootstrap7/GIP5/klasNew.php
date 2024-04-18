@@ -1,23 +1,39 @@
+<!DOCTYPE html>
 <?php
-    require('pdo.php');
+    require("../header.php");
 
-    if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["klas"])) {
-        $klas = $_GET["klas"];
-        // Update the "klas" in the database
-        $query = "INSERT INTO `tblKlassen`(`klas`) VALUES ('" . $klas . "')";
+    $showAlert = false;
+    
+    if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
+        header("Location: ../index.php");
+        exit;   
+    }
 
-        try{
-            $res = $pdo->prepare($query);
-            $res->execute();
-            header("Location: klasOverview.php");
-            exit;
-        }catch(PDOException $e){
-            //error in de query
-            echo 'Query errors';
-            die();
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        require("pdo.php");
+        $klas = $_POST["klas"];
+        if (strlen($klas) >= 2) {
+            //Update query template
+            $query = "INSERT INTO `tblKlassen`(`klas`) VALUES ('$klas')";
+
+            //Execute the query
+            try {
+                $res = $pdo->prepare($query);
+                $res->execute();
+                header("Location: klasOverview.php");
+                exit;
+            } catch (PDOException $e) 
+            {
+                file_put_contents("log.txt","aanmaken van klas mislukt".PHP_EOL, FILE_APPEND);
+                header("Location: klasOverview.php");
+                exit;
+            }
         }
     } else {
-        header("Location: ../index.php");
-        die();
+        file_put_contents("log.txt","aanmaken van klas mislukt".PHP_EOL, FILE_APPEND);
+        header("Location: klasOverview.php");
+        exit;
     }
 ?>
+</body>
+</html>

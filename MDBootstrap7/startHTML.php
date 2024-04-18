@@ -19,3 +19,5 @@
   <link rel="stylesheet" href="<?php echo $path; ?>plugins/css/all.min.css" />
   <!-- EIGEN STIJL -->
   <link rel="stylesheet" href="<?php echo $path; ?>css/eigenstijl.css" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">

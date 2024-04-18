@@ -84,10 +84,10 @@ define('beheer_inschrijvingen', 65536);
                                                 href="<?php echo $path ?>GIP5/userOverview.php">
                                                 <i class="fas fa-file-export ps-1 pe-3"></i>User overview
                                             </a>
-                                            <!--<a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/klasOverview.php">
-                                                <i class="far fa-id-card ps-1 pe-3"></i>klas Overvieuw
-                                            </a>-->
+                                            <a class="list-group-item list-group-item-action"
+                                                href="<?php echo $path ?>GIP5/log.php">
+                                                <i class="fas fa-align-left ps-1 pe-3"></i>log file
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">

@@ -5,7 +5,7 @@
 }
 
 .bg-lichtgroen {
-  background-color: #6200EA !important;
+  background-image: linear-gradient(0deg, black, #002566);
 }
 .text-donkerrood {
   color: #8E0037 !important;
