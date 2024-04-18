@@ -94,8 +94,10 @@
 <style>
     .card {
         margin-left: 75px;
-        margin-right: 75px; 
+        margin-right: 75px;
         margin-top: 40px;
+        border: 10px solid black rounded;
+        border-radius: 10px;
     }
     .logos{
         height: 150px;
@@ -107,97 +109,120 @@
 
 <br><br>
 <div class="card">
-    <div class="card-header bg-primary bg-gradient">
-        <h1 class="text-white center">Users kiezen<h1>
+    <div class="card-header bg-dark bg-gradient">
+        <h1 class="text-white text-center">Nieuwe User<h1>
     </div>
     <div class="card-body">
-        <!-- SELECT KLAS -->
-        <div class="col-sm-2">
-            <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <select name="klas" class="form-select" data-mdb-select-init data-mdb-filter="true" onchange="this.form.submit()"> 
-                    <option disabled selected>Kies een klas</option>
-                    <?php foreach ($klasarray as $klas) : ?>
-                        <?php echo "<option value='" . $klas['code'] . "'>" . $klas['code'] . "</option>"; ?>
-                    <?php endforeach; ?>
-                </select>
-            </form>
-        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-info bg-gradient">
+                        <h1 class="text-white center">Users kiezen<h1>
+                    </div>
+                    <div class="card-body">
+                        <!-- SELECT KLAS -->
+                        <div class="col-sm-2">
+                            <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                <select name="klas" class="form-select" data-mdb-select-init data-mdb-filter="true" onchange="this.form.submit()"> 
+                                    <option disabled selected>Kies een klas</option>
+                                    <?php foreach ($klasarray as $klas) : ?>
+                                        <?php echo "<option value='" . $klas['code'] . "'>" . $klas['code'] . "</option>"; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </form>
+                        </div>
+        
+                        <!-- KLASLIJST -->
+                        <?php if(isset($_GET["klas"])) : ?>
+                            <br><br>
+                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                <h3 class="d-inline"><i class="fas fa-clipboard-list"></i>&nbsp;Klaslijst van <?php echo $_GET["klas"]; ?></h3>
+                                <button type="submit" class="btn btn-success float-end d-inline">Gebruikers aanmaken</button>
+                                <br><br>
+                                <div class="card-body">
+                                    <table class="table align-middle mb-0 bg-white">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Internnr</th>
+                                                <th>Status</th>
+                                                <th>Selecteer</th>
+                                                <th>Linux</th>
+                                                <th>MySql</th>
+                                                <th>Beheer</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($resultArray['account'] as $key => $row) : ?>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <?php $foto = $ss->ophalenfoto($row['internnummer']); ?>
+                                                            <img
+                                                            src="data:image/png;base64,<?php echo $foto; ?>" 
+                                                            class="rounded-circle" 
+                                                            height="100px" 
+                                                            width="100px"
+                                                            />
+                                                            <div class="ms-3">
+                                                                <p class="fw-bold mb-1"><?php echo $row['naam']; ?></p>
+                                                                <p class="text-muted mb-0"><?php echo $row['voornaam']; ?></p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td> 
+                                                        <p class="fw-normal mb-1"><?php echo $row['internnummer']; ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-success rounded-pill d-inline">
+                                                            <?php echo $row['@attributes']['status']; ?>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <?php foreach($bestaandeLeerlingen as $leerling) {
+                                                            if ($leerling['internNr'] == $row['internnummer']) {
+                                                                $exists = 1;
+                                                                break;
+                                                            } 
+                                                            else {
+                                                                $exists = 0;
+                                                            }
+                                                        }?>
+                                                        <input class="form-check-input checkbox" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" <?php if($exists == "0") echo "checked" ;?> <?php if($exists == "1") echo "disabled" ;?>>
+                                                    </td>
+                                                    <td>
 
-        <!-- KLASLIJST -->
-        <?php if(isset($_GET["klas"])) : ?>
-            <br><br>
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <h3 class="d-inline"><i class="fas fa-clipboard-list"></i>&nbsp;Klaslijst van <?php echo $_GET["klas"]; ?></h3>
-                <button type="submit" class="btn btn-success float-end d-inline">Gebruikers aanmaken</button>
-                <br><br>
-                <div class="card-body">
-                    <table class="table align-middle mb-0 bg-white">
-                        <thead class="bg-light">
-                            <tr>
-                                <th>Name</th>
-                                <th>Internnr</th>
-                                <th>Status</th>
-                                <th>Selecteer</th>
-                                <th>Linux</th>
-                                <th>MySql</th>
-                                <th>Beheer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($resultArray['account'] as $key => $row) : ?>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <?php $foto = $ss->ophalenfoto($row['internnummer']); ?>
-                                            <img
-                                            src="data:image/png;base64,<?php echo $foto; ?>" 
-                                            class="rounded-circle" 
-                                            height="100px" 
-                                            width="100px"
-                                            />
-                                            <div class="ms-3">
-                                                <p class="fw-bold mb-1"><?php echo $row['naam']; ?></p>
-                                                <p class="text-muted mb-0"><?php echo $row['voornaam']; ?></p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td> 
-                                        <p class="fw-normal mb-1"><?php echo $row['internnummer']; ?></p>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-success rounded-pill d-inline">
-                                            <?php echo $row['@attributes']['status']; ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <?php foreach($bestaandeLeerlingen as $leerling) {
-                                            if ($leerling['internNr'] == $row['internnummer']) {
-                                                $exists = 1;
-                                                break;
-                                            } 
-                                            else {
-                                                $exists = 0;
-                                            }
-                                        }?>
-                                        <input class="form-check-input checkbox" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" <?php if($exists == "0") echo "checked" ;?> <?php if($exists == "1") echo "disabled" ;?>>
-                                    </td>
-                                    <td>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-warning rounded-pill d-inline">
+                                                            <a href="userMysql.php?voornaam=<?php echo $row['voornaam']; ?>" class="text-decoration-none text-dark">
+                                                                <span class="small">Maak Account</span>
+                                                            </a>
+                                                        </span>
+                                                    </td>
 
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        <button type="button" value="<?php echo $row['internnummer'] ;?>" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts" onclick="myFunction(this.value)" <?php if($exists == "0") echo "disabled" ;?>>beheer</button>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                                                    <td>
+                                                        <?php if($exists) : ?>
+                                                            <button type="button" value="<?php echo $row['internnummer'] ;?>" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts" onclick="myFunction(this.value)">beheer</button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td>
+                                                    <?php if($exists) : ?>
+                                                        <a href=".php?id=<?php echo $row['idKlas']; ?>"><i class="fas fa-pen-to-square text-warning fs-5"  data-bs-toggle="tooltip" data-bs-placement="top" title="Wijzig gebruiker"></i></a>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        <?php endif; ?>
+                    </div>          
                 </div>
-            </form>
-        <?php endif; ?>
-    </div>          
+            </div>
+        </div>
+    </div>
 </div>
     
 <!-- ACCOUNTS ------------------------------------------------------------------------------------------------------- -->
