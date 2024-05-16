@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 setlocale(LC_ALL, 'nl_BE');
 session_start();
 
-$path = "//localhost/MDBootstrap7/";
+include("path.php");
 
 //indien nog niemand is aangemeld ga naar impersonte
 if (!isset($_SESSION["internalnr"])) {

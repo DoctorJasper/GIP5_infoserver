@@ -6,7 +6,7 @@ setlocale(LC_ALL, 'nl_BE');
 session_start();
 session_unset();
 
-$path = "//localhost/MDBootstrap7/";
+include("path.php");
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

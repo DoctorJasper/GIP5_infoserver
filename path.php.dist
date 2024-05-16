@@ -1,0 +1,3 @@
+<?php
+// vul de url van de server in
+$path = "http://localhost/MDBootstrap7/";
