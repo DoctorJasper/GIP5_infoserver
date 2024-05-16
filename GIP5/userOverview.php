@@ -137,7 +137,7 @@
                 <a data-mdb-ripple-init href="
                                             <?php
                                                 echo $path."GIP5/userLinux.php?users=";
-                                            ?>">
+                                            ?>" id="linux_link">
                     <img
                         src="<?php echo $path;?>/img/Linux_logo.png"
                         class="img-fluid shadow p-2 rounded logos"
@@ -145,7 +145,10 @@
                     />
                 </a>
                 
-                <a data-mdb-ripple-init href="<?php echo $path."GIP5/userMySql.php";?>">              
+                <a data-mdb-ripple-init href="
+                                            <?php
+                                                echo $path."GIP5/userMySql.php?users=";
+                                            ?>" id="musql_link">              
                     <img
                         src="<?php echo $path;?>/img/MySql_logo.png"
                         class="img-fluid shadow p-2 rounded logos"
@@ -163,11 +166,11 @@
     let button2 = document.querySelector("#activeer");
 
     function myFunction(nummer) {
+
         let idCheckbox = nummer;
         let checkbox = document.getElementById(idCheckbox);
 
-        if(checkbox.checked == true) {
-            isChecked();
+        if (getChecked().length > 0) {
             <?php if(!$deleted) : ?>
                 button1.style.display = "block";
                 console.log("ok, <?php echo $isChecked;?>");
@@ -182,6 +185,7 @@
             button2.style.display = "none";
             console.log("ok, <?php echo $isChecked;?>");
         }
+        updateLinks();
     }
 
     function selectAll(id) {
@@ -194,7 +198,6 @@
 
         let checkbox = document.getElementById(id)
         if(checkbox.checked == true) {
-            isChecked();
             <?php if(!$deleted) : ?>
                 button1.style.display = "block";
                 console.log("ok, <?php echo $isChecked;?>");
@@ -209,11 +212,29 @@
             button2.style.display = "none";
             console.log("ok, <?php echo $isChecked;?>");
         }
+        updateLinks();
     }
     
-    function isChecked() {
+    function getChecked() {
         let checkboxes = document.getElementsByName('leerlingen[]');
-        console.log(checkboxes);
+        let leerlingen = [];
+        checkboxes.forEach(function(checkbox){
+            if (checkbox.checked) {
+                leerlingen.push(checkbox.value);
+            }
+        })
+        console.log(leerlingen);
+        return leerlingen;
+    }
+
+    function updateLinks() {
+        let path = "<?php echo $path."GIP5/";?>";
+
+        let linuxLink = document.querySelector("#linux_link");
+        linuxLink.setAttribute("href",path+"userLinux.php?users="+getChecked().join(","))
+
+        let mysqlLink = document.querySelector("#musql_link");
+        mysqlLink.setAttribute("href",path+"userMySql.php?users="+getChecked().join(","))
     }
 </script>
 <?php require('../footer2.php');?>

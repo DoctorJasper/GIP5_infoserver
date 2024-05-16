@@ -27,3 +27,7 @@ verwijderd users met internnummer '115759' - 2024-05-16
 verwijderd users met internnummer '115759' - 2024-05-16
 verwijderd users met internnummer '112014' - 2024-05-16
 heractiveren users met internnummer '112014' - 2024-05-16
+verwijderd users met internnummer '115759' - 2024-05-16
+heractiveren users met internnummer '115759' - 2024-05-16
+verwijderd users met internnummer '115759, 112014' - 2024-05-16
+heractiveren users met internnummer '115759, 112014' - 2024-05-16
