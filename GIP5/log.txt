@@ -1,45 +1,29 @@
-aanmaken van user -> Calin Claudiu-Stefan - 2024-04-17
-aanmaken van user -> De Mil Mattias - 2024-04-17
-aanmaken van user -> De Moor Seppe - 2024-04-17
-aanmaken van user -> De Nijs Milan - 2024-04-17
-aanmaken van user -> Iemants Joppe - 2024-04-17
-aanmaken van user -> Mortier Karen - 2024-04-17
-aanmaken van user -> Van der Meiren Yorben - 2024-04-17
-verwijderd users met internnummer '115489, 112079, 113781, 112013, 115448, 59293, 113786' - 2024-04-17
-verwijderd users met internnummer '115489' - 2024-04-17
-verwijderd users met internnummer '115489, 112079, 113781' - 2024-04-17
-verwijderd users met internnummer '112079, 113781, 112013, 115448, 59293, 113786' - 2024-04-17
-verwijderd users met internnummer '115489, 112079, 113781, 112013, 115448, 59293, 113786' - 2024-04-17
-aanmaken van user -> Calin Claudiu-Stefan - 2024-04-17
-aanmaken van user -> De Mil Mattias - 2024-04-17
-aanmaken van user -> De Moor Seppe - 2024-04-17
-aanmaken van user -> De Nijs Milan - 2024-04-17
-aanmaken van user -> Iemants Joppe - 2024-04-17
-aanmaken van user -> Mortier Karen - 2024-04-17
-aanmaken van user -> Van der Meiren Yorben - 2024-04-17
-aanmaken van user -> Waelkens Brieuc - 2024-04-17
-aanmaken van user -> van der Linden Liam - 2024-04-17
-verwijderd users met internnummer '115448, 59293, 113786, 115758, 118123' - 2024-04-17
-verwijderd users met internnummer '115489, 112079, 113781, 112013' - 2024-04-17
-aanmaken van user -> Calin Claudiu-Stefan - 2024-04-17
-aanmaken van user -> De Mil Mattias - 2024-04-17
-aanmaken van user -> De Moor Seppe - 2024-04-17
-aanmaken van user -> De Nijs Milan - 2024-04-17
-aanmaken van user -> Iemants Joppe - 2024-04-17
-aanmaken van user -> Mortier Karen - 2024-04-17
-aanmaken van user -> Van der Meiren Yorben - 2024-04-17
-aanmaken van user -> Waelkens Brieuc - 2024-04-17
-aanmaken van user -> van der Linden Liam - 2024-04-17
-verwijderd users met internnummer '115489, 112079, 113781, 112013, 115448, 59293, 113786, 115758, 118123' - 2024-04-17
-verwijderd users met internnummer '115489, 112079, 113781, 112013, 115448, 59293, 113786, 115758, 118123' - 2024-04-17
-aanmaken van klas mislukt
-aanmaken van klas mislukt
-aanmaken van user -> Calin Claudiu-Stefan - 2024-04-17
-aanmaken van user -> De Mil Mattias - 2024-04-17
-aanmaken van user -> De Moor Seppe - 2024-04-17
-aanmaken van user -> De Nijs Milan - 2024-04-17
-aanmaken van user -> Iemants Joppe - 2024-04-17
-aanmaken van user -> Mortier Karen - 2024-04-17
-aanmaken van user -> Van der Meiren Yorben - 2024-04-17
-aanmaken van user -> Waelkens Brieuc - 2024-04-17
-aanmaken van user -> van der Linden Liam - 2024-04-17
+2024-04-18 13:06:02 || Command veld van 'Linux' bewerkt
+2024-04-18 13:06:09 || Command veld van 'MySql' bewerkt
+2024-04-18 15:36:56 || Klas '5INFO' heractiveerd
+2024-04-18 16:12:16 || Command veld van 'Linux' bewerkt
+2024-04-18 16:21:47 || Klas '1Aa' verwijderd
+2024-04-18 16:22:11 || aanmaken van klas mislukt
+aanmaken van user -> De Moor Seppe - 2024-04-18
+aanmaken van user -> Iemants Joppe - 2024-04-18
+2024-05-13 14:26:10 || Database query error
+2024-05-13 14:28:21 || Gefaald om klas '1Aa' te verwijderen
+2024-05-13 14:30:16 || Klas '1Aa' verwijderd
+2024-05-13 14:30:23 || Klas '5APDA' verwijderd
+2024-05-13 14:32:31 || Klas '1Aa' verwijderd
+2024-05-13 15:21:31 || Database query error
+2024-05-16 07:30:25 || Database query error
+2024-05-16 07:31:26 || Database query error
+verwijderd users met internnummer '115759, 112014' - 2024-05-16
+verwijderd users met internnummer '115759, 112014' - 2024-05-16
+2024-05-16 08:37:12 || Database query error
+2024-05-16 08:43:35 || Database query error
+2024-05-16 08:43:44 || Database query error
+2024-05-16 08:44:16 || Command veld van 'MySql' bewerkt
+2024-05-16 08:44:24 || Command veld van 'MySql' bewerkt
+verwijderd users met internnummer '115759, 112014' - 2024-05-16
+verwijderd users met internnummer '115759, 112014' - 2024-05-16
+verwijderd users met internnummer '115759' - 2024-05-16
+verwijderd users met internnummer '115759' - 2024-05-16
+verwijderd users met internnummer '112014' - 2024-05-16
+heractiveren users met internnummer '112014' - 2024-05-16

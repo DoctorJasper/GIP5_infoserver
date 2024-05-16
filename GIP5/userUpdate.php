@@ -37,13 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
         $row = $res->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) 
     {
-        echo "Guery error.<br>".$e;
-        die();
+        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+        header("Location: ../index.php");
+        exit;
     }
    
 }
 else {
-    var_dump($_POST);
     $post = true;
     $idGeb = $_POST["idGeb"];
     $internNr = trim($_POST["internNr"]);
@@ -66,8 +67,10 @@ else {
             exit;
         } catch (PDOException $e) 
         {
-            echo "Guery error.<br>".$e;
-            die();
+            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+            header("Location: ../index.php");
+            exit;
         }
     } else {
         $TextAlert = "<strong> FOUT! </strong> de ingegeven informatie is te kort of mogelijks fout.";

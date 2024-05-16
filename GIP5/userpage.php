@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <?php
+    require('../header.php');
 
-//if (!isset($_SESSION["naam"]) /*|| $_SESSION["admin"] == 1*/) {
-//    header("Location: login.php");
-//    exit;
-//}
+    if (!isset($_SESSION["firstname"])) {
+        header("Location: ../index.php");
+        exit;
+    }
 
-require('pdo.php');
-require('../header.php');
 // hieronder zet je PHP code
-
+    require('pdo.php');
     require('../inc/config.php');
     require('../classes/class.smartschool.php');
 
     $ss = new Smartschool();
     $klasarray = $ss->ophalenKlassen();
 
-    require('../startHTML.php');
-    require('../navbar.php');
 
     /*if (!isset($_SESSION["admin"]) || $_SESSION["admin"] == 0) {
         header("Location: ../impersonate.php");
@@ -40,14 +37,9 @@ try{
 }
 */
 
+require('../startHTML.php');
 ?>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style> 
+<style> 
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -66,19 +58,13 @@ try{
         max-height: 300px;
     }
 </style>
-</head>
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="#">Infoserver</a>
-</nav>
+<?php require('../navbar.php') ;?>
 
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block sidebar">
             <div class="sidebar-sticky">
                 <ul class="navbar-nav ms-auto">
-                   
                 </ul>
             </div>
         </nav>
@@ -116,6 +102,7 @@ try{
     <p id="tutorialLink"></p>
 </div>
 
+<?php require('../footer1.php'); ?>
 <script>
     function showTutorial(select) {
         var selectedIndex = select.selectedIndex;
@@ -127,17 +114,4 @@ try{
         document.getElementById("tutorialLink").innerHTML = '<a href="' + tutorialLink + '" target="_blank">View Tutorial</a>';
     }
 </script>
-
-</body>
-</body>
-</html>
-<?php
-        require('../footer1.php');
-    ?>
-    <!-- Custom scripts -->
-    <script type="text/javascript">
-
-    </script>
-    <?php
-    require('../footer2.php');
-?>  
+<?php require('../footer2.php');?>  

@@ -15,27 +15,21 @@
     $ss = new Smartschool();
     $klasarray = $ss->ophalenKlassen();
 
-    require('../startHTML.php');
-    require('../navbar.php');
-
-    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["deleted"])) {  
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {  
         //Update query template
-        $query = "SELECT * FROM `tblKlassen` WHERE `active` = 0";
-        $deleted = true;
-    } else {
-        //Update query template
-        $query = "SELECT * FROM `tblKlassen` WHERE `active` = 1";
-        $deleted = false;
+        $query = "SELECT * FROM `tblKlassen`";
     }
 
     try{
         $res = $pdo->prepare($query);
         $res->execute();
     }catch(PDOException $e){
-        //error in de query
-        echo 'Query error';
-        die();
+        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+        header("Location: ../index.php");
+        exit;
     }
+    require('../startHTML.php');
 ?>
 <style>
     #card {
@@ -43,13 +37,13 @@
         margin-right: 75px; 
         margin-top: 40px;
     }
-    <?php require("../css/eigenstijl.css") ;?>
 </style>
+<?php require('../navbar.php') ;?>
 <br><br>
 <br>
 <div class ="card" id="card">
     <div class="card-header bg-primary bg-gradient">
-        <h1 class="text-white center">Nieuwe Klassen<h1>
+        <h1 class="text-white center">Mijn Klassen<h1>
     </div>
     <div class="container mt-5">
         <div class="card-body">
@@ -61,15 +55,6 @@
                         <div class="card-header bg-warning bg-gradient">
                             <h1 class="text-white center">Overzicht Klassen<h1>
                         </div>
-                        <span class=float-end>
-                            <?php if ($deleted): ?>
-                                <a href="klasOverview.php"><i class="bi bi-person-heart fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>
-                            <?php else: ?>
-                                <a href="klasNew.php"><i class="bi bi-person-plus-fill fs-3" data-bs-toggle="tooltip" data-bs-placement="top" title="nieuwe klas"></i></a>                
-                                &nbsp;
-                                <a href="klasOverview.php?deleted"><i class="bi bi-person-fill-slash fs-3 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde klassen"></i></a>
-                            <?php endif; ?>
-                        </span>
                         <table class="table table-hover table-striped">
                             <tr>
                                 <th>klas</th>
@@ -80,11 +65,7 @@
                                     <tr>
                                         <td><a class="text-black" href="userNew.php?klas=<?php echo $row["klas"]; ?>"><?php echo$row["klas"]; ?></a></td>
                                         <td> 
-                                            <?php if ($deleted) : ?>
-                                                <a href="klasReactivate.php?klas=<?php echo $row["klas"] ;?>"><i id="Reactivate" class="bi bi-person-up text-success fs-5" data-bs-toggle="modal" data-bs-target="#ReactivateKlas" data-bs-toggle="tooltip" data-bs-placement="top" title="Heractiveer klas"></i></a>
-                                            <?php else : ?>
-                                                <a href="klasDelete.php?klas=<?php echo $row["klas"] ;?>"><i id="Delete" class="bi bi-trash text-danger fs-5" data-bs-toggle="modal" data-bs-target="#DeleteKlas" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijder klas"></i></a>
-                                            <?php endif; ?>
+                                            <a href="klasDelete.php?klas=<?php echo $row["klas"] ;?>"><i id="Delete" class="bi bi-trash text-danger fs-5" data-bs-toggle="modal" data-bs-target="#DeleteKlas" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijder klas"></i></a>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>

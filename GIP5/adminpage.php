@@ -22,9 +22,10 @@
         $res->execute();
         $row = $res->fetchAll(PDO::FETCH_ASSOC);
     }catch(PDOException $e){
-        //error in de query
-        var_dump($e);
-        die();
+        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+        header("Location: ../index.php");
+        exit;
     }
 
 //-- GET ------------------------------------------------------------------------------------------
@@ -37,22 +38,46 @@
         $text = $_POST["linux"];
         $delay = 0.1;
         // Update the command in the database
-        $query = 'UPDATE `tblCommandos` SET `commandos`="'. $text . '" WHERE idPlatform=1';
+        $query = 'UPDATE `tblCommandos` SET `commandos`="'. $text . '" WHERE idComm = 1';
 
         try {
             // Prepare and execute the update query
             $res = $pdo->prepare($query);
             $res->execute();
+
+            $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'Linux AddUser' bewerkt","success");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'Linux AddUser' bewerkt".PHP_EOL, FILE_APPEND);
             // Refresh the page after a delay
             header("Refresh: $delay");
         } catch (PDOException $e) {
-            // Handle query error
-            var_dump($e);
-            die();
+            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
         }
     }
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["phpMyAdmin"])) {
-        $text = $_POST["phpMyAdmin"];
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux2"])) {
+        $text = $_POST["linux2"];
+        $delay = 0.1;
+        // Update the command in the database
+        $query = 'UPDATE `tblCommandos` SET `commandos`="'. $text . '" WHERE idComm = 3';
+
+        try {
+            // Prepare and execute the update query
+            $res = $pdo->prepare($query);
+            $res->execute();
+
+            $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'Linux DeleteUser' bewerkt","success");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'Linux DeleteUser' bewerkt".PHP_EOL, FILE_APPEND);
+            // Refresh the page after a delay
+            header("Refresh: $delay");
+        } catch (PDOException $e) {
+            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+            header("Location: adminpage.php");
+            exit;
+        }
+    }
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["MySql"])) {
+        $text = $_POST["MySql"];
         $delay = 0.1;
         // Update the command in the database
         $query = 'UPDATE `tblCommandos` SET `commandos`="'. $text . '" WHERE idPlatform=2';
@@ -61,12 +86,16 @@
             // Prepare and execute the update query
             $res = $pdo->prepare($query);
             $res->execute();
+
+            $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'MySql' bewerkt","success");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'MySql' bewerkt".PHP_EOL, FILE_APPEND);
             // Refresh the page after a delay
             header("Refresh: $delay");
         } catch (PDOException $e) {
-            // Handle query error
-            var_dump($e);
-            die();
+            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+            header("Location: adminpage.php");
+            exit;
         }
     }
 
@@ -85,7 +114,7 @@
 <?php require('../navbar.php') ;?>
 <br><br>
 <div class="card">
-    <div class="card-header  bg-donkerrood bg-gradient">
+    <div class="card-header bg-primary bg-gradient">
         <h1 class="text-white text-center">Welkom <?php// echo $_SESSION["firstname"] ;?> ADMIN</h1>
     </div>
     <div class="container-fluid">
@@ -108,7 +137,23 @@
                                     <button type="submit" class="btn btn-success">Toepassen</button>
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
-                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="6"><?php echo $row[0]["commandos"] ;?></textarea>
+                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="70"><?php echo $row[0]["commandos"] ;?></textarea>
+                                        </div>
+                                </form>
+                            <?php endif; ?>
+                            <br><br>
+                            <?php if ($command != "linux2") : ?>
+                                <a href="adminpage.php?comm=linux2"><button type="button" class="btn btn-primary">Edit</button></a>
+                                <p></p>
+                                <div class="md-form amber-textarea active-amber-textarea-2">
+                                    <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[2]["commandos"] ;?></textarea>
+                                </div>
+                            <?php elseif ($command == "linux2") : ?>
+                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                    <button type="submit" class="btn btn-success">Toepassen</button>
+                                        <p></p>
+                                        <div class="md-form amber-textarea active-amber-textarea-2">
+                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="70"><?php echo $row[0]["commandos"] ;?></textarea>
                                         </div>
                                 </form>
                             <?php endif; ?>
@@ -118,21 +163,21 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header bg-warning bg-gradient">
-                            <h4 class="text-white">phpMyAdmin</h4>
+                            <h4 class="text-white">MySql</h4>
                         </div>
                         <div class="card-body"> 
-                            <?php if ($command != "phpMyAdmin") : ?>
-                                <a href="adminpage.php?comm=phpMyAdmin"><button type="button" class="btn btn-primary">Edit</button></a>
+                            <?php if ($command != "MySql") : ?>
+                                <a href="adminpage.php?comm=MySql"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
                                     <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[1]["commandos"] ;?></textarea>
                                 </div>
-                            <?php elseif ($command == "phpMyAdmin") : ?>
+                            <?php elseif ($command == "MySql") : ?>
                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                                     <button type="submit" class="btn btn-success">Toepassen</button>
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
-                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="phpMyAdmin" rows="70"><?php echo $row[1]["commandos"] ;?></textarea>
+                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql" rows="70"><?php echo $row[1]["commandos"] ;?></textarea>
                                         </div>
                                 </form>
                             <?php endif; ?>

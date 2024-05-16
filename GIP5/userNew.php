@@ -134,10 +134,10 @@
                     <table class="table align-middle mb-0 bg-white">
                         <thead class="bg-light">
                             <tr>
-                                <th>Name</th>
+                                <th>Selecteer</th>
+                                <th>Naam</th>
                                 <th>Internnr</th>
                                 <th>Status</th>
-                                <th>Selecteer</th>
                                 <th>Linux</th>
                                 <th>MySql</th>
                                 <th>Beheer</th>
@@ -146,6 +146,18 @@
                         <tbody>
                             <?php foreach ($resultArray['account'] as $key => $row) : ?>
                                 <tr>
+                                    <td>
+                                        <?php foreach($bestaandeLeerlingen as $leerling) {
+                                            if ($leerling['internNr'] == $row['internnummer']) {
+                                                $exists = 1;
+                                                break;
+                                            } 
+                                            else {
+                                                $exists = 0;
+                                            }
+                                        }?>
+                                        <input class="form-check-input checkbox" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" <?php if($exists == "0") echo "checked" ;?> <?php if($exists == "1") echo "disabled" ;?>>
+                                    </td>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <?php $foto = $ss->ophalenfoto($row['internnummer']); ?>
@@ -170,18 +182,6 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <?php foreach($bestaandeLeerlingen as $leerling) {
-                                            if ($leerling['internNr'] == $row['internnummer']) {
-                                                $exists = 1;
-                                                break;
-                                            } 
-                                            else {
-                                                $exists = 0;
-                                            }
-                                        }?>
-                                        <input class="form-check-input checkbox" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" <?php if($exists == "0") echo "checked" ;?> <?php if($exists == "1") echo "disabled" ;?>>
-                                    </td>
-                                    <td>
 
                                     </td>
                                     <td>
@@ -192,6 +192,7 @@
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
+                            </form>
                         </tbody>
                     </table>
                 </div>

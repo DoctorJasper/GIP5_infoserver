@@ -31,9 +31,9 @@
     }
     catch (PDOException $e)
     {
-    /* If there is an error, an exception is thrown. */
-    echo 'Database connection failed.';
-    var_dump($e);
-    die();
+        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+        header("Location: ../index.php");
+        exit;
     }
 ?>

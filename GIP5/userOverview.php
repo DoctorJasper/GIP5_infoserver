@@ -15,6 +15,7 @@
     $isChecked = 0;
     $teller = 0;
     $deleted = false;
+    $selectedUsers = [];
 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["deleted"])) {  
         //Update query template
@@ -30,8 +31,10 @@
         $res = $pdo->prepare($query);
         $res->execute();
     }catch(PDOException $e){
-        //error in de query
-        die();
+        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+        header("Location: ../index.php");
+        exit;
     }
     require('../startHTML.php');
 ?>
@@ -69,8 +72,12 @@
                 <?php endif; ?>
             </span>
             <br><br>
+            <div class="px-4">
+                
+            </div>
             <table class="table table-hover table-striped">
                 <tr>
+                    <th><input class="form-check-input shadow-sm rounded" type="checkbox" id="selectAll" onclick="selectAll(this.id)" title="Select all"/></th>
                     <th class="fw-bold">Gebruikers</th>
                     <th class="fw-bold">Email</th>
                     <th class="fw-bold">Admin</th>
@@ -82,8 +89,10 @@
                             <?php $teller++;?>
                             <tr>
                                 <td>
+                                    <input class="form-check-input shadow-sm rounded" type="checkbox" name="leerlingen[]" value="<?php echo $row['internNr']?>" id="<?php echo $teller;?>" onclick="myFunction(this.id)">&ensp;
+                                </td>
+                                <td>
                                     <div class="d-flex align-items-center">
-                                        <input class="form-check-input shadow-sm rounded float-end" type="checkbox" name="leerlingen[]" value="<?php echo $row['internNr']?>" id="<?php echo $teller;?>" onclick="myFunction(this.id)">&ensp;
                                         <?php $foto = $ss->ophalenfoto($row['internNr']); ?>
                                         <img
                                         src="data:image/png;base64,<?php echo $foto; ?>" 
@@ -125,7 +134,10 @@
                 <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4 text-center">
-                <a data-mdb-ripple-init href="<?php echo $path;?>GIP5/userLinux.php">
+                <a data-mdb-ripple-init href="
+                                            <?php
+                                                echo $path."GIP5/userLinux.php?users=";
+                                            ?>">
                     <img
                         src="<?php echo $path;?>/img/Linux_logo.png"
                         class="img-fluid shadow p-2 rounded logos"
@@ -133,7 +145,7 @@
                     />
                 </a>
                 
-                <a data-mdb-ripple-init href="<?php echo $path;?>GIP5/userMySql.php">
+                <a data-mdb-ripple-init href="<?php echo $path."GIP5/userMySql.php";?>">              
                     <img
                         src="<?php echo $path;?>/img/MySql_logo.png"
                         class="img-fluid shadow p-2 rounded logos"
@@ -155,6 +167,7 @@
         let checkbox = document.getElementById(idCheckbox);
 
         if(checkbox.checked == true) {
+            isChecked();
             <?php if(!$deleted) : ?>
                 button1.style.display = "block";
                 console.log("ok, <?php echo $isChecked;?>");
@@ -169,6 +182,38 @@
             button2.style.display = "none";
             console.log("ok, <?php echo $isChecked;?>");
         }
+    }
+
+    function selectAll(id) {
+        let checkboxes = document.getElementsByName('leerlingen[]');
+        let source = document.querySelector('input[type="checkbox"]');
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = source.checked;
+        });
+
+        let checkbox = document.getElementById(id)
+        if(checkbox.checked == true) {
+            isChecked();
+            <?php if(!$deleted) : ?>
+                button1.style.display = "block";
+                console.log("ok, <?php echo $isChecked;?>");
+            <?php else : ?>
+                button2.style.display = "block";
+                console.log("ok, <?php echo $isChecked;?>");
+            <?php endif; ?>
+        } else {
+            button1.style.display = "none";
+            console.log("niet ok, <?php echo $isChecked;?>");
+
+            button2.style.display = "none";
+            console.log("ok, <?php echo $isChecked;?>");
+        }
+    }
+    
+    function isChecked() {
+        let checkboxes = document.getElementsByName('leerlingen[]');
+        console.log(checkboxes);
     }
 </script>
 <?php require('../footer2.php');?>

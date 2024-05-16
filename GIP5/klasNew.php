@@ -24,13 +24,15 @@
                 exit;
             } catch (PDOException $e) 
             {
-                file_put_contents("log.txt","aanmaken van klas mislukt".PHP_EOL, FILE_APPEND);
+                $toast->set("fa-exclamation-triangle", "Error","", "Aanmaken van klas mislukt","danger");
+                file_put_contents("log.txt", date("Y-m-d H:i:s")." || aanmaken van klas mislukt".PHP_EOL, FILE_APPEND);
                 header("Location: klasOverview.php");
                 exit;
             }
         }
     } else {
-        file_put_contents("log.txt","aanmaken van klas mislukt".PHP_EOL, FILE_APPEND);
+        $toast->set("fa-exclamation-triangle", "Error","", "Aanmaken van klas mislukt","danger");
+        file_put_contents("log.txt", date("Y-m-d H:i:s")." || aanmaken van klas mislukt".PHP_EOL, FILE_APPEND);
         header("Location: klasOverview.php");
         exit;
     }
