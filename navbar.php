@@ -1,3 +1,14 @@
+    <style>
+        .user-container {
+            display: flex;
+            align-items: center;
+        }
+        .user-name {
+            font-size: 14px;
+            margin-left: 10px;
+            line-height: 30px;
+        }
+    </style>
 </head>
 <?php
 //variabelen voor wie mag wat zien.
@@ -116,12 +127,6 @@ define('beheer_inschrijvingen', 65536);
 
             <!-- Right elements -->
             <div class="d-flex align-items-center">
-                <!-- Icon -->
-                <a class="nav-link waves-effect waves-light" href="https://www.facebook.com/goatheneumoudenaarde/"
-                    target="_blank">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                &nbsp;&nbsp;
                 <a class="nav-link waves-effect waves-light" href="https://apps.google.com/user/hub" target="_blank">
                     <i class="fab fa-google"></i>
                 </a>
@@ -131,43 +136,35 @@ define('beheer_inschrijvingen', 65536);
                     <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
                         id="navbarDropdownMenuLink" role="button" aria-expanded="false">
                         <i class="fas fa-bell"></i>
-                        <span class="badge rounded-pill badge-notification bg-danger">3</span>
+                        <span class="badge rounded-pill badge-notification bg-danger"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                        <li>
-                            <a class="dropdown-item" href="#">Some news</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Another news</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </li>
                     </ul>
                 </div>
                 <!-- Avatar -->
                 
                 <div class="dropdown">
-                <!------------------------------------------------------------------------------------------------------------------------------------------------>
-                    <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
-                        id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-                        <img src="<?php echo $_SESSION['foto']; ?>" class="rounded-circle" height="36"
-                            title="<?php 
-                                    echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname'];
-                                    if ($_SESSION["isCoAccount"])
-                                        echo " - " . $_SESSION["typeCoAccount"] . " van " . $_SESSION['MAINfirstname'] . ' ' . $_SESSION['MAINlastname'];
-                                    if ($_SESSION["lln"])
-                                        echo " - " . $_SESSION['klas'];
-                                    ?>" loading="lazy" />
+                    <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow user-container" href="#" id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
+                        <?php 
+                            $foto = $ss->ophalenfoto($_SESSION['internalnr']); 
+                        ?>
+                        <img
+                            src="data:image/png;base64,<?php echo $foto; ?>" 
+                            class="rounded-circle" 
+                            height="30px" 
+                            width="30px"
+                            loading="lazy" 
+                        />
+                        <span class="user-name text-black">
+                            <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?>
+                        </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                         <li>
                             <a class="dropdown-item" href="#">Mijn documenten</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="https://www.go-atheneumoudenaarde.be/epay/public/"
-                                target="_blank">mijn
-                                E-pay</a>
+                            <a class="dropdown-item" href="https://www.go-atheneumoudenaarde.be/epay/public/" target="_blank">mijn E-pay</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="logout.php">Logout</a>

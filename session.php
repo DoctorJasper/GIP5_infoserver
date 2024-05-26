@@ -1,9 +1,14 @@
 <?php
 require('header.php');
-// hieronder zet je PHP code
+
+require('pdo.php');
+require('inc/config.php');
+require('classes/class.smartschool.php');
+
+$ss = new Smartschool();
+
 require('startHTML.php');
 ?>
-<!-- hier linken extra styling en css -->
 <style>
 
 </style>
@@ -31,11 +36,5 @@ require('navbar.php');
 <br>
 <?php
 require('footer1.php');
-?>
-<!-- Custom scripts -->
-<script type="text/javascript">
-
-</script>
-<?php
 require('footer2.php');
 ?>

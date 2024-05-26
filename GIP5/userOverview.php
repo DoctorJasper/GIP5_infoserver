@@ -233,7 +233,7 @@
         let linuxLink = document.querySelector("#linux_link");
         linuxLink.setAttribute("href",path+"userLinux.php?users="+getChecked().join(","))
 
-        let mysqlLink = document.querySelector("#musql_link");
+        let mysqlLink = document.querySelector("#sql_link");
         mysqlLink.setAttribute("href",path+"userMySql.php?users="+getChecked().join(","))
     }
 </script>

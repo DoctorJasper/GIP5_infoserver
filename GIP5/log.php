@@ -5,7 +5,10 @@
         header("Location: ../index.php");
         exit;   
     }
+    require('../inc/config.php');
+    require('../classes/class.smartschool.php');
 
+    $ss = new Smartschool();
     $lines = explode(PHP_EOL, file_get_contents('log.txt'));
     
     require('../startHTML.php');

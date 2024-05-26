@@ -17,38 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION["firstname"] = "Kyan";
         $_SESSION["internalnr"] = "115759";
         $_SESSION["email"] = "kyan.vanderkelen@leerling.go-ao.be";
-        $_SESSION["isMainAccount"] = 1;
-        $_SESSION["isCoAccount"] = 0;
-        $_SESSION["nrCoAccount"] = 0;
-        $_SESSION["typeCoAccount"] = "" ;
         $_SESSION["admin"] = 1;
-        $_SESSION["lln"] = false;
-    } /*elseif (isset($_POST['LK'])) {
-        //leerkracht
-        $_SESSION['foto'] = "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp";
-        $_SESSION["lastname"] = "Kindt";
-        $_SESSION["firstname"] = "Bart";
-        $_SESSION["internalnr"] = "17302010339";
-        $_SESSION["email"] = "bart.kindt@go-ao.be";
-        $_SESSION["isMainAccount"] = 1;
-        $_SESSION["isCoAccount"] = 0;
-        $_SESSION["nrCoAccount"] = 0;
-        $_SESSION["typeCoAccount"] = "" ;
-        $_SESSION["basisrol"] = "Leerkracht";
-        $_SESSION["lln"] = false;
-    }*/ else {
+    } 
+    else {
         //leerling
         $_SESSION['foto'] = "https://mdbcdn.b-cdn.net/img/new/avatars/4.webp";
         $_SESSION["lastname"] = "Janssens";
         $_SESSION["firstname"] = "Jan";
         $_SESSION["internalnr"] = "17302010339";
         $_SESSION["email"] = "jan.janssens@go-ao.be";
-        $_SESSION["isMainAccount"] = 1;
-        $_SESSION["isCoAccount"] = 0;
-        $_SESSION["nrCoAccount"] = 0;
-        $_SESSION["typeCoAccount"] = "" ;
         $_SESSION["admin"] = 0;
-        $_SESSION["lln"] = true; 
         $_SESSION['klas'] = "6INFO";
     }
     header("Location: index.php");
@@ -77,10 +55,5 @@ require('startHTML.php');
 <br>
 <?php
 require('footer1.php');
-?>
-<!-- Custom scripts -->
-<script type="text/javascript">
-</script>
-<?php
 require('footer2.php');
 ?>

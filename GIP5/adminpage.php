@@ -14,6 +14,7 @@
     $ss = new Smartschool();
     $klasarray = $ss->ophalenKlassen();
     $command = "";
+    $delay = 0.1;
 
     $query = "SELECT commandos FROM `tblCommandos` c, `tblPlatform` p WHERE c.`idPlatform`=p.`idPlt`";
 
@@ -36,9 +37,9 @@
 //-- POST ------------------------------------------------------------------------------------------
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux"])) {
         $text = $_POST["linux"];
-        $delay = 0.1;
+        
         // Update the command in the database
-        $query = 'UPDATE `tblCommandos` SET `commandos`="'. $text . '" WHERE idComm = 1';
+        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idComm = 1";
 
         try {
             // Prepare and execute the update query
@@ -47,18 +48,15 @@
 
             $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'Linux AddUser' bewerkt","success");
             file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'Linux AddUser' bewerkt".PHP_EOL, FILE_APPEND);
-            // Refresh the page after a delay
-            header("Refresh: $delay");
         } catch (PDOException $e) {
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
         }
     }
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux2"])) {
+    else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux2"])) {
         $text = $_POST["linux2"];
-        $delay = 0.1;
         // Update the command in the database
-        $query = 'UPDATE `tblCommandos` SET `commandos`="'. $text . '" WHERE idComm = 3';
+        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idComm = 3";
 
         try {
             // Prepare and execute the update query
@@ -71,14 +69,11 @@
             header("Refresh: $delay");
         } catch (PDOException $e) {
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
-            header("Location: adminpage.php");
-            exit;
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
         }
     }
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["MySql"])) {
+    else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["MySql"])) {
         $text = $_POST["MySql"];
-        $delay = 0.1;
         // Update the command in the database
         $query = 'UPDATE `tblCommandos` SET `commandos`="'. $text . '" WHERE idPlatform=2';
 
@@ -137,7 +132,7 @@
                                     <button type="submit" class="btn btn-success">Toepassen</button>
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
-                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="70"><?php echo $row[0]["commandos"] ;?></textarea>
+                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="35"><?php echo $row[0]["commandos"] ;?></textarea>
                                         </div>
                                 </form>
                             <?php endif; ?>
@@ -153,7 +148,7 @@
                                     <button type="submit" class="btn btn-success">Toepassen</button>
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
-                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="70"><?php echo $row[0]["commandos"] ;?></textarea>
+                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux2" rows="30"><?php echo $row[0]["commandos"] ;?></textarea>
                                         </div>
                                 </form>
                             <?php endif; ?>

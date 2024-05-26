@@ -31,3 +31,86 @@ verwijderd users met internnummer '115759' - 2024-05-16
 heractiveren users met internnummer '115759' - 2024-05-16
 verwijderd users met internnummer '115759, 112014' - 2024-05-16
 heractiveren users met internnummer '115759, 112014' - 2024-05-16
+2024-05-19 11:28:49 || Database query error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':internNr' at line 1
+2024-05-19 11:28:49 || Database query error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':internNr' at line 1
+2024-05-19 11:29:26 || Database query error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':internNr' at line 1
+2024-05-19 11:29:26 || Database query error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':internNr' at line 1
+aanmaken van user -> Anderson Niamh - 2024-05-20
+2024-05-20 12:08:25 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-20 13:35:31 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-20 13:35:31 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-20 13:35:31 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-20 13:35:43 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-20 13:35:43 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-20 13:35:43 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-20 16:37:39 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-20 16:37:39 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-20 16:37:43 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-20 17:30:21 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 14:34:47 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:18:11 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:18:11 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:19:40 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:19:41 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:21:20 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:21:20 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:22:24 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:22:24 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:22:34 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:22:51 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:22:51 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:26:42 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:27:53 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:28:27 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:28:40 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:28:54 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:32:10 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:33:24 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:33:47 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:35:46 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-22 15:36:01 || Database query error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'commando' in 'field list'
+2024-05-25 12:39:18 || Database query error
+2024-05-25 12:47:34 || Database query error
+2024-05-25 12:49:24 || Database query error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '," -disabled-password';
+//$cmd = 'sudo whoami';
+//echo $cmd;
+
+$output=null;' at line 1
+2024-05-25 12:58:59 || Database query error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '," -disabled-password';
+//$cmd = 'sudo whoami';
+//echo $cmd;
+
+$output=null;' at line 1
+2024-05-25 13:19:06 || Database query error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '," -disabled-password';
+//$cmd = 'sudo whoami';
+//echo $cmd;
+
+$output=null;' at line 1
+2024-05-25 13:22:30 || Database query error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=<?php0
+$username = gebruikersnaam;
+$password = wachtwoord;
+$cmd = 'sudo addu' at line 1
+2024-05-25 13:24:40 || Database query error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sudo adduser '.$username.' --gecos ",,," -disabled-password';
+//$cmd = 'sudo wh' at line 1
+2024-05-25 13:26:05 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 13:27:46 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 13:30:54 || Database query error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'username"];
+$cmd = "sudo deluser ".$username;
+
+$output=null;
+$retval=null;
+' at line 1
+2024-05-25 13:31:50 || Command veld van 'Linux DeleteUser' bewerkt
+2024-05-25 13:32:33 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 13:40:30 || Command veld van 'Linux DeleteUser' bewerkt
+2024-05-25 13:40:53 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 13:41:56 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 13:42:59 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 13:44:02 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 14:02:59 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 14:21:52 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 14:23:16 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 14:23:25 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 14:24:02 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 14:26:51 || Command veld van 'Linux AddUser' bewerkt
+2024-05-25 14:27:00 || Command veld van 'Linux AddUser' bewerkt
