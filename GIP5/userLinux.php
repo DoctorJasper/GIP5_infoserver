@@ -117,6 +117,8 @@ function handleAction($actie, $leerlingenIntNr) {
                 $res->execute();
                 $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
                 $commando = str_replace("gebruikersnaam", $username, $commando);
+                var_dump($commando);
+                die();
 
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
                 
