@@ -148,7 +148,7 @@
                 <a data-mdb-ripple-init href="
                                             <?php
                                                 echo $path."GIP5/userMySql.php?users=";
-                                            ?>" id="musql_link">              
+                                            ?>" id="mysql_link">              
                     <img
                         src="<?php echo $path;?>/img/MySql_logo.png"
                         class="img-fluid shadow p-2 rounded logos"
@@ -233,7 +233,7 @@
         let linuxLink = document.querySelector("#linux_link");
         linuxLink.setAttribute("href",path+"userLinux.php?users="+getChecked().join(","))
 
-        let mysqlLink = document.querySelector("#sql_link");
+        let mysqlLink = document.querySelector("#mysql_link");
         mysqlLink.setAttribute("href",path+"userMySql.php?users="+getChecked().join(","))
     }
 </script>

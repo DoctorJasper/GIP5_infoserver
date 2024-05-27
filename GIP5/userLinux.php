@@ -10,11 +10,13 @@ require('pdo.php');
 require('../inc/config.php');
 require('../classes/class.smartschool.php');
 
+$ss = new Smartschool();
+
 $leerlingenIntNr = [];
 $namenLeerlingen = [];
 $actie = "";
 
-if (!isset($_GET["users"])) {
+if (!isset($_GET["users"]) || $_GET["users"] == "") {
     $toast->set("fa-exclamation-triangle", "Note", "", "U moet eerst een user selecteren", "warning");
     header("Location: userOverview.php");
     exit;
@@ -47,31 +49,36 @@ function handleAction($actie, $leerlingenIntNr) {
 
         foreach ($namenLeerlingen as $naamLeerling) {
             // Create username
-            $voornaam = strtolower($naamLeerling["voornaam"]);
+            $username = strtolower($naamLeerling["voornaam"]);
 
             // Create random password
-            $randomNumber = mt_rand(1000, 9999);
+            $password = mt_rand(1000, 9999);
 
-            $query = "SELECT `commando` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'toevoegen'";
+            $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'toevoegen'";
+            $query2 = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'password'";
         
             try {
                 $res = $pdo->prepare($query);
                 $res->execute();
-                $commando = $res->fetch(PDO::FETCH_ASSOC)['commando'];
+                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
                 $commando = str_replace("gebruikersnaam", $username, $commando);
                 $commando = str_replace("wachtwoord", $randomNumber, $commando);
 
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
-                
-                if (preg_match('/^\s*<\?php\s.+\?>\s*$/s', $commando) === 1) {
-                    eval($commando);
-                } else {
-                    throw new Exception("Invalid command format: " . $commando);
-                }
+                exec($commando);
+
+                file_put_contents("pw.txt",$username.":".$password);
+                $res = $pdo->prepare($query2);
+                $res->execute();
+                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
+
+                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
+                exec($commando);
+                $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '{$naamLeerling['naam']} {$username}' aangemaakt", "success");
+
             } catch (PDOException $e) {
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-            } catch (Exception $e) {
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om linux user '{$naamLeerling['naam']} {$username}' aan te maken", "danger");
             }
 
             // Insert into tblAccounts
@@ -81,9 +88,8 @@ function handleAction($actie, $leerlingenIntNr) {
             try {
                 $res = $pdo->prepare($query);
                 $res->execute($values);
-                $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '{$naamLeerling['naam']} {$voornaam}' toegevoegd", "success");
             } catch (PDOException $e) {
-                $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om '{$naamLeerling['naam']} {$voornaam}' toe te voegen", "danger");
+                $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om '{$naamLeerling['naam']} {$username}' toe te voegen aan de database", "danger");
             }
         }
     }
@@ -114,11 +120,7 @@ function handleAction($actie, $leerlingenIntNr) {
 
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
                 
-                if (preg_match('/^\s*<\?php\s.+\?>\s*$/s', $commando) === 1) {
-                    eval($commando);
-                } else {
-                    throw new Exception("Invalid command format: " . $commando);
-                }
+                exec($commando);
             } catch (PDOException $e) {
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
             } catch (Exception $e) {

@@ -11,11 +11,13 @@
     require('../inc/config.php');
     require('../classes/class.smartschool.php');
 
+    $ss = new Smartschool();
+
     $leerlingenIntNr = [];
     $namenLeerlingen = [];
     $actie = "";
 
-    if (!isset($_GET["users"])) {
+    if (!isset($_GET["users"]) || $_GET["users"] == "") {
         $toast->set("fa-exclamation-triangle", "Note", "", "U moet eerst een user selecteren", "warning");
         header("Location: userOverview.php");
         exit;
@@ -27,11 +29,6 @@
         $leerlingenIntNr = explode(',', $users);
         handleAction($actie, $leerlingenIntNr);
     }
-
-    /*$query = "CREATE USER 'username'@'%' IDENTIFIED BY 'password';GRANT USAGE ON *.* TO 'username'@'%' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;CREATE DATABASE IF NOT EXISTS `username`;GRANT ALL PRIVILEGES ON `username`.* TO 'username'@'%';";
-    $query = str_replace("username","06INFOKyan",$query);
-    $query = str_replace("password","pw123",$query);*/
-
 
     function handleAction($actie, $leerlingenIntNr) {
         global $pdo, $toast;
@@ -67,10 +64,12 @@
                 $commando = $res->fetch(PDO::FETCH_ASSOC)['commando'];
                 $commando = str_replace("username", $username, $commando);
                 $commando = str_replace("password", $randomNumber, $commando);
-
                 try {
-                    $res = $pdo->($commando);
+                    $res = $pdo->prepare($commando);
                     $res->execute();
+                }
+                catch (PDOException $e) {
+                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 }
             } catch (PDOException $e) {
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
