@@ -128,7 +128,7 @@ function handleAction($actie, $leerlingenIntNr) {
             }
 
             // Insert into tblAccounts
-            $query = "DELETE FROM `tblAccounts` WHERE `username` = $username";
+            $query = "DELETE FROM `tblAccounts` WHERE `username` = '$username'";
 
             try {
                 $res = $pdo->prepare($query);
