@@ -110,7 +110,6 @@ function handleAction($actie, $leerlingenIntNr) {
         foreach ($namenLeerlingen as $naamLeerling) {
             $username = $naamLeerling["username"];
 
-<<<<<<< HEAD
             if ($username != "") 
             {
                 $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'verwijderen'";
@@ -132,27 +131,6 @@ function handleAction($actie, $leerlingenIntNr) {
 
                 // Insert into tblAccounts
                 $query = "DELETE FROM `tblAccounts` WHERE `username` = '$username'";
-=======
-            $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'verwijderen'";
-        
-            try {
-                $res = $pdo->prepare($query);
-                $res->execute();
-                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
-                $commando = str_replace("gebruikersnaam", $username, $commando);
-
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
-                
-                exec($commando);
-                $toast->set("fa-exclamation-triangle", "Note", "", "Linux user '$username' verwijderd", "success");
-            } catch (PDOException $e) {
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om linux user '$username' te verwijderen", "danger");
-            }
-
-            // Insert into tblAccounts
-            $query = "DELETE FROM `tblAccounts` WHERE `username` = '$username'";
->>>>>>> cf6b35445fffb41d5b9edde5765f2aec61d500e9
 
                 try {
                     $res = $pdo->prepare($query);
