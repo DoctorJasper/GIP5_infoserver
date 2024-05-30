@@ -93,11 +93,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             }
 
             // mail versturen
-            $bericht = "Beste,
-            
-            Dit is u huidige watchwoord: ".$password. "
-            
-            Klik hier om uw wachtwoord te veranderen.";
+            $bericht = "Beste,"."\r\n"." Dit is u huidige watchwoord: ".$password."\r\n"."Klik hier om uw wachtwoord te veranderen.";
 
             $result = $ss->bericht("115759", $leerlingIntNr , "Linux Code", $bericht);
             if($result){
