@@ -41,13 +41,13 @@ function handleAction($actie, $leerlingenIntNr) {
                 $res = $pdo->prepare($query);
                 $res->bindParam(':internNr', $leerlingIntNr, PDO::PARAM_INT);
                 $res->execute();
-                $namenLeerlingen[] = $res->fetch(PDO::FETCH_ASSOC);
+                $namenLeerlingen[$leerlingIntNr] = $res->fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
             }
         }
 
-        foreach ($namenLeerlingen as $naamLeerling) {
+        foreach ($namenLeerlingen as $leerlingIntNr => $naamLeerling) {
             // Create username
             $username = strtolower($naamLeerling["voornaam"]);
 
@@ -62,7 +62,7 @@ function handleAction($actie, $leerlingenIntNr) {
                 $res->execute();
                 $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
                 $commando = str_replace("gebruikersnaam", $username, $commando);
-                $commando = str_replace("wachtwoord", $randomNumber, $commando);
+                $commando = str_replace("wachtwoord", $password, $commando);
 
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
                 exec($commando);
@@ -100,7 +100,7 @@ function handleAction($actie, $leerlingenIntNr) {
         
             try {
                 $res = $pdo->prepare($query);
-                $res->bindParam(':internNr', $leerlingIntNr, PDO::PARAM_INT);
+                $res->bindParam('internNr', $leerlingIntNr);
                 $res->execute();
                 $namenLeerlingen[] = $res->fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
@@ -110,32 +110,35 @@ function handleAction($actie, $leerlingenIntNr) {
         foreach ($namenLeerlingen as $naamLeerling) {
             $username = $naamLeerling["username"];
 
-            $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'verwijderen'";
-        
-            try {
-                $res = $pdo->prepare($query);
-                $res->execute();
-                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
-                $commando = str_replace("gebruikersnaam", $username, $commando);
+            if ($username != "") 
+            {
+                $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'verwijderen'";
+            
+                try {
+                    $res = $pdo->prepare($query);
+                    $res->execute();
+                    $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
+                    $commando = str_replace("gebruikersnaam", $username, $commando);
 
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
-                
-                exec($commando);
-                $toast->set("fa-exclamation-triangle", "Note", "", "Linux user '$username' verwijderd", "success");
-            } catch (PDOException $e) {
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om linux user '$username' te verwijderen", "danger");
-            }
+                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
+                    
+                    exec($commando);
+                    $toast->set("fa-exclamation-triangle", "Note", "", "Linux user '$username' verwijderd", "success");
+                } catch (PDOException $e) {
+                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om linux user '$username' te verwijderen", "danger");
+                }
 
-            // Insert into tblAccounts
-            $query = "DELETE FROM `tblAccounts` WHERE `username` = $username";
+                // Insert into tblAccounts
+                $query = "DELETE FROM `tblAccounts` WHERE `username` = '$username'";
 
-            try {
-                $res = $pdo->prepare($query);
-                $res->execute();
-                $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '$username' verwijderd", "success");
-            } catch (PDOException $e) {
-                $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om user '$username' te verwijderen", "danger");
+                try {
+                    $res = $pdo->prepare($query);
+                    $res->execute();
+                    $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '$username' verwijderd", "success");
+                } catch (PDOException $e) {
+                    $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om user '$username' te verwijderen", "danger");
+                } 
             }
         }
     }

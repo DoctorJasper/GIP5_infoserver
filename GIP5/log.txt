@@ -114,3 +114,4 @@ $retval=null;
 2024-05-25 14:24:02 || Command veld van 'Linux AddUser' bewerkt
 2024-05-25 14:26:51 || Command veld van 'Linux AddUser' bewerkt
 2024-05-25 14:27:00 || Command veld van 'Linux AddUser' bewerkt
+aanmaken van user -> De Nijs Milan - 2024-05-30
