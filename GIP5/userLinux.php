@@ -26,10 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actie"])) {
     $actie = $_POST["actie"];
     $users = $_GET["users"];
     $leerlingenIntNr = explode(',', $users);
-    handleAction($actie, $leerlingenIntNr);
+    handleAction($actie, $leerlingenIntNr, $ss);
 }
 
-function handleAction($actie, $leerlingenIntNr) {
+function handleAction($actie, $leerlingenIntNr, $ss) {
     global $pdo, $toast;
     $namenLeerlingen = [];
 
