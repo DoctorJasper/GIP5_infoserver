@@ -91,6 +91,21 @@ function handleAction($actie, $leerlingenIntNr) {
             } catch (PDOException $e) {
                 $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om '{$naamLeerling['naam']} {$username}' toe te voegen aan de database", "danger");
             }
+
+            // mail versturen
+            $bericht = "Beste,
+            
+            Dit is u huidige watchwoord: ".$password. "
+            
+            Klik hier om uw wachtwoord te veranderen.";
+
+            $result = $ss->bericht("115759", $leerlingIntNr , "Linux Code", $bericht);
+            if($result){
+                $message = "Bericht is goed verzonden.";
+            }else{
+                $message = "Bericht is niet verzonden.";
+            
+            }
         }
     }
 
