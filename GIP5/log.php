@@ -9,7 +9,8 @@
     require('../classes/class.smartschool.php');
 
     $ss = new Smartschool();
-    $lines = explode(PHP_EOL, file_get_contents('log.txt'));
+    $lines = explode(PHP_EOL, file_get_contents('log.txt')); 
+    $lines = array_reverse($lines);
     
     require('../startHTML.php');
 ?>
