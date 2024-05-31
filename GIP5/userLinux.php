@@ -1,84 +1,99 @@
 <?php
-require('../header.php');
+require('../header.php'); // Vereist de header.php bestand
 
+// Controleer of de gebruiker een admin is, anders stuur hem terug naar de indexpagina
 if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
     header("Location: ../index.php");
     exit;   
 }
 
-require('pdo.php');
-require('../inc/config.php');
-require('../classes/class.smartschool.php');
+require('pdo.php'); // Vereist het pdo.php bestand
+require('../inc/config.php'); // Vereist het config.php bestand
+require('../classes/class.smartschool.php'); // Vereist de Smartschool klasse
 
-$ss = new Smartschool();
+$ss = new Smartschool(); // Maak een nieuw object van de Smartschool klasse aan
 
-$leerlingenIntNr = [];
-$namenLeerlingen = [];
-$actie = "";
+$leerlingenIntNr = []; // Initialiseer een array voor leerlingen interne nummers
+$namenLeerlingen = []; // Initialiseer een array voor leerlingennamen
+$actie = ""; // Initialiseer de actie variabele
 
+// Controleer of er gebruikers zijn geselecteerd, zo niet, geef een opmerking en stuur de gebruiker terug naar het overzicht
 if (!isset($_GET["users"]) || $_GET["users"] == "") {
-    $toast->set("fa-exclamation-triangle", "Note", "", "U moet eerst een user selecteren", "warning");
+    $toast->set("fa-exclamation-triangle", "Opmerking", "", "U moet eerst een gebruiker selecteren", "warning");
     header("Location: userOverview.php");
     exit;
 }
 
+// Controleer of er een POST-verzoek is gedaan en of de actie is ingesteld
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actie"])) { 
     $actie = $_POST["actie"];
     $users = $_GET["users"];
     $leerlingenIntNr = explode(',', $users);
-    handleAction($actie, $leerlingenIntNr, $ss);
+    handleAction($actie, $leerlingenIntNr, $ss); // Roep de handleAction functie aan
 }
 
+// Functie om de actie te verwerken
 function handleAction($actie, $leerlingenIntNr, $ss) {
-    global $pdo, $toast;
-    $namenLeerlingen = [];
+    global $pdo, $toast; // Maak de pdo en toast variabelen globaal beschikbaar
+    $namenLeerlingen = []; // Initialiseer een array voor leerlingennamen
 
+    // Als de actie 'toevoegen' is
     if ($actie == "toevoegen") {
+        // Loop door elk leerlingen interne nummer
         foreach ($leerlingenIntNr as $leerlingIntNr) {
+            // Bereid een query voor om de naam, voornaam en klas van de leerling op te halen
             $query = "SELECT `naam`, `voornaam`, `klas` FROM `tblGebruiker` WHERE `internNr` = :internNr";
         
             try {
-                $res = $pdo->prepare($query);
-                $res->bindParam(':internNr', $leerlingIntNr, PDO::PARAM_INT);
-                $res->execute();
-                $namenLeerlingen[$leerlingIntNr] = $res->fetch(PDO::FETCH_ASSOC);
+                $res = $pdo->prepare($query); // Bereid de query voor
+                $res->bindParam(':internNr', $leerlingIntNr, PDO::PARAM_INT); // Bind de parameter
+                $res->execute(); // Voer de query uit
+                $namenLeerlingen[$leerlingIntNr] = $res->fetch(PDO::FETCH_ASSOC); // Haal de resultaten op en voeg deze toe aan de array
             } catch (PDOException $e) {
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND); // Log eventuele databasefouten
             }
         }
 
+        // Loop door elke leerling en voer acties uit
         foreach ($namenLeerlingen as $leerlingIntNr => $naamLeerling) {
-            // Create username
+            // Maak gebruikersnaam aan (kleine letters)
             $username = strtolower($naamLeerling["voornaam"]);
 
-            // Create random password
+            // Genereer een willekeurig wachtwoord
             $password = mt_rand(1000, 9999);
 
+            // Haal de commando's op om gebruikers toe te voegen en wachtwoorden te wijzigen
             $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'toevoegen'";
             $query2 = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'password'";
         
             try {
-                $res = $pdo->prepare($query);
-                $res->execute();
-                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
-                $commando = str_replace("gebruikersnaam", $username, $commando);
-                $commando = str_replace("wachtwoord", $password, $commando);
+                $res = $pdo->prepare($query); // Bereid de query voor
+                $res->execute(); // Voer de query uit
+                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
+                $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
+                $commando = str_replace("wachtwoord", $password, $commando); // Vervang placeholders met het wachtwoord
 
+                // Voer het commando uit en log het
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
                 exec($commando);
 
+                // Sla het wachtwoord op in een tekstbestand
                 file_put_contents("pw.txt",$username.":".$password);
-                $res = $pdo->prepare($query2);
-                $res->execute();
-                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
 
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
-                exec($commando);
-                $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '{$naamLeerling['naam']} {$username}' aangemaakt", "success");
+                // Haal het commando op om het wachtwoord te wijzigen en voer het uit
+                $res = $pdo->prepare($query2); // Bereid de query voor
+                $res->execute(); // Voer de query uit
+                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
+                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND); // Log het commando
+                exec($commando); // Voer het commando uit
+
+                // Geef een succesmelding weer
+                $toast->set("fa-exclamation-triangle", "Gebruikers", "", "Gebruiker '{$naamLeerling['naam']} {$username}' aangemaakt", "success");
 
             } catch (PDOException $e) {
+                // Log eventuele databasefouten en geef een foutmelding weer
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om linux user '{$naamLeerling['naam']} {$username}' aan te maken", "danger");
+                $toast->set("fa-exclamation-triangle", "Fout", "", "Mislukt om Linux gebruiker '{$naamLeerling['naam']} {$username}' aan te maken", "danger");
             }
 
             // Insert into tblAccounts
@@ -106,6 +121,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
     }
 
     if ($actie == "verwijderen") {
+         // Voor elke gebruiker de gebruikersnaam ophalen
         foreach ($leerlingenIntNr as $leerlingIntNr) {
             $query = "SELECT `username` FROM `tblAccounts` WHERE `internnrGebruiker` = :internNr";
         
@@ -118,6 +134,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
             }
         }
+        // Voor elke gebruiker de gebruikersnaam controleren en actie uitvoeren indien deze bestaat
         foreach ($namenLeerlingen as $naamLeerling) {
             $username = $naamLeerling["username"];
 
@@ -136,11 +153,12 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                     exec($commando);
                     $toast->set("fa-exclamation-triangle", "Note", "", "Linux user '$username' verwijderd", "success");
                 } catch (PDOException $e) {
+                       // Foutloggen bij databasequeryfouten
                     file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                     $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om linux user '$username' te verwijderen", "danger");
                 }
 
-                // Insert into tblAccounts
+              // Verwijderen van gebruiker uit de database
                 $query = "DELETE FROM `tblAccounts` WHERE `username` = '$username'";
 
                 try {

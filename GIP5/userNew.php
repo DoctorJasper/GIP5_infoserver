@@ -1,16 +1,21 @@
 <?php
+    // Vereist het header.php-bestand voor de opmaak van de pagina
     require("../header.php");
 
+    // Controleert of de gebruiker is ingelogd als admin, anders wordt deze omgeleid naar de indexpagina
     if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
         header("Location: ../index.php");
         exit;   
     }
 
+    // Vereist enkele bestanden en klassen
     require('pdo.php');
     require('../inc/config.php');
     require('../classes/class.smartschool.php');
 
+    // Maakt een instantie van de Smartschool-klasse
     $ss = new Smartschool();
+    // Haalt de lijst met klassen op
     $klasarray = $ss->ophalenKlassen();
     $showAlert = false;
     $leerlingen = [];
@@ -19,12 +24,15 @@
     $id;
 
     //--- GET --------------------------------------------------------------------------------------------------------------------------------
+    // Als het verzoeksmethode GET is en een klas is geselecteerd
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["klas"])) {
         $klas = $_GET["klas"];
+        // Haalt de leerlingen op voor de geselecteerde klas
         $result = $ss->ophalenLeerlingen($klas);
         $resultArray = json_decode($result,true);
         $csvLeerlingen = [];
         
+        // Maakt een CSV-bestand met de leerlingeninformatie
         foreach ($resultArray['account'] as $key => $row) {
 
             $naam[$key] = $row['naam'];
@@ -35,7 +43,7 @@
         file_put_contents('leerlingen.csv', implode(PHP_EOL, $csvLeerlingen));
         array_multisort($naam, SORT_ASC, $voornaam, SORT_ASC, $resultArray['account']);
 
-        
+        // Haalt bestaande leerlingen op voor de geselecteerde klas
         $query = 'SELECT internNr
                   FROM `tblGebruiker` 
                   WHERE `klas` = "' . $klas .'"';
@@ -45,50 +53,55 @@
             $res->execute();
             $bestaandeLeerlingen = $res->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
+            // Behandel eventuele fouten
         }
     }
 
     //--- POST --------------------------------------------------------------------------------------------------------------------------------
+    // Als het verzoeksmethode POST is en er leerlingen zijn geselecteerd
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["leerlingen"])) {
         $lines = explode(PHP_EOL, file_get_contents('leerlingen.csv'));
         $intNummers = $_POST["leerlingen"];
         $klassen = [];
         $i = 0;
 
+        // Splits de CSV-lijnen en haalt de leerlinginformatie op
         foreach($lines as $line) {
             $parts = explode(",", $line);
             $klassen[$parts[0]] = $parts;
         }
 
+        // Voegt de geselecteerde leerlingen toe aan de database
         foreach($intNummers as $intNr) {
             $naam = $klassen[$intNr][1];
             $voornaam = $klassen[$intNr][2];
             $klas = $klassen[$intNr][3];
             $email = strtolower($voornaam .".". $naam . "@leerling.go-ao.be");
    
-            file_put_contents("log.txt","aanmaken van user -> $naam $voornaam - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
-
-            //Update query template
+            // Voert een query uit om de leerling toe te voegen aan de database
             $query = "INSERT INTO `tblGebruiker`(`internNr`,`naam`,`voornaam`,`klas`,`email`)
                     VALUES (:NR, :naam, :voornaam, :klas, :email)";
 
-            //Values array for PDO
+            // Waardenarray voor PDO
             $values = [":NR" => $intNr, ":naam" => $naam, ":voornaam" => $voornaam, ":klas" => $klas,
             ":email" => $email];
 
-            //Execute the query
+            // Voert de query uit
             try {
                 $res = $pdo->prepare($query);
                 $res->execute($values);
                 $toast->set("fa-exclamation-triangle", "Gebruikers","", "User '$naam $voornaam' toegevoegd","success");
             } catch (PDOException $e) 
             {   
+                // Meldt een fout als de gebruiker niet kan worden toegevoegd
                 $toast->set("fa-exclamation-triangle", "Error","", "Gefaald om '$naam $voornaam' toe te voegen","danger");
             }
         }
     } elseif($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Meldt een fout als er geen leerlingen zijn geselecteerd
         $toast->set("fa-exclamation-triangle", "Error","", "Selecteer een leerling","danger");
     }
+    // Vereist het startHTML-bestand voor de opmaak van de pagina
     require('../startHTML.php');
 ?>
 <style>
@@ -107,7 +120,7 @@
 
 <br><br>
 <div class="card">
-    <div class="card-header bg-primary bg-gradient">
+    <div class="card-header bg-danger">
         <h1 class="text-white center">Users kiezen<h1>
     </div>
     <div class="card-body">
@@ -202,14 +215,18 @@
 </div>
     
 <!-- ACCOUNTS ------------------------------------------------------------------------------------------------------- -->
+<!-- Een modaal venster voor het kiezen van een account -->
 <div class="modal fade" id="Accounts" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <!-- Titel van het modale venster -->
                 <h5 class="modal-title" id="exampleModalLabel">Kies een account</h5>
+                <!-- Knop om het modale venster te sluiten -->
                 <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4 text-center">
+                <!-- Link naar het Linux-account met een logo -->
                 <a data-mdb-ripple-init id="link1" href="">
                     <img
                         src="<?php echo $path;?>/img/Linux_logo.png"
@@ -218,6 +235,7 @@
                     />
                 </a>
                 
+                <!-- Link naar het MySql-account met een logo -->
                 <a data-mdb-ripple-init id="link2"  href="">
                     <img
                         src="<?php echo $path;?>/img/MySql_logo.png"
@@ -233,9 +251,11 @@
 <!-- FOOTER -->
 <?php require('../footer1.php') ;?>
 <script>
+    // JavaScript om de links van de accounts in te stellen
     let link1 = document.querySelector("#link1");
     let link2 = document.querySelector("#link2");
 
+    // Functie om de link van het account in te stellen op basis van het nummer van de leerling
     function myFunction(nummer) {
         link1.href = "//<?php echo $path;?>GIP5/userLinux.php?id=" + nummer + "&klas=<?php echo $_GET["klas"] ;?>";
         link2.href = "//<?php echo $path;?>GIP5/userLinux.php?id=" + nummer + "&klas=<?php echo $_GET["klas"] ;?>";

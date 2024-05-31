@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<?php
+<!DOCTYPE html> 
+<?php                   //DEZE PAGINA IS NIET AF
     require('../header.php');
 
     /*if (!isset($_SESSION["firstname"])) {
