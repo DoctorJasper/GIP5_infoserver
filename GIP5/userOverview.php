@@ -41,6 +41,7 @@
     require('../startHTML.php');
 ?>
 <style>
+    /* CSS-styling */
     .card {
         margin-left: 75px;
         margin-right: 75px; 
@@ -56,7 +57,7 @@
 <br><br>
 <div class="card" id="card">
     <div class="col-sm-12">
-        <div class="card-header bg-<?php echo (!$deleted) ? "primary" : "danger";?> bg-gradient text-white">
+        <div class="card-header bg-<?php echo (!$deleted) ? "primary" : "danger";?>  text-white">
             <h3 class="ml-5">Overzicht <?php if ($deleted) echo "verwijderde"; ?> gebruikers</h3>
         </div>    
         <div class="card-body">
@@ -127,12 +128,14 @@
     </div>
 </div>       
 
-<!-- ACCOUNTS ------------------------------------------------------------------------------------------------------- -->
+<!-- ACCOUNTS MODAL -->
 <div class="modal fade" id="Accounts" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+               
                 <h5 class="modal-title" id="exampleModalLabel">Kies een account</h5>
+                
                 <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4 text-center">
@@ -159,6 +162,7 @@
 </div>
 
 <?php require('../footer1.php');?>
+
 <script>
     // JavaScript voor functionaliteit binnen het modale venster
     let button1 = document.querySelector("#delete");

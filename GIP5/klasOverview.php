@@ -1,5 +1,4 @@
-<?php
-    // Inclusief het header-bestand
+<?php 
     require('../header.php');
 
     // Controleer of de gebruiker een admin is. Zo niet, stuur door naar de index pagina.
@@ -45,17 +44,17 @@
 <?php require('../navbar.php') ;?>
 <br><br>
 <br>
-<div class ="card" id="card">
-    <div class="card-header bg-primary bg-gradient">
+<div class="card" id="card">
+    <div class="card-header bg-danger">
         <h1 class="text-white center">Mijn Klassen<h1>
     </div>
     <div class="container mt-5">
         <div class="card-body">
             <div class="row">
 
-                <!--OVERZICHT KLASSEN-->
+                <!-- OVERZICHT KLASSEN -->
                 <div class="col-sm-6">
-                    <div class ="card">
+                    <div class="card">
                         <div class="card-header bg-warning bg-gradient">
                             <h1 class="text-white center">Overzicht Klassen<h1>
                         </div>
@@ -81,12 +80,12 @@
                         </table>
                     </div>
                 </div>
-                <!--EIND OVERZICHT USERS-->                
+                <!-- EINDE OVERZICHT KLASSEN -->                
 
 
-                <!--KLAS SELECTEREN-->
+                <!-- KLAS SELECTEREN -->
                 <div class="col-sm-6">
-                    <div class ="card">
+                    <div class="card">
                         <div class="card-header bg-success bg-gradient">
                             <h1 class="text-white center">Selecteer Klas<h1>
                         </div>
@@ -94,15 +93,13 @@
                             <form method="post" action="klasNew.php">
                                 <select name="klas" class="select" data-mdb-select-init data-mdb-filter="true" onchange="this.form.submit()"> 
                                     <option disabled selected>Kies een klas</option>
-                                    <!-- Opties voor klassen selectie -->
                                         <?php foreach ($klasarray as $klas) : ?>
                                             <?php echo "<option value='" . $klas['code'] . "'>" . $klas['code'] . "</option>"; ?>
-                                        <!-- Hieronder kunnen aanvullende details over de klas worden weergegeven -->
                                             <div>
                                             <p class="mb-0 mt-0 fw-bold"><?php echo $row["naam"];?></p>
-                                                <p class="mb-0 mt-0"><?php echo $row["voornaam"];?></p>
-                                            </div> 
-                                        <?php endforeach; ?>
+                                            <p class="mb-0 mt-0"><?php echo $row["voornaam"];?></p>
+                                        </div> 
+                                    <?php endforeach; ?>
                                 </select>
                             </form>
                         </div>
@@ -113,6 +110,7 @@
     </div>
 </div> 
 <?php
+    // Inclusief het footer-bestand
     require('../footer1.php');
     require('../footer2.php');
 ?>

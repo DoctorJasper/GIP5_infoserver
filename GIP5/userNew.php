@@ -120,7 +120,7 @@
 
 <br><br>
 <div class="card">
-    <div class="card-header bg-primary bg-gradient">
+    <div class="card-header bg-danger">
         <h1 class="text-white center">Users kiezen<h1>
     </div>
     <div class="card-body">
@@ -222,6 +222,7 @@
             <div class="modal-header">
                 <!-- Titel van het modale venster -->
                 <h5 class="modal-title" id="exampleModalLabel">Kies een account</h5>
+                <!-- Knop om het modale venster te sluiten -->
                 <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4 text-center">

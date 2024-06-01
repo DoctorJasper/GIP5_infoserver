@@ -36,7 +36,7 @@
 <div class="card" id="card">
     <div class="col-sm-12">
         <div class="card-header bg-success bg-gradient text-white">
-            <h3 class="ml-5">Log file</h3>
+            <h3 class="ml-5">Logbestand</h3>
         </div>    
         <div class="card-body">
             <!-- Weergeven van elk logregel -->
@@ -46,7 +46,5 @@
         </div>
     </div>
 </div>  
-<?php 
-    require('../footer1.php');
-    require('../footer2.php');
-?>
+<?php require('../footer1.php');?>
+<?php require('../footer2.php');?>

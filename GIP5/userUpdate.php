@@ -79,45 +79,45 @@
     }
 ?>
 <br><br>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-sm-6">
-                <a class="btn btn-outline-primary" role="button" href="userOverview.php">Terug</a>
-                <?php if ($showAlert) : ?>
-                    <div class="alert alert-danger float-end">
-                        <?php echo $TextAlert; ?>
-                    </div>
-                <?php endif; ?>
-                <p><br></p>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <div class="mb-3">
-                        <input type="hidden" class="from-control" name="idGeb" value="<?php if(!$post) echo $id ;?>">
-                        <label for="InternNr" class="form-label">Intern nummer</label>
-                        <input type="text" class="form-control" id="InternNr" name="internNr" value="<?php if (!$post) echo $row['internNr']; ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Naam" class="form-label">Naam</label>
-                        <input type="text" class="form-control" id="Naam" name="naam" value="<?php if (!$post) echo $row['naam']; ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Voornaam" class="form-label">Voornaam</label>
-                        <input type="text" class="form-control" id="Voornaam" name="voornaam" value="<?php if (!$post) echo $row['voornaam']; ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="Email" name="email" value="<?php if (!$post) echo $row['email']; ?>" required>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" name="admin" type="checkbox" role="switch" id="flexSwitchCheckDefault" <?php if (!$post) { if(isset($row["admin"]) && $row["admin"] == 1) echo "checked"; };?>>
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Admin</label>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-success">Gebruiker updaten</button>
-                </form>
-            </div>
-            <div class="col-sm-6">
-            </div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-6">
+            <a class="btn btn-outline-primary" role="button" href="userOverview.php">Terug</a>
+            <?php if ($showAlert) : ?>
+                <div class="alert alert-danger float-end">
+                    <?php echo $TextAlert; ?>
+                </div>
+            <?php endif; ?>
+            <p><br></p>
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <div class="mb-3">
+                    <input type="hidden" class="from-control" name="idGeb" value="<?php if(!$post) echo $id ;?>">
+                    <label for="InternNr" class="form-label">Intern nummer</label>
+                    <input type="text" class="form-control" id="InternNr" name="internNr" value="<?php if (!$post) echo $row['internNr']; ?>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Naam" class="form-label">Naam</label>
+                    <input type="text" class="form-control" id="Naam" name="naam" value="<?php if (!$post) echo $row['naam']; ?>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Voornaam" class="form-label">Voornaam</label>
+                    <input type="text" class="form-control" id="Voornaam" name="voornaam" value="<?php if (!$post) echo $row['voornaam']; ?>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="Email" name="email" value="<?php if (!$post) echo $row['email']; ?>" required>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" name="admin" type="checkbox" role="switch" id="flexSwitchCheckDefault" <?php if (!$post) { if(isset($row["admin"]) && $row["admin"] == 1) echo "checked"; };?>>
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Admin</label>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success">Gebruiker updaten</button>
+            </form>
+        </div>
+        <div class="col-sm-6">
         </div>
     </div>
+</div>
 </body>
 </html>

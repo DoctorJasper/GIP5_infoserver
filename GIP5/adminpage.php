@@ -125,18 +125,18 @@
         background-color: #f2f2f2;
     }
 </style>
-<?php require('../navbar.php') ;?>
+<?php require('../navbar.php'); ?>
 <br><br>
 <div class="card">
-    <div class="card-header bg-primary bg-gradient">
-        <h1 class="text-white text-center">Welkom <?php// echo $_SESSION["firstname"] ;?> ADMIN</h1>
+    <div class="card-header bg-danger">
+        <h1 class="text-white text-center">Welkom <?php // echo $_SESSION["firstname"]; ?> ADMIN</h1>
     </div>
     <div class="container-fluid">
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header bg-success bg-gradient">
+                        <div class="card-header bg-warning">
                             <h4 class="text-white">Linux</h4>
                         </div>
                         <div class="card-body"> 
@@ -144,15 +144,15 @@
                                 <a href="adminpage.php?comm=linux"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[0]["commandos"] ;?></textarea>
+                                    <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[0]["commandos"]; ?></textarea>
                                 </div>
                             <?php elseif ($command == "linux") : ?>
-                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                     <button type="submit" class="btn btn-success">Toepassen</button>
-                                        <p></p>
-                                        <div class="md-form amber-textarea active-amber-textarea-2">
-                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="35"><?php echo $row[0]["commandos"] ;?></textarea>
-                                        </div>
+                                    <p></p>
+                                    <div class="md-form amber-textarea active-amber-textarea-2">
+                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="35"><?php echo $row[0]["commandos"]; ?></textarea>
+                                    </div>
                                 </form>
                             <?php endif; ?>
                             <br><br>
@@ -160,15 +160,15 @@
                                 <a href="adminpage.php?comm=linux2"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[2]["commandos"] ;?></textarea>
+                                    <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[2]["commandos"]; ?></textarea>
                                 </div>
                             <?php elseif ($command == "linux2") : ?>
-                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                     <button type="submit" class="btn btn-success">Toepassen</button>
-                                        <p></p>
-                                        <div class="md-form amber-textarea active-amber-textarea-2">
-                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux2" rows="30"><?php echo $row[0]["commandos"] ;?></textarea>
-                                        </div>
+                                    <p></p>
+                                    <div class="md-form amber-textarea active-amber-textarea-2">
+                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux2" rows="30"><?php echo $row[0]["commandos"]; ?></textarea>
+                                    </div>
                                 </form>
                             <?php endif; ?>
                         </div>
@@ -184,15 +184,15 @@
                                 <a href="adminpage.php?comm=MySql"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[1]["commandos"] ;?></textarea>
+                                    <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[1]["commandos"]; ?></textarea>
                                 </div>
                             <?php elseif ($command == "MySql") : ?>
-                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                     <button type="submit" class="btn btn-success">Toepassen</button>
-                                        <p></p>
-                                        <div class="md-form amber-textarea active-amber-textarea-2">
-                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql" rows="70"><?php echo $row[1]["commandos"] ;?></textarea>
-                                        </div>
+                                    <p></p>
+                                    <div class="md-form amber-textarea active-amber-textarea-2">
+                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql" rows="70"><?php echo $row[1]["commandos"]; ?></textarea>
+                                    </div>
                                 </form>
                             <?php endif; ?>
                         </div>
