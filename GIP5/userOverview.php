@@ -1,15 +1,15 @@
 <?php 
+    // Vereiste bestanden en controle op administratorsessie
     require('../header.php');
-   
     if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
         header("Location: ../index.php");
         exit;   
     }
 
+    // Vereiste bestanden en initialisatie van variabelen
     require('pdo.php');
     require('../inc/config.php');
     require('../classes/class.smartschool.php');
-
     $ss = new Smartschool();
     $klasarray = $ss->ophalenKlassen();
     $isChecked = 0;
@@ -17,25 +17,27 @@
     $deleted = false;
     $selectedUsers = [];
 
+    // Bepaal de query op basis van de GET-parameter "deleted"
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["deleted"])) {  
-        //Update query template
         $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`klas`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 0";
         $deleted = true;    
     } else {
-        //Update query template
         $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`klas`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 1";
         $deleted = false;
     }
 
+    // Uitvoeren van de query
     try{
         $res = $pdo->prepare($query);
         $res->execute();
     }catch(PDOException $e){
+        // Foutafhandeling bij databasequeryfouten
         $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
         file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
         header("Location: ../index.php");
         exit;
     }
+    // Vereiste HTML-bestanden en start van HTML-structuur
     require('../startHTML.php');
 ?>
 <style>
@@ -134,10 +136,8 @@
                 <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4 text-center">
-                <a data-mdb-ripple-init href="
-                                            <?php
-                                                echo $path."GIP5/userLinux.php?users=";
-                                            ?>" id="linux_link">
+                <!-- Link voor Linux-account -->
+                <a data-mdb-ripple-init href="<?php echo $path."GIP5/userLinux.php?users=";?>" id="linux_link">
                     <img
                         src="<?php echo $path;?>/img/Linux_logo.png"
                         class="img-fluid shadow p-2 rounded logos"
@@ -145,10 +145,8 @@
                     />
                 </a>
                 
-                <a data-mdb-ripple-init href="
-                                            <?php
-                                                echo $path."GIP5/userMySql.php?users=";
-                                            ?>" id="mysql_link">              
+                <!-- Link voor MySQL-account -->
+                <a data-mdb-ripple-init href="<?php echo $path."GIP5/userMySql.php?users=";?>" id="mysql_link">              
                     <img
                         src="<?php echo $path;?>/img/MySql_logo.png"
                         class="img-fluid shadow p-2 rounded logos"
@@ -162,11 +160,14 @@
 
 <?php require('../footer1.php');?>
 <script>
+    // JavaScript voor functionaliteit binnen het modale venster
     let button1 = document.querySelector("#delete");
     let button2 = document.querySelector("#activeer");
 
+    // Functie om knoppen weer te geven/verbergen en links bij te werken op basis van geselecteerde gebruikers
     function myFunction(nummer) {
-
+       
+        // Afhankelijk van de waarde van $deleted worden verschillende acties uitgevoerd
         let idCheckbox = nummer;
         let checkbox = document.getElementById(idCheckbox);
 
@@ -188,6 +189,7 @@
         updateLinks();
     }
 
+    // Functie om alle selectievakjes aan/uit te zetten
     function selectAll(id) {
         let checkboxes = document.getElementsByName('leerlingen[]');
         let source = document.querySelector('input[type="checkbox"]');
@@ -215,6 +217,7 @@
         updateLinks();
     }
     
+    // Functie om geselecteerde gebruikers op te halen
     function getChecked() {
         let checkboxes = document.getElementsByName('leerlingen[]');
         let leerlingen = [];
@@ -227,6 +230,7 @@
         return leerlingen;
     }
 
+    // Functie om links bij te werken op basis van geselecteerde gebruikers
     function updateLinks() {
         let path = "<?php echo $path."GIP5/";?>";
 

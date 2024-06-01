@@ -1,82 +1,82 @@
-<!DOCTYPE html>
 <?php
     require('../header.php');
-// hieronder zet je PHP code
-  
+
+    // Controleer of de gebruiker een admin is
     if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
-        header("Location: ../index.php");
+        header("Location: ../index.php"); // Redirect naar de homepage als de gebruiker geen admin is
         exit;   
     }
 
     require('pdo.php');
     require('../inc/config.php');
-    require('../classes/class.smartschool.php');
+    require('../classes/class.smartschool.php'); 
 
     $ss = new Smartschool();
-    $klasarray = $ss->ophalenKlassen();
+    $klasarray = $ss->ophalenKlassen(); 
 
     require('../startHTML.php');
     require('../navbar.php');
 
-$showAlert = false;
+    $showAlert = false; // Variabele om waarschuwingen te tonen
+    $post = false; // Variabele om te controleren of het een POST-verzoek is
 
-$post = false;
+    // Controleer het verzoekstype
+    if ($_SERVER["REQUEST_METHOD"] != "POST") {
+        $id = $_GET['id']; // Haal het gebruikers-ID uit de URL
+        
+        // Template voor de SELECT query
+        $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`email`,`admin` 
+                  FROM `tblGebruiker` 
+                  WHERE `idGeb` = $id";
 
-//UPDATE USER
-if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    $id = $_GET['id'];
-    //Update query template
-    $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`email`,`admin` 
-    FROM `tblGebruiker` 
-    WHERE `idGeb` = $id";
-
-    //Execute the query
-    try {
-        $res = $pdo->prepare($query);
-        $res->execute();    
-        $row = $res->fetch(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) 
-    {
-        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
-        header("Location: ../index.php");
-        exit;
-    }
-   
-}
-else {
-    $post = true;
-    $idGeb = $_POST["idGeb"];
-    $internNr = trim($_POST["internNr"]);
-    $naam = trim($_POST["naam"]); 
-    $voornaam = trim($_POST["voornaam"]);
-    $email = trim($_POST["email"]);
-    $admin = isset($_POST["admin"]) ? 1 : 0;
-
-    if (strlen($naam) >= 2 || strlen($voornaam) >= 2) {
-        //Update query template
-        $query = "UPDATE `tblGebruiker`
-                SET `internNr` = '$internNr', `naam` = '$naam',`voornaam` = '$voornaam',`email` = '$email',`admin` = '$admin'
-                WHERE `idGeb` = '$idGeb'";
-
-        //Execute the query
+        // Voer de query uit
         try {
-            $res2 = $pdo->prepare($query);
-            $res2->execute();
-            header("Location: userOverview.php");
-            exit;
-        } catch (PDOException $e) 
-        {
+            $res = $pdo->prepare($query);
+            $res->execute();    
+            $row = $res->fetch(PDO::FETCH_ASSOC); // Haal de resultaten op als een associatieve array
+        } catch (PDOException $e) {
+            // Log de fout en toon een foutmelding
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
             file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
             header("Location: ../index.php");
             exit;
         }
     } else {
-        $TextAlert = "<strong> FOUT! </strong> de ingegeven informatie is te kort of mogelijks fout.";
-        $showAlert = true;
+        // Als het een POST-verzoek is
+        $post = true;
+        $idGeb = $_POST["idGeb"]; // Haal gegevens uit het POST-verzoek
+        $internNr = trim($_POST["internNr"]);
+        $naam = trim($_POST["naam"]); 
+        $voornaam = trim($_POST["voornaam"]);
+        $email = trim($_POST["email"]);
+        $admin = isset($_POST["admin"]) ? 1 : 0;
+
+        // Valideer de gegevens
+        if (strlen($naam) >= 2 || strlen($voornaam) >= 2) {
+            // Template voor de UPDATE query
+            $query = "UPDATE `tblGebruiker`
+                      SET `internNr` = '$internNr', `naam` = '$naam',`voornaam` = '$voornaam',`email` = '$email',`admin` = '$admin'
+                      WHERE `idGeb` = '$idGeb'";
+
+            // Voer de query uit
+            try {
+                $res2 = $pdo->prepare($query);
+                $res2->execute();
+                header("Location: userOverview.php"); // Redirect naar het overzicht
+                exit;
+            } catch (PDOException $e) {
+                // Log de fout en toon een foutmelding
+                $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+                file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+                header("Location: ../index.php");
+                exit;
+            }
+        } else {
+            // Toon een foutmelding als de gegevens niet geldig zijn
+            $TextAlert = "<strong> FOUT! </strong> de ingegeven informatie is te kort of mogelijks fout.";
+            $showAlert = true;
+        }
     }
-}
 ?>
 <br><br>
     <div class="container mt-5">

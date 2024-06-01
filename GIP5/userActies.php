@@ -1,51 +1,70 @@
 <?php
+    // Inclusief het header-bestand
     require('../header.php');
 
+    // Controleer of de gebruiker een admin is. Zo niet, stuur door naar de indexpagina.
     if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
         header("Location: ../index.php");
         exit;   
     }
 
+    // Inclusief het PDO-bestand
     require('pdo.php');
 
-    
+    // Als de knop "Verwijder gebruikers" is ingedrukt
     if(isset($_POST["btnDeleteUsers"])) {
+        // Ontvang de geselecteerde gebruikers-id's
         $idLeerlingen = $_POST["leerlingen"];
+        // Formatteer de id's als een string gescheiden door komma's
         $idSorted = implode(", ", $idLeerlingen);
 
+        // Query om de geselecteerde gebruikers te deactiveren
         $query = "UPDATE `tblGebruiker` SET `active` = 0 WHERE `internNr` IN($idSorted)";
 
-        //Execute the query
+        // Uitvoeren van de query
         try {
             $res = $pdo->prepare($query);
             $res->execute();
-            $toast->set("fa-exclamation-triangle", "Gebruikers","", "Users met internnummer '$idSorted' verwijderd","success");
-            file_put_contents("log.txt","verwijderd users met internnummer '$idSorted' - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
+            // Succesmelding
+            $toast->set("fa-exclamation-triangle", "Gebruikers","", "Gebruikers met internnummer '$idSorted' verwijderd","success");
+            // Loggen van de actie
+            file_put_contents("log.txt","Gebruikers met internnummer '$idSorted' verwijderd - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
         } catch (PDOException $e) 
         {   
-            $toast->set("fa-exclamation-triangle", "Error","", "Gefaald om users met internnummer '$idSorted' te verwijderen","danger");
-            file_put_contents("log.txt","verwijderen van users met internnummer '$idSorted' mislukt - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
+            // Foutmelding als de query mislukt
+            $toast->set("fa-exclamation-triangle", "Error","", "Gefaald om gebruikers met internnummer '$idSorted' te verwijderen","danger");
+            // Loggen van de fout
+            file_put_contents("log.txt","Verwijderen van gebruikers met internnummer '$idSorted' mislukt - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
         }
     }
+    // Als de knop "Activeer gebruikers" is ingedrukt
     elseif(isset($_POST["btnAcivateUsers"])) {
+        // Ontvang de geselecteerde gebruikers-id's
         $idLeerlingen = $_POST["leerlingen"];
+        // Formatteer de id's als een string gescheiden door komma's
         $idSorted = implode(", ", $idLeerlingen);
 
+        // Query om de geselecteerde gebruikers te activeren
         $query = "UPDATE `tblGebruiker` SET `active` = 1 WHERE `internNr` IN($idSorted)";
 
-        //Execute the query
+        // Uitvoeren van de query
         try {
             $res = $pdo->prepare($query);
             $res->execute();
-            $toast->set("fa-exclamation-triangle", "Gebruikers","", "Users met internnummer '$idSorted' heractiveerd","success");
-            file_put_contents("log.txt","heractiveren users met internnummer '$idSorted' - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
+            // Succesmelding
+            $toast->set("fa-exclamation-triangle", "Gebruikers","", "Gebruikers met internnummer '$idSorted' geactiveerd","success");
+            // Loggen van de actie
+            file_put_contents("log.txt","Gebruikers met internnummer '$idSorted' geactiveerd - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
         } catch (PDOException $e) 
         {   
-            $toast->set("fa-exclamation-triangle", "Error","", "Gefaald om users met internnummer '$idSorted' te verwijderen","danger");
-            file_put_contents("log.txt","heractiveren van users met internnummer '$idSorted' mislukt - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
+            // Foutmelding als de query mislukt
+            $toast->set("fa-exclamation-triangle", "Error","", "Gefaald om gebruikers met internnummer '$idSorted' te activeren","danger");
+            // Loggen van de fout
+            file_put_contents("log.txt","Activeren van gebruikers met internnummer '$idSorted' mislukt - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
         }
     }
 
+    // Na het uitvoeren van de acties, stuur door naar de gebruikersoverzichtspagina
     header("Location: userOverview.php");
     exit;
 ?>

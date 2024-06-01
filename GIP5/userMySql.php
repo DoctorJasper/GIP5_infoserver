@@ -1,28 +1,34 @@
-
 <?php
+    // Vereist het header.php-bestand voor de opmaak van de pagina
     require('../header.php');
 
+    // Controleert of de gebruiker is ingelogd als admin, anders wordt deze omgeleid naar de indexpagina
     if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
         header("Location: ../index.php");
         exit;   
     }
 
+    // Vereist enkele bestanden en klassen
     require('pdo.php');
     require('../inc/config.php');
     require('../classes/class.smartschool.php');
 
+    // Maakt een instantie van de Smartschool-klasse
     $ss = new Smartschool();
 
+    // Initialiseren van variabelen
     $leerlingenIntNr = [];
     $namenLeerlingen = [];
     $actie = "";
 
+    // Controleert of de gebruikersparameter is ingesteld en niet leeg is, anders wordt de gebruiker teruggeleid naar het gebruikersoverzicht
     if (!isset($_GET["users"]) || $_GET["users"] == "") {
         $toast->set("fa-exclamation-triangle", "Note", "", "U moet eerst een user selecteren", "warning");
         header("Location: userOverview.php");
         exit;
     }
 
+    // Als het verzoeksmethode POST is en er een actie is ingesteld, wordt de actie afgehandeld
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actie"])) { 
         $actie = $_POST["actie"];
         $users = $_GET["users"];
@@ -30,10 +36,12 @@
         handleAction($actie, $leerlingenIntNr);
     }
 
+    // Functie om de acties uit te voeren op de gebruikers
     function handleAction($actie, $leerlingenIntNr) {
         global $pdo, $toast;
         $namenLeerlingen = [];
 
+        // Haalt de namen van de gebruikers op basis van hun interne nummers
         foreach ($leerlingenIntNr as $leerlingIntNr) {
             $query = "SELECT `naam`, `voornaam`, `klas` FROM `tblGebruiker` WHERE `internNr` = :internNr";
         
@@ -43,19 +51,22 @@
                 $res->execute();
                 $namenLeerlingen[] = $res->fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
+                // Logt eventuele databasefouten
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
             }
         }
 
+        // Voor elke gebruiker worden acties uitgevoerd
         foreach ($namenLeerlingen as $naamLeerling) {
-            // Create username
+            // Maakt een gebruikersnaam op basis van de klas en voornaam
             $klas = $naamLeerling["klas"];
             $voornaam = ucfirst(strtolower($naamLeerling["voornaam"]));
             $username = "0" . substr($klas, 0, 2) . strtolower(substr($klas, 2)) . $voornaam;
 
-            // Create random password
+            // Genereert een willekeurig wachtwoord
             $randomNumber = mt_rand(1000, 9999);
 
+            // Haalt het commando op voor het toevoegen van de gebruiker
             $query = "SELECT `commando` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'toevoegen'";
         
             try {
@@ -65,19 +76,23 @@
                 $commando = str_replace("username", $username, $commando);
                 $commando = str_replace("password", $randomNumber, $commando);
                 try {
+                    // Voert het commando uit om de gebruiker toe te voegen
                     $res = $pdo->prepare($commando);
                     $res->execute();
                 }
                 catch (PDOException $e) {
+                    // Logt eventuele databasefouten
                     file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 }
             } catch (PDOException $e) {
+                // Logt eventuele databasefouten
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
             } catch (Exception $e) {
+                // Logt eventuele commando-uitvoeringsfouten
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
             }
 
-            // Insert into tblAccounts
+            // Voegt de gebruiker toe aan tblAccounts
             $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
             $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 1];
 
@@ -86,6 +101,7 @@
                 $res->execute($values);
                 $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '{$naamLeerling['naam']} {$voornaam}' toegevoegd", "success");
             } catch (PDOException $e) {
+                // Meldt een fout als de gebruiker niet kan worden toegevoegd
                 $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om '{$naamLeerling['naam']} {$voornaam}' toe te voegen", "danger");
             }
         }
