@@ -90,12 +90,12 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 exec($commando); // Voer het commando uit
 
                 // Geef een succesmelding weer
-                $toast->set("fa-exclamation-triangle", "Gebruikers", "", "Gebruiker '{$naamLeerling['naam']} {$username}' aangemaakt", "success");
+                array_push($tabel, array("Linux gebruiker $username toegevoegd", "success"));
 
             } catch (PDOException $e) {
                 // Log eventuele databasefouten en geef een foutmelding weer
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                $toast->set("fa-exclamation-triangle", "Fout", "", "Mislukt om Linux gebruiker '{$naamLeerling['naam']} {$username}' aan te maken", "danger");
+                array_push($tabel, array("Gefaald om Linux gebruiker $username aan te maken", "danger"));
             }
 
             // Insert into tblAccounts
@@ -105,8 +105,9 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             try {
                 $res = $pdo->prepare($query);
                 $res->execute($values);
+                array_push($tabel, array("Database user $username toegevoegd", "success"));
             } catch (PDOException $e) {
-                $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om '{$naamLeerling['naam']} {$username}' toe te voegen aan de database", "danger");
+                array_push($tabel, array("Gefaald om database user $username toe te voegen", "danger"));
             }
 
             // mail versturen
@@ -154,11 +155,9 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                     
                     exec($commando);
                     array_push($tabel, array("Linux user $username verwijderd", "success"));
-                    $toast->set("fa-exclamation-triangle", "Note", "", "Linux user '$username' verwijderd", "success");
                 } catch (PDOException $e) {
                        // Foutloggen bij databasequeryfouten
                     file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                    $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om linux user '$username' te verwijderen", "danger");
                     array_push($tabel, array("Gefaald om linux user $username te verwijderen", "danger"));
                 }
 
@@ -168,11 +167,9 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 try {
                     $res = $pdo->prepare($query);
                     $res->execute();
-                    array_push($tabel, array("User $username verwijderd", "success"));
-                    $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '$username' verwijderd", "success");
+                    array_push($tabel, array("Database user $username verwijderd", "success"));
                 } catch (PDOException $e) {
-                    array_push($tabel, array("Gefaald om database user $username verwijderd", "success"));
-                    $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om user '$username' te verwijderen", "danger");
+                    array_push($tabel, array("Gefaald om database user $username verwijderd", "danger"));
                 } 
             }
         }
@@ -235,7 +232,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 </form>
                 <br><br>
                 <?php foreach ($tabel as $line) : ?>
-                    <span class="badge bg-<?php echo $line[1] ;?>"><h1><?php echo $line[0] ;?></h1></span>
+                    <span class="badge bg-<?php echo $line[1] ;?>"><h3><?php echo $line[0] ;?></h3></span>
                     <p></p>
                 <?php endforeach; ?>
             </div>
