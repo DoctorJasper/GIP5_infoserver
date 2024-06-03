@@ -126,7 +126,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
     if ($actie == "verwijderen") {
          // Voor elke gebruiker de gebruikersnaam ophalen
         foreach ($leerlingenIntNr as $leerlingIntNr) {
-            $query = "SELECT `username` FROM `tblAccounts` WHERE `internnrGebruiker` = :internNr";
+            $query = "SELECT `username` FROM `tblAccounts` WHERE `internnrGebruiker` = :internNr AND idPlatform = 1";
         
             try {
                 $res = $pdo->prepare($query);
