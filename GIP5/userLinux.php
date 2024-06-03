@@ -172,6 +172,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                     array_push($tabel, array("Gefaald om database user $username verwijderd", "danger"));
                 } 
             }
+            array_push($tabel, array("De user kan niet gevonden worden, omdat deze niet in de database staat", "danger"));
         }
     }
 }

@@ -21,6 +21,8 @@
     $leerlingenIntNr = [];
     $namenLeerlingen = [];
     $actie = "";
+    
+    $tabel = []; // Initialiseer een array voor de table
 
     // Controleert of de gebruikersparameter is ingesteld en niet leeg is, anders wordt de gebruiker teruggeleid naar het gebruikersoverzicht
     if (!isset($_GET["users"]) || $_GET["users"] == "") {
@@ -39,7 +41,7 @@
 
     // Functie om de acties uit te voeren op de gebruikers
     function handleAction($actie, $leerlingenIntNr) {
-        global $pdo, $toast, $pdoLocal; // Haal de pdo, toast, ... op van de globale variabelen
+        global $pdo, $toast, $pdoLocal, $tabel; // Haal de pdo, toast, ... op van de globale variabelen
         $namenLeerlingen = [];
 
         if ($actie == "toevoegen") {
@@ -101,17 +103,17 @@
                 try {
                     $res = $pdo->prepare($query);
                     $res->execute($values);
-                    $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '{$naamLeerling['naam']} {$voornaam}' toegevoegd", "success");
+                    array_push($tabel, array("Database user $username toegevoegd", "success"));
                 } catch (PDOException $e) {
                     // Meldt een fout als de gebruiker niet kan worden toegevoegd
-                    $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om '{$naamLeerling['naam']} {$voornaam}' toe te voegen", "danger");
+                    array_push($tabel, array("Gefaald om database user $username toe te voegen", "danger"));
                 }
             }
         }
         if ($actie == "verwijderen") {
             // Haalt de namen van de gebruikers op basis van hun interne nummers
             foreach ($leerlingenIntNr as $leerlingIntNr) {
-                $query = "SELECT `username` FROM `tblAccounts` WHERE `internnrGebruiker` = :internNr";
+                $query = "SELECT `username` FROM `tblAccounts` WHERE `internnrGebruiker` = :internNr AND idPlatform = 2";
             
                 try {
                     $res = $pdo->prepare($query);
@@ -126,44 +128,48 @@
 
             // Voor elke gebruiker worden acties uitgevoerd
             foreach ($namenLeerlingen as $naamLeerling) {
-                // Haalt het commando op voor het toevoegen van de gebruiker
-                $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 2 AND `type` = 'verwijderen'";
-            
-                try {
-                    $res = $pdo->prepare($query);
-                    $res->execute();
-                    $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
-                    $commando = str_replace("username", $username, $commando);
-                    $commando = str_replace("password", $randomNumber, $commando);
+                $username = $naamLeerling["username"];
+                
+                if ($username != "") 
+                {
+                    // Haalt het commando op voor het toevoegen van de gebruiker
+                    $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 2 AND `type` = 'verwijderen'";
+                
                     try {
-                        // Voert het commando uit om de gebruiker toe te voegen
-                        $res = $pdoLocal->prepare($commando);
+                        $res = $pdo->prepare($query);
                         $res->execute();
-                    }
-                    catch (PDOException $e) {
+                        $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
+                        $commando = str_replace("gebruikersnaam", $username, $commando);
+                        try {
+                            // Voert het commando uit om de gebruiker toe te voegen
+                            $res = $pdoLocal->prepare($commando);
+                            $res->execute();
+                            array_push($tabel, array("Linux user $username toegevoegd", "success"));
+                        }
+                        catch (PDOException $e) {
+                            // Logt eventuele databasefouten
+                            file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                            array_push($tabel, array("Gefaald om linux user $username te verwijderen", "danger"));
+                        }
+                    } catch (PDOException $e) {
                         // Logt eventuele databasefouten
                         file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                     }
-                } catch (PDOException $e) {
-                    // Logt eventuele databasefouten
-                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                } catch (Exception $e) {
-                    // Logt eventuele commando-uitvoeringsfouten
-                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                }
 
-                // Voegt de gebruiker toe aan tblAccounts
-                $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
-                $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 2];
+                    // Voegt de gebruiker toe aan tblAccounts
+                    $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
+                    $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 2];
 
-                try {
-                    $res = $pdo->prepare($query);
-                    $res->execute($values);
-                    $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '{$naamLeerling['naam']} {$voornaam}' toegevoegd", "success");
-                } catch (PDOException $e) {
-                    // Meldt een fout als de gebruiker niet kan worden toegevoegd
-                    $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om '{$naamLeerling['naam']} {$voornaam}' toe te voegen", "danger");
+                    try {
+                        $res = $pdo->prepare($query);
+                        $res->execute($values);
+                        array_push($tabel, array("Database user $username verwijderd", "success"));
+                    } catch (PDOException $e) {
+                        // Meldt een fout als de gebruiker niet kan worden toegevoegd
+                        array_push($tabel, array("Gefaald om database user $username verwijderd", "danger"));
+                    }
                 }
+                array_push($tabel, array("De user kan niet gevonden worden, omdat deze niet in de database staat", "danger"));
             }
         }
         
@@ -223,6 +229,11 @@
                         </button>
                     </div>
                 </form>
+                <br><br>
+                <?php foreach ($tabel as $line) : ?>
+                    <span class="badge bg-<?php echo $line[1] ;?>"><h3><?php echo $line[0] ;?></h3></span>
+                    <p></p>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
