@@ -39,7 +39,7 @@
 
     // Functie om de acties uit te voeren op de gebruikers
     function handleAction($actie, $leerlingenIntNr) {
-        global $pdo, $toast;
+        global $pdo, $toast, $pdoLocal;
         $namenLeerlingen = [];
 
         // Haalt de namen van de gebruikers op basis van hun interne nummers
