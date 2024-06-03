@@ -68,7 +68,7 @@
             $randomNumber = mt_rand(1000, 9999);
 
             // Haalt het commando op voor het toevoegen van de gebruiker
-            $query = "SELECT `commando` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'toevoegen'";
+            $query = "SELECT `commando` FROM `tblCommandos` WHERE `idPlatform` = 2 AND `type` = 'toevoegen'";
         
             try {
                 $res = $pdo->prepare($query);
@@ -95,7 +95,7 @@
 
             // Voegt de gebruiker toe aan tblAccounts
             $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
-            $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 1];
+            $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 2];
 
             try {
                 $res = $pdo->prepare($query);
