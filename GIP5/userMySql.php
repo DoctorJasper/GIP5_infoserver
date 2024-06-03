@@ -68,12 +68,12 @@
             $randomNumber = mt_rand(1000, 9999);
 
             // Haalt het commando op voor het toevoegen van de gebruiker
-            $query = "SELECT `commando` FROM `tblCommandos` WHERE `idPlatform` = 2 AND `type` = 'toevoegen'";
+            $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 2 AND `type` = 'toevoegen'";
         
             try {
                 $res = $pdo->prepare($query);
                 $res->execute();
-                $commando = $res->fetch(PDO::FETCH_ASSOC)['commando'];
+                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
                 $commando = str_replace("username", $username, $commando);
                 $commando = str_replace("password", $randomNumber, $commando);
                 try {
