@@ -234,7 +234,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                     </div>
                 </form>
                 <?php foreach ($tabel as $line) : ?>
-                    <span class="badge bg-primary"><?php echo $line ;?></span>
+                    <span class="badge bg-<?php echo $line[1] ;?>"><?php echo $line[0] ;?></span>
                 <?php endforeach; ?>
             </div>
         </div>
