@@ -157,8 +157,7 @@
                     }
 
                     // Voegt de gebruiker toe aan tblAccounts
-                    $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
-                    $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 2];
+                    $query = "DELETE FROM `tblAccounts` WHERE `username` = '$username'";
 
                     try {
                         $res = $pdo->prepare($query);
