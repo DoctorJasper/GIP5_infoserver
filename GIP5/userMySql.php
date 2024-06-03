@@ -83,10 +83,12 @@
                         // Voert het commando uit om de gebruiker toe te voegen
                         $res = $pdoLocal->prepare($commando);
                         $res->execute();
+                        array_push($tabel, array("MySql user $username toegevoegd", "success"));
                     }
                     catch (PDOException $e) {
                         // Logt eventuele databasefouten
                         file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                        array_push($tabel, array("Gefaal om mySql user $username toe te voegen", "danger"));
                     }
                 } catch (PDOException $e) {
                     // Logt eventuele databasefouten
