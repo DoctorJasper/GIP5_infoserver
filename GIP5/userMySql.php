@@ -10,6 +10,7 @@
 
     // Vereist enkele bestanden en klassen
     require('pdo.php');
+    require('pdoLocal.php');
     require('../inc/config.php');
     require('../classes/class.smartschool.php');
 
@@ -77,7 +78,7 @@
                 $commando = str_replace("password", $randomNumber, $commando);
                 try {
                     // Voert het commando uit om de gebruiker toe te voegen
-                    $res = $pdo->prepare($commando);
+                    $res = $pdoLocal->prepare($commando);
                     $res->execute();
                 }
                 catch (PDOException $e) {
