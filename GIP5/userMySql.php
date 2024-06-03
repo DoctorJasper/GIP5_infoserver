@@ -146,12 +146,12 @@
                             // Voert het commando uit om de gebruiker toe te voegen
                             $res = $pdoLocal->prepare($commando);
                             $res->execute();
-                            array_push($tabel, array("Linux user $username toegevoegd", "success"));
+                            array_push($tabel, array("MySql user $username toegevoegd", "success"));
                         }
                         catch (PDOException $e) {
                             // Logt eventuele databasefouten
                             file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                            array_push($tabel, array("Gefaald om linux user $username te verwijderen", "danger"));
+                            array_push($tabel, array("Gefaald om mySql user $username te verwijderen", "danger"));
                         }
                     } catch (PDOException $e) {
                         // Logt eventuele databasefouten
@@ -170,7 +170,9 @@
                         array_push($tabel, array("Gefaald om database user $username verwijderd", "danger"));
                     }
                 }
-                array_push($tabel, array("De user kan niet gevonden worden, omdat deze niet in de database staat", "danger"));
+                else {
+                    array_push($tabel, array("De user kan niet gevonden worden, omdat deze niet in de database staat", "danger"));
+                }
             }
         }
         
