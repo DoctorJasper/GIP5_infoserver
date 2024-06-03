@@ -146,7 +146,7 @@
                             // Voert het commando uit om de gebruiker toe te voegen
                             $res = $pdoLocal->prepare($commando);
                             $res->execute();
-                            array_push($tabel, array("MySql user $username toegevoegd", "success"));
+                            array_push($tabel, array("MySql user $username verwijderd", "success"));
                         }
                         catch (PDOException $e) {
                             // Logt eventuele databasefouten

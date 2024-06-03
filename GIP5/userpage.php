@@ -2,10 +2,10 @@
 <?php                   //DEZE PAGINA IS NIET AF
     require('../header.php');
 
-    /*if (!isset($_SESSION["firstname"])) {
+    if (!isset($_SESSION["firstname "])) {
         header("Location: ../index.php");
         exit;
-    }*/
+    }
 
 // hieronder zet je PHP code
     require('pdo.php');
@@ -15,17 +15,12 @@
     $ss = new Smartschool();
     $klasarray = $ss->ophalenKlassen();
 
-
-    /*if (!isset($_SESSION["admin"]) || $_SESSION["admin"] == 0) {
-        header("Location: ../impersonate.php");
-        die();
-    }
 //Update query template
-/*$query = "SELECT a.`idAcc`, a.`internnrGebruiker`, a.`idPlatform`, a.`AanmaakDatum`, p.`platform`
-          FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
-          WHERE g.`internNr` =  :intNr AND a.`idPlatform` = p.`idPlt`";
+$query = "SELECT g.internNr, g.naam, g.voornaam, g.klas, a.username, a.idPlatform, p.platform
+FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
+WHERE g.`internNr`=intNr AND g.internNr=a.internnrGebruiker AND a.idPlatform=p.idPlt AND a.idPlatform = 2";
 
-//$values = [":intNr" => $_GET["NR"]];
+$values = [":intNr" => $_SESSION["internalnr"]];
 
 try{
     $res = $pdo->prepare($query);
