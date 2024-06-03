@@ -17,6 +17,8 @@ $leerlingenIntNr = []; // Initialiseer een array voor leerlingen interne nummers
 $namenLeerlingen = []; // Initialiseer een array voor leerlingennamen
 $actie = ""; // Initialiseer de actie variabele
 
+$tabel = []; // Initialiseer een array voor de table
+
 // Controleer of er gebruikers zijn geselecteerd, zo niet, geef een opmerking en stuur de gebruiker terug naar het overzicht
 if (!isset($_GET["users"]) || $_GET["users"] == "") {
     $toast->set("fa-exclamation-triangle", "Opmerking", "", "U moet eerst een gebruiker selecteren", "warning");
@@ -151,11 +153,13 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                     file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
                     
                     exec($commando);
+                    array_push($tabel, array("Linux user $username verwijderd", "success"));
                     $toast->set("fa-exclamation-triangle", "Note", "", "Linux user '$username' verwijderd", "success");
                 } catch (PDOException $e) {
                        // Foutloggen bij databasequeryfouten
                     file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                     $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om linux user '$username' te verwijderen", "danger");
+                    array_push($tabel, array("Gefaald om linux user $username te verwijderen", "danger"));
                 }
 
               // Verwijderen van gebruiker uit de database
@@ -164,11 +168,16 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 try {
                     $res = $pdo->prepare($query);
                     $res->execute();
+                    array_push($tabel, array("User $username verwijderd", "success"));
                     $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '$username' verwijderd", "success");
                 } catch (PDOException $e) {
+                    array_push($tabel, array("Gefaald om database user $username verwijderd", "success"));
                     $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om user '$username' te verwijderen", "danger");
                 } 
             }
+            
+            var_dump($tabel);
+            die();
         }
     }
 }
@@ -214,24 +223,22 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
 
 <br><br>
 <div class="row center">
-    <div class="col-sm-3"></div>
-        <div class="col-sm-6 text-center">
-            <div class="card">
-                <div class="card-body">
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?users=' . $_GET['users']; ?>">
-                        <div class="button-container">
-                            <button type="submit" name="actie" value="toevoegen" class="btn btn-success action-btn">
-                                <i class="fas fa-square-check" data-bs-toggle="tooltip" data-bs-placement="top" title="Toeveogen user"></i>
-                            </button>
-                            <button type="submit" name="actie" value="verwijderen" class="btn btn-danger action-btn">
-                                <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijderen user"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+    <div class="col-sm-12 text-center">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?users=' . $_GET['users']; ?>">
+                    <div class="button-container">
+                        <button type="submit" name="actie" value="toevoegen" class="btn btn-success action-btn">
+                            <i class="fas fa-square-check" data-bs-toggle="tooltip" data-bs-placement="top" title="Toevoegen user"></i>
+                        </button>
+                        <button type="submit" name="actie" value="verwijderen" class="btn btn-danger action-btn">
+                            <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijderen user"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    <div class="col-sm-3"></div>
+    </div>
 </div>
 
 <!-- FOOTER -->

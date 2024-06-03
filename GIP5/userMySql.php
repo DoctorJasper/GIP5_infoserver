@@ -149,24 +149,22 @@
 
 <br><br>
 <div class="row center">
-    <div class="col-sm-3"></div>
-        <div class="col-sm-6 text-center">
-            <div class="card">
-                <div class="card-body">
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?users=' . $_GET['users']; ?>">
-                        <div class="button-container">
-                            <button type="submit" name="actie" value="toevoegen" class="btn btn-success action-btn">
-                                <i class="fas fa-square-check" data-bs-toggle="tooltip" data-bs-placement="top" title="Toeveogen user"></i>
-                            </button>
-                            <button type="submit" name="actie" value="verwijderen" class="btn btn-danger action-btn">
-                                <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijderen user"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+    <div class="col-sm-12 text-center">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?users=' . $_GET['users']; ?>">
+                    <div class="button-container">
+                        <button type="submit" name="actie" value="toevoegen" class="btn btn-success action-btn">
+                            <i class="fas fa-square-check" data-bs-toggle="tooltip" data-bs-placement="top" title="Toevoegen user"></i>
+                        </button>
+                        <button type="submit" name="actie" value="verwijderen" class="btn btn-danger action-btn">
+                            <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijderen user"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    <div class="col-sm-3"></div>
+    </div>
 </div>
 
 <!-- FOOTER -->

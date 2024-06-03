@@ -122,3 +122,7 @@ aanmaken van user -> Cardon Thomas - 2024-05-30
 2024-05-30 18:06:26 || Command to execute: sudo deluser thomas; sudo rm -r /home/thomas
 2024-05-30 18:07:09 || Command to execute: sudo adduser thomas --gecos ",,," -disabled-password
 2024-05-30 18:07:09 || Command to execute: sudo chpasswd < pw.txt
+2024-06-03 16:22:25 || Command to execute: sudo deluser 06InfoKyan; sudo rm -r /home/06InfoKyan
+2024-06-03 16:25:21 || Command to execute: sudo deluser 06InfoKyan; sudo rm -r /home/06InfoKyan
+2024-06-03 16:26:55 || Command to execute: sudo deluser 06InfoKyan; sudo rm -r /home/06InfoKyan
+2024-06-03 16:34:58 || Command to execute: sudo deluser 06InfoKyan; sudo rm -r /home/06InfoKyan
