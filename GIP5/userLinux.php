@@ -175,9 +175,6 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                     $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om user '$username' te verwijderen", "danger");
                 } 
             }
-            
-            var_dump($tabel);
-            die();
         }
     }
 }
@@ -236,6 +233,9 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                         </button>
                     </div>
                 </form>
+                <?php foreach ($tabel as $line) : ?>
+                    <span class="badge bg-primary"><?php echo $line ;?></span>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
