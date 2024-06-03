@@ -233,9 +233,10 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                         </button>
                     </div>
                 </form>
-                <br>
+                <br><br>
                 <?php foreach ($tabel as $line) : ?>
                     <span class="badge bg-<?php echo $line[1] ;?>"><h1><?php echo $line[0] ;?></h1></span>
+                    <p></p>
                 <?php endforeach; ?>
             </div>
         </div>
