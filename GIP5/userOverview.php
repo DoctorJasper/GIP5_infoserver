@@ -103,7 +103,6 @@
                 <form  method="post" action="userActies.php">
                     <?php if ($res->rowCount() != 0) : ?>
                         <?php while($row = $res->fetch(PDO::FETCH_ASSOC)) : ?>
-                            <?php die(); ?>
                             <?php $teller++;?>
                             <tr>
                                 <td>
