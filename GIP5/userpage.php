@@ -27,7 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
 
     try{
         $res = $pdo->prepare($query);
-        var_dump($res);
+        $res->execute($values);
+        $row = $res->fetch(PDO::FETCH_ASSOC);
     } catch(PDOException $e){
         //error in de query
     }
@@ -36,6 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
 require('../startHTML.php');
 ?>
 <style> 
+    .card {
+        margin-left: 75px;
+        margin-right: 75px; 
+        margin-top: 40px;
+    }
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -56,46 +62,31 @@ require('../startHTML.php');
 </style>
 <?php require('../navbarUser.php') ;?>
 
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-md-2 d-none d-md-block sidebar">
-            <div class="sidebar-sticky">
-                <ul class="navbar-nav ms-auto">
-                </ul>
-            </div>
-        </nav>
+<br><br>
+<div class="card" id="card">
+    <div class="col-sm-12">
+        <div class="card-header bg-primary br-text-white">
+            <h3 class="ml-5">Userpage <?php echo $row["voornaam"].$row["naam"]; ?></h3>
+        </div>    
+        <div class="card-body">
+            <select onchange="showTutorial(this)">
+                <option value="">Selecteer een tutorial</option>    
+                <option value="https://www.youtube.com/watch?v=KJotmmDJWAg" >Tutorial 1 - Verander je wachtwoord</option>
+                <option value="https://www.youtube.com/watch?v=KJztmmDJWAg" >Tutorial 2 - CSS Basics</option>
+                <!-- Add more tutorial options as needed -->
+            </select>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <br>
-            <div class="card">
-                <div class="card-header">
-                    <h1>Welkom <?php echo $_SESSION['firstname']; ?></h1>
+            <div id="tutorialInfo">
+                <div id="thumbnailContainer">
+                    <a id="thumbnailLink"  target="_blank">
+                        <img id="tutorialThumbnail" class="thumbnail" src="" alt="Tutorial Thumbnail">
+                    </a>
                 </div>
-                <div class="card-body">
-                    <h4>Uw user gegevens</h4>
-                    
-                </div>
+                <h3 id="tutorialTitle"></h3>
+                <p id="tutorialLink"></p>
             </div>
-        </main>
+        </div>
     </div>
-</div>
-<body>
-
-<select onchange="showTutorial(this)">
-    <option value="">Selecteer een tutorial</option>    
-    <option value="https://www.youtube.com/watch?v=KJotmmDJWAg" >Tutorial 1 - Verander je wachtwoord</option>
-    <option value="https://www.youtube.com/watch?v=KJztmmDJWAg" >Tutorial 2 - CSS Basics</option>
-    <!-- Add more tutorial options as needed -->
-</select>
-
-<div id="tutorialInfo">
-    <div id="thumbnailContainer">
-        <a id="thumbnailLink"  target="_blank">
-            <img id="tutorialThumbnail" class="thumbnail" src="" alt="Tutorial Thumbnail">
-        </a>
-    </div>
-    <h3 id="tutorialTitle"></h3>
-    <p id="tutorialLink"></p>
 </div>
 
 <?php require('../footer1.php'); ?>
