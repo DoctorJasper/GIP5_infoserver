@@ -127,6 +127,8 @@
                                 <td>
                                     <?php 
                                         foreach ($row2 as $platform) {
+                                            var_dump($platform);
+                                            die();
                                             if ($row["internNr"] == $platform["internNr"]) {
                                                 if ($platform["platform"] == "Linux") echo '<span class="badge bg-warning text-dark">'.$platform["platform"].'</span>';
                                                 if ($platform["platform"] == "phpMyAdmin") echo '<span class="badge bg-info text-dark">'.$platform["platform"].'</span>';
