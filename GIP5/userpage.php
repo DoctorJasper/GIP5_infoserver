@@ -1,11 +1,10 @@
-<!DOCTYPE html> 
-<?php                   //DEZE PAGINA IS NIET AF
+<?php
     require('../header.php');
 
-    if (!isset($_SESSION["firstname "])) {
+    /*if (!isset($_SESSION["firstname "])) {
         header("Location: ../index.php");
         exit;
-    }
+    }*/
 
 // hieronder zet je PHP code
     require('pdo.php');
@@ -30,7 +29,6 @@ try{
     echo 'Query error';
     die();
 }
-*/
 
 require('../startHTML.php');
 ?>
