@@ -16,14 +16,32 @@ $klasarray = $ss->ophalenKlassen();
 
 $row = [];
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
-    $internNr = $_GET["id"];
+    
+    $query = "SELECT * FROM `tblGebruiker` WHERE `internNr` = :intNr";
+
+    $values = [":intNr" => $_GET["id"]];
+
+    try {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+        $row = $res->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        // Handle error
+        echo "Error: " . $e->getMessage();
+    }
+
+    $_SESSION["lastname"] = $row["naam"];
+    $_SESSION["firstname"] = $row["voornaam"];
+    $_SESSION["internalnr"] =  $row["internNr"];
+    $_SESSION["email"] =  $row["email"];
+    $_SESSION["admin"] =  $row["admin"];
 
     // Update query template
     $query = "SELECT g.naam, g.voornaam, a.username, p.platform
               FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
               WHERE g.`internNr` = :intNr AND a.idPlatform = p.idPlt";
 
-    $values = [":intNr" => $internNr];
+    $values = [":intNr" => $_SESSION["internalnr"]];
 
     try {
         $res = $pdo->prepare($query);

@@ -10,6 +10,7 @@
     require('pdo.php');
     require('../inc/config.php');
     require('../classes/class.smartschool.php');
+    
     $ss = new Smartschool();
     $klasarray = $ss->ophalenKlassen();
     $isChecked = 0;
