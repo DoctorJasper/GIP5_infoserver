@@ -20,11 +20,10 @@ FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
 WHERE g.`internNr`= :intNr AND g.internNr=a.internnrGebruiker AND a.idPlatform=p.idPlt AND a.idPlatform = 2";
 
 $values = [":intNr" => $_SESSION["internalnr"]];
-var_dump($values);
+
 try{
     $res = $pdo->prepare($query);
     var_dump($res);
-    $res->execute($values);
 } catch(PDOException $e){
     //error in de query
     echo 'Query error';

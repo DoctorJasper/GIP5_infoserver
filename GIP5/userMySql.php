@@ -62,6 +62,8 @@
 
             // Voor elke gebruiker worden acties uitgevoerd
             foreach ($namenLeerlingen as $naamLeerling) {
+                var_dump($namenLeerlingen);
+                die();
                 // Maakt een gebruikersnaam op basis van de klas en voornaam
                 $klas = $naamLeerling["klas"];
                 $voornaam = ucfirst(strtolower($naamLeerling["voornaam"]));

@@ -22,7 +22,7 @@
         $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`klas`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 0";
         $deleted = true;    
     } else {
-        $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`klas`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 1";
+        $query = "SELECT g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin`, p.`platform` FROM `tblGebruiker` g, `tblAccounts` a, `tblPlatform` p WHERE g.`active` = 1 AND g.`internNr`= a.`internnrGebruiker` AND a.`idPlatform` = p.`idPlt`";
         $deleted = false;
     }
 
