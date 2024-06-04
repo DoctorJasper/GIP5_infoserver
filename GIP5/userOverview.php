@@ -133,7 +133,7 @@
                                             }
                                         }
                                         if (in_array("Linux", $platforms)) {
-                                            echo '<span class="badge bg-warning text-dark">Linux</span> ';
+                                            echo '<span class="badge bg-warning text-dark">Linux</span> <br>';
                                         }
                                         if (in_array("phpMyAdmin", $platforms)) {
                                             echo '<span class="badge bg-info text-dark">phpMyAdmin</span>';
