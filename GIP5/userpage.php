@@ -44,67 +44,10 @@ require('../startHTML.php');
         margin: 0;
         padding: 0;
     }
-
     .card {
         margin-left: 75px;
         margin-right: 75px; 
         margin-top: 40px;
-        background: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-    }
-
-    .card-header {
-        background-color: #007bff;
-        color: white;
-        padding: 15px;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    .form-select {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        margin-bottom: 20px;
-    }
-
-    .tutorial-info {
-        text-align: center;
-    }
-
-    .tutorial-info img {
-        max-width: 300px;
-        margin-bottom: 20px;
-    }
-
-    .tutorial-info h3 {
-        margin-bottom: 10px;
-    }
-
-    .tutorial-info a {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-    .tutorial-info a:hover {
-        text-decoration: underline;
-    }
-
-    .user-details {
-        margin-bottom: 20px;
-    }
-
-    .user-details h4 {
-        margin-bottom: 10px;
-    }
-
-    .user-details p {
-        margin: 5px 0;
     }
 </style>
 <?php require('../navbarUser.php'); ?>
