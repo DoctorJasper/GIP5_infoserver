@@ -125,12 +125,21 @@
                                 </td>
                                 <td><?php echo$row["email"]; ?> </td>
                                 <td>
-                                    <?php 
-                                            if ($row["internNr"] == $row2["internNr"]) {
-                                                if ($row2["platform"] == "Linux") echo '<span class="badge bg-warning text-dark">'.$row2["platform"].'</span>';
-                                                if ($row2["platform"] == "phpMyAdmin") echo '<span class="badge bg-info text-dark">'.$row2["platform"].'</span>';
+                                    <?php
+                                        $platform = "nog geen account";
+                                        foreach ($row2 as $account) {
+                                            if ($row["internNr"] == $account["internNr"]) {
+                                                $platform = $account["platform"];
+                                                break;
                                             }
-                                        else echo '<span class="badge bg-secondary">nog geen account</span>';
+                                        }
+                                        if ($platform == "Linux") {
+                                            echo '<span class="badge bg-warning text-dark">'.$platform.'</span>';
+                                        } elseif ($platform == "phpMyAdmin") {
+                                            echo '<span class="badge bg-info text-dark">'.$platform.'</span>';
+                                        } else {
+                                            echo '<span class="badge bg-secondary">'.$platform.'</span>';
+                                        }
                                     ?>
                                 </td>
                                 <td><?php echo$row["admin"] ? '<i class="fas fa-square-check text-success fs-5"></i>':
