@@ -55,7 +55,7 @@
 ?>
 <style>
     /* CSS-styling */
-    .card {
+    #card {
         margin-left: 75px;
         margin-right: 75px; 
         margin-top: 40px;
