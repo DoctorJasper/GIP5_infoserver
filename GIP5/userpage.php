@@ -53,7 +53,7 @@ require('../startHTML.php');
         max-height: 300px;
     }
 </style>
-<?php require('../navbar.php') ;?>
+<?php require('../navbarUser.php') ;?>
 
 <div class="container-fluid">
     <div class="row">
