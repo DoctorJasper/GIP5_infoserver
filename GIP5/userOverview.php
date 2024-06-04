@@ -135,9 +135,11 @@
                                         }
                                         if ($platform == "Linux") {
                                             echo '<span class="badge bg-warning text-dark">'.$platform.'</span>';
-                                        } elseif ($platform == "phpMyAdmin") {
+                                        } 
+                                        if ($platform == "phpMyAdmin") {
                                             echo '<span class="badge bg-info text-dark">'.$platform.'</span>';
-                                        } else {
+                                        } 
+                                        else {
                                             echo '<span class="badge bg-secondary">'.$platform.'</span>';
                                         }
                                     ?>
