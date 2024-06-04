@@ -126,21 +126,20 @@
                                 <td><?php echo$row["email"]; ?> </td>
                                 <td>
                                     <?php
-                                        $platform = "nog geen account";
+                                        $platforms = [];
                                         foreach ($row2 as $account) {
                                             if ($row["internNr"] == $account["internNr"]) {
-                                                $platform = $account["platform"];
-                                                break;
+                                                $platforms[] = $account["platform"];
                                             }
                                         }
-                                        if ($platform == "Linux") {
-                                            echo '<span class="badge bg-warning text-dark">'.$platform.'</span>';
-                                        } 
-                                        if ($platform == "phpMyAdmin") {
-                                            echo '<span class="badge bg-info text-dark">'.$platform.'</span>';
-                                        } 
-                                        else {
-                                            echo '<span class="badge bg-secondary">'.$platform.'</span>';
+                                        if (in_array("Linux", $platforms)) {
+                                            echo '<span class="badge bg-warning text-dark">Linux</span> ';
+                                        }
+                                        if (in_array("phpMyAdmin", $platforms)) {
+                                            echo '<span class="badge bg-info text-dark">phpMyAdmin</span>';
+                                        }
+                                        if (empty($platforms)) {
+                                            echo '<span class="badge bg-secondary">nog geen account</span>';
                                         }
                                     ?>
                                 </td>
