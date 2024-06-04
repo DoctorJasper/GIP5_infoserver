@@ -126,14 +126,10 @@
                                 <td><?php echo$row["email"]; ?> </td>
                                 <td>
                                     <?php 
-                                        foreach ($row2 as $platform) {
-                                            var_dump($platform);
-                                            die();
-                                            if ($row["internNr"] == $platform["internNr"]) {
-                                                if ($platform["platform"] == "Linux") echo '<span class="badge bg-warning text-dark">'.$platform["platform"].'</span>';
-                                                if ($platform["platform"] == "phpMyAdmin") echo '<span class="badge bg-info text-dark">'.$platform["platform"].'</span>';
+                                            if ($row["internNr"] == $row2["internNr"]) {
+                                                if ($row2["platform"] == "Linux") echo '<span class="badge bg-warning text-dark">'.$row2["platform"].'</span>';
+                                                if ($row2["platform"] == "phpMyAdmin") echo '<span class="badge bg-info text-dark">'.$row2["platform"].'</span>';
                                             }
-                                        }
                                         else echo '<span class="badge bg-secondary">nog geen account</span>';
                                     ?>
                                 </td>
