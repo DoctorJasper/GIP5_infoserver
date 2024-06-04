@@ -73,6 +73,8 @@
 
         // Voegt de geselecteerde leerlingen toe aan de database
         foreach($intNummers as $intNr) {
+            var_dump($klassen);
+            die();
             $naam = $klassen[$intNr][1];
             $voornaam = $klassen[$intNr][2];
             $klas = $klassen[$intNr][3];
