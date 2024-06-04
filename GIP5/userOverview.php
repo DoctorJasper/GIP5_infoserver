@@ -22,7 +22,7 @@
         $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`klas`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 0";
         $deleted = true;    
     } else {
-        $query = "SELECT g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin`, p.`platform` FROM `tblGebruiker` g, `tblAccounts` a, `tblPlatform` p WHERE g.`active` = 1 AND g.`internNr`= a.`internnrGebruiker` AND a.`idPlatform` = p.`idPlt`";
+        $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`klas`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 1";
         $deleted = false;
     }
 
@@ -36,6 +36,19 @@
         file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
         header("Location: ../index.php");
         exit;
+    }
+
+    $query = "SELECT g.`internNr`, p.`platform` FROM `tblGebruiker` g, `tblAccounts` a, `tblPlatform` p WHERE g.`active` = 1 AND g.`internNr`= a.`internnrGebruiker` AND a.`idPlatform` = p.`idPlt`";
+
+    // Uitvoeren van de query
+    try{
+        $res2 = $pdo->prepare($query);
+        $res2->execute();
+        $row2 = $res2->fetchAll(PDO::FETCH_ASSOC);
+    }catch(PDOException $e){
+        // Foutafhandeling bij databasequeryfouten
+        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
     }
     // Vereiste HTML-bestanden en start van HTML-structuur
     require('../startHTML.php');
@@ -110,6 +123,16 @@
                                     </div>
                                 </td>
                                 <td><?php echo$row["email"]; ?> </td>
+                                <td>
+                                    <?php 
+                                        if ($row["internNr"] == $row2["internNr"]) {
+                                            if ($row2["platform"] == "Linux") echo '<span class="badge bg-warning text-dark">'.$row2["platform"].'</span>';
+                                            if ($row2["platform"] == "phpMyAdmin") echo '<span class="badge bg-info text-dark">'.$row2["platform"].'</span>';
+                                            
+                                        }
+                                        else echo '<span class="badge bg-secondary">nog geen account</span>';
+                                    ?>
+                                </td>
                                 <td><?php echo$row["admin"] ? '<i class="fas fa-square-check text-success fs-5"></i>':
                                                                 '<i class="far fa-square fs-5"></i>';?> </td>
                                 <td>
