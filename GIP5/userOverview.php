@@ -103,7 +103,6 @@
                 <form  method="post" action="userActies.php">
                     <?php if ($res->rowCount() != 0) : ?>
                         <?php while($row = $res->fetch(PDO::FETCH_ASSOC)) : ?>
-                            <?php var_dump($row2);?>
                             <?php die(); ?>
                             <?php $teller++;?>
                             <tr>
@@ -131,7 +130,6 @@
                                         if ($row["internNr"] == $row2["internNr"]) {
                                             if ($row2["platform"] == "Linux") echo '<span class="badge bg-warning text-dark">'.$row2["platform"].'</span>';
                                             if ($row2["platform"] == "phpMyAdmin") echo '<span class="badge bg-info text-dark">'.$row2["platform"].'</span>';
-                                            
                                         }
                                         else echo '<span class="badge bg-secondary">nog geen account</span>';
                                     ?>
