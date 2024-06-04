@@ -14,20 +14,23 @@
     $ss = new Smartschool();
     $klasarray = $ss->ophalenKlassen();
 
-//Update query template
-$query = "SELECT g.internNr, g.naam, g.voornaam, g.klas, a.username, a.idPlatform, p.platform
-FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
-WHERE g.`internNr`= :intNr AND g.internNr=a.internnrGebruiker AND a.idPlatform=p.idPlt AND a.idPlatform = 2";
+    
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {  
+    $internNr = $_GET["id"];
 
-$values = [":intNr" => $_SESSION["internalnr"]];
+    //Update query template
+    $query = "SELECT g.internNr, g.naam, g.voornaam, g.klas, a.username, a.idPlatform, p.platform
+    FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
+    WHERE g.`internNr`= :intNr AND g.internNr=a.internnrGebruiker AND a.idPlatform=p.idPlt AND a.idPlatform = 2";
 
-try{
-    $res = $pdo->prepare($query);
-    var_dump($res);
-} catch(PDOException $e){
-    //error in de query
-    echo 'Query error';
-    die();
+    $values = [":intNr" => $internNr];
+
+    try{
+        $res = $pdo->prepare($query);
+        var_dump($res);
+    } catch(PDOException $e){
+        //error in de query
+    }
 }
 
 require('../startHTML.php');
