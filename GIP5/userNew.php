@@ -23,59 +23,86 @@
     $exists = "";
     $id;
 
-    //--- POST --------------------------------------------------------------------------------------------------------------------------------
-// Als het verzoeksmethode POST is en er leerlingen zijn geselecteerd
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["leerlingen"])) {
-    $lines = explode(PHP_EOL, file_get_contents('leerlingen.csv'));
-    $intNummers = $_POST["leerlingen"];
-    $klassen = [];
-    $i = 0;
+    //--- GET --------------------------------------------------------------------------------------------------------------------------------
+    // Als het verzoeksmethode GET is en een klas is geselecteerd
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["klas"])) {
+        $klas = $_GET["klas"];
+        // Haalt de leerlingen op voor de geselecteerde klas
+        $result = $ss->ophalenLeerlingen($klas);
+        $resultArray = json_decode($result,true);
+        $csvLeerlingen = [];
+        
+        // Maakt een CSV-bestand met de leerlingeninformatie
+        foreach ($resultArray['account'] as $key => $row) {
 
-    // Splits de CSV-lijnen en haalt de leerlinginformatie op
-    foreach($lines as $line) {
-        $parts = explode(",", $line);
-        $klassen[$parts[0]] = $parts;
-    }
+            $naam[$key] = $row['naam'];
+            $voornaam[$key] = $row['voornaam'];
 
-    // Debugging klassen content
-    echo "<pre>";
-    print_r($klassen);
-    echo "</pre>";
+            $csvLeerlingen[] = implode(",", [$row['internnummer'], $row['naam'], $row['voornaam'], $klas]);
+        }
+        file_put_contents('leerlingen.csv', implode(PHP_EOL, $csvLeerlingen));
+        array_multisort($naam, SORT_ASC, $voornaam, SORT_ASC, $resultArray['account']);
 
-    // Voegt de geselecteerde leerlingen toe aan de database
-    foreach($intNummers as $intNr) {
-        $naam = $klassen[$intNr][1];
-        $voornaam = $klassen[$intNr][2];
-        $klas = $klassen[$intNr][3];
-        $email = strtolower($voornaam . "." . $naam . "@leerling.go-ao.be");
+        // Haalt bestaande leerlingen op voor de geselecteerde klas
+        $query = 'SELECT internNr
+                  FROM `tblGebruiker` 
+                  WHERE `klas` = "' . $klas .'"';
 
-        // Voert een query uit om de leerling toe te voegen aan de database
-        $query = "INSERT INTO `tblGebruiker`(`internNr`, `naam`, `voornaam`, `klas`, `email`)
-                VALUES (:NR, :naam, :voornaam, :klas, :email)";
-
-        // Waardenarray voor PDO
-        $values = [
-            ":NR" => $intNr,
-            ":naam" => $naam,
-            ":voornaam" => $voornaam,
-            ":klas" => $klas,
-            ":email" => $email
-        ];
-
-        // Voert de query uit
         try {
             $res = $pdo->prepare($query);
-            $res->execute($values);
-            $toast->set("fa-exclamation-triangle", "Gebruikers", "", "User '$naam $voornaam' toegevoegd", "success");
+            $res->execute();
+            $bestaandeLeerlingen = $res->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            // Meldt een fout als de gebruiker niet kan worden toegevoegd
-            $toast->set("fa-exclamation-triangle", "Error", "", "Gefaald om '$naam $voornaam' toe te voegen", "danger");
+            // Behandel eventuele fouten
         }
     }
-} elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Meldt een fout als er geen leerlingen zijn geselecteerd
-    $toast->set("fa-exclamation-triangle", "Error", "", "Selecteer een leerling", "danger");
-}
+
+    //--- POST --------------------------------------------------------------------------------------------------------------------------------
+    // Als het verzoeksmethode POST is en er leerlingen zijn geselecteerd
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["leerlingen"])) {
+        $lines = explode(PHP_EOL, file_get_contents('leerlingen.csv'));
+        $intNummers = $_POST["leerlingen"];
+        $klassen = [];
+        $i = 0;
+
+        // Splits de CSV-lijnen en haalt de leerlinginformatie op
+        foreach($lines as $line) {
+            $parts = explode(",", $line);
+            $klassen[$parts[0]] = $parts;
+        }
+
+        // Voegt de geselecteerde leerlingen toe aan de database
+        foreach($intNummers as $intNr) {
+            var_dump($klassen[$intNr]);
+            die();
+            $naam = $klassen[$intNr][1];
+            $voornaam = $klassen[$intNr][2];
+            $klas = $klassen[$intNr][3];
+            $email = strtolower($voornaam .".". $naam . "@leerling.go-ao.be");
+   
+            // Voert een query uit om de leerling toe te voegen aan de database
+            $query = "INSERT INTO `tblGebruiker`(`internNr`,`naam`,`voornaam`,`klas`,`email`)
+                    VALUES (:NR, :naam, :voornaam, :klas, :email)";
+
+            // Waardenarray voor PDO
+            $values = [":NR" => $intNr, ":naam" => $naam, ":voornaam" => $voornaam, ":klas" => $klas,
+            ":email" => $email];
+
+            // Voert de query uit
+            try {
+                $res = $pdo->prepare($query);
+                $res->execute($values);
+                $toast->set("fa-exclamation-triangle", "Gebruikers","", "User '$naam $voornaam' toegevoegd","success");
+            } catch (PDOException $e) 
+            {   
+                // Meldt een fout als de gebruiker niet kan worden toegevoegd
+                $toast->set("fa-exclamation-triangle", "Error","", "Gefaald om '$naam $voornaam' toe te voegen","danger");
+            }
+        }
+    } elseif($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Meldt een fout als er geen leerlingen zijn geselecteerd
+        $toast->set("fa-exclamation-triangle", "Error","", "Selecteer een leerling","danger");
+    }
     // Vereist het startHTML-bestand voor de opmaak van de pagina
     require('../startHTML.php');
 ?>
