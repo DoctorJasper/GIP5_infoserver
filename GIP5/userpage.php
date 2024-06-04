@@ -45,12 +45,13 @@ require('../startHTML.php');
         padding: 0;
     }
 
-    .container {
-        max-width: 900px;
-        margin: 50px auto;
-        padding: 20px;
+    .card {
+        margin-left: 75px;
+        margin-right: 75px; 
+        margin-top: 40px;
         background: #fff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
     }
 
     .card-header {
@@ -108,10 +109,10 @@ require('../startHTML.php');
 </style>
 <?php require('../navbarUser.php'); ?>
 
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h3>Userpage: <?php echo htmlspecialchars($row["voornaam"] . " " . $row["naam"]); ?></h3>
+<div class="card" id="card">
+    <div class="col-sm-12">
+        <div class="card-header bg-primary text-white">
+            <h3 class="ml-5">Userpage: <?php echo htmlspecialchars($row["voornaam"] . " " . $row["naam"]); ?></h3>
         </div>
         <div class="card-body">
             <div class="user-details">
