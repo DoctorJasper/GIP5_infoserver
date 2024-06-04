@@ -96,12 +96,15 @@
                     <th><input class="form-check-input shadow-sm rounded" type="checkbox" id="selectAll" onclick="selectAll(this.id)" title="Select all"/></th>
                     <th class="fw-bold">Gebruikers</th>
                     <th class="fw-bold">Email</th>
+                    <th class="fw-bold">Accounts</th>
                     <th class="fw-bold">Admin</th>
                     <th class="fw-bold">Update</th>
                 </tr>
                 <form  method="post" action="userActies.php">
                     <?php if ($res->rowCount() != 0) : ?>
                         <?php while($row = $res->fetch(PDO::FETCH_ASSOC)) : ?>
+                            <?php var_dump($row);?>
+                            <?php die(); ?>
                             <?php $teller++;?>
                             <tr>
                                 <td>
