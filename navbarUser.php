@@ -53,35 +53,14 @@ define('beheer_inschrijvingen', 65536);
 
                 <!-- Links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown position-static">
-                        <a href="#" aria-expanded="false" id="navbarDropdownMenu" class="nav-link  dropdown-toggle"
-                            data-mdb-dropdown-init role="button">
-                            <i class="fa-solid fa-folder-open"></i> GIP menu
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo $path?>GIP5/userpage.php">
+                            <i class="far fa-file ps-1 pe-3"></i> Userpage
                         </a>
-
-
-                        <div class="dropdown-menu w-100 mt-0" aria-labelledby="navbarDropdownMenu"
-                            style="border-top-left-radius: 0; border-top-right-radius: 0;">
-                            <div class="container">
-                                <div class="row my-4">
-                                    <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-                                        <div class="list-group list-group-flush">
-                                            <h6 class="mb-0 list-group-item text-uppercase font-weight-bold">
-                                                Gebruiker opties
-                                            </h6>
-                                            <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/UserpageCsv.php">
-                                                <i class="far fa-file ps-1 pe-3"></i>Gebruikerspagina
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="impersonate.php">
-                            <i class="fa-solid fa-people-arrows"></i> Impersonate
+                        <a class="nav-link" href="<?php echo $path?>GIP5/userpage.php">
+                            <i class="fas fa-video ps-1 pe-3"></i> Tutorials
                         </a>
                     </li>
                 </ul>
