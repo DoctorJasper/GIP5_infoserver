@@ -64,7 +64,7 @@ if(!isset($_GET["code"])) {
 
     if ($row["active"] == 1) {
         if ($row["admin"] == 0) {
-            header("Location: ../GIP5/userpage.php?NR=".$_SESSION["internnummer"]);
+            header("Location: ../GIP5/userpage.php");
             die();
         } else {
             header("Location: ../GIP5/adminpage.php");

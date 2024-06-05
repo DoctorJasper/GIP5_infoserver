@@ -1,46 +1,20 @@
 <?php
-require('../header.php');
+    require('../header.php');
 
-// Commented out to allow easy debugging
-// if (!isset($_SESSION["firstname"])) {
-//     header("Location: ../index.php");
-//     exit;
-// }
+    // Commented out to allow easy debugging
+    // if (!isset($_SESSION["firstname"])) {
+    //     header("Location: ../index.php");
+    //     exit;
+    // }
 
-require('pdo.php');
-require('../inc/config.php');
-require('../classes/class.smartschool.php');
-
-$ss = new Smartschool();
-$klasarray = $ss->ophalenKlassen();
-
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
-    
-    $query = "SELECT * FROM `tblGebruiker` WHERE `internNr` = :intNr";
-
-    $values = [":intNr" => $_GET["id"]];
-
-    try {
-        $res = $pdo->prepare($query);
-        $res->execute($values);
-        $row = $res->fetch(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        // Handle error
-        echo "Error: " . $e->getMessage();
-    }
-
-    $_SESSION["lastname"] = $row["naam"];
-    $_SESSION["firstname"] = $row["voornaam"];
-    $_SESSION["internalnr"] =  $row["internNr"];
-    $_SESSION["email"] =  $row["email"];
-    $_SESSION["admin"] =  $row["admin"];
+    require('pdo.php');
 
     // Update query template
     $query = "SELECT g.naam, g.voornaam, a.username, p.platform
-              FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
-              WHERE g.`internNr` = :intNr AND a.idPlatform = p.idPlt";
+    FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
+    WHERE g.`internNr` = :intNr AND a.idPlatform = p.idPlt";
 
-    $values = [":intNr" => $_SESSION["internalnr"]];
+    $values = [":intNr" => $_SESSION["internnummer"]];
 
     try {
         $res = $pdo->prepare($query);
@@ -50,9 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
         // Handle error
         echo "Error: " . $e->getMessage();
     }
-}
 
-require('../startHTML.php');
+    require('../startHTML.php');
 ?>
 <style>
     body {
