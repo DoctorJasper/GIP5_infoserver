@@ -24,6 +24,9 @@
     
     $tabel = []; // Initialiseer een array voor de table
 
+    $userGeg[] = file_get_contents("pw.txt");
+    var_dump($userGeg);
+
     // Controleert of de gebruikersparameter is ingesteld en niet leeg is, anders wordt de gebruiker teruggeleid naar het gebruikersoverzicht
     if (!isset($_GET["users"]) || $_GET["users"] == "") {
         $toast->set("fa-exclamation-triangle", "Note", "", "U moet eerst een user selecteren", "warning");
@@ -84,6 +87,7 @@
                         $res = $pdoLocal->prepare($commando);
                         $res->execute();
                         array_push($tabel, array("MySql user $username toegevoegd", "success"));
+
 
                         file_put_contents('pw.txt', implode(PHP_EOL, ":", $username, $randomNumber, $));
                     }
