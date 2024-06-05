@@ -58,6 +58,8 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
 
         // Loop door elke leerling en voer acties uit
         foreach ($namenLeerlingen as $leerlingIntNr => $naamLeerling) {
+            var_dump($leerlingIntNr);
+            die();
             // Maak gebruikersnaam aan (kleine letters)
             $username = strtolower($naamLeerling["voornaam"]);
 

@@ -162,7 +162,9 @@
                     }
 
                     // Voegt de gebruiker toe aan tblAccounts
-                    $query = "DELETE FROM `tblAccounts` WHERE `username` = '$username'";
+                    $query = "DELETE FROM `tblAccounts` WHERE `username` = :username";
+
+                    $values = [":username" => $username];
 
                     try {
                         $res = $pdo->prepare($query);
