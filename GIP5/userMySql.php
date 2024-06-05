@@ -79,7 +79,7 @@
                     $res = $pdo->prepare($query);
                     $res->execute();
                     $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
-                    $commando = str_replace("username", $username, $commando);
+                    $commando = str_replace("gebruikersnaam", $username, $commando);
                     $commando = str_replace("password", $randomNumber, $commando);
                     try {
                         // Voert het commando uit om de gebruiker toe te voegen
