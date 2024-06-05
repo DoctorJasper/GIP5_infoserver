@@ -90,6 +90,8 @@
                         
                         $gegLeerlingen[] = implode(",", $username, $randomNumber);
                         file_put_contents('pw.txt', implode(PHP_EOL, ":", $gegLeerlingen));
+                        var_dump($gegLeerlingen);
+                        die();
                     }
                     catch (PDOException $e) {
                         // Logt eventuele databasefouten
