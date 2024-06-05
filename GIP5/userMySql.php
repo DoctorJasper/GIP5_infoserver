@@ -104,7 +104,7 @@
 
                 // Voegt de gebruiker toe aan tblAccounts
                 $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
-                $values = [":nrGeb" => $interNr, ":username" => $username, ":idPla" => 2];
+                $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 2];
 
                 try {
                     $res = $pdo->prepare($query);
