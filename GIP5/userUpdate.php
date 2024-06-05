@@ -27,7 +27,9 @@
         // Template voor de SELECT query
         $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`email`,`admin` 
                   FROM `tblGebruiker` 
-                  WHERE `idGeb` = $id";
+                  WHERE `idGeb` = :intNr";
+
+        $values = [":intNr" => $id];
 
         // Voer de query uit
         try {

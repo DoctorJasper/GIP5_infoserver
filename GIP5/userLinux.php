@@ -113,8 +113,11 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             // mail versturen
             $bericht = "<html><body>";
             $bericht .= "<p>Beste,</p>";
-            $bericht .= "<p>Dit is uw huidige wachtwoord: <strong>" . htmlspecialchars($password) . "</strong></p>";
+            $bericht .= "<p></p>";
+            $bericht .= "<p>Dit is uw huidige linux wachtwoord: <strong>" . htmlspecialchars($password) . "</strong></p>";
             $bericht .= "<p><a href='http://83.217.67.87/gip/GIP5/userpage.php?id=$leerlingIntNr'>Klik hier om uw wachtwoord te veranderen</a>.</p>";
+            $bericht .= "<p></p>";
+            $bericht .= "<p>mvg</p>";
             $bericht .= "</body></html>";
 
             $headers = "MIME-Version: 1.0" . "\r\n";

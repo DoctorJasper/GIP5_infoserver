@@ -14,7 +14,6 @@ require('../classes/class.smartschool.php');
 $ss = new Smartschool();
 $klasarray = $ss->ophalenKlassen();
 
-$row = [];
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
     
     $query = "SELECT * FROM `tblGebruiker` WHERE `internNr` = :intNr";

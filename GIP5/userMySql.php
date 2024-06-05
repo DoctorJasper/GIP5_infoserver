@@ -100,6 +100,7 @@
                     file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 }
 
+                var_dump($leerlingIntNr);
                 // Voegt de gebruiker toe aan tblAccounts
                 $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
                 $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 2];
