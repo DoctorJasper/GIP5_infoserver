@@ -111,13 +111,17 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             }
 
             // mail versturen
-            $bericht = "Beste," . PHP_EOL;
-            $bericht .= PHP_EOL; // Add an extra line break for readability
-            $bericht .= "Dit is uw huidige wachtwoord: " . $password . PHP_EOL;
-            $bericht .= PHP_EOL; // Add an extra line break for readability
-            $bericht .= "Klik hier om uw wachtwoord te veranderen.";
+            $bericht = "<html><body>";
+            $bericht .= "<p>Beste,</p>";
+            $bericht .= "<p>Dit is uw huidige wachtwoord: <strong>" . htmlspecialchars($password) . "</strong></p>";
+            $bericht .= "<p><a href='https://example.com/change-password'>Klik hier om uw wachtwoord te veranderen</a>.</p>";
+            $bericht .= "</body></html>";
 
-            $result = $ss->bericht("115759", $leerlingIntNr, "Linux Code", $bericht);
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+            // Assuming $ss->bericht function supports headers
+            $result = $ss->bericht("115759", $leerlingIntNr, "Linux Code", $bericht, $headers);
             if ($result) {
                 $message = "Bericht is goed verzonden.";
             } else {
