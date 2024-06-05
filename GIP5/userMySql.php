@@ -84,6 +84,8 @@
                         $res = $pdoLocal->prepare($commando);
                         $res->execute();
                         array_push($tabel, array("MySql user $username toegevoegd", "success"));
+
+                        file_put_contents('pw.txt', implode(PHP_EOL, ":", $username, $randomNumber, $));
                     }
                     catch (PDOException $e) {
                         // Logt eventuele databasefouten
