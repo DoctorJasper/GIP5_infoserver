@@ -112,7 +112,9 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
 
             // mail versturen
             $bericht = "Beste," . PHP_EOL;
+            $bericht .= PHP_EOL; // Add an extra line break for readability
             $bericht .= "Dit is uw huidige wachtwoord: " . $password . PHP_EOL;
+            $bericht .= PHP_EOL; // Add an extra line break for readability
             $bericht .= "Klik hier om uw wachtwoord te veranderen.";
 
             $result = $ss->bericht("115759", $leerlingIntNr, "Linux Code", $bericht);
