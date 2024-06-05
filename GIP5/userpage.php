@@ -14,7 +14,7 @@
     FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
     WHERE g.`internNr` = :intNr AND a.idPlatform = p.idPlt";
 
-    $values = [":intNr" => $_SESSION["internnummer"]];
+    $values = [":intNr" => $_SESSION["internalnr"]];
 
     try {
         $res = $pdo->prepare($query);

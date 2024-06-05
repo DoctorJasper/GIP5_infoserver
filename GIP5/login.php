@@ -51,7 +51,7 @@ if(!isset($_GET["code"])) {
     //haal rij op uit resultaat
     $row = $res->fetch(PDO::FETCH_ASSOC);
 
-    $_SESSION["internnummer"] = $result["internalnr"];
+    $_SESSION["internalnr"] = $result["internalnr"];
     $_SESSION["naam"] = $result["naam"];
     $_SESSION["voornaam"] = $result["voornaam"];
     $_SESSION["admin"] = $row["admin"];

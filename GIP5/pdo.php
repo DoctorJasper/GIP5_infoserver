@@ -1,8 +1,8 @@
 <?php
-    if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
+    /*if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
         header("Location: ../index.php");
         exit;   
-    }
+    }*/
     
     /* Host name of the MySQL server. */
     $host = 'kyan.go-ao.be';
