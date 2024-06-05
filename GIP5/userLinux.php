@@ -114,14 +114,14 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             $bericht = "<html><body>";
             $bericht .= "<p>Beste,</p>";
             $bericht .= "<p>Dit is uw huidige wachtwoord: <strong>" . htmlspecialchars($password) . "</strong></p>";
-            $bericht .= "<p><a href='https://example.com/change-password'>Klik hier om uw wachtwoord te veranderen</a>.</p>";
+            $bericht .= "<p><a href='$path GIP5/userpage.php'>Klik hier om uw wachtwoord te veranderen</a>.</p>";
             $bericht .= "</body></html>";
 
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            /*$headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";*/
 
             // Assuming $ss->bericht function supports headers
-            $result = $ss->bericht("115759", $leerlingIntNr, "Linux Code", $bericht, $headers);
+        $result = $ss->bericht("115759", $leerlingIntNr, "Linux Code", $bericht, /*$headers*/);
             if ($result) {
                 $message = "Bericht is goed verzonden.";
             } else {
