@@ -6,6 +6,11 @@
     //     header("Location: ../index.php");
     //     exit;
     // }
+    
+    require('../inc/config.php'); // Vereist het config.php bestand
+    require('../classes/class.smartschool.php'); // Vereist de Smartschool klasse
+
+    $ss = new Smartschool(); // Maak een nieuw object van de Smartschool klasse aan
 
     require('pdo.php');
 
