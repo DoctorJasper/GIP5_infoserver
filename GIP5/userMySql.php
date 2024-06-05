@@ -26,6 +26,7 @@
 
     $userGeg[] = file_get_contents("pw.txt");
     var_dump($userGeg);
+    die();
 
     // Controleert of de gebruikersparameter is ingesteld en niet leeg is, anders wordt de gebruiker teruggeleid naar het gebruikersoverzicht
     if (!isset($_GET["users"]) || $_GET["users"] == "") {
