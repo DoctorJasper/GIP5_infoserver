@@ -58,8 +58,6 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
 
         // Loop door elke leerling en voer acties uit
         foreach ($namenLeerlingen as $leerlingIntNr => $naamLeerling) {
-            var_dump($leerlingIntNr);
-            die();
             // Maak gebruikersnaam aan (kleine letters)
             $username = strtolower($naamLeerling["voornaam"]);
 
@@ -99,7 +97,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 array_push($tabel, array("Gefaald om Linux gebruiker $username aan te maken", "danger"));
             }
-
+            
             // Insert into tblAccounts
             $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
             $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 1];
@@ -107,13 +105,15 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             try {
                 $res = $pdo->prepare($query);
                 $res->execute($values);
+                
+                var_dump($leerlingIntNr);
                 array_push($tabel, array("Database user $username toegevoegd", "success"));
             } catch (PDOException $e) {
                 array_push($tabel, array("Gefaald om database user $username toe te voegen", "danger"));
             }
 
             // mail versturen
-            $bericht = "<html><body>";
+            /*$bericht = "<html><body>";
             $bericht .= "<p>Beste,</p>";
             $bericht .= "<p></p>";
             $bericht .= "<p>Dit is uw huidige linux wachtwoord: <strong>" . htmlspecialchars($password) . "</strong></p>";
@@ -131,7 +131,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 $message = "Bericht is goed verzonden.";
             } else {
                 $message = "Bericht is niet verzonden.";
-            }
+            }*/
         }
     }
 
