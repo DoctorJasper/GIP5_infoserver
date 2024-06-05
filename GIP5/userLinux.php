@@ -111,7 +111,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             }
 
             // mail versturen
-            $bericht = "Beste,\r\nDit is u huidige watchwoord: ".$password."\r\nKlik hier om uw wachtwoord te veranderen.";
+            /*$bericht = "Beste,\r\nDit is u huidige watchwoord: ".$password."\r\nKlik hier om uw wachtwoord te veranderen.";
 
             $result = $ss->bericht("115759", $leerlingIntNr , "Linux Code", $bericht);
             if($result){
@@ -119,7 +119,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             }else{
                 $message = "Bericht is niet verzonden.";
             
-            }
+            }*/
         }
     }
 
