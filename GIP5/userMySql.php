@@ -47,7 +47,7 @@
         if ($actie == "toevoegen") {
             // Haalt de namen van de gebruikers op basis van hun interne nummers
             foreach ($leerlingenIntNr as $leerlingIntNr) {
-                $query = "SELECT `naam`, `voornaam`, `klas` FROM `tblGebruiker` WHERE `internNr` = :internNr";
+                $query = "SELECT `naam`, `voornaam`, `klas`, `internNr` FROM `tblGebruiker` WHERE `internNr` = :internNr";
             
                 try {
                     $res = $pdo->prepare($query);
@@ -65,7 +65,9 @@
                 // Maakt een gebruikersnaam op basis van de klas en voornaam
                 $klas = $naamLeerling["klas"];
                 $voornaam = ucfirst(strtolower($naamLeerling["voornaam"]));
+                $voornaam = str_replace("-", "", $voornaam);
                 $username = "0" . substr($klas, 0, 2) . strtolower(substr($klas, 2)) . $voornaam;
+                $interNr = $naamLeerling["internNr"]
 
                 // Genereert een willekeurig wachtwoord
                 $randomNumber = mt_rand(1000, 9999);
@@ -100,10 +102,9 @@
                     file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 }
 
-                var_dump($leerlingIntNr);
                 // Voegt de gebruiker toe aan tblAccounts
                 $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
-                $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 2];
+                $values = [":nrGeb" => $interNr, ":username" => $username, ":idPla" => 2];
 
                 try {
                     $res = $pdo->prepare($query);
