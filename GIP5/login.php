@@ -13,8 +13,8 @@ if(!isset($_GET["code"])) {
 
     //stuur de gebruiker naar hier om in te loggen
     $loginUrl = $oAuthLoginUrl. "?app=" .$oAuthAppName;
-    
-    echo '<a href="'. $loginUrl.'">Klik hier om in te loggen</a>';
+    header("Location: $loginUrl");
+    exit;
 } else {
     $userToken = $_GET["code"];
     $dataJson = json_encode(array("app" => $oAuthAppName, "code" => $userToken));
@@ -64,10 +64,10 @@ if(!isset($_GET["code"])) {
 
     if ($row["active"] == 1) {
         if ($row["admin"] == 0) {
-            header("Location: ../userpage.php?NR=".$_SESSION["internnummer"]);
+            header("Location: ../GIP5/userpage.php?NR=".$_SESSION["internnummer"]);
             die();
         } else {
-            header("Location: ../adminpage.php");
+            header("Location: ../GIP5/adminpage.php");
             die();
         }
     }
