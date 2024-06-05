@@ -85,7 +85,7 @@
                         $res->execute();
                         array_push($tabel, array("MySql user $username toegevoegd", "success"));
 
-                        file_put_contents('pw.txt', "$username:$randomNummer" . PHP_EOL, FILE_APPEND);
+                        //file_put_contents('pw.txt', "$username:$randomNummer" . PHP_EOL, FILE_APPEND);
                     }
                     catch (PDOException $e) {
                         // Logt eventuele databasefouten
