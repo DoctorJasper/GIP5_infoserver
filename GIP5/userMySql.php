@@ -65,7 +65,7 @@
                 // Maakt een gebruikersnaam op basis van de klas en voornaam
                 $klas = $naamLeerling["klas"];
                 $voornaam = ucfirst(strtolower($naamLeerling["voornaam"]));
-                $voornaam = str_replace("-", "", $voornaam);
+                //$voornaam = str_replace("-", "", $voornaam);
                 $username = "0" . substr($klas, 0, 2) . strtolower(substr($klas, 2)) . $voornaam;
                 $interNr = $naamLeerling["internNr"]
 
