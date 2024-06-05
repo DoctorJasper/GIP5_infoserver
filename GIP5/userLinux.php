@@ -114,7 +114,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             $bericht = "<html><body>";
             $bericht .= "<p>Beste,</p>";
             $bericht .= "<p>Dit is uw huidige wachtwoord: <strong>" . htmlspecialchars($password) . "</strong></p>";
-            $bericht .= "<p><a href='$path GIP5/userpage.php'>Klik hier om uw wachtwoord te veranderen</a>.</p>";
+            $bericht .= "<p><a href='http://83.217.67.87/gip/GIP5/userpage.php'>Klik hier om uw wachtwoord te veranderen</a>.</p>";
             $bericht .= "</body></html>";
 
             $headers = "MIME-Version: 1.0" . "\r\n";
