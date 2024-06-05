@@ -47,7 +47,7 @@
         if ($actie == "toevoegen") {
             // Haalt de namen van de gebruikers op basis van hun interne nummers
             foreach ($leerlingenIntNr as $leerlingIntNr) {
-                $query = "SELECT `naam`, `voornaam`, `klas`, `internNr` FROM `tblGebruiker` WHERE `internNr` = :internNr";
+                $query = "SELECT `naam`, `voornaam`, `klas` FROM `tblGebruiker` WHERE `internNr` = :internNr";
             
                 try {
                     $res = $pdo->prepare($query);
