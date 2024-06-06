@@ -15,7 +15,7 @@
     require('pdo.php');
 
     // Update query template
-    $query = "SELECT g.naam, g.voornaam, a.username, p.platform
+    $query = "SELECT g.naam, g.voornaam, a.username, p.platform, g.`internNr`
     FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
     WHERE g.`internNr` = :intNr AND a.idPlatform = p.idPlt";
 
@@ -63,10 +63,10 @@ else {
         <div class="card-body">
             <div class="user-details">
                 <h4>User Details</h4>
-                <p><strong>Intern Number:</strong> <?php echo htmlspecialchars($internNr); ?></p>
-                <p><strong>Name:</strong> <?php echo htmlspecialchars($row["voornaam"] . " " . $row["naam"]); ?></p>
-                <p><strong>Platform:</strong> <?php echo htmlspecialchars($row["platform"]); ?></p>
-                <p><strong>Username:</strong> <?php echo htmlspecialchars($row["username"]); ?></p>
+                <p><strong>Intern Number:</strong> <?php echo $row["internNr"]; ?></p>
+                <p><strong>Name:</strong> <?php echo $row["voornaam"] . " " . $row["naam"]; ?></p>
+                <p><strong>Platform:</strong> <?php echo $row["platform"]; ?></p>
+                <p><strong>Username:</strong> <?php echo $row["username"]; ?></p>
             </div>
 
             <div class="tutorial-selection">
