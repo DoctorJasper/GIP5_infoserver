@@ -59,7 +59,7 @@ define('beheer_inschrijvingen', 65536);
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $path?>GIP5/userpage.php">
+                        <a class="nav-link" href="<?php echo $path?>GIP5/tutorials.php">
                             <i class="fas fa-video ps-1 pe-3"></i> Tutorials
                         </a>
                     </li>
