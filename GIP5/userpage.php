@@ -82,7 +82,9 @@ else {
     <div class="col-sm-12">
         <div class="card-header bg-primary text-white">
             <h3 class="ml-5">Userpage: <?php echo $row[0]["voornaam"] . " " . $row[0]["naam"]; ?></h3>
+            <?php if ($post) : ?>
             <button class="btn btn-danger float-end"><a href="userpage.php"></a>annuleer</button>
+            <?php endif;?>
         </div>
         <div class="card-body">
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
