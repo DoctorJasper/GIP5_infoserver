@@ -62,14 +62,25 @@ else {
 <div class="card" id="card">
     <div class="col-sm-12">
         <div class="card-header bg-primary text-white">
-            <h3 class="ml-5">Userpage: <?php echo $row["voornaam"] . " " . $row["naam"]; ?></h3>
+            <h3 class="ml-5">Userpage: <?php echo $row[0]["voornaam"] . " " . $row[0]["naam"]; ?></h3>
         </div>
         <div class="card-body">
-            <div class="user-details">
-                <h4>User Details</h4>
-                <p><strong>Intern Number:</strong> <?php echo $row["internNr"]; ?></p>
-                <p><strong>Platform:</strong> <?php echo $row["platform"]; ?></p>
-                <p><strong>Username:</strong> <?php echo $row["username"]; ?></p>
+            <h4>User Details</h4>
+            <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
+            <div class="card-body">
+                <div class="user-details">
+                    <h3><?php echo $row[0]["platform"]; ?></h3>
+                    <hr>
+                    <p><strong>Username:</strong> <?php echo $row[0]["username"]; ?></p>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <div class="user-details">
+                    <h3><?php echo $row[1]["platform"]; ?></h3>
+                    <hr>
+                    <p><strong>Username:</strong> <?php echo $row[1]["username"]; ?></p>
+                </div>
             </div>
 
             <div class="tutorial-selection">
