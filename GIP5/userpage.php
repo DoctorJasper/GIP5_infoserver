@@ -15,6 +15,10 @@
     require('pdo.php');
     $post = false;
 
+    
+    $platform = "";
+    $username = "";
+
     if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST["newPasswd"])) {
         $post = true;
         $platform = $_POST["platform"];
