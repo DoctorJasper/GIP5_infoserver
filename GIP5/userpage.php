@@ -45,7 +45,15 @@
         margin-top: 40px;
     }
 </style>
-<?php require('../navbarUser.php'); ?>
+<?php 
+if ($_SESSION("admin") == 0) {
+    require('../navbarUser.php'); 
+}
+else {
+    require('../navbar.php');
+}
+
+?>
 
 <div class="card" id="card">
     <div class="col-sm-12">

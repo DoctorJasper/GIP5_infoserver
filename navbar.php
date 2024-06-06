@@ -156,7 +156,7 @@ define('beheer_inschrijvingen', 65536);
                             loading="lazy" 
                         />
                         <span class="user-name text-black">
-                            <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?>
+                            <?php echo $_SESSION['voornaam'] . ' ' . $_SESSION['naam']; ?>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
