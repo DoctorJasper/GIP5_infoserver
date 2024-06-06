@@ -46,6 +46,9 @@
         margin-right: 75px; 
         margin-top: 40px;
     }
+    .pagecard {
+        padding: 25px;
+    }
 </style>
 <?php 
 if ($_SESSION["admin"] == 0) {
@@ -65,13 +68,13 @@ else {
         <div class="card-body">
             <h4>User Details</h4>
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
-            <div class="card">
+            <div class="card pagecard">
                 <h3><?php echo $row[0]["platform"]; ?></h3>
                 <hr>
                 <p><strong>Username:</strong> <?php echo $row[0]["username"]; ?></p>
             </div>
             
-            <div class="card">
+            <div class="card pagecard">
                 <h3><?php echo $row[1]["platform"]; ?></h3>
                 <hr>
                 <p><strong>Username:</strong> <?php echo $row[1]["username"]; ?></p>
