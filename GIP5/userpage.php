@@ -69,13 +69,13 @@ else {
             <h4>User Details</h4>
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
             <div class="card pagecard">
-                <h3><?php echo $row[0]["platform"]; ?></h3>
+                <span class="badge bg-warning text-dark"><h3><?php echo $row[0]["platform"]; ?></h3></span> <br>
                 <hr>
                 <p><strong>Username:</strong> <?php echo $row[0]["username"]; ?></p>
             </div>
             
             <div class="card pagecard">
-                <h3><?php echo $row[1]["platform"]; ?></h3>
+                <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span> <br>
                 <hr>
                 <p><strong>Username:</strong> <?php echo $row[1]["username"]; ?></p>
             </div>
