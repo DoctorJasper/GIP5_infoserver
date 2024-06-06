@@ -86,8 +86,6 @@ else {
         <div class="card-body">
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
             <?php if (!$post) : ;?>
-                <br>
-                <h3>Wachtwoord <?php echo $platform ;?> aanpassen</h3>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="card pagecard">
                         <span class="badge bg-warning text-dark"><h3><?php echo $row[0]["platform"]; ?></h3></span><br>
@@ -108,6 +106,8 @@ else {
                     </div>
                 </form>
             <?php else : ;?>
+                <br>
+                <h3>Wachtwoord <?php echo $platform ;?> aanpassen</h3>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
