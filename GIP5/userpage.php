@@ -44,7 +44,7 @@
     #card {
         margin-left: 75px;
         margin-right: 75px; 
-        margin-top: 40px;
+        margin-top: 55px;
     }
     .pagecard {
         padding: 25px;
