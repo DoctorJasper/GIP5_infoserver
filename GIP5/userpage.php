@@ -15,10 +15,17 @@
     require('pdo.php');
     $post = false;
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = "";
+    $platform = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST["newPasswd"])) {
         $post = true;
         $platform = $_POST["platform"];
         $username = $_POST["username"];
+    }
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["newPasswd"])) {
+        $newPasswd = $_POST["newPasswd"];
+        
     }
     // Update query template
     $query = "SELECT g.naam, g.voornaam, a.username, p.platform, g.internNr
@@ -74,6 +81,8 @@ else {
         <div class="card-body">
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
             <?php if (!$post) : ;?>
+                <br>
+                <h3>Wachtwoord <?php echo $platform ;?> aanpassen</h3>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="card pagecard">
                         <span class="badge bg-warning text-dark"><h3  name="platform"><?php echo $row[0]["platform"]; ?></h3></span><br>
@@ -97,12 +106,8 @@ else {
                 <form>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="myPasswd">
-                        <input type="checkbox" onclick="myFunction()">Show Password
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        <input type="password" name="newPasswd" class="form-control" id="myPasswd">
+                        <input type="checkbox" class="form-check-input" onclick="myFunction()">Show Password
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
