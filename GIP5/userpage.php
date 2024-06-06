@@ -15,9 +15,11 @@
     require('pdo.php');
 
     // Update query template
-    $query = "SELECT g.naam, g.voornaam, a.username, p.platform, g.`internNr`
-    FROM `tblAccounts` a, `tblGebruiker` g, `tblPlatform` p
-    WHERE g.`internNr` = :intNr AND a.idPlatform = p.idPlt";
+    $query = "SELECT g.naam, g.voornaam, a.username, p.platform, g.internNr
+              FROM tblGebruiker g
+              JOIN tblAccounts a ON g.internNr = a.internnrGebruiker
+              JOIN tblPlatform p ON a.idPlatform = p.idPlt
+              WHERE g.internNr = :intNr";
 
     $values = [":intNr" => $_SESSION["internalnr"]];
 
@@ -25,6 +27,8 @@
         $res = $pdo->prepare($query);
         $res->execute($values);
         $row = $res->fetch(PDO::FETCH_ASSOC);
+        var_dump($row);
+        die();
     } catch (PDOException $e) {
         // Handle error
         echo "Error: " . $e->getMessage();
