@@ -46,7 +46,7 @@
     }
 </style>
 <?php 
-if ($_SESSION("admin") == 0) {
+if ($_SESSION["admin"] == 0) {
     require('../navbarUser.php'); 
 }
 else {
