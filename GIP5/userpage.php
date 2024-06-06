@@ -65,7 +65,7 @@ else {
         <div class="card-body">
             <h4>User Details</h4>
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
-            <div class="card-body">
+            <div class="card-body bg-warning">
                 <div class="user-details">
                     <h3><?php echo $row[0]["platform"]; ?></h3>
                     <hr>
@@ -73,7 +73,7 @@ else {
                 </div>
             </div>
             
-            <div class="card-body">
+            <div class="card-body bg-success">
                 <div class="user-details">
                     <h3><?php echo $row[1]["platform"]; ?></h3>
                     <hr>
