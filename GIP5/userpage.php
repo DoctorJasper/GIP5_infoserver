@@ -15,9 +15,6 @@
     require('pdo.php');
     $post = false;
 
-    $username = "";
-    $platform = "";
-
     if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST["newPasswd"])) {
         $post = true;
         $platform = $_POST["platform"];
@@ -25,7 +22,8 @@
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["newPasswd"])) {
         $newPasswd = $_POST["newPasswd"];
-        
+        $platform = $_POST["platform"];
+        $username = $_POST["username"];
     }
     // Update query template
     $query = "SELECT g.naam, g.voornaam, a.username, p.platform, g.internNr
@@ -89,7 +87,7 @@ else {
                         <input type="hidden" name="platform" value="<?php echo $row[0]["platform"]; ?>">
                         <h3 name="username"><strong>Username:</strong> <?php echo $row[0]["username"]; ?></h3>
                         <input type="hidden" name="username" value="<?php echo $row[0]["username"]; ?>">
-                        <button type="submit" class="btn btn-primary float-end d-inline">edit wachtwoord</button>
+                        <button type="submit" class="btn btn-primary float-end">edit wachtwoord</button>
                     </div>
                 </form>
                 
@@ -99,7 +97,7 @@ else {
                         <input type="hidden" name="platform" value="<?php echo $row[1]["platform"]; ?>">
                         <h3><strong>Username:</strong> <?php echo $row[1]["username"]; ?></h3>
                         <input type="hidden" name="username" value="<?php echo $row[1]["username"]; ?>">
-                        <button type="submit" class="btn btn-primary float-end d-inline">edit wachtwoord</button>
+                        <button type="submit" class="btn btn-primary float-end">edit wachtwoord</button>
                     </div>
                 </form>
             <?php else : ;?>
@@ -108,6 +106,8 @@ else {
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" name="newPasswd" class="form-control" id="myPasswd">
                         <input type="checkbox" class="form-check-input" onclick="myFunction()">Show Password
+                        <input type="hidden" name="platform" value="<?php echo $_POST["platform"]; ?>">
+                        <input type="hidden" name="username" value="<?php echo $_POST["username"]; ?>">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
