@@ -67,7 +67,7 @@
                 $voornaam = ucfirst(strtolower($naamLeerling["voornaam"]));
                 //$voornaam = str_replace("-", "", $voornaam);
                 $username = "0" . substr($klas, 0, 2) . strtolower(substr($klas, 2)) . $voornaam;
-                $interNr = $naamLeerling["internNr"]
+                $interNr = $naamLeerling["internNr"];
 
                 // Genereert een willekeurig wachtwoord
                 $randomNumber = mt_rand(1000, 9999);

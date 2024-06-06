@@ -64,7 +64,6 @@ else {
             <div class="user-details">
                 <h4>User Details</h4>
                 <p><strong>Intern Number:</strong> <?php echo $row["internNr"]; ?></p>
-                <p><strong>Name:</strong> <?php echo $row["voornaam"] . " " . $row["naam"]; ?></p>
                 <p><strong>Platform:</strong> <?php echo $row["platform"]; ?></p>
                 <p><strong>Username:</strong> <?php echo $row["username"]; ?></p>
             </div>
