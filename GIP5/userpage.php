@@ -65,17 +65,21 @@ else {
         <div class="card-body">
             <h4>User Details</h4>
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
-            <div class="card-body bg-warning">
-                <div class="user-details">
+            <div class="card">
+                <div class="card-header bg-warning">
                     <h3><?php echo $row[0]["platform"]; ?></h3>
+                </div>
+                <div>
                     <hr>
                     <p><strong>Username:</strong> <?php echo $row[0]["username"]; ?></p>
                 </div>
             </div>
             
-            <div class="card-body bg-success">
-                <div class="user-details">
+            <div class="card bg-success">
+                <div class="card-header bg-warning">
                     <h3><?php echo $row[1]["platform"]; ?></h3>
+                </div>
+                <div class="card-body">
                     <hr>
                     <p><strong>Username:</strong> <?php echo $row[1]["username"]; ?></p>
                 </div>
