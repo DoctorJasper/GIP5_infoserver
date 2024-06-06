@@ -82,10 +82,6 @@ else {
     <div class="col-sm-12">
         <div class="card-header bg-primary text-white">
             <h3 class="ml-5">Userpage: <?php echo $row[0]["voornaam"] . " " . $row[0]["naam"]; ?></h3>
-            <?php if ($post) : ?>
-            <br>
-            <a href="userpage.php"><button class="btn btn-danger float-end">annuleer</button></a>
-            <?php endif;?>
         </div>
         <div class="card-body">
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
@@ -110,6 +106,7 @@ else {
                     </div>
                 </form>
             <?php else : ;?>
+                <a href="userpage.php"><button class="btn btn-danger float-end">annuleer</button></a>
                 <h3>Wachtwoord <?php echo $platform ;?> aanpassen</h3>
                 <br>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
