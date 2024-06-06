@@ -41,10 +41,10 @@
         margin: 0;
         padding: 0;
     }
-    .card {
+    #card {
         margin-left: 75px;
         margin-right: 75px; 
-        margin-top: 400px;
+        margin-top: 40px;
     }
     .pagecard {
         padding: 25px;
