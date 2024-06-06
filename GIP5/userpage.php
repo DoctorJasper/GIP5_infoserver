@@ -58,7 +58,7 @@ else {
 <div class="card" id="card">
     <div class="col-sm-12">
         <div class="card-header bg-primary text-white">
-            <h3 class="ml-5">Userpage: <?php echo htmlspecialchars($row["voornaam"] . " " . $row["naam"]); ?></h3>
+            <h3 class="ml-5">Userpage: <?php echo $row["voornaam"] . " " . $row["naam"]; ?></h3>
         </div>
         <div class="card-body">
             <div class="user-details">

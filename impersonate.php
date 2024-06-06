@@ -12,18 +12,16 @@ include("path.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['A'])) {
         //Admin
-        $_SESSION['foto'] = "https://mdbcdn.b-cdn.net/img/new/avatars/1.webp";
-        $_SESSION["lastname"] = "Vanderkelen";
-        $_SESSION["firstname"] = "Kyan";
+        $_SESSION["naam"] = "Vanderkelen";
+        $_SESSION["voornaam"] = "Kyan";
         $_SESSION["internalnr"] = "115759";
         $_SESSION["email"] = "kyan.vanderkelen@leerling.go-ao.be";
         $_SESSION["admin"] = 1;
     } 
     else {
         //leerling
-        $_SESSION['foto'] = "https://mdbcdn.b-cdn.net/img/new/avatars/4.webp";
-        $_SESSION["lastname"] = "Janssens";
-        $_SESSION["firstname"] = "Jan";
+        $_SESSION["naam"] = "Janssens";
+        $_SESSION["voornaam"] = "Jan";
         $_SESSION["internalnr"] = "17302010339";
         $_SESSION["email"] = "jan.janssens@go-ao.be";
         $_SESSION["admin"] = 0;
