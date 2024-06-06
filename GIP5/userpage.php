@@ -17,6 +17,8 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $post = true;
+        var_dump($_POST);
+        die();
         $platform = $_POST["platform"];
         $username = $_POST["username"];
     }
