@@ -20,24 +20,22 @@
         $platform = $_POST["platform"];
         $username = $_POST["username"];
     }
-    else {
-        // Update query template
-        $query = "SELECT g.naam, g.voornaam, a.username, p.platform, g.internNr
-                FROM tblGebruiker g
-                JOIN tblAccounts a ON g.internNr = a.internnrGebruiker
-                JOIN tblPlatform p ON a.idPlatform = p.idPlt
-                WHERE g.internNr = :intNr";
+    // Update query template
+    $query = "SELECT g.naam, g.voornaam, a.username, p.platform, g.internNr
+            FROM tblGebruiker g
+            JOIN tblAccounts a ON g.internNr = a.internnrGebruiker
+            JOIN tblPlatform p ON a.idPlatform = p.idPlt
+            WHERE g.internNr = :intNr";
 
-        $values = [":intNr" => $_SESSION["internalnr"]];
+    $values = [":intNr" => $_SESSION["internalnr"]];
 
-        try {
-            $res = $pdo->prepare($query);
-            $res->execute($values);
-            $row = $res->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            // Handle error
-            echo "Error: " . $e->getMessage();
-        }
+    try {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+        $row = $res->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        // Handle error
+        echo "Error: " . $e->getMessage();
     }
 
     require('../startHTML.php');
