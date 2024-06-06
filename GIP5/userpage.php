@@ -13,23 +13,31 @@
     $ss = new Smartschool(); // Maak een nieuw object van de Smartschool klasse aan
 
     require('pdo.php');
+    $post = false;
 
-    // Update query template
-    $query = "SELECT g.naam, g.voornaam, a.username, p.platform, g.internNr
-              FROM tblGebruiker g
-              JOIN tblAccounts a ON g.internNr = a.internnrGebruiker
-              JOIN tblPlatform p ON a.idPlatform = p.idPlt
-              WHERE g.internNr = :intNr";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $post = true;
+        $platform = $_POST["platform"];
+        $username = $_POST["username"];
+    }
+    else {
+        // Update query template
+        $query = "SELECT g.naam, g.voornaam, a.username, p.platform, g.internNr
+                FROM tblGebruiker g
+                JOIN tblAccounts a ON g.internNr = a.internnrGebruiker
+                JOIN tblPlatform p ON a.idPlatform = p.idPlt
+                WHERE g.internNr = :intNr";
 
-    $values = [":intNr" => $_SESSION["internalnr"]];
+        $values = [":intNr" => $_SESSION["internalnr"]];
 
-    try {
-        $res = $pdo->prepare($query);
-        $res->execute($values);
-        $row = $res->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        // Handle error
-        echo "Error: " . $e->getMessage();
+        try {
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+            $row = $res->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Handle error
+            echo "Error: " . $e->getMessage();
+        }
     }
 
     require('../startHTML.php');
@@ -66,53 +74,50 @@ else {
             <h3 class="ml-5">Userpage: <?php echo $row[0]["voornaam"] . " " . $row[0]["naam"]; ?></h3>
         </div>
         <div class="card-body">
-            <h4>User Details</h4>
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
-            <div class="card pagecard">
-                <span class="badge bg-warning text-dark"><h3><?php echo $row[0]["platform"]; ?></h3></span> <br>
-                <hr>
-                <p><strong>Username:</strong> <?php echo $row[0]["username"]; ?></p>
-            </div>
-            
-            <div class="card pagecard">
-                <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span> <br>
-                <hr>
-                <p><strong>Username:</strong> <?php echo $row[1]["username"]; ?></p>
-            </div>
-
-            <div class="tutorial-selection">
-                <label for="tutorialSelect">Select a tutorial:</label>
-                <select id="tutorialSelect" class="form-select" onchange="showTutorial(this)">
-                    <option value="" data-thumbnail="" selected disabled>Select a tutorial</option>
-                    <option value="https://www.youtube.com/watch?v=KJotmmDJWAg" data-thumbnail="link_to_thumbnail_1.jpg">Tutorial 1 - Change Your Password</option>
-                    <option value="https://www.youtube.com/watch?v=KJztmmDJWAg" data-thumbnail="link_to_thumbnail_2.jpg">Tutorial 2 - CSS Basics</option>
-                </select>
-            </div>
-
-            <div class="tutorial-info" id="tutorialInfo">
-                <a id="thumbnailLink" href="#" target="_blank">
-                    <img id="tutorialThumbnail" src="" alt="Tutorial Thumbnail">
-                </a>
-                <h3 id="tutorialTitle"></h3>
-                <p id="tutorialLink"></p>
-            </div>
+            <?php if (!$post) : ;?>
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    <div class="card pagecard">
+                        <span class="badge bg-warning text-dark"><h3  name="platform"><?php echo $row[0]["platform"]; ?></h3></span><br>
+                        <h3 name="username"><strong>Username:</strong> <?php echo $row[0]["username"]; ?></h3>
+                        <button type="submit" class="btn btn-primary float-end d-inline">edit wachtwoord</button>
+                    </div>
+                </form>
+                
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    <div class="card pagecard">
+                        <span class="badge bg-success text-dark"><h3 name="platform"><?php echo $row[1]["platform"]; ?></h3></span><br>
+                        <h3 name="username"><strong>Username:</strong> <?php echo $row[1]["username"]; ?></h3>
+                        <button type="submit" class="btn btn-primary float-end d-inline">edit wachtwoord</button>
+                    </div>
+                </form>
+            <?php else : ;?>
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="myPasswd">
+                        <input type="checkbox" onclick="myFunction()">Show Password
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            <?php endif;?>
         </div>
     </div>
 </div>
 
 <?php require('../footer1.php'); ?>
 <script>
-    function showTutorial(select) {
-        var selectedIndex = select.selectedIndex;
-        var selectedOption = select.options[selectedIndex];
-        var thumbnail = selectedOption.getAttribute("data-thumbnail");
-        var tutorialTitle = selectedOption.textContent;
-        var tutorialLink = selectedOption.value;
-
-        document.getElementById("thumbnailLink").href = tutorialLink;
-        document.getElementById("tutorialThumbnail").src = thumbnail;
-        document.getElementById("tutorialTitle").textContent = tutorialTitle;
-        document.getElementById("tutorialLink").innerHTML = '<a href="' + tutorialLink + '" target="_blank">View Tutorial</a>';
+    function myFunction() {
+        var x = document.getElementById("myPasswd");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
     }
 </script>
 <?php require('../footer2.php'); ?>
