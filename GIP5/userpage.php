@@ -79,15 +79,19 @@ else {
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="card pagecard">
                         <span class="badge bg-warning text-dark"><h3  name="platform"><?php echo $row[0]["platform"]; ?></h3></span><br>
+                        <input type="hidden" name="platform" value="<?php echo $row[0]["platform"]; ?>">
                         <h3 name="username"><strong>Username:</strong> <?php echo $row[0]["username"]; ?></h3>
+                        <input type="hidden" name="username" value="<?php echo $row[0]["username"]; ?>">
                         <button type="submit" class="btn btn-primary float-end d-inline">edit wachtwoord</button>
                     </div>
                 </form>
                 
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="card pagecard">
-                        <span class="badge bg-success text-dark"><h3 name="platform"><?php echo $row[1]["platform"]; ?></h3></span><br>
-                        <h3 name="username"><strong>Username:</strong> <?php echo $row[1]["username"]; ?></h3>
+                        <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span><br>
+                        <input type="hidden" name="platform" value="<?php echo $row[1]["platform"]; ?>">
+                        <h3><strong>Username:</strong> <?php echo $row[1]["username"]; ?></h3>
+                        <input type="hidden" name="username" value="<?php echo $row[1]["username"]; ?>">
                         <button type="submit" class="btn btn-primary float-end d-inline">edit wachtwoord</button>
                     </div>
                 </form>
