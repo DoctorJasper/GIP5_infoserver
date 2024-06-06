@@ -27,8 +27,6 @@
         $res = $pdo->prepare($query);
         $res->execute($values);
         $row = $res->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($row);
-        die();
     } catch (PDOException $e) {
         // Handle error
         echo "Error: " . $e->getMessage();
