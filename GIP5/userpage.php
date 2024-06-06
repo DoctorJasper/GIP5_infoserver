@@ -20,6 +20,8 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST["newPasswd"])) {
         if (isset($_POST["newPasswd"])) {
+            var_dump($_POST);
+            die();
             $newPasswd = $_POST["newPasswd"];
             $platform = $_POST["platform"];
             $username = $_POST["username"];
