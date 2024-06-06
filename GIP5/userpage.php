@@ -26,7 +26,7 @@
     try {
         $res = $pdo->prepare($query);
         $res->execute($values);
-        $row = $res->fetch(PDO::FETCH_ASSOC);
+        $row = $res->fetchAll(PDO::FETCH_ASSOC);
         var_dump($row);
         die();
     } catch (PDOException $e) {
