@@ -130,16 +130,27 @@
                                         $platforms = [];
                                         foreach ($row2 as $account) {
                                             if ($row["internNr"] == $account["internNr"]) {
-                                                $platforms[] = $account["platform"];
+                                                $platforms[] = [
+                                                    "platform" => $account["platform"],
+                                                    "username" => $account["username"]
+                                                ];
                                             }
                                         }
-                                        if (in_array("Linux", $platforms)) {
-                                            echo '<span class="badge bg-warning text-dark">Linux</span> <br>';
-                                            echo '<span class="float-end">: '.$account["username"].'</span>';
-                                        }
-                                        if (in_array("MySql", $platforms)) {
-                                            echo '<span class="badge bg-info text-dark">MySql</span>';
-                                            echo '<span class="float-end">: '.$account["username"].'</span>';
+                                        foreach ($platforms as $platform) {
+                                            $badgeColor = "";
+                                            switch ($platform["platform"]) {
+                                                case "Linux":
+                                                    $badgeColor = "bg-warning text-dark";
+                                                    break;
+                                                case "MySql":
+                                                    $badgeColor = "bg-info text-dark";
+                                                    break;
+                                                default:
+                                                    $badgeColor = "bg-secondary";
+                                                    break;
+                                            }
+                                            echo '<span class="badge ' . $badgeColor . '">' . $platform["platform"] . '</span>';
+                                            echo '<span class="float-end">: ' . $platform["username"] . '</span><br>';
                                         }
                                         if (empty($platforms)) {
                                             echo '<span class="badge bg-secondary">nog geen account</span>';
