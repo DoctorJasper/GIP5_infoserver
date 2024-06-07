@@ -66,6 +66,11 @@
         width: 300px;
         margin: 25px;
     }
+    #scrollable-table {
+        height: 400px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
 </style>
 <?php require('../navbar.php') ;?>
 <br><br>
@@ -92,82 +97,84 @@
             <div class="px-4">
                 
             </div>
-            <table class="table table-hover table-striped">
-                <tr>
-                    <th><input class="form-check-input shadow-sm rounded" type="checkbox" id="selectAll" onclick="selectAll(this.id)" title="Select all"/></th>
-                    <th class="fw-bold">Gebruikers</th>
-                    <th class="fw-bold">Email</th>
-                    <th class="fw-bold">Accounts</th>
-                    <th class="fw-bold">Admin</th>
-                    <th class="fw-bold">Update</th>
-                </tr>
-                <form  method="post" action="userActies.php">
-                    <?php if ($res->rowCount() != 0) : ?>
-                        <?php while($row = $res->fetch(PDO::FETCH_ASSOC)) : ?>
-                            <?php $teller++;?>
-                            <tr>
-                                <td>
-                                    <input class="form-check-input shadow-sm rounded" type="checkbox" name="leerlingen[]" value="<?php echo $row['internNr']?>" id="<?php echo $teller;?>" onclick="myFunction(this.id)">&ensp;
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <?php $foto = $ss->ophalenfoto($row['internNr']); ?>
-                                        <img
-                                        src="data:image/png;base64,<?php echo $foto; ?>" 
-                                        class="rounded-circle" 
-                                        height="50px" 
-                                        width="50px"
-                                        />
-                                        <div class="ms-3">
-                                            <p class="fw-bold mb-1"><?php echo $row['naam']; ?></p>
-                                            <p class="text-muted mb-0"><?php echo $row['voornaam']; ?></p>
+            <div id="scrollable-table">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <th><input class="form-check-input shadow-sm rounded" type="checkbox" id="selectAll" onclick="selectAll(this.id)" title="Select all"/></th>
+                        <th class="fw-bold">Gebruikers</th>
+                        <th class="fw-bold">Email</th>
+                        <th class="fw-bold">Accounts</th>
+                        <th class="fw-bold">Admin</th>
+                        <th class="fw-bold">Update</th>
+                    </tr>
+                    <form  method="post" action="userActies.php">
+                        <?php if ($res->rowCount() != 0) : ?>
+                            <?php while($row = $res->fetch(PDO::FETCH_ASSOC)) : ?>
+                                <?php $teller++;?>
+                                <tr>
+                                    <td>
+                                        <input class="form-check-input shadow-sm rounded" type="checkbox" name="leerlingen[]" value="<?php echo $row['internNr']?>" id="<?php echo $teller;?>" onclick="myFunction(this.id)">&ensp;
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <?php $foto = $ss->ophalenfoto($row['internNr']); ?>
+                                            <img
+                                            src="data:image/png;base64,<?php echo $foto; ?>" 
+                                            class="rounded-circle" 
+                                            height="50px" 
+                                            width="50px"
+                                            />
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1"><?php echo $row['naam']; ?></p>
+                                                <p class="text-muted mb-0"><?php echo $row['voornaam']; ?></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td><?php echo$row["email"]; ?> </td>
-                                <td>
-                                    <?php
-                                        $platforms = [];
-                                        foreach ($row2 as $account) {
-                                            if ($row["internNr"] == $account["internNr"]) {
-                                                $platforms[] = [
-                                                    "platform" => $account["platform"],
-                                                    "username" => $account["username"]
-                                                ];
+                                    </td>
+                                    <td><?php echo$row["email"]; ?> </td>
+                                    <td>
+                                        <?php
+                                            $platforms = [];
+                                            foreach ($row2 as $account) {
+                                                if ($row["internNr"] == $account["internNr"]) {
+                                                    $platforms[] = [
+                                                        "platform" => $account["platform"],
+                                                        "username" => $account["username"]
+                                                    ];
+                                                }
                                             }
-                                        }
-                                        foreach ($platforms as $platform) {
-                                            $badgeColor = "";
-                                            switch ($platform["platform"]) {
-                                                case "Linux":
-                                                    $badgeColor = "bg-warning text-dark";
-                                                    break;
-                                                case "MySql":
-                                                    $badgeColor = "bg-info text-dark";
-                                                    break;
-                                                default:
-                                                    $badgeColor = "bg-secondary";
-                                                    break;
+                                            foreach ($platforms as $platform) {
+                                                $badgeColor = "";
+                                                switch ($platform["platform"]) {
+                                                    case "Linux":
+                                                        $badgeColor = "bg-warning text-dark";
+                                                        break;
+                                                    case "MySql":
+                                                        $badgeColor = "bg-info text-dark";
+                                                        break;
+                                                    default:
+                                                        $badgeColor = "bg-secondary";
+                                                        break;
+                                                }
+                                                echo '<span class="badge ' . $badgeColor . '">' . $platform["platform"] . '</span>';
+                                                echo '<span class="float-end font-monospace">' . $platform["username"] . '</span><br>';
                                             }
-                                            echo '<span class="badge ' . $badgeColor . '">' . $platform["platform"] . '</span>';
-                                            echo '<span class="float-end font-monospace">' . $platform["username"] . '</span><br>';
-                                        }
-                                        if (empty($platforms)) {
-                                            echo '<span class="badge bg-secondary">nog geen account</span>';
-                                        }
-                                    ?>
-                                </td>
-                                <td><?php echo$row["admin"] ? '<i class="fas fa-square-check text-success fs-5"></i>':
-                                                                '<i class="far fa-square fs-5"></i>';?> </td>
-                                <td>
-                                    <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="fas fa-pen-to-square text-warning fs-5"  data-bs-toggle="tooltip" data-bs-placement="top" title="Wijzig gebruiker"></i></a>    
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    <?php else : ?>
-                        <tr><td colspan="6">Geen gegevens gevonden</td></tr>
-                    <?php endif; ?>
-            </table>
+                                            if (empty($platforms)) {
+                                                echo '<span class="badge bg-secondary">nog geen account</span>';
+                                            }
+                                        ?>
+                                    </td>
+                                    <td><?php echo$row["admin"] ? '<i class="fas fa-square-check text-success fs-5"></i>':
+                                                                    '<i class="far fa-square fs-5"></i>';?> </td>
+                                    <td>
+                                        <a href="userUpdate.php?id=<?php echo $row['idGeb']; ?>"><i class="fas fa-pen-to-square text-warning fs-5"  data-bs-toggle="tooltip" data-bs-placement="top" title="Wijzig gebruiker"></i></a>    
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else : ?>
+                            <tr><td colspan="6">Geen gegevens gevonden</td></tr>
+                        <?php endif; ?>
+                </table>
+            </div>
             <button type="submit" id="delete" name="btnDeleteUsers" class="btn btn-danger" style="display: none">verwijderen</button>
             <button type="submit" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>
             </form>
