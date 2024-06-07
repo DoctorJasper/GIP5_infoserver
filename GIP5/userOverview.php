@@ -136,8 +136,8 @@
                                         if (in_array("Linux", $platforms)) {
                                             echo '<span class="badge bg-warning text-dark">Linux</span> <br>';
                                         }
-                                        if (in_array("phpMyAdmin", $platforms)) {
-                                            echo '<span class="badge bg-info text-dark">phpMyAdmin</span>';
+                                        if (in_array("mySql", $platforms)) {
+                                            echo '<span class="badge bg-info text-dark">mySql</span>';
                                         }
                                         if (empty($platforms)) {
                                             echo '<span class="badge bg-secondary">nog geen account</span>';
@@ -187,7 +187,7 @@
                     <img
                         src="<?php echo $path;?>/img/MySql_logo.png"
                         class="img-fluid shadow p-2 rounded logos"
-                        alt="PhpMyAdmin"
+                        alt="mySql"
                     />
                 </a>
             </div>

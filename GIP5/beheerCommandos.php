@@ -107,7 +107,7 @@
             // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de admin pagina
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
             file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
-            header("Location: adminpage.php");
+            header("Location: beheerCommandos.php");
             exit;
         }
     }
@@ -141,7 +141,7 @@
                         </div>
                         <div class="card-body"> 
                             <?php if ($command != "linux") : ?>
-                                <a href="adminpage.php?comm=linux"><button type="button" class="btn btn-primary">Edit</button></a>
+                                <a href="beheerCommandos.php?comm=linux"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
                                     <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[0]["commandos"]; ?></textarea>
@@ -157,7 +157,7 @@
                             <?php endif; ?>
                             <br><br>
                             <?php if ($command != "linux2") : ?>
-                                <a href="adminpage.php?comm=linux2"><button type="button" class="btn btn-primary">Edit</button></a>
+                                <a href="beheerCommandos.php?comm=linux2"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
                                     <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[2]["commandos"]; ?></textarea>
@@ -181,7 +181,7 @@
                         </div>
                         <div class="card-body"> 
                             <?php if ($command != "MySql") : ?>
-                                <a href="adminpage.php?comm=MySql"><button type="button" class="btn btn-primary">Edit</button></a>
+                                <a href="beheerCommandos.php?comm=MySql"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
                                     <textarea id="text1" class="md-textarea form-control" rows="6" disabled><?php echo $row[1]["commandos"]; ?></textarea>

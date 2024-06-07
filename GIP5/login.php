@@ -67,7 +67,7 @@ if(!isset($_GET["code"])) {
             header("Location: ../GIP5/userpage.php");
             die();
         } else {
-            header("Location: ../GIP5/adminpage.php");
+            header("Location: ../GIP5/userOverview.php");
             die();
         }
     }

@@ -228,7 +228,7 @@
                     <img
                         src="<?php echo $path;?>/img/MySql_logo.png"
                         class="img-fluid shadow p-2 rounded logos"
-                        alt="PhpMyAdmin"
+                        alt="mySql"
                     />
                 </a>
             </div>

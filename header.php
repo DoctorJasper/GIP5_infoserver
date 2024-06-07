@@ -9,7 +9,7 @@ include("path.php");
 
 //indien nog niemand is aangemeld ga naar impersonte
 if (!isset($_SESSION["internalnr"])) {
-    header("Location: impersonate.php");
+    header("Location: $path/GIP5/login.php");
     exit();
 }
 
