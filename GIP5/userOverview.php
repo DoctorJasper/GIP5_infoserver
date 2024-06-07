@@ -67,7 +67,7 @@
         margin: 25px;
     }
     #scrollable-table {
-        height: 425px;
+        height: 400px;
         overflow-y: auto;
         margin-bottom: 20px;
     }
