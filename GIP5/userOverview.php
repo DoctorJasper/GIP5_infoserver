@@ -39,7 +39,7 @@
         exit;
     }
 
-    $query = "SELECT g.`internnr`, p.`platform`, a.username FROM `tblGebruiker` g, `tblAccounts` a, `tblPlatform` p WHERE g.`active` = 1 AND g.`internNr`= a.`internnrGebruiker` AND a.`idPlatform` = p.`idPlt`";
+    $query = "SELECT g.`internNr`, p.`platform`, a.username FROM `tblGebruiker` g, `tblAccounts` a, `tblPlatform` p WHERE g.`active` = 1 AND g.`internNr`= a.`internnrGebruiker` AND a.`idPlatform` = p.`idPlt`";
 
     // Uitvoeren van de query
     try{
