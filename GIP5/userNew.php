@@ -124,18 +124,6 @@
         <h1 class="text-white center">Users kiezen<h1>
     </div>
     <div class="card-body">
-        <!-- SELECT KLAS -->
-        <div class="col-sm-2">
-            <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <select name="klas" class="form-select" data-mdb-select-init data-mdb-filter="true" onchange="this.form.submit()"> 
-                    <option disabled selected>Kies een klas</option>
-                    <?php foreach ($klasarray as $klas) : ?>
-                        <?php echo "<option value='" . $klas['code'] . "'>" . $klas['code'] . "</option>"; ?>
-                    <?php endforeach; ?>
-                </select>
-            </form>
-        </div>
-
         <!-- KLASLIJST -->
         <?php if(isset($_GET["klas"])) : ?>
             <br><br>

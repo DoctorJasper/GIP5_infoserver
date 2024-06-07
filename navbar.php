@@ -75,20 +75,16 @@ define('beheer_inschrijvingen', 65536);
                                                 Admin opties
                                             </h6>
                                             <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/adminpage.php">
-                                                <i class="fas fa-wrench ps-1 pe-3"></i>Adminpage
+                                                href="<?php echo $path ?>GIP5/userOverview.php">
+                                                <i class="fas fa-file-export ps-1 pe-3"></i>User overview
                                             </a>
                                             <a class="list-group-item list-group-item-action"
                                                 href="<?php echo $path ?>GIP5/klasOverview.php">
                                                 <i class="fas fa-users ps-1 pe-3"></i>Klassen
                                             </a>
                                             <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userNew.php">
-                                                <i class="fas fa-user-plus ps-1 pe-3"></i>User toevoegen
-                                            </a>
-                                            <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php">
-                                                <i class="fas fa-file-export ps-1 pe-3"></i>User overview
+                                                href="<?php echo $path ?>GIP5/beheerCommandos.php">
+                                                <i class="fas fa-wrench ps-1 pe-3"></i>Beheer commandos
                                             </a>
                                             <a class="list-group-item list-group-item-action"
                                                 href="<?php echo $path ?>GIP5/log.php">
