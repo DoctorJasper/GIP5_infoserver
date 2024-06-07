@@ -97,7 +97,7 @@
                     <th><input class="form-check-input shadow-sm rounded" type="checkbox" id="selectAll" onclick="selectAll(this.id)" title="Select all"/></th>
                     <th class="fw-bold">Gebruikers</th>
                     <th class="fw-bold">Email</th>
-                    <th class="fw-bold">Accounts</th>
+                    <th class="fw-bold"><i data-mdb-sort="name" class="datatable-sort-icon fas fa-arrow-up" style="transform: rotate(0deg);"></i>Accounts</th>
                     <th class="fw-bold">Admin</th>
                     <th class="fw-bold">Update</th>
                 </tr>
