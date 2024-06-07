@@ -39,7 +39,7 @@
         exit;
     }
 
-    $query = "SELECT g.`internNr`, p.`platform` FROM `tblGebruiker` g, `tblAccounts` a, `tblPlatform` p WHERE g.`active` = 1 AND g.`internNr`= a.`internnrGebruiker` AND a.`idPlatform` = p.`idPlt`";
+    $query = "SELECT g.`internnr`, p.`platform`, a.username FROM `tblGebruiker` g, `tblAccounts` a, `tblPlatform` p WHERE g.`active` = 1 AND g.`internNr`= a.`internnrGebruiker` AND a.`idPlatform` = p.`idPlt`";
 
     // Uitvoeren van de query
     try{
@@ -135,9 +135,11 @@
                                         }
                                         if (in_array("Linux", $platforms)) {
                                             echo '<span class="badge bg-warning text-dark">Linux</span> <br>';
+                                            echo '<span class="float-end">: '.$account["username"].'</span>';
                                         }
                                         if (in_array("MySql", $platforms)) {
                                             echo '<span class="badge bg-info text-dark">MySql</span>';
+                                            echo '<span class="float-end">: '.$account["username"].'</span>';
                                         }
                                         if (empty($platforms)) {
                                             echo '<span class="badge bg-secondary">nog geen account</span>';
