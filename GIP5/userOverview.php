@@ -150,7 +150,7 @@
                                                     break;
                                             }
                                             echo '<span class="badge ' . $badgeColor . '">' . $platform["platform"] . '</span>';
-                                            echo '<span class="float-end">: ' . $platform["username"] . '</span><br>';
+                                            echo '<span class="float-none font-weight-bold">' . $platform["username"] . '</span><br>';
                                         }
                                         if (empty($platforms)) {
                                             echo '<span class="badge bg-secondary">nog geen account</span>';
