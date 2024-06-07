@@ -18,46 +18,38 @@
     $deleted = false;
     $selectedUsers = [];
 
-    // Initialize filter variable
-    $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
-
-    // Modify query based on filter
-    if ($filter == 'Linux' || $filter == 'MySql') {
-        $query = "SELECT g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin`, a.`platform`, a.`username`
-                  FROM `tblGebruiker` g
-                  JOIN `tblAccounts` a ON g.`internNr` = a.`internnrGebruiker`
-                  JOIN `tblPlatform` p ON a.`idPlatform` = p.`idPlt`
-                  WHERE g.`active` = 1 AND p.`platform` = :filter";
+    // Bepaal de query op basis van de GET-parameter "deleted"
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["deleted"])) {  
+        $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`klas`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 0";
+        $deleted = true;    
     } else {
-        $query = "SELECT g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin`
-                  FROM `tblGebruiker` g
-                  WHERE g.`active` = 1";
+        $query = "SELECT `idGeb`,`internNr`,`naam`,`voornaam`,`klas`,`email`,`active`,`admin` FROM `tblGebruiker` WHERE `active` = 1";
+        $deleted = false;
     }
 
-    try {
+    // Uitvoeren van de query
+    try{
         $res = $pdo->prepare($query);
-        if ($filter == 'Linux' || $filter == 'MySql') {
-            $res->bindParam(':filter', $filter);
-        }
         $res->execute();
-    } catch (PDOException $e) {
+    }catch(PDOException $e){
+        // Foutafhandeling bij databasequeryfouten
         $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
         file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
         header("Location: ../index.php");
         exit;
     }
 
-    // Fetch accounts information if needed
-    if ($filter == 'all') {
-        $query = "SELECT g.`internNr`, p.`platform`, a.username FROM `tblGebruiker` g, `tblAccounts` a, `tblPlatform` p WHERE g.`active` = 1 AND g.`internNr`= a.`internnrGebruiker` AND a.`idPlatform` = p.`idPlt`";
-        try {
-            $res2 = $pdo->prepare($query);
-            $res2->execute();
-            $row2 = $res2->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
-        }
+    $query = "SELECT g.`internNr`, p.`platform`, a.username FROM `tblGebruiker` g, `tblAccounts` a, `tblPlatform` p WHERE g.`active` = 1 AND g.`internNr`= a.`internnrGebruiker` AND a.`idPlatform` = p.`idPlt`";
+
+    // Uitvoeren van de query
+    try{
+        $res2 = $pdo->prepare($query);
+        $res2->execute();
+        $row2 = $res2->fetchAll(PDO::FETCH_ASSOC);
+    }catch(PDOException $e){
+        // Foutafhandeling bij databasequeryfouten
+        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
     }
     // Vereiste HTML-bestanden en start van HTML-structuur
     require('../startHTML.php');
@@ -98,18 +90,14 @@
             </span>
             <br><br>
             <div class="px-4">
-                <!-- Filter Buttons -->
-                <button type="button" class="btn btn-info" onclick="filterUsers('all')">All</button>
-                <button type="button" class="btn btn-warning" onclick="filterUsers('Linux')">Linux</button>
-                <button type="button" class="btn btn-info" onclick="filterUsers('MySql')">MySql</button>
+                
             </div>
-            <br>
             <table class="table table-hover table-striped">
                 <tr>
                     <th><input class="form-check-input shadow-sm rounded" type="checkbox" id="selectAll" onclick="selectAll(this.id)" title="Select all"/></th>
                     <th class="fw-bold">Gebruikers</th>
                     <th class="fw-bold">Email</th>
-                    <th class="fw-bold"><i data-mdb-sort="name" class="datatable-sort-icon fas fa-arrow-up" style="transform: rotate(0deg);"></i>Accounts</th>
+                    <th class="fw-bold">Accounts</th>
                     <th class="fw-bold">Admin</th>
                     <th class="fw-bold">Update</th>
                 </tr>
@@ -139,38 +127,18 @@
                                 <td><?php echo$row["email"]; ?> </td>
                                 <td>
                                     <?php
-                                        if ($filter == 'all') {
-                                            $platforms = [];
-                                            foreach ($row2 as $account) {
-                                                if ($row["internNr"] == $account["internNr"]) {
-                                                    $platforms[] = [
-                                                        "platform" => $account["platform"],
-                                                        "username" => $account["username"]
-                                                    ];
-                                                }
+                                        $platforms = [];
+                                        foreach ($row2 as $account) {
+                                            if ($row["internNr"] == $account["internNr"]) {
+                                                $platforms[] = [
+                                                    "platform" => $account["platform"],
+                                                    "username" => $account["username"]
+                                                ];
                                             }
-                                            foreach ($platforms as $platform) {
-                                                $badgeColor = "";
-                                                switch ($platform["platform"]) {
-                                                    case "Linux":
-                                                        $badgeColor = "bg-warning text-dark";
-                                                        break;
-                                                    case "MySql":
-                                                        $badgeColor = "bg-info text-dark";
-                                                        break;
-                                                    default:
-                                                        $badgeColor = "bg-secondary";
-                                                        break;
-                                                }
-                                                echo '<span class="badge ' . $badgeColor . '">' . $platform["platform"] . '</span>';
-                                                echo '<span class="float-end font-monospace">' . $platform["username"] . '</span><br>';
-                                            }
-                                            if (empty($platforms)) {
-                                                echo '<span class="badge bg-secondary">nog geen account</span>';
-                                            }
-                                        } else {
+                                        }
+                                        foreach ($platforms as $platform) {
                                             $badgeColor = "";
-                                            switch ($row["platform"]) {
+                                            switch ($platform["platform"]) {
                                                 case "Linux":
                                                     $badgeColor = "bg-warning text-dark";
                                                     break;
@@ -181,8 +149,11 @@
                                                     $badgeColor = "bg-secondary";
                                                     break;
                                             }
-                                            echo '<span class="badge ' . $badgeColor . '">' . $row["platform"] . '</span>';
-                                            echo '<span class="float-end font-monospace">' . $row["username"] . '</span><br>';
+                                            echo '<span class="badge ' . $badgeColor . '">' . $platform["platform"] . '</span>';
+                                            echo '<span class="float-end font-monospace">' . $platform["username"] . '</span><br>';
+                                        }
+                                        if (empty($platforms)) {
+                                            echo '<span class="badge bg-secondary">nog geen account</span>';
                                         }
                                     ?>
                                 </td>
@@ -319,11 +290,6 @@
 
         let mysqlLink = document.querySelector("#mysql_link");
         mysqlLink.setAttribute("href",path+"userMySql.php?users="+getChecked().join(","))
-    }
-
-    // Filter users
-    function filterUsers(platform) {
-        window.location.href = 'userOverview.php?filter=' + platform;
     }
 </script>
 <?php require('../footer2.php');?>
