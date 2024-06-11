@@ -70,7 +70,7 @@ require('../startHTML.php');
 <!-- Filter Dropdown -->
 <div class="container">
     <div class="filter-container">
-        <label for="lineFilter">Rows per page:</label>
+        <label for="lineFilter">Aantal lijntjes:</label>
         <select id="lineFilter" class="form-select d-inline w-auto" onchange="updateLineFilter()">
             <option value="10" <?php echo $linesToShow == 10 ? 'selected' : ''; ?>>10</option>
             <option value="20" <?php echo $linesToShow == 20 ? 'selected' : ''; ?>>20</option>
