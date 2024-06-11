@@ -34,7 +34,7 @@
     } catch (PDOException $e) {
         // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de index pagina
         $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+        file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Database query error".PHP_EOL, FILE_APPEND);
         header("Location: ../index.php");
         exit;
     }
@@ -60,11 +60,11 @@
 
             // Stel een melding in en log de wijziging
             $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'Linux AddUser' bewerkt","success");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'Linux AddUser' bewerkt".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Command veld van 'Linux AddUser' bewerkt".PHP_EOL, FILE_APPEND);
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
         }
     }
     // Controleer of de request methode POST is en of de 'linux2' parameter is ingesteld
@@ -80,12 +80,12 @@
 
             // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
             $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'Linux DeleteUser' bewerkt","success");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'Linux DeleteUser' bewerkt".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Command veld van 'Linux DeleteUser' bewerkt".PHP_EOL, FILE_APPEND);
             header("Refresh: $delay");
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
         }
     }
     else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux3"])) {
@@ -100,12 +100,12 @@
 
             // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
             $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'Linux PasswordUser' bewerkt","success");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'Linux PasswordUser' bewerkt".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Command veld van 'Linux PasswordUser' bewerkt".PHP_EOL, FILE_APPEND);
             header("Refresh: $delay");
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
         }
     }
     else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux4"])) {
@@ -120,12 +120,12 @@
 
             // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
             $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'Linux UpdateUser' bewerkt","success");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'Linux UpdateUser' bewerkt".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Command veld van 'Linux UpdateUser' bewerkt".PHP_EOL, FILE_APPEND);
             header("Refresh: $delay");
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
         }
     }
     // Controleer of de request methode POST is en of de 'MySql' parameter is ingesteld
@@ -141,12 +141,12 @@
 
             // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
             $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'MySql Toevoegen' bewerkt","success");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'MySql Toevoegen' bewerkt".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Command veld van 'MySql Toevoegen' bewerkt".PHP_EOL, FILE_APPEND);
             header("Refresh: $delay");
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de admin pagina
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Database query error".PHP_EOL, FILE_APPEND);
             header("Location: beheerCommandos.php");
             exit;
         }
@@ -163,12 +163,12 @@
 
             // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
             $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'MySql Verwijderen' bewerkt","success");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'MySql Verwijderen' bewerkt".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Command veld van 'MySql Verwijderen' bewerkt".PHP_EOL, FILE_APPEND);
             header("Refresh: $delay");
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de admin pagina
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Database query error".PHP_EOL, FILE_APPEND);
             header("Location: beheerCommandos.php");
             exit;
         }
@@ -185,12 +185,12 @@
 
             // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
             $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'MySql Update' bewerkt","success");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'MySql Update' bewerkt".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Command veld van 'MySql Update' bewerkt".PHP_EOL, FILE_APPEND);
             header("Refresh: $delay");
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de admin pagina
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", date("Y-m-d H"+2":i:s")." || Database query error".PHP_EOL, FILE_APPEND);
             header("Location: beheerCommandos.php");
             exit;
         }
