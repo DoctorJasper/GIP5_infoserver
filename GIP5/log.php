@@ -38,17 +38,12 @@ require('../startHTML.php');
         overflow-y: auto;
         margin-bottom: 5px;
     }
-    .pagination-container {
+    .filter-container {
         display: flex;
         align-items: center;
         justify-content: flex-end;
         margin-top: 20px;
-    }
-    .rows-per-page {
-        margin-right: 10px;
-    }
-    .pagination-info {
-        margin: 0 10px;
+        margin-right: 75px;
     }
     body {
         overflow: hidden;
@@ -74,25 +69,16 @@ require('../startHTML.php');
 
 <!-- Filter Dropdown -->
 <div class="container">
-    <div class="pagination-container">
-        <div class="rows-per-page">
-            <label for="lineFilter">Rows per page:</label>
-            <select id="lineFilter" class="form-select d-inline w-auto" onchange="updateLineFilter()">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="30">30</option>
-                <option value="50" <?php echo $linesToShow == 50 ? 'selected' : ''; ?>>50</option>
-                <option value="100" <?php echo $linesToShow == 100 ? 'selected' : ''; ?>>100</option>
-                <option value="200" <?php echo $linesToShow == 200 ? 'selected' : ''; ?>>200</option>
-            </select>
-        </div>
-        <div class="pagination-info">
-            <span id="rowsInfo">1 - <?php echo $linesToShow; ?> of <?php echo count($lines); ?></span>
-        </div>
-        <div class="pagination-controls">
-            <button class="btn btn-link" onclick="prevPage()">&#10094;</button>
-            <button class="btn btn-link" onclick="nextPage()">&#10095;</button>
-        </div>
+    <div class="filter-container">
+        <label for="lineFilter">Rows per page:</label>
+        <select id="lineFilter" class="form-select d-inline w-auto" onchange="updateLineFilter()">
+            <option value="10" <?php echo $linesToShow == 10 ? 'selected' : ''; ?>>10</option>
+            <option value="20" <?php echo $linesToShow == 20 ? 'selected' : ''; ?>>20</option>
+            <option value="30" <?php echo $linesToShow == 30 ? 'selected' : ''; ?>>30</option>
+            <option value="50" <?php echo $linesToShow == 50 ? 'selected' : ''; ?>>50</option>
+            <option value="100" <?php echo $linesToShow == 100 ? 'selected' : ''; ?>>100</option>
+            <option value="200" <?php echo $linesToShow == 200 ? 'selected' : ''; ?>>200</option>
+        </select>
     </div>
 </div>
 
@@ -101,25 +87,6 @@ require('../startHTML.php');
     function updateLineFilter() {
         const filterValue = document.getElementById('lineFilter').value;
         window.location.href = "?lines=" + filterValue;
-    }
-
-    function prevPage() {
-        console.log('Previous page');
-        // Logic to go to the previous page
-        updatePaginationInfo();
-    }
-
-    function nextPage() {
-        console.log('Next page');
-        // Logic to go to the next page
-        updatePaginationInfo();
-    }
-
-    function updatePaginationInfo() {
-        const filterValue = document.getElementById('lineFilter').value;
-        const rowsInfo = document.getElementById('rowsInfo');
-        // Logic to update the rows info text based on current page and filter value
-        rowsInfo.innerText = `1 - ${filterValue} of <?php echo count($lines); ?>`; // Example update
     }
 </script>
 <?php require('../footer2.php'); ?>
