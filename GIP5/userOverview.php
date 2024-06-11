@@ -86,7 +86,7 @@
                 <button type="button" class="btn btn-success me-2" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts">accounts aanmaken</button>
 
                 <button type="submit" form="form1" id="delete" name="btnDeleteUsers" class="btn btn-danger me-2" style="display: none">verwijderen</button>
-                <button type="submit" form="form1" id="activeer" name="btnActivateUsers" class="btn btn-success" style="display: none">activeren</button>
+                <button type="submit" form="form1" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>
             </div>
 
             <span class="float-end">
