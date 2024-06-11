@@ -98,7 +98,7 @@
                 <?php else: ?>
                     <a href="userNew.php"><i class="fas fa-user-plus fs-3 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="nieuwe gebruiker"></i></a>                
                     &nbsp;
-                    <a href="userOverview.php?deleted"><i class="fas fa-users-slash text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>               
+                    <a href="userOverview.php?deleted"><i class="fas fa-users-slash fs-3 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>               
                 <?php endif; ?>
             </span>
             <br><br>
