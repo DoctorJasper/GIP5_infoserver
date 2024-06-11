@@ -46,7 +46,7 @@
 <br>
 <div class="card" id="card">
     <div class="card-header bg-danger">
-        <h1 class="text-white center">Mijn Klassen<h1>
+        <h1 class="text-white center">Overzicht klassen<h1>
     </div>
     <div class="container mt-5">
         <div class="card-body">
@@ -56,7 +56,7 @@
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header bg-warning bg-gradient">
-                            <h1 class="text-white center">Overzicht Klassen<h1>
+                            <h1 class="text-white center">Mijn klassen<h1>
                         </div>
                         <table class="table table-hover table-striped">
                             <tr>
@@ -87,7 +87,7 @@
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header bg-success bg-gradient">
-                            <h1 class="text-white center">Selecteer Klas<h1>
+                            <h1 class="text-white center">Kies een niewe klas<h1>
                         </div>
                         <div class="card-body" id="SideCardKlas">
                             <form method="post" action="klasNew.php">
