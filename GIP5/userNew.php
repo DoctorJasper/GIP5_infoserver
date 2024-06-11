@@ -114,7 +114,7 @@
         $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
         file_put_contents("log.txt", $timestamp." || Database query error".PHP_EOL, FILE_APPEND);
     }
-    
+
     // Vereist het startHTML-bestand voor de opmaak van de pagina
     require('../startHTML.php');
 ?>
@@ -128,6 +128,14 @@
         height: 150px;
         width: 300px;
         margin: 25px;
+    }
+    #scrollable-table {
+        height: 400px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
+    body {
+        overflow: hidden;
     }
 </style>
 <?php require('../navbar.php'); ?>
@@ -146,91 +154,93 @@
                 <button type="submit" class="btn btn-success float-end d-inline">Gebruikers aanmaken</button>
                 <br><br>
                 <div class="card-body">
-                    <table class="table align-middle mb-0 bg-white">
-                        <thead class="bg-light">
-                            <tr>
-                                <th>Selecteer</th>
-                                <th>Naam</th>
-                                <th>Internnr</th>
-                                <th>Status</th>
-                                <th>Accounts</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($resultArray['account'] as $key => $row) : ?>
+                    <div id="scrollable-table">
+                        <table class="table align-middle mb-0 bg-white">
+                            <thead class="bg-light">
                                 <tr>
-                                    <td>
-                                        <?php foreach($bestaandeLeerlingen as $leerling) {
-                                            if ($leerling['internNr'] == $row['internnummer']) {
-                                                $exists = 1;
-                                                break;
-                                            } 
-                                            else {
-                                                $exists = 0;
-                                            }
-                                        }?>
-                                        <input class="form-check-input checkbox" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" <?php if($exists == "0") echo "checked" ;?> <?php if($exists == "1") echo "disabled" ;?>>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <?php $foto = $ss->ophalenfoto($row['internnummer']); ?>
-                                            <img
-                                            src="data:image/png;base64,<?php echo $foto; ?>" 
-                                            class="rounded-circle" 
-                                            height="100px" 
-                                            width="100px"
-                                            />
-                                            <div class="ms-3">
-                                                <p class="fw-bold mb-1"><?php echo $row['naam']; ?></p>
-                                                <p class="text-muted mb-0"><?php echo $row['voornaam']; ?></p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td> 
-                                        <p class="fw-normal mb-1"><?php echo $row['internnummer']; ?></p>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-success rounded-pill d-inline">
-                                            <?php echo $row['@attributes']['status']; ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <?php
-                                            $platforms = [];
-                                            foreach ($row2 as $account) {
-                                                if ($row["internnummer"] == $account["internNr"]) {
-                                                    $platforms[] = [
-                                                        "platform" => $account["platform"],
-                                                        "username" => $account["username"]
-                                                    ];
-                                                }
-                                            }
-                                            foreach ($platforms as $platform) {
-                                                $badgeColor = "";
-                                                switch ($platform["platform"]) {
-                                                    case "Linux":
-                                                        $badgeColor = "bg-warning text-dark";
-                                                        break;
-                                                    case "MySql":
-                                                        $badgeColor = "bg-info text-dark";
-                                                        break;
-                                                    default:
-                                                        $badgeColor = "bg-secondary";
-                                                        break;
-                                                }
-                                                echo '<span class="badge ' . $badgeColor . '">' . $platform["platform"] . '</span>';
-                                                echo '<span class="float-end font-monospace">' . $platform["username"] . '</span><br>';
-                                            }
-                                            if (empty($platforms)) {
-                                                echo '<span class="badge bg-secondary">nog geen account</span>';
-                                            }
-                                        ?>
-                                    </td>
+                                    <th>Selecteer</th>
+                                    <th>Naam</th>
+                                    <th>Internnr</th>
+                                    <th>Status</th>
+                                    <th>Accounts</th>
                                 </tr>
-                            <?php endforeach; ?>
-                            </form>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($resultArray['account'] as $key => $row) : ?>
+                                    <tr>
+                                        <td>
+                                            <?php foreach($bestaandeLeerlingen as $leerling) {
+                                                if ($leerling['internNr'] == $row['internnummer']) {
+                                                    $exists = 1;
+                                                    break;
+                                                } 
+                                                else {
+                                                    $exists = 0;
+                                                }
+                                            }?>
+                                            <input class="form-check-input checkbox" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" <?php if($exists == "0") echo "checked" ;?> <?php if($exists == "1") echo "disabled" ;?>>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <?php $foto = $ss->ophalenfoto($row['internnummer']); ?>
+                                                <img
+                                                src="data:image/png;base64,<?php echo $foto; ?>" 
+                                                class="rounded-circle" 
+                                                height="100px" 
+                                                width="100px"
+                                                />
+                                                <div class="ms-3">
+                                                    <p class="fw-bold mb-1"><?php echo $row['naam']; ?></p>
+                                                    <p class="text-muted mb-0"><?php echo $row['voornaam']; ?></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td> 
+                                            <p class="fw-normal mb-1"><?php echo $row['internnummer']; ?></p>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-success rounded-pill d-inline">
+                                                <?php echo $row['@attributes']['status']; ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                $platforms = [];
+                                                foreach ($row2 as $account) {
+                                                    if ($row["internnummer"] == $account["internNr"]) {
+                                                        $platforms[] = [
+                                                            "platform" => $account["platform"],
+                                                            "username" => $account["username"]
+                                                        ];
+                                                    }
+                                                }
+                                                foreach ($platforms as $platform) {
+                                                    $badgeColor = "";
+                                                    switch ($platform["platform"]) {
+                                                        case "Linux":
+                                                            $badgeColor = "bg-warning text-dark";
+                                                            break;
+                                                        case "MySql":
+                                                            $badgeColor = "bg-info text-dark";
+                                                            break;
+                                                        default:
+                                                            $badgeColor = "bg-secondary";
+                                                            break;
+                                                    }
+                                                    echo '<span class="badge ' . $badgeColor . '">' . $platform["platform"] . '</span>';
+                                                    echo '<span class="float-end font-monospace">' . $platform["username"] . '</span><br>';
+                                                }
+                                                if (empty($platforms)) {
+                                                    echo '<span class="badge bg-secondary">nog geen account</span>';
+                                                }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </form>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </form>
         <?php endif; ?>
