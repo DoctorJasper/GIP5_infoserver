@@ -12,6 +12,7 @@
     require('pdo.php');
     require('../inc/config.php');
     require('../classes/class.smartschool.php');
+    require('datetime.php');
 
     // Maak een nieuwe instantie van de Smartschool klasse
     $ss = new Smartschool();
@@ -22,10 +23,6 @@
     // Initialiseer de variabelen
     $command = "";
     $delay = 0.5;
-
-    $date = new DateTime();
-    $date->modify('+2 hours');
-    $timestamp = $date->format('d-m-Y H:i:s');
 
     // Query om commando's op te halen uit de database
     $query = "SELECT commandos FROM `tblCommandos` c, `tblPlatform` p WHERE c.`idPlatform`=p.`idPlt`";

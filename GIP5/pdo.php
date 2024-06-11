@@ -3,6 +3,7 @@
         header("Location: ../index.php");
         exit;   
     }*/
+    require('datetime.php');
     
     /* Host name of the MySQL server. */
     $host = 'kyan.go-ao.be';
@@ -32,7 +33,7 @@
     catch (PDOException $e)
     {
         $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+        file_put_contents("log.txt", $timestamp." || Database query error".PHP_EOL, FILE_APPEND);
         header("Location: ../index.php");
         exit;
     }

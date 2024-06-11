@@ -15,6 +15,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Inclusief het pdo-bestand om de databaseverbinding te maken
         require("pdo.php");
+        require('datetime.php');
         
         // Haal de waarde van het 'klas' veld op uit het formulier
         $klas = $_POST["klas"];
@@ -35,7 +36,7 @@
             } catch (PDOException $e) {
                 // Bij een fout, stel een melding in en log de fout
                 $toast->set("fa-exclamation-triangle", "Error", "", "Aanmaken van klas mislukt", "danger");
-                file_put_contents("log.txt", date("Y-m-d H:i:s")." || Aanmaken van klas mislukt".PHP_EOL, FILE_APPEND);
+                file_put_contents("log.txt", $timestamp." || Aanmaken van klas mislukt".PHP_EOL, FILE_APPEND);
                 header("Location: klasOverview.php");
                 exit;
             }
@@ -43,7 +44,7 @@
     } else {
         // Als de request methode geen POST is, stel een melding in en log de fout
         $toast->set("fa-exclamation-triangle", "Error", "", "Aanmaken van klas mislukt", "danger");
-        file_put_contents("log.txt", date("Y-m-d H:i:s")." || Aanmaken van klas mislukt".PHP_EOL, FILE_APPEND);
+        file_put_contents("log.txt", $timestamp." || Aanmaken van klas mislukt".PHP_EOL, FILE_APPEND);
         header("Location: klasOverview.php");
         exit;
     }

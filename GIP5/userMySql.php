@@ -13,6 +13,7 @@
     require('pdoLocal.php');
     require('../inc/config.php');
     require('../classes/class.smartschool.php');
+    require('datetime.php');
 
     // Maakt een instantie van de Smartschool-klasse
     $ss = new Smartschool();
@@ -56,7 +57,7 @@
                     $namenLeerlingen[] = $res->fetch(PDO::FETCH_ASSOC);
                 } catch (PDOException $e) {
                     // Logt eventuele databasefouten
-                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 }
             }
 
@@ -91,15 +92,15 @@
                     }
                     catch (PDOException $e) {
                         // Logt eventuele databasefouten
-                        file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                        file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                         array_push($tabel, array("Gefaal om mySql user $username toe te voegen", "danger"));
                     }
                 } catch (PDOException $e) {
                     // Logt eventuele databasefouten
-                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 } catch (Exception $e) {
                     // Logt eventuele commando-uitvoeringsfouten
-                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    file_put_contents("log.txt", $timestamp . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 }
 
                 // Voegt de gebruiker toe aan tblAccounts
@@ -128,7 +129,7 @@
                     $namenLeerlingen[] = $res->fetch(PDO::FETCH_ASSOC);
                 } catch (PDOException $e) {
                     // Logt eventuele databasefouten
-                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 }
             }
 
@@ -154,12 +155,12 @@
                         }
                         catch (PDOException $e) {
                             // Logt eventuele databasefouten
-                            file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                            file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                             array_push($tabel, array("Gefaald om mySql user $username te verwijderen", "danger"));
                         }
                     } catch (PDOException $e) {
                         // Logt eventuele databasefouten
-                        file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                        file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                     }
 
                     // Voegt de gebruiker toe aan tblAccounts

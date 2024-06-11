@@ -10,6 +10,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
 require('pdo.php'); // Vereist het pdo.php bestand
 require('../inc/config.php'); // Vereist het config.php bestand
 require('../classes/class.smartschool.php'); // Vereist de Smartschool klasse
+require('datetime.php');
 
 $ss = new Smartschool(); // Maak een nieuw object van de Smartschool klasse aan
 
@@ -52,7 +53,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 $res->execute(); // Voer de query uit
                 $namenLeerlingen[$leerlingIntNr] = $res->fetch(PDO::FETCH_ASSOC); // Haal de resultaten op en voeg deze toe aan de array
             } catch (PDOException $e) {
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND); // Log eventuele databasefouten
+                file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND); // Log eventuele databasefouten
             }
         }
 
@@ -76,7 +77,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 $commando = str_replace("wachtwoord", $password, $commando); // Vervang placeholders met het wachtwoord
 
                 // Voer het commando uit en log het
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
+                file_put_contents("log.txt", $timestamp . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
                 exec($commando);
 
                 // Sla het wachtwoord op in een tekstbestand
@@ -87,7 +88,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 $res->execute(); // Voer de query uit
                 $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
                 $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND); // Log het commando
+                file_put_contents("log.txt", $timestamp . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND); // Log het commando
                 exec($commando); // Voer het commando uit
 
                 // Geef een succesmelding weer
@@ -95,7 +96,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
 
             } catch (PDOException $e) {
                 // Log eventuele databasefouten en geef een foutmelding weer
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 array_push($tabel, array("Gefaald om Linux gebruiker $username aan te maken", "danger"));
             }
             
@@ -147,7 +148,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 $res->execute();
                 $namenLeerlingen[] = $res->fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
-                file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
             }
         }
         // Voor elke gebruiker de gebruikersnaam controleren en actie uitvoeren indien deze bestaat
@@ -164,13 +165,13 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                     $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
                     $commando = str_replace("gebruikersnaam", $username, $commando);
 
-                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
+                    file_put_contents("log.txt", $timestamp . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
                     
                     exec($commando);
                     array_push($tabel, array("Linux user $username verwijderd", "success"));
                 } catch (PDOException $e) {
                        // Foutloggen bij databasequeryfouten
-                    file_put_contents("log.txt", date("Y-m-d H:i:s") . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                     array_push($tabel, array("Gefaald om linux user $username te verwijderen", "danger"));
                 }
 

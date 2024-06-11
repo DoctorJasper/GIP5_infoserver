@@ -12,6 +12,7 @@
     require('pdo.php');
     require('../inc/config.php');
     require('../classes/class.smartschool.php');
+    require('datetime.php');
 
     // Controleer of de request methode GET is en of de 'klas' parameter is ingesteld
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['klas'])) {
@@ -35,7 +36,7 @@
             
             // Stel een melding in en log de verwijdering
             $toast->set("fa-exclamation-triangle", "Melding", "", "Klas '". $_GET["klas"]."' verwijderd", "success");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Klas '". $_GET["klas"]."' verwijderd".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", $timestamp." || Klas '". $_GET["klas"]."' verwijderd".PHP_EOL, FILE_APPEND);
             
             // Stuur door naar de overzichtspagina
             header("Location: klasOverview.php");
@@ -43,7 +44,7 @@
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout
             $toast->set("fa-exclamation-triangle", "Melding", "", "Gefaald om klas '". $_GET["klas"]."' te verwijderen", "danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Gefaald om klas '". $_GET["klas"]."' te verwijderen".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", $timestamp." || Gefaald om klas '". $_GET["klas"]."' te verwijderen".PHP_EOL, FILE_APPEND);
             
             // Stuur door naar de overzichtspagina
             header("Location: klasOverview.php");

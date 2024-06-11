@@ -10,6 +10,7 @@
     require('pdo.php');
     require('../inc/config.php');
     require('../classes/class.smartschool.php'); 
+    require('datetime.php');
 
     $ss = new Smartschool();
     $klasarray = $ss->ophalenKlassen(); 
@@ -39,7 +40,7 @@
         } catch (PDOException $e) {
             // Log de fout en toon een foutmelding
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", $timestamp." || Database query error".PHP_EOL, FILE_APPEND);
             header("Location: ../index.php");
             exit;
         }
@@ -69,7 +70,7 @@
             } catch (PDOException $e) {
                 // Log de fout en toon een foutmelding
                 $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-                file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+                file_put_contents("log.txt", $timestamp." || Database query error".PHP_EOL, FILE_APPEND);
                 header("Location: ../index.php");
                 exit;
             }
