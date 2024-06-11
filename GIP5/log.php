@@ -53,10 +53,10 @@ require('../startHTML.php');
     <div class="col-sm-12">
         <div class="card-header bg-success bg-gradient text-white">
             <h3 class="ml-5">Logbestand</h3>
-        </div>    
+        </div>
         <div class="card-body">
             <!-- Weergeven van elk logregel -->
-            <div id="scrollable-table">                
+            <div id="scrollable-table">
                 <?php foreach(array_slice($lines, 0, $linesToShow) as $line) : ?>
                     <h5><?php echo $line ?></h5>
                 <?php endforeach; ?>
@@ -65,10 +65,10 @@ require('../startHTML.php');
     </div>
 </div>  
 
-<!-- Filter Dropdown -->
-<div class="filter-container">
-    <label for="lineFilter">Toon regels: </label>
-    <select id="lineFilter" onchange="updateLineFilter()">
+ <!-- Filter Dropdown -->
+ <div class="filter-container d-flex align-items-center">
+    <label for="lineFilter" class="form-label me-2">Toon regels: </label>
+    <select id="lineFilter" class="form-select" onchange="updateLineFilter()">
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="30">30</option>
@@ -79,18 +79,19 @@ require('../startHTML.php');
 </div>
 
 <?php require('../footer1.php'); ?>
-<script>
-    function updateLineFilter() {
-        const lines = document.getElementById('lineFilter').value;
-        window.location.href = '?lines=' + lines;
-    }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <script>
+        function updateLineFilter() {
+            const lines = document.getElementById('lineFilter').value;
+            window.location.href = '?lines=' + lines;
+        }
 
-    // Preserve the selected option on page reload
-    document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const lines = urlParams.get('lines') || '50';
-        document.getElementById('lineFilter').value = lines;
-    });
-</script>
+        // Preserve the selected option on page reload
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lines = urlParams.get('lines') || '50';
+            document.getElementById('lineFilter').value = lines;
+        });
+    </script>
 <?php require('../footer2.php'); ?>
 
