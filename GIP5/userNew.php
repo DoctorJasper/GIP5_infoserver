@@ -134,9 +134,6 @@
         overflow-y: auto;
         margin-bottom: 0px;
     }
-    body {
-        overflow: hidden;
-    }
 </style>
 <?php require('../navbar.php'); ?>
 
