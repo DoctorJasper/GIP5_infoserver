@@ -317,14 +317,14 @@
                                 <a href="beheerCommandos.php?comm=MySql2"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
+                                    <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
                                 </div>
                             <?php elseif ($command == "MySql2") : ?>
                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                     <button type="submit" class="btn btn-success">Toepassen</button>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql2" rows="2"><?php echo $row[3]["commandos"]; ?></textarea>
+                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql2" rows="2"><?php echo $row[4]["commandos"]; ?></textarea>
                                     </div>
                                 </form>
                             <?php endif; ?>
@@ -333,14 +333,14 @@
                                 <a href="beheerCommandos.php?comm=MySql3"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
+                                    <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[6]["commandos"]; ?></textarea>
                                 </div>
                             <?php elseif ($command == "MySql3") : ?>
                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                     <button type="submit" class="btn btn-success">Toepassen</button>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql3" rows="2"><?php echo $row[2]["commandos"]; ?></textarea>
+                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql3" rows="2"><?php echo $row[6]["commandos"]; ?></textarea>
                                     </div>
                                 </form>
                             <?php endif; ?>
