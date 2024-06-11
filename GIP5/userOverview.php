@@ -83,9 +83,11 @@
        
             <!-- BUTTON: KIEZEN WELK ACCOUNT --> 
             <button type="button" class="btn btn-success" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts">accounts aanmaken</button>
-            
+
+            <form  method="post" action="userActies.php">
             <button type="submit" id="delete" name="btnDeleteUsers" class="btn btn-danger" style="display: none">verwijderen</button>
             <button type="submit" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>
+
             <span class="float-end">
                 <?php if ($deleted): ?>
                     <a href="userOverview.php"><i class="fas fa-user-group fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="actieve gebruikers"></i></a>  
@@ -109,7 +111,6 @@
                         <th class="fw-bold">Admin</th>
                         <th class="fw-bold">Update</th>
                     </tr>
-                    <form  method="post" action="userActies.php">
                         <?php if ($res->rowCount() != 0) : ?>
                             <?php while($row = $res->fetch(PDO::FETCH_ASSOC)) : ?>
                                 <?php $teller++;?>
