@@ -68,21 +68,7 @@ define('beheer_inschrijvingen', 65536);
 
 
             <!-- Right elements -->
-            <div class="d-flex align-items-center">
-                <a class="nav-link waves-effect waves-light" href="https://apps.google.com/user/hub" target="_blank">
-                    <i class="fab fa-google"></i>
-                </a>
-                &nbsp;&nbsp;
-                <!-- Notifications -->
-                <div class="dropdown">
-                    <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
-                        id="navbarDropdownMenuLink" role="button" aria-expanded="false">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge rounded-pill badge-notification bg-danger"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                    </ul>
-                </div>
+            <div class="d-flex align-items-center">                
                 <!-- Avatar -->
                 
                 <div class="dropdown">
@@ -102,9 +88,6 @@ define('beheer_inschrijvingen', 65536);
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                        <li>
-                            <a class="dropdown-item" href="#">Mijn documenten</a>
-                        </li>
                         <li>
                             <a class="dropdown-item" href="https://www.go-atheneumoudenaarde.be/epay/public/" target="_blank">mijn E-pay</a>
                         </li>

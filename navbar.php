@@ -53,17 +53,11 @@ define('beheer_inschrijvingen', 65536);
 
                 <!-- Links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $path; ?>toast_test.php">
-                            <i class="fa-solid fa-comment"></i> toastr
-                        </a>
-                    </li>
                     <li class="nav-item dropdown position-static">
                         <a href="#" aria-expanded="false" id="navbarDropdownMenu" class="nav-link  dropdown-toggle"
                             data-mdb-dropdown-init role="button">
                             <i class="fa-solid fa-folder-open"></i> GIP menu
                         </a>
-
 
                         <div class="dropdown-menu w-100 mt-0" aria-labelledby="navbarDropdownMenu"
                             style="border-top-left-radius: 0; border-top-right-radius: 0;">
@@ -108,11 +102,6 @@ define('beheer_inschrijvingen', 65536);
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="impersonate.php">
-                            <i class="fa-solid fa-people-arrows"></i> Impersonate
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="session.php">
                             <i class="fa-solid fa-list"></i> Session laten zien
                         </a>
@@ -123,22 +112,7 @@ define('beheer_inschrijvingen', 65536);
 
             <!-- Right elements -->
             <div class="d-flex align-items-center">
-                <a class="nav-link waves-effect waves-light" href="https://apps.google.com/user/hub" target="_blank">
-                    <i class="fab fa-google"></i>
-                </a>
-                &nbsp;&nbsp;
-                <!-- Notifications -->
-                <div class="dropdown">
-                    <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
-                        id="navbarDropdownMenuLink" role="button" aria-expanded="false">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge rounded-pill badge-notification bg-danger"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                    </ul>
-                </div>
-                <!-- Avatar -->
-                
+                <!-- Avatar -->                
                 <div class="dropdown">
                     <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow user-container" href="#" id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
                         <?php 
@@ -156,9 +130,6 @@ define('beheer_inschrijvingen', 65536);
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                        <li>
-                            <a class="dropdown-item" href="#">Mijn documenten</a>
-                        </li>
                         <li>
                             <a class="dropdown-item" href="https://www.go-atheneumoudenaarde.be/epay/public/" target="_blank">mijn E-pay</a>
                         </li>
