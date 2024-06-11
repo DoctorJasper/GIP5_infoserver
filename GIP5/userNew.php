@@ -130,7 +130,7 @@
         margin: 25px;
     }
     #scrollable-table {
-        height: 200px;
+        height: 350px;
         overflow-y: auto;
         margin-bottom: 20px;
     }
@@ -148,7 +148,7 @@
     <div class="card-body">
         <!-- KLASLIJST -->
         <?php if(isset($_GET["klas"])) : ?>
-            <br><br>
+            <br>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 <h3 class="d-inline"><i class="fas fa-clipboard-list"></i>&nbsp;Klaslijst van <?php echo $_GET["klas"]; ?></h3>
                 <button type="submit" class="btn btn-success float-end d-inline">Gebruikers aanmaken</button>
