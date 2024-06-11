@@ -21,7 +21,7 @@
 
     // Initialiseer de variabelen
     $command = "";
-    $delay = 0.1;
+    $delay = 0.5;
 
     // Query om commando's op te halen uit de database
     $query = "SELECT commandos FROM `tblCommandos` c, `tblPlatform` p WHERE c.`idPlatform`=p.`idPlt`";
@@ -132,7 +132,7 @@
     else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["MySql"])) {
         $text = $_POST["MySql"];
         // Update het commando in de database
-        $query = 'UPDATE `tblCommandos` SET `commandos`="'. $text . '" WHERE idPlatform=2';
+        $query = "UPDATE `tblCommandos` SET `commandos`='". $text . "' WHERE idPlatform = 2 AND type = 'toevoegen'";
 
         try {
             // Bereid de update query voor en voer deze uit
@@ -140,8 +140,52 @@
             $res->execute();
 
             // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
-            $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'MySql' bewerkt","success");
-            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'MySql' bewerkt".PHP_EOL, FILE_APPEND);
+            $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'MySql Toevoegen' bewerkt","success");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'MySql Toevoegen' bewerkt".PHP_EOL, FILE_APPEND);
+            header("Refresh: $delay");
+        } catch (PDOException $e) {
+            // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de admin pagina
+            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+            header("Location: beheerCommandos.php");
+            exit;
+        }
+    }
+    else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["MySql2"])) {
+        $text = $_POST["MySql2"];
+        // Update het commando in de database
+        $query = "UPDATE `tblCommandos` SET `commandos`='". $text . "' WHERE idPlatform = 2 AND type = 'verwijderen'";
+
+        try {
+            // Bereid de update query voor en voer deze uit
+            $res = $pdo->prepare($query);
+            $res->execute();
+
+            // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
+            $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'MySql Verwijderen' bewerkt","success");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'MySql Verwijderen' bewerkt".PHP_EOL, FILE_APPEND);
+            header("Refresh: $delay");
+        } catch (PDOException $e) {
+            // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de admin pagina
+            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Database query error".PHP_EOL, FILE_APPEND);
+            header("Location: beheerCommandos.php");
+            exit;
+        }
+    }
+    else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["MySql3"])) {
+        $text = $_POST["MySql3"];
+        // Update het commando in de database
+        $query = "UPDATE `tblCommandos` SET `commandos`='". $text . "' WHERE idPlatform = 2 AND type = 'update'";
+
+        try {
+            // Bereid de update query voor en voer deze uit
+            $res = $pdo->prepare($query);
+            $res->execute();
+
+            // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
+            $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'MySql Update' bewerkt","success");
+            file_put_contents("log.txt", date("Y-m-d H:i:s")." || Command veld van 'MySql Update' bewerkt".PHP_EOL, FILE_APPEND);
             header("Refresh: $delay");
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de admin pagina
@@ -264,6 +308,36 @@
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
                                         <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql" rows="5"><?php echo $row[1]["commandos"]; ?></textarea>
+                                    </div>
+                                </form>
+                            <?php endif; ?>
+                            <?php if ($command != "MySql2") : ?>
+                                <a href="beheerCommandos.php?comm=MySql2"><button type="button" class="btn btn-primary">Edit</button></a>
+                                <p></p>
+                                <div class="md-form amber-textarea active-amber-textarea-2">
+                                    <textarea id="text1" class="md-textarea form-control" rows="5" disabled><?php echo $row[3]["commandos"]; ?></textarea>
+                                </div>
+                            <?php elseif ($command == "MySql2") : ?>
+                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                    <button type="submit" class="btn btn-success">Toepassen</button>
+                                    <p></p>
+                                    <div class="md-form amber-textarea active-amber-textarea-2">
+                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql2" rows="5"><?php echo $row[3]["commandos"]; ?></textarea>
+                                    </div>
+                                </form>
+                            <?php endif; ?>
+                            <?php if ($command != "MySql3") : ?>
+                                <a href="beheerCommandos.php?comm=MySql3"><button type="button" class="btn btn-primary">Edit</button></a>
+                                <p></p>
+                                <div class="md-form amber-textarea active-amber-textarea-2">
+                                    <textarea id="text1" class="md-textarea form-control" rows="5" disabled><?php echo $row[2]["commandos"]; ?></textarea>
+                                </div>
+                            <?php elseif ($command == "MySql3") : ?>
+                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                    <button type="submit" class="btn btn-success">Toepassen</button>
+                                    <p></p>
+                                    <div class="md-form amber-textarea active-amber-textarea-2">
+                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql3" rows="5"><?php echo $row[2]["commandos"]; ?></textarea>
                                     </div>
                                 </form>
                             <?php endif; ?>
