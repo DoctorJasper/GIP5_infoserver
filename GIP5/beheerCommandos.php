@@ -51,7 +51,7 @@
         $text = $_POST["linux"];
         
         // Update het commando in de database
-        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = toevoegen";
+        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = 'toevoegen'";
 
         try {
             // Bereid de update query voor en voer deze uit
@@ -71,7 +71,7 @@
     else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux2"])) {
         $text = $_POST["linux2"];
         // Update het commando in de database
-        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = verwijderen";
+        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = 'verwijderen'";
 
         try {
             // Bereid de update query voor en voer deze uit
@@ -91,7 +91,7 @@
     else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux3"])) {
         $text = $_POST["linux3"];
         // Update het commando in de database
-        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = password";
+        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = 'password'";
 
         try {
             // Bereid de update query voor en voer deze uit
@@ -111,7 +111,7 @@
     else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux4"])) {
         $text = $_POST["linux4"];
         // Update het commando in de database
-        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = update";
+        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = 'update'";
 
         try {
             // Bereid de update query voor en voer deze uit
