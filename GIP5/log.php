@@ -38,15 +38,17 @@ require('../startHTML.php');
         overflow-y: auto;
         margin-bottom: 5px;
     }
-    .filter-container {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-        background: white;
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    .pagination-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+    .rows-per-page {
+        margin-right: 10px;
+    }
+    .pagination-info {
+        margin: 0 10px;
     }
     body {
         overflow: hidden;
@@ -71,32 +73,56 @@ require('../startHTML.php');
 </div>
 
 <!-- Filter Dropdown -->
-<div class="filter-container d-flex align-items-center">
-    <label for="lineFilter" class="form-label me-2">Toon regels: </label>
-    <select id="lineFilter" class="form-select" onchange="updateLineFilter()">
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="30">30</option>
-        <option value="50" selected>50</option>
-        <option value="100">100</option>
-        <option value="200">200</option>
-    </select>
+<div class="container">
+    <div class="pagination-container">
+        <div class="rows-per-page">
+            <label for="lineFilter">Rows per page:</label>
+            <select id="lineFilter" class="form-select d-inline w-auto" onchange="updateLineFilter()">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50" selected>50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+            </select>
+        </div>
+        <div class="pagination-info">
+            <span id="rowsInfo">1 - 50 of 100</span>
+        </div>
+        <div class="pagination-controls">
+            <button class="btn btn-link" onclick="prevPage()">&#10094;</button>
+            <button class="btn btn-link" onclick="nextPage()">&#10095;</button>
+        </div>
+    </div>
 </div>
 
 <?php require('../footer1.php'); ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
 <script>
     function updateLineFilter() {
-        const lines = document.getElementById('lineFilter').value;
-        window.location.href = '?lines=' + lines;
+        const filterValue = document.getElementById('lineFilter').value;
+        console.log(`Rows per page: ${filterValue}`);
+        // Update the rows displayed based on filterValue
+        updatePaginationInfo();
     }
 
-    // Preserve the selected option on page reload
-    document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const lines = urlParams.get('lines') || '50';
-        document.getElementById('lineFilter').value = lines;
-    });
+    function prevPage() {
+        console.log('Previous page');
+        // Logic to go to the previous page
+        updatePaginationInfo();
+    }
+
+    function nextPage() {
+        console.log('Next page');
+        // Logic to go to the next page
+        updatePaginationInfo();
+    }
+
+    function updatePaginationInfo() {
+        const filterValue = document.getElementById('lineFilter').value;
+        const rowsInfo = document.getElementById('rowsInfo');
+        // Logic to update the rows info text based on current page and filter value
+        rowsInfo.innerText = `1 - ${filterValue} of 100`; // Example update
+    }
 </script>
 <?php require('../footer2.php'); ?>
 
