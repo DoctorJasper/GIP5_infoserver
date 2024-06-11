@@ -101,6 +101,20 @@
         // Meldt een fout als er geen leerlingen zijn geselecteerd
         $toast->set("fa-exclamation-triangle", "Error","", "Selecteer een leerling","danger");
     }
+
+    $query = "SELECT g.`internNr`, p.`platform`, a.username FROM `tblGebruiker` g, `tblAccounts` a, `tblPlatform` p WHERE g.`internNr`= a.`internnrGebruiker` AND a.`idPlatform` = p.`idPlt`";
+
+    // Uitvoeren van de query
+    try{
+        $res2 = $pdo->prepare($query);
+        $res2->execute();
+        $row2 = $res2->fetchAll(PDO::FETCH_ASSOC);
+    }catch(PDOException $e){
+        // Foutafhandeling bij databasequeryfouten
+        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        file_put_contents("log.txt", $timestamp." || Database query error".PHP_EOL, FILE_APPEND);
+    }
+    
     // Vereist het startHTML-bestand voor de opmaak van de pagina
     require('../startHTML.php');
 ?>
@@ -139,9 +153,7 @@
                                 <th>Naam</th>
                                 <th>Internnr</th>
                                 <th>Status</th>
-                                <th>Linux</th>
-                                <th>MySql</th>
-                                <th>Beheer</th>
+                                <th>Accounts</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -183,13 +195,36 @@
                                         </span>
                                     </td>
                                     <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        <button type="button" value="<?php echo $row['internnummer'] ;?>" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts" onclick="myFunction(this.value)" <?php if($exists == "0") echo "disabled" ;?>>beheer</button>
+                                        <?php
+                                            $platforms = [];
+                                            foreach ($row2 as $account) {
+                                                if ($row["internnummer"] == $account["internNr"]) {
+                                                    $platforms[] = [
+                                                        "platform" => $account["platform"],
+                                                        "username" => $account["username"]
+                                                    ];
+                                                }
+                                            }
+                                            foreach ($platforms as $platform) {
+                                                $badgeColor = "";
+                                                switch ($platform["platform"]) {
+                                                    case "Linux":
+                                                        $badgeColor = "bg-warning text-dark";
+                                                        break;
+                                                    case "MySql":
+                                                        $badgeColor = "bg-info text-dark";
+                                                        break;
+                                                    default:
+                                                        $badgeColor = "bg-secondary";
+                                                        break;
+                                                }
+                                                echo '<span class="badge ' . $badgeColor . '">' . $platform["platform"] . '</span>';
+                                                echo '<span class="float-end font-monospace">' . $platform["username"] . '</span><br>';
+                                            }
+                                            if (empty($platforms)) {
+                                                echo '<span class="badge bg-secondary">nog geen account</span>';
+                                            }
+                                        ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -202,51 +237,9 @@
     </div>          
 </div>
     
-<!-- ACCOUNTS ------------------------------------------------------------------------------------------------------- -->
-<!-- Een modaal venster voor het kiezen van een account -->
-<div class="modal fade" id="Accounts" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- Titel van het modale venster -->
-                <h5 class="modal-title" id="exampleModalLabel">Kies een account</h5>
-                <!-- Knop om het modale venster te sluiten -->
-                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4 text-center">
-                <!-- Link naar het Linux-account met een logo -->
-                <a data-mdb-ripple-init id="link1" href="">
-                    <img
-                        src="<?php echo $path;?>/img/Linux_logo.png"
-                        class="img-fluid shadow p-2 rounded logos"
-                        alt="Linux"
-                    />
-                </a>
-                
-                <!-- Link naar het MySql-account met een logo -->
-                <a data-mdb-ripple-init id="link2"  href="">
-                    <img
-                        src="<?php echo $path;?>/img/MySql_logo.png"
-                        class="img-fluid shadow p-2 rounded logos"
-                        alt="mySql"
-                    />
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- FOOTER -->
 <?php require('../footer1.php') ;?>
 <script>
-    // JavaScript om de links van de accounts in te stellen
-    let link1 = document.querySelector("#link1");
-    let link2 = document.querySelector("#link2");
 
-    // Functie om de link van het account in te stellen op basis van het nummer van de leerling
-    function myFunction(nummer) {
-        link1.href = "//<?php echo $path;?>GIP5/userLinux.php?id=" + nummer + "&klas=<?php echo $_GET["klas"] ;?>";
-        link2.href = "//<?php echo $path;?>GIP5/userLinux.php?id=" + nummer + "&klas=<?php echo $_GET["klas"] ;?>";
-    }
 </script>
 <?php require('../footer2.php') ;?>
