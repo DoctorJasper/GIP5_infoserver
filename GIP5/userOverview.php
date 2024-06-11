@@ -101,11 +101,7 @@
                     <?php endif; ?>
                 </span>
             </div>
-           
-            <br><br>
-            <div class="px-4">
-                
-            </div>
+           <br>
             <div id="scrollable-table">
                 <table class="table table-hover table-striped">
                     <tr>
