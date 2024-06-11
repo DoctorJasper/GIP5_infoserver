@@ -34,7 +34,7 @@ require('../startHTML.php');
         margin-top: 40px;
     }
     #scrollable-table {
-        height: 450px;
+        height: 440px;
         overflow-y: auto;
         margin-bottom: 5px;
     }
