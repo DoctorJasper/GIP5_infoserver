@@ -81,13 +81,13 @@ require('../startHTML.php');
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="30">30</option>
-                <option value="50" selected>50</option>
-                <option value="100">100</option>
-                <option value="200">200</option>
+                <option value="50" <?php echo $linesToShow == 50 ? 'selected' : ''; ?>>50</option>
+                <option value="100" <?php echo $linesToShow == 100 ? 'selected' : ''; ?>>100</option>
+                <option value="200" <?php echo $linesToShow == 200 ? 'selected' : ''; ?>>200</option>
             </select>
         </div>
         <div class="pagination-info">
-            <span id="rowsInfo">1 - 50 of 100</span>
+            <span id="rowsInfo">1 - <?php echo $linesToShow; ?> of <?php echo count($lines); ?></span>
         </div>
         <div class="pagination-controls">
             <button class="btn btn-link" onclick="prevPage()">&#10094;</button>
@@ -100,9 +100,7 @@ require('../startHTML.php');
 <script>
     function updateLineFilter() {
         const filterValue = document.getElementById('lineFilter').value;
-        console.log(`Rows per page: ${filterValue}`);
-        // Update the rows displayed based on filterValue
-        updatePaginationInfo();
+        window.location.href = "?lines=" + filterValue;
     }
 
     function prevPage() {
@@ -121,8 +119,7 @@ require('../startHTML.php');
         const filterValue = document.getElementById('lineFilter').value;
         const rowsInfo = document.getElementById('rowsInfo');
         // Logic to update the rows info text based on current page and filter value
-        rowsInfo.innerText = `1 - ${filterValue} of 100`; // Example update
+        rowsInfo.innerText = `1 - ${filterValue} of <?php echo count($lines); ?>`; // Example update
     }
 </script>
 <?php require('../footer2.php'); ?>
-
