@@ -81,11 +81,13 @@
         </div>    
         <div class="card-body">
        
-            <!-- BUTTON: KIEZEN WELK ACCOUNT --> 
-            <button type="button" class="btn btn-success" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts">accounts aanmaken</button>
+            <div class="d-flex align-items-center mb-3">
+                <!-- BUTTON: KIEZEN WELK ACCOUNT --> 
+                <button type="button" class="btn btn-success me-2" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts">accounts aanmaken</button>
 
-            <button type="submit" form="form1" id="delete" name="btnDeleteUsers" class="btn btn-danger" style="display: none">verwijderen</button>
-            <button type="submit" form="form1" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>
+                <button type="submit" form="form1" id="delete" name="btnDeleteUsers" class="btn btn-danger me-2" style="display: none">verwijderen</button>
+                <button type="submit" form="form1" id="activeer" name="btnActivateUsers" class="btn btn-success" style="display: none">activeren</button>
+            </div>
 
             <span class="float-end">
                 <?php if ($deleted): ?>
