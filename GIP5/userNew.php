@@ -130,7 +130,7 @@
         margin: 25px;
     }
     #scrollable-table {
-        height: 400px;
+        height: 200px;
         overflow-y: auto;
         margin-bottom: 20px;
     }
