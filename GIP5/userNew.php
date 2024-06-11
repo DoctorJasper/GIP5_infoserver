@@ -119,32 +119,26 @@
     require('../startHTML.php');
 ?>
 <style>
-    .card {
+    #card {
         margin-left: 75px;
         margin-right: 75px; 
         margin-top: 40px;
-    }
-    .logos{
-        height: 150px;
-        width: 300px;
-        margin: 25px;
     }
 </style>
 <?php require('../navbar.php'); ?>
 
 <br><br>
-<div class="card">
+<div class="card" id="card">
     <div class="card-header bg-danger">
         <h1 class="text-white center">Users kiezen<h1>
     </div>
     <div class="card-body">
         <!-- KLASLIJST -->
         <?php if(isset($_GET["klas"])) : ?>
-            <br>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 <h3 class="d-inline"><i class="fas fa-clipboard-list"></i>&nbsp;Klaslijst van <?php echo $_GET["klas"]; ?></h3>
                 <button type="submit" class="btn btn-success float-end d-inline">Gebruikers aanmaken</button>
-                <br><br>
+                <br>
                 <div class="card-body">
                     <div id="scrollable-table">
                         <table class="table align-middle mb-0 bg-white">
@@ -178,8 +172,8 @@
                                                 <img
                                                 src="data:image/png;base64,<?php echo $foto; ?>" 
                                                 class="rounded-circle" 
-                                                height="100px" 
-                                                width="100px"
+                                                height="50px" 
+                                                width="50px"
                                                 />
                                                 <div class="ms-3">
                                                     <p class="fw-bold mb-1"><?php echo $row['naam']; ?></p>
