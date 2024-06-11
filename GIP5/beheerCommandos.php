@@ -147,7 +147,7 @@
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de admin pagina
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", $timestamp." || Database query error".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", $timestamp." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
             header("Location: beheerCommandos.php");
             exit;
         }
@@ -169,7 +169,7 @@
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de admin pagina
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", $timestamp." || Database query error".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", $timestamp." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
             header("Location: beheerCommandos.php");
             exit;
         }
@@ -191,7 +191,7 @@
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout, vervolgens doorsturen naar de admin pagina
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            file_put_contents("log.txt", $timestamp." || Database query error".PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", $timestamp." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
             header("Location: beheerCommandos.php");
             exit;
         }
