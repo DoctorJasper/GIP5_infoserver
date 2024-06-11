@@ -124,6 +124,14 @@
         margin-right: 75px; 
         margin-top: 40px;
     }
+    #scrollable-table {
+        height: 400px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
+    body {
+        overflow: hidden;
+    }
 </style>
 <?php require('../navbar.php'); ?>
 
