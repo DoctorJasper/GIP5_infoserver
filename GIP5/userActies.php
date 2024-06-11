@@ -28,13 +28,13 @@
             // Succesmelding
             $toast->set("fa-exclamation-triangle", "Gebruikers","", "Gebruikers met internnummer '$idSorted' verwijderd","success");
             // Loggen van de actie
-            file_put_contents("log.txt","Gebruikers met internnummer '$idSorted' verwijderd - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", $timestamp." || Gebruikers met internnummer '$idSorted' verwijderd".PHP_EOL, FILE_APPEND);
         } catch (PDOException $e) 
         {   
             // Foutmelding als de query mislukt
             $toast->set("fa-exclamation-triangle", "Error","", "Gefaald om gebruikers met internnummer '$idSorted' te verwijderen","danger");
             // Loggen van de fout
-            file_put_contents("log.txt","Verwijderen van gebruikers met internnummer '$idSorted' mislukt - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", $timestamp." || Verwijderen van gebruikers met internnummer '$idSorted' mislukt".PHP_EOL, FILE_APPEND);
         }
     }
     // Als de knop "Activeer gebruikers" is ingedrukt
@@ -54,13 +54,13 @@
             // Succesmelding
             $toast->set("fa-exclamation-triangle", "Gebruikers","", "Gebruikers met internnummer '$idSorted' geactiveerd","success");
             // Loggen van de actie
-            file_put_contents("log.txt","Gebruikers met internnummer '$idSorted' geactiveerd - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", $timestamp." || Gebruikers met internnummer '$idSorted' geactiveerd".PHP_EOL, FILE_APPEND);
         } catch (PDOException $e) 
         {   
             // Foutmelding als de query mislukt
             $toast->set("fa-exclamation-triangle", "Error","", "Gefaald om gebruikers met internnummer '$idSorted' te activeren","danger");
             // Loggen van de fout
-            file_put_contents("log.txt","Activeren van gebruikers met internnummer '$idSorted' mislukt - ".date("Y-m-d").PHP_EOL, FILE_APPEND);
+            file_put_contents("log.txt", $timestamp." || Activeren van gebruikers met internnummer '$idSorted' mislukt".PHP_EOL, FILE_APPEND);
         }
     }
 
