@@ -84,9 +84,8 @@
             <!-- BUTTON: KIEZEN WELK ACCOUNT --> 
             <button type="button" class="btn btn-success" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts">accounts aanmaken</button>
 
-            <form  method="post" action="userActies.php">
-            <button type="submit" id="delete" name="btnDeleteUsers" class="btn btn-danger" style="display: none">verwijderen</button>
-            <button type="submit" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>
+            <button type="submit" form="form1" id="delete" name="btnDeleteUsers" class="btn btn-danger" style="display: none">verwijderen</button>
+            <button type="submit" form="form1" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>
 
             <span class="float-end">
                 <?php if ($deleted): ?>
@@ -111,6 +110,7 @@
                         <th class="fw-bold">Admin</th>
                         <th class="fw-bold">Update</th>
                     </tr>
+                    <form id="form1" method="post" action="userActies.php">
                         <?php if ($res->rowCount() != 0) : ?>
                             <?php while($row = $res->fetch(PDO::FETCH_ASSOC)) : ?>
                                 <?php $teller++;?>
@@ -175,10 +175,10 @@
                             <?php endwhile; ?>
                         <?php else : ?>
                             <tr><td colspan="6">Geen gegevens gevonden</td></tr>
-                        <?php endif; ?>
+                        <?php endif; ?>                        
+                    </form>
                 </table>
             </div>
-            </form>
         </div>
     </div>
 </div>       
