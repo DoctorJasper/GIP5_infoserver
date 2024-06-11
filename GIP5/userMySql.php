@@ -42,7 +42,7 @@
 
     // Functie om de acties uit te voeren op de gebruikers
     function handleAction($actie, $leerlingenIntNr) {
-        global $pdo, $toast, $pdoLocal, $tabel; // Haal de pdo, toast, ... op van de globale variabelen
+        global $pdo, $toast, $pdoLocal, $tabel, $timestamp; // Haal de pdo, toast, ... op van de globale variabelen
         $namenLeerlingen = [];
 
         if ($actie == "toevoegen") {
