@@ -71,6 +71,9 @@
         overflow-y: auto;
         margin-bottom: 20px;
     }
+    body {
+        overflow: hidden;
+    }
 </style>
 <?php require('../navbar.php') ;?>
 <br><br>
@@ -91,11 +94,11 @@
 
             <span class="float-end">
                 <?php if ($deleted): ?>
-                    <a href="userOverview.php"><i class="fas fa-user-group fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="actieve gebruikers"></i></a>  
+                    <a href="userOverview.php"><i class="fas fa-users fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="actieve gebruikers"></i></a>  
                 <?php else: ?>
                     <a href="userNew.php"><i class="fas fa-user-plus fs-3 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="nieuwe gebruiker"></i></a>                
                     &nbsp;
-                    <a href="userOverview.php?deleted"><i class="fas fa-user-xmark fs-3 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>               
+                    <a href="userOverview.php?deleted"><i class="fas fa-users-slash text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>               
                 <?php endif; ?>
             </span>
             <br><br>
