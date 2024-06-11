@@ -30,6 +30,14 @@
         margin-right: 75px; 
         margin-top: 40px;
     }
+    #scrollable-table {
+        height: 300px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
+    body {
+        overflow: hidden;
+    }
 </style>
 <?php require('../navbar.php') ;?>
 <br><br>
@@ -40,9 +48,11 @@
         </div>    
         <div class="card-body">
             <!-- Weergeven van elk logregel -->
-            <?php foreach($lines as $line) : ?>
-                <h5><?php echo $line ?></h5>
-            <?php endforeach; ?>
+             <div id="scrollable-table">                
+                <?php foreach($lines as $line) : ?>
+                    <h5><?php echo $line ?></h5>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </div>  
