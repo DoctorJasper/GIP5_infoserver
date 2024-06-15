@@ -66,36 +66,38 @@
     .pagecard {
         padding: 25px;
     }
-
     .video-container {
         width: 100%;
         overflow: hidden;
         position: relative;
     }
-
     .video-list {
         display: flex;
         margin: 0;
         padding: 0;
         list-style: none;
+        animation: scrollVideos 10s linear;
     }
-
     .video-item {
         flex: 0 0 auto;
         margin-right: 10px;
     }
-
     video {
         width: 600px;
         height: 400px;
         border: 2px solid #fff;
         border-radius: 5px;
     }
-
     /* Keyframes for auto-scrolling effect */
     @keyframes scrollVideos {
         0% {
             transform: translateX(0);
+        }
+        5% {
+            transform: translateX(0);
+        }
+        95% {
+            transform: translateX(calc(-300px * 3)); /* Adjust this value based on the number of videos */
         }
         100% {
             transform: translateX(calc(-300px * 3)); /* Adjust this value based on the number of videos */
