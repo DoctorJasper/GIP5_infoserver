@@ -77,8 +77,8 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
 
                 $output = shell_exec($commando);
-                var_dump($output);
-                die();
+                
+                if ($output != null) die();
             
                 $res = $pdo->prepare($query1); // Bereid de query voor
                 $res->execute(); // Voer de query uit
