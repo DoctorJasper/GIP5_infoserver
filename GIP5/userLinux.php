@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actie"])) {
 
 // Functie om de actie te verwerken
 function handleAction($actie, $leerlingenIntNr, $ss) {
-    global $pdo, $toast, $tabel; // Haal de pdo, toast, ... op van de globale variabelen
+    global $pdo, $toast, $tabel, $timestamp; // Haal de pdo, toast, ... op van de globale variabelen
     $namenLeerlingen = []; // Initialiseer een array voor leerlingennamen
 
     // Als de actie 'toevoegen' is
