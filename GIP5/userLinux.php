@@ -79,8 +79,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 $output = shell_exec($commando);
                 var_dump($output);
                 die();
-                if ()
-
+            
                 $res = $pdo->prepare($query1); // Bereid de query voor
                 $res->execute(); // Voer de query uit
                 $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
