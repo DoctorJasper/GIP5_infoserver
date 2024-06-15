@@ -38,7 +38,7 @@
                         // Voert het commando uit om de gebruiker toe te voegen
                         $res = $pdoLocal->prepare($commando);
                         $res->execute();
-                        file_put_contents('pw.txt', "$username:$newPasswd" . PHP_EOL, FILE_APPEND);
+                        $toast->set("fa-exclamation-triangle", "Note","", "Password is geüpdatet","Success");
                     }
                     catch (PDOException $e) {
                         // Logt eventuele databasefouten
