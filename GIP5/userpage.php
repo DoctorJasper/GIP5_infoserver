@@ -123,7 +123,7 @@ else {
                 <div class="video-container">
                     <ul class="video-list">
                         <li class="video-item">
-                            <video src="video1.mp4" controls></video>
+                            <video src="tutorials/Eminem - Lose Yourself [HD].mp4" controls></video>
                         </li>
                         <li class="video-item">
                             <video src="video2.mp4" controls></video>
