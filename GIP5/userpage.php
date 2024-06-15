@@ -13,16 +13,46 @@
     $ss = new Smartschool(); // Maak een nieuw object van de Smartschool klasse aan
 
     require('pdo.php');
+    require('pdoLocal.php');
 
     $post = false;
     $platform = "";
     $username = "";
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST["newPasswd"])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST["newPasswd"])) {
             $newPasswd = $_POST["newPasswd"];
             $platform = $_POST["platform"];
             $username = $_POST["username"];
+
+            if ($platform == "MySql") {
+                $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 2 AND `type` = 'update'";
+            
+                try {
+                    $res = $pdo->prepare($query);
+                    $res->execute();
+                    $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
+                    $commando = str_replace("gebruikersnaam", $username, $commando);
+                    $commando = str_replace("password", $newPasswd, $commando);
+                    try {
+                        // Voert het commando uit om de gebruiker toe te voegen
+                        $res = $pdoLocal->prepare($commando);
+                        $res->execute();
+                        file_put_contents('pw.txt', "$username:$newPasswd" . PHP_EOL, FILE_APPEND);
+                    }
+                    catch (PDOException $e) {
+                        // Logt eventuele databasefouten
+                        file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                        array_push($tabel, array("Gefaal om mySql user $username toe te voegen", "danger"));
+                    }
+                } catch (PDOException $e) {
+                    // Logt eventuele databasefouten
+                    file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                } catch (Exception $e) {
+                    // Logt eventuele commando-uitvoeringsfouten
+                    file_put_contents("log.txt", $timestamp . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                }
+            }
         }
         else {
             $post = true;
