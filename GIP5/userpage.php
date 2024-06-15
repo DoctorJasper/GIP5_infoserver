@@ -38,7 +38,7 @@
                         // Voert het commando uit om de gebruiker toe te voegen
                         $res = $pdoLocal->prepare($commando);
                         $res->execute();
-                        $toast->set("fa-exclamation-triangle", "Note","", "Password is geüpdatet","Success");
+                        $toast->set("fa-exclamation-triangle", "Note","", "Password is geüpdatet","success");
                     }
                     catch (PDOException $e) {
                         // Logt eventuele databasefouten
