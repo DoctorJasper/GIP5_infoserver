@@ -123,13 +123,15 @@
                     <ul class="video-list">
                         <li class="video-item">
                             <video src="tutorials/Eminem - Lose Yourself [HD].mp4" controls></video>
-                            <p>eminem</p>
+                            <h4>Tutorial 1</h4>
                         </li>
                         <li class="video-item">
                             <video src="video2.mp4" controls></video>
+                            <h4>Tutorial 2</h4>
                         </li>
                         <li class="video-item">
                             <video src="video3.mp4" controls></video>
+                            <h4>Tutorial 3</h4>
                         </li>
                     </ul>
                 </div>
