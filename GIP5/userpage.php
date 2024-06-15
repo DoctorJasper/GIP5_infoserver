@@ -78,6 +78,7 @@
         margin: 0;
         padding: 0;
         list-style: none;
+        animation: scrollVideos 10s linear;
     }
 
     .video-item {
