@@ -140,7 +140,7 @@ else {
                 <?php if (!$post) : ;?>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <div class="card pagecard">
-                            <span class="badge bg-warning text-dark"><h3><?php echo $row[0]["platform"]; ?></h3></span><br>
+                            <span class="badge bg-warning text-dark"><h3>Linux</h3></span><br>
                             <div class="d-flex align-items-center mb-3">
                                 <h3>
                                     <strong>Username:</strong> <?php echo isset($row[0]["username"]) ? $row[0]["username"] : "nog geen account"; ?>
@@ -154,12 +154,12 @@ else {
                     <br>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <div class="card pagecard">
-                            <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span><br>
+                            <span class="badge bg-success text-dark"><h3>MySQL</h3></span><br>
                             <div class="d-flex align-items-center mb-3">
                                 <h3>
-                                    <strong>Username:</strong> <?php echo isset($row[0]["username"]) ? $row[0]["username"] : "nog geen account"; ?>
+                                    <strong>Username:</strong> <?php echo isset($row[1]["username"]) ? $row[1]["username"] : "nog geen account"; ?>
                                 </h3>
-                                <button type="submit" class="btn btn-primary ms-auto" <?php echo isset($row[0]["username"]) ? "": "disabled";?>>edit wachtwoord</button>
+                                <button type="submit" class="btn btn-primary ms-auto" <?php echo isset($row[1]["username"]) ? "": "disabled";?>>edit wachtwoord</button>
                             </div>
                             <input type="hidden" name="platform" value="<?php echo $row[1]["platform"]; ?>">
                             <input type="hidden" name="username" value="<?php echo $row[1]["username"]; ?>">
