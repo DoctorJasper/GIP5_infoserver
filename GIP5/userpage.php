@@ -164,7 +164,7 @@ else {
                         </div>
                     </form>
                 <?php else : ;?>
-                    <div class="card">                    
+                    <div class="card pagecard">                    
                         <a href="userpage.php"><button class="btn btn-danger float-end">annuleren</button></a>
                         <h3>Wachtwoord <?php echo $platform ;?> aanpassen</h3>
                         <br>
