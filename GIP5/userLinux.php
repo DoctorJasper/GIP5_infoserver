@@ -45,7 +45,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
     
         $res = $pdo->prepare($query);
         $res->execute();
-        $row = $res->fetchAll(PDO::FETCH_ASSOC);
+        $row = $res->fetch(PDO::FETCH_ASSOC);
         var_dump($row);
         die();
     }
