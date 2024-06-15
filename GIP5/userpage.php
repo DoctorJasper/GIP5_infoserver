@@ -93,10 +93,10 @@
         0% {
             transform: translateX(0);
         }
-        5% {
+        10% {
             transform: translateX(0);
         }
-        95% {
+        90% {
             transform: translateX(calc(-300px * 3)); /* Adjust this value based on the number of videos */
         }
         100% {
