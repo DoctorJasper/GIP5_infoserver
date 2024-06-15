@@ -81,45 +81,39 @@ else {
 <div class="card" id="card">
     <div class="col-sm-12">
         <div class="card-header bg-primary text-white">
-            <h3 class="ml-5">Userpage: <?php echo $row[0]["voornaam"] . " " . $row[0]["naam"]; ?></h3>
+            <h3 class="ml-5">Userpage: <?php echo htmlspecialchars($row[0]["voornaam"] . " " . $row[0]["naam"]); ?></h3>
         </div>
         <div class="card-body">
-            <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
-            <?php if (!$post) : ;?>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <div class="card pagecard">
-                        <span class="badge bg-warning text-dark"><h3><?php echo $row[0]["platform"]; ?></h3></span><br>
-                        <input type="hidden" name="platform" value="<?php echo $row[0]["platform"]; ?>">
-                        <h3><strong>Username:</strong> <?php echo $row[0]["username"]; ?></h3>
-                        <input type="hidden" name="username" value="<?php echo $row[0]["username"]; ?>">
-                        <button type="submit" class="btn btn-primary">edit wachtwoord</button>
-                    </div>
-                </form>
-                
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <div class="card pagecard">
-                        <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span><br>
-                        <input type="hidden" name="platform" value="<?php echo $row[1]["platform"]; ?>">
-                        <h3><strong>Username:</strong> <?php echo $row[1]["username"]; ?></h3>
-                        <input type="hidden" name="username" value="<?php echo $row[1]["username"]; ?>">
-                        <button type="submit" class="btn btn-primary">edit wachtwoord</button>
-                    </div>
-                </form>
-            <?php else : ;?>
-                <a href="userpage.php"><button class="btn btn-danger float-end">annuleer</button></a>
-                <h3>Wachtwoord <?php echo $platform ;?> aanpassen</h3>
+            <p><strong>Intern Number:</strong> <?php echo htmlspecialchars($row[0]["internNr"]); ?></p>
+            <?php if (!$post) : ?>
+                <?php for ($i = 0; $i < count($row); $i++) : ?>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <div class="card pagecard">
+                            <span class="badge bg-warning text-dark">
+                                <h3><?php echo htmlspecialchars($row[$i]["platform"]); ?></h3>
+                            </span><br>
+                            <input type="hidden" name="platform" value="<?php echo htmlspecialchars($row[$i]["platform"]); ?>">
+                            <h3><strong>Username:</strong> <?php echo htmlspecialchars($row[$i]["username"]); ?></h3>
+                            <input type="hidden" name="username" value="<?php echo htmlspecialchars($row[$i]["username"]); ?>">
+                            <button type="submit" class="btn btn-primary">Edit Password</button>
+                        </div>
+                    </form>
+                <?php endfor; ?>
+            <?php else : ?>
+                <a href="userpage.php" class="btn btn-danger float-end">Cancel</a>
+                <h3>Change Password for <?php echo htmlspecialchars($platform); ?></h3>
                 <br>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" name="newPasswd" class="form-control" id="myPasswd">
                         <input type="checkbox" class="form-check-input" onclick="myFunction()">Show Password
-                        <input type="hidden" name="platform" value="<?php echo $platform; ?>">
-                        <input type="hidden" name="username" value="<?php echo $username; ?>">
+                        <input type="hidden" name="platform" value="<?php echo htmlspecialchars($platform); ?>">
+                        <input type="hidden" name="username" value="<?php echo htmlspecialchars($username); ?>">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-            <?php endif;?>
+            <?php endif; ?>
         </div>
     </div>
 </div>
