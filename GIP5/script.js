@@ -3,7 +3,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const videoList = document.querySelector('.video-list');
     const videoItems = document.querySelectorAll('.video-item');
-    const animationDuration = 10000; // 10 seconds in milliseconds
     let animationTimeout;
 
     // Function to start the scrolling animation after a delay
