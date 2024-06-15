@@ -39,31 +39,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actie"])) {
 function handleAction($actie, $leerlingenIntNr, $ss) {
     global $pdo, $toast, $tabel, $timestamp; // Haal de pdo, toast, ... op van de globale variabelen
     $namenLeerlingen = []; // Initialiseer een array voor leerlingennamen
-
-    try {
-        $query = "SELECT internnrGebruiker FROM `tblAccounts` WHERE idPlatform = 1";
     
-        $res = $pdo->prepare($query);
-        $res->execute();
-        $row = $res->fetch(PDO::FETCH_ASSOC);
-        var_dump($row);
-        die();
-    }
-    catch (PDOException $e) {
-        // Log eventuele databasefouten en geef een foutmelding weer
-        file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-    }
-
-
     // Als de actie 'toevoegen' is
     if ($actie == "toevoegen") {
         // Loop door elk leerlingen interne nummer
         foreach ($leerlingenIntNr as $leerlingIntNr) {
-            if (in_array($leerlingIntNr, $row["internnrGebruiker"])) {
-                array_push($tabel, array("User met internNr $leerlingIntNr bestaat al", "warning"));
+            try {
+                $query = "SELECT internnrGebruiker FROM `tblAccounts` WHERE idPlatform = 1 AND internnrGebruiker = :NR";
+                $values = [":NR" => $intNr];
+            
+                $res = $pdo->prepare($query);
+                $res->execute($values);
+                $row = $res->fetch(PDO::FETCH_ASSOC);
             }
-            else {
+            catch (PDOException $e) {
+                // Log eventuele databasefouten en geef een foutmelding weer
+                file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+            }
+
+            if ($row["internnrGebruiker"] == null) {
                 // Bereid een query voor om de naam, voornaam en klas van de leerling op te halen
                 $query = "SELECT `naam`, `voornaam`, `klas` FROM `tblGebruiker` WHERE `internNr` = :internNr";
                 $values = [":internNr" => $leerlingIntNr];
