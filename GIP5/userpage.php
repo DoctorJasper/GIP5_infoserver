@@ -143,11 +143,9 @@ else {
                             <span class="badge bg-warning text-dark"><h3><?php echo $row[0]["platform"]; ?></h3></span><br>
                             <div class="d-flex align-items-center mb-3">
                                 <h3>
-                                    <strong>Username:</strong> <?php if ($row[0]["username"] == "") echo "nog geen account";
-                                                                     else echo $row[0]["username"]; 
-                                                                ?>
+                                    <strong>Username:</strong> <?php if (isset($row[0]["username"]))? echo $row[0]["username"] : echo "nog geen account";?>
                                 </h3>
-                                <button type="submit" class="btn btn-primary ms-auto" <?php if ($row[0]["username"] = "") echo "disabled";?>>edit wachtwoord</button>
+                                <button type="submit" class="btn btn-primary ms-auto" <?php if (isset($row[0]["username"]))? echo "": echo "disabled";?>>edit wachtwoord</button>
                             </div>
                             <input type="hidden" name="platform" value="<?php echo $row[0]["platform"]; ?>">
                             <input type="hidden" name="username" value="<?php echo $row[0]["username"]; ?>">
@@ -159,11 +157,9 @@ else {
                             <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span><br>
                             <div class="d-flex align-items-center mb-3">
                                 <h3>
-                                    <strong>Username:</strong> <?php if ($row[1]["username"] == "") echo "nog geen account";
-                                                                     else echo $row[1]["username"]; 
-                                                                ?>
+                                    <strong>Username:</strong> <?php if (isset($row[0]["username"]))? echo $row[0]["username"] : echo "nog geen account";?>
                                 </h3>
-                                <button type="submit" class="btn btn-primary ms-auto" <?php if ($row[1]["username"] = "") echo "disabled";?>>edit wachtwoord</button>
+                                <button type="submit" class="btn btn-primary ms-auto" <?php if (isset($row[0]["username"]))? echo "": echo "disabled";?>>edit wachtwoord</button>
                             </div>
                             <input type="hidden" name="platform" value="<?php echo $row[1]["platform"]; ?>">
                             <input type="hidden" name="username" value="<?php echo $row[1]["username"]; ?>">
