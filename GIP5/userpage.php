@@ -117,6 +117,7 @@
                     <ul class="video-list">
                         <li class="video-item">
                             <video src="tutorials/Eminem - Lose Yourself [HD].mp4" controls></video>
+                            <p>eminem</p>
                         </li>
                         <li class="video-item">
                             <video src="video2.mp4" controls></video>
