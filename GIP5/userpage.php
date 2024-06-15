@@ -164,19 +164,21 @@ else {
                         </div>
                     </form>
                 <?php else : ;?>
-                    <a href="userpage.php"><button class="btn btn-danger float-end">annuleer</button></a>
-                    <h3>Wachtwoord <?php echo $platform ;?> aanpassen</h3>
-                    <br>
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" name="newPasswd" class="form-control" id="myPasswd">
-                            <input type="checkbox" class="form-check-input" onclick="myFunction()">Show Password
-                            <input type="hidden" name="platform" value="<?php echo $platform; ?>">
-                            <input type="hidden" name="username" value="<?php echo $username; ?>">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    <div class="card">                    
+                        <a href="userpage.php"><button class="btn btn-danger float-end">annuleren</button></a>
+                        <h3>Wachtwoord <?php echo $platform ;?> aanpassen</h3>
+                        <br>
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" name="newPasswd" class="form-control" id="myPasswd">
+                                <input type="checkbox" class="form-check-input" onclick="myFunction()">Show Password
+                                <input type="hidden" name="platform" value="<?php echo $platform; ?>">
+                                <input type="hidden" name="username" value="<?php echo $username; ?>">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
                 <?php endif;?>                
             </div>
         </div>
