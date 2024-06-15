@@ -70,7 +70,10 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 } catch (PDOException $e) {
                     file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND); // Log eventuele databasefouten
                 }
-            }            
+            }      
+            else {       
+                array_push($tabel, array("User met internNr '$leerlingIntNr' bestaat al", "warning"));         
+            }      
         }
 
         // Loop door elke leerling en voer acties uit
