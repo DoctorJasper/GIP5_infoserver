@@ -120,7 +120,6 @@ else {
         <h3 class="ml-5">Userpage: <?php echo $row[0]["voornaam"] . " " . $row[0]["naam"]; ?></h3>
     </div>
     <div class="card-body">
-        <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>        
         <div class="row">
             <div class="col-sm-6">
                 <div class="video-container">
