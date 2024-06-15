@@ -12,8 +12,14 @@ require('startHTML.php');
 <style>
 
 </style>
-<?php
-require('navbar.php');
+<?php 
+if ($_SESSION["admin"] == 0) {
+    require('navbarUser.php'); 
+}
+else {
+    require('navbar.php');
+}
+
 ?>
 <div class="container-fluid mt-5" id="top">
 <div class="d-flex justify-content-center align-items-center">
