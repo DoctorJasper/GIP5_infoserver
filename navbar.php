@@ -102,7 +102,7 @@ define('beheer_inschrijvingen', 65536);
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="session.php">
+                        <a class="nav-link" href="<?php echo $path ?>session.php">
                             <i class="fa-solid fa-list"></i> Session laten zien
                         </a>
                     </li>
