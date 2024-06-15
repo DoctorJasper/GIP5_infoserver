@@ -124,7 +124,7 @@ else {
         <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>        
         <div class="row">
             <div class="col-sm-6">
-                <div class="video-container">
+                <div class="video-container card">
                     <ul class="video-list">
                         <li class="video-item">
                             <video src="video1.mp4" controls></video>
@@ -151,7 +151,7 @@ else {
                             <input type="hidden" name="username" value="<?php echo $row[0]["username"]; ?>">
                         </div>
                     </form>
-                    
+                    <br>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <div class="card pagecard">
                             <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span><br>
