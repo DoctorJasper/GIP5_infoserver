@@ -110,26 +110,24 @@ define('beheer_inschrijvingen', 65536);
             </div>
 
 
-            <!-- Right elements -->
-            <div class="d-flex align-items-center">
-                <!-- Avatar -->                
-                <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow user-container" href="#" id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-                    <?php 
-                        $foto = $ss->ophalenfoto($_SESSION['internalnr']); 
-                    ?>
-                    <img
-                        src="data:image/png;base64,<?php echo $foto; ?>" 
-                        class="rounded-circle" 
-                        height="30px" 
-                        width="30px"
-                        loading="lazy" 
-                    />
-                    <span class="user-name text-black">
-                        <?php echo $_SESSION['voornaam'] . ' ' . $_SESSION['naam']; ?>
-                    </span>
-                </a>
+            <!-- Right element -->
+            <div class="d-flex align-items-center">                
+                <!-- Avatar -->  
+                <?php 
+                    $foto = $ss->ophalenfoto($_SESSION['internalnr']); 
+                ?>
+                <img
+                    src="data:image/png;base64,<?php echo $foto; ?>" 
+                    class="rounded-circle" 
+                    height="30px" 
+                    width="30px"
+                    loading="lazy" 
+                />
+                <span class="user-name text-black">
+                    <?php echo $_SESSION['voornaam'] . ' ' . $_SESSION['naam']; ?>
+                </span>
             </div>
-            <!-- Right elements -->
+            <!-- Right element -->
         </div>
     </nav>
     <!-- Navbar -->
