@@ -70,7 +70,6 @@
     .video-container {
         width: 100%;
         overflow: hidden;
-        position: relative;
     }
 
     .video-list {
@@ -102,10 +101,10 @@
             transform: translateX(0);
         }
         85% {
-            transform: translateX(calc(-350px * 3)); /* Adjust this value based on the number of videos */
+            transform: translateX(calc(-400px * 3)); /* Adjust this value based on the number of videos */
         }
         100% {
-            transform: translateX(calc(-350px * 3)); /* Adjust this value based on the number of videos */
+            transform: translateX(calc(-400px * 3)); /* Adjust this value based on the number of videos */
         }
     }
 </style>
