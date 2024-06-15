@@ -12,15 +12,9 @@ require('startHTML.php');
 <style>
 
 </style>
-<?php 
-if ($_SESSION["admin"] == 0) {
-    require('navbarUser.php'); 
-}
-else {
-    require('navbar.php');
-}
 
-?>
+<?php require ($_SESSION["admin"] == 0) ? 'navbarUser.php' : 'navbar.php';?>
+
 <div class="container-fluid mt-5" id="top">
 <div class="d-flex justify-content-center align-items-center">
     <div class="card mt-5">
