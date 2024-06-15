@@ -79,54 +79,55 @@ else {
 ?>
 
 <div class="card" id="card">
-    <div class="col-sm-6">
-
-    </div>
-    <div class="col-sm-6">
+    <div class="col-sm-12">
         <div class="card-header bg-primary text-white">
             <h3 class="ml-5">Userpage: <?php echo $row[0]["voornaam"] . " " . $row[0]["naam"]; ?></h3>
         </div>
         <div class="card-body">
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
-            <?php if (!$post) : ;?>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <div class="card pagecard">
-                        <span class="badge bg-warning text-dark"><h3><?php echo $row[0]["platform"]; ?></h3></span><br>
-                        <div class="d-flex align-items-center mb-3">
-                            <h3><strong>Username:</strong> <?php echo $row[0]["username"]; ?></h3>
-                            <button type="submit" class="btn btn-primary float-end">edit wachtwoord</button>
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <?php if (!$post) : ;?>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <div class="card pagecard">
+                            <span class="badge bg-warning text-dark"><h3><?php echo $row[0]["platform"]; ?></h3></span><br>
+                            <div class="d-flex align-items-center mb-3">
+                                <h3><strong>Username:</strong> <?php echo $row[0]["username"]; ?></h3>
+                                <button type="submit" class="btn btn-primary float-end">edit wachtwoord</button>
+                            </div>
+                            <input type="hidden" name="platform" value="<?php echo $row[0]["platform"]; ?>">
+                            <input type="hidden" name="username" value="<?php echo $row[0]["username"]; ?>">
                         </div>
-                        <input type="hidden" name="platform" value="<?php echo $row[0]["platform"]; ?>">
-                        <input type="hidden" name="username" value="<?php echo $row[0]["username"]; ?>">
-                    </div>
-                </form>
-                
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <div class="card pagecard">
-                        <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span><br>
-                        <div class="d-flex align-items-center mb-3">
-                            <h3><strong>Username:</strong> <?php echo $row[1]["username"]; ?></h3>
-                            <button type="submit" class="btn btn-primary float-end">edit wachtwoord</button>
+                    </form>
+                    
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <div class="card pagecard">
+                            <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span><br>
+                            <div class="d-flex align-items-center mb-3">
+                                <h3><strong>Username:</strong> <?php echo $row[1]["username"]; ?></h3>
+                                <button type="submit" class="btn btn-primary float-end">edit wachtwoord</button>
+                            </div>
+                            <input type="hidden" name="platform" value="<?php echo $row[1]["platform"]; ?>">
+                            <input type="hidden" name="username" value="<?php echo $row[1]["username"]; ?>">
                         </div>
-                        <input type="hidden" name="platform" value="<?php echo $row[1]["platform"]; ?>">
-                        <input type="hidden" name="username" value="<?php echo $row[1]["username"]; ?>">
-                    </div>
-                </form>
-            <?php else : ;?>
-                <a href="userpage.php"><button class="btn btn-danger float-end">annuleer</button></a>
-                <h3>Wachtwoord <?php echo $platform ;?> aanpassen</h3>
-                <br>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" name="newPasswd" class="form-control" id="myPasswd">
-                        <input type="checkbox" class="form-check-input" onclick="myFunction()">Show Password
-                        <input type="hidden" name="platform" value="<?php echo $platform; ?>">
-                        <input type="hidden" name="username" value="<?php echo $username; ?>">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            <?php endif;?>
+                    </form>
+                <?php else : ;?>
+                    <a href="userpage.php"><button class="btn btn-danger float-end">annuleer</button></a>
+                    <h3>Wachtwoord <?php echo $platform ;?> aanpassen</h3>
+                    <br>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" name="newPasswd" class="form-control" id="myPasswd">
+                            <input type="checkbox" class="form-check-input" onclick="myFunction()">Show Password
+                            <input type="hidden" name="platform" value="<?php echo $platform; ?>">
+                            <input type="hidden" name="username" value="<?php echo $username; ?>">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                <?php endif;?>                
+            </div>
         </div>
     </div>
 </div>
