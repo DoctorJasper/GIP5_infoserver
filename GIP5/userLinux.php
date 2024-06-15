@@ -44,7 +44,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
         $query = "SELECT internnrGebruiker FROM `tblAccounts` WHERE idPlatform = 1";
     
         $res = $pdo->prepare($query);
-        $res->execute($values);
+        $res->execute();
         $row = $res->fetchAll(PDO::FETCH_ASSOC);
         var_dump($row);
         die();
