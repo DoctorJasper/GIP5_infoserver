@@ -66,11 +66,22 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             $password = mt_rand(1000, 9999);
 
             // Haal de commando's op om gebruikers toe te voegen en wachtwoorden te wijzigen
-            $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'toevoegen'";
+            $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'check'";
+            $query1 = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'toevoegen'";
             $query2 = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'password'";
         
             try {
                 $res = $pdo->prepare($query); // Bereid de query voor
+                $res->execute(); // Voer de query uit
+                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
+                $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
+
+                $output = shell_exec($commando);
+                var_dump($output);
+                die();
+                if ()
+
+                $res = $pdo->prepare($query1); // Bereid de query voor
                 $res->execute(); // Voer de query uit
                 $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
                 $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
