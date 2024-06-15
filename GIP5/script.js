@@ -1,14 +1,22 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const videoList = document.querySelector('.video-list');
-    const videoItems = document.querySelectorAll('.video-item');
+function openModal(videoElement) {
+    const modal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
 
-    const totalWidth = Array.from(videoItems).reduce((total, item) => {
-        return total + item.offsetWidth + parseInt(getComputedStyle(item).marginRight);
-    }, 0);
+    modalVideo.src = videoElement.src;
+    modal.style.display = 'block';
+}
 
-    videoList.style.animationDuration = `${totalWidth / 100}px`;
+function closeModal() {
+    const modal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
 
-    videoList.addEventListener('animationiteration', () => {
-        videoList.appendChild(videoList.firstElementChild);
-    });
-});
+    modal.style.display = 'none';
+    modalVideo.src = ''; // Stop the video when the modal is closed
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('videoModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
