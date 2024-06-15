@@ -74,7 +74,6 @@
         overflow: hidden;
         position: relative;
         padding: 20px;
-        background-color: #333;
     }
 
     .video-list {
@@ -91,8 +90,8 @@
     }
 
     video {
-        width: 300px;
-        height: 200px;
+        width: 600px;
+        height: 400px;
         border: 2px solid #fff;
         border-radius: 5px;
     }
