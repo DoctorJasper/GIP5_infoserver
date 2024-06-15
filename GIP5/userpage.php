@@ -20,8 +20,6 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST["newPasswd"])) {
         if (isset($_POST["newPasswd"])) {
-            var_dump($_POST);
-            die();
             $newPasswd = $_POST["newPasswd"];
             $platform = $_POST["platform"];
             $username = $_POST["username"];
@@ -117,7 +115,7 @@ else {
 
 <div class="card" id="card">
     <div class="card-header bg-primary text-white">
-        <h3 class="ml-5">Userpage: <?php echo $row[0]["voornaam"] . " " . $row[0]["naam"]; ?></h3>
+        <h3 class="ml-5">Userpage: <?php echo $_SESSION["voornaam"] . " " . $_SESSION["naam"]; ?></h3>
     </div>
     <div class="card-body">
         <div class="row">
