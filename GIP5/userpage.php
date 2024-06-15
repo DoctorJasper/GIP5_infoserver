@@ -66,28 +66,33 @@
     .pagecard {
         padding: 25px;
     }
+
     .video-container {
         width: 100%;
         overflow: hidden;
         position: relative;
     }
+
     .video-list {
         display: flex;
         margin: 0;
         padding: 0;
         list-style: none;
-        animation: scrollVideos 10s linear;
+        animation: scrollVideos 10s linear infinite;
     }
+
     .video-item {
         flex: 0 0 auto;
         margin-right: 10px;
     }
+
     video {
         width: 600px;
         height: 400px;
         border: 2px solid #fff;
         border-radius: 5px;
     }
+
     /* Keyframes for auto-scrolling effect */
     @keyframes scrollVideos {
         0% {
