@@ -50,68 +50,9 @@
 
     require('../startHTML.php');
 ?>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-    }
-    #card {
-        margin-left: 75px;
-        margin-right: 75px; 
-        margin-top: 75px;
-    }
-    .pagecard {
-        padding: 25px;
-    }
+<style src="tutorials/style.css"></style>
 
-    .video-container {
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .video-list {
-        display: flex;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        animation: scrollVideos 10s linear infinite;
-    }
-
-    .video-item {
-        flex: 0 0 auto;
-        margin-right: 10px;
-    }
-
-    video {
-        width: 600px;
-        height: 400px;
-        border: 2px solid #fff;
-        border-radius: 5px;
-    }
-
-    /* Keyframes for auto-scrolling effect */
-    @keyframes scrollVideos {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(calc(-300px * 3)); /* Adjust this value based on the number of videos */
-        }
-    }
-</style>
-<?php 
-if ($_SESSION["admin"] == 0) {
-    require('../navbarUser.php'); 
-}
-else {
-    require('../navbar.php');
-}
-
-?>
+<?php require ($_SESSION["admin"] == 0) ? '../navbarUser.php' : '../navbar.php';?>
 
 <div class="card" id="card">
     <div class="card-header bg-primary text-white">
@@ -123,13 +64,13 @@ else {
                 <div class="video-container">
                     <ul class="video-list">
                         <li class="video-item">
-                            <video src="tutorials/Eminem - Lose Yourself [HD].mp4" controls></video>
+                            <video src="tutorials/Eminem - Lose Yourself [HD].mp4" controls onclick="openModal(this)"></video>
                         </li>
                         <li class="video-item">
-                            <video src="video2.mp4" controls></video>
+                            <video src="video2.mp4" controls onclick="openModal(this)"></video>
                         </li>
                         <li class="video-item">
-                            <video src="video3.mp4" controls></video>
+                            <video src="video3.mp4" controls onclick="openModal(this)"></video>
                         </li>
                     </ul>
                 </div>
@@ -184,6 +125,13 @@ else {
         </div>
     </div>
 </div>
+
+<!-- video modal -->
+<div id="videoModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <video id="modalVideo" controls></video>
+</div>
+
 
 <?php require('../footer1.php'); ?>
 <script src="scripts.js"></script>
