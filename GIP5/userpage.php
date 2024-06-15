@@ -73,7 +73,6 @@
         width: 100%;
         overflow: hidden;
         position: relative;
-        padding: 20px;
     }
 
     .video-list {
@@ -124,7 +123,7 @@ else {
         <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>        
         <div class="row">
             <div class="col-sm-6">
-                <div class="video-container card">
+                <div class="video-container">
                     <ul class="video-list">
                         <li class="video-item">
                             <video src="video1.mp4" controls></video>
