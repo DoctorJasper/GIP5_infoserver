@@ -146,7 +146,7 @@ else {
                             <span class="badge bg-warning text-dark"><h3><?php echo $row[0]["platform"]; ?></h3></span><br>
                             <div class="d-flex align-items-center mb-3">
                                 <h3><strong>Username:</strong> <?php echo $row[0]["username"]; ?></h3>
-                                <button type="submit" class="btn btn-primary float-end">edit wachtwoord</button>
+                                <button type="submit" class="btn btn-primary ms-auto">edit wachtwoord</button>
                             </div>
                             <input type="hidden" name="platform" value="<?php echo $row[0]["platform"]; ?>">
                             <input type="hidden" name="username" value="<?php echo $row[0]["username"]; ?>">
@@ -158,7 +158,7 @@ else {
                             <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span><br>
                             <div class="d-flex align-items-center mb-3">
                                 <h3><strong>Username:</strong> <?php echo $row[1]["username"]; ?></h3>
-                                <button type="submit" class="btn btn-primary float-end">edit wachtwoord</button>
+                                <button type="submit" class="btn btn-primary ms-auto">edit wachtwoord</button>
                             </div>
                             <input type="hidden" name="platform" value="<?php echo $row[1]["platform"]; ?>">
                             <input type="hidden" name="username" value="<?php echo $row[1]["username"]; ?>">
