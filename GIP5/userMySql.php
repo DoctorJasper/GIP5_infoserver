@@ -95,8 +95,23 @@
 
                 // Haalt het commando op voor het toevoegen van de gebruiker
                 $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 2 AND `type` = 'toevoegen'";
+                $query2 = "SELECT username FROM `tblAccounts` WHERE idPlatform = 2";
             
                 try {
+                    while(true) {
+                        $res = $pdo->prepare($query2); // Bereid de query voor
+                        $res->execute(); // Voer de query uit                        
+                        $row = $res->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        if (in_array($username, $row)) {
+                            $teller++;
+                            $username = $username . substr($naamLeerling["naam"], 0, $teller);
+                        }
+                        else {
+                            break;
+                        }
+                    }
+
                     $res = $pdo->prepare($query);
                     $res->execute();
                     $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos'];
