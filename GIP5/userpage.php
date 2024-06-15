@@ -98,6 +98,12 @@
         0% {
             transform: translateX(0);
         }
+        15% {
+            transform: translateX(0);
+        }
+        85% {
+            transform: translateX(calc(-300px * 3)); /* Adjust this value based on the number of videos */
+        }
         100% {
             transform: translateX(calc(-300px * 3)); /* Adjust this value based on the number of videos */
         }
