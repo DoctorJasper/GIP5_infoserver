@@ -143,7 +143,7 @@ else {
                             <span class="badge bg-warning text-dark"><h3><?php echo $row[0]["platform"]; ?></h3></span><br>
                             <div class="d-flex align-items-center mb-3">
                                 <h3>
-                                    <strong>Username:</strong> <?php if ($row[0]["username"] = "") echo "nog geen account"
+                                    <strong>Username:</strong> <?php if ($row[0]["username"] = "") echo "nog geen account";
                                                                      else echo $row[0]["username"]; 
                                                                 ?>
                                 </h3>
@@ -159,7 +159,7 @@ else {
                             <span class="badge bg-success text-dark"><h3><?php echo $row[1]["platform"]; ?></h3></span><br>
                             <div class="d-flex align-items-center mb-3">
                                 <h3>
-                                    <strong>Username:</strong> <?php if ($row[1]["username"] = "") echo "nog geen account"
+                                    <strong>Username:</strong> <?php if ($row[1]["username"] = "") echo "nog geen account";
                                                                      else echo $row[1]["username"]; 
                                                                 ?>
                                 </h3>
