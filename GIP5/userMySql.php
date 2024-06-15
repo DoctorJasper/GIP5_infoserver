@@ -48,17 +48,37 @@
         if ($actie == "toevoegen") {
             // Haalt de namen van de gebruikers op basis van hun interne nummers
             foreach ($leerlingenIntNr as $leerlingIntNr) {
-                $query = "SELECT `naam`, `voornaam`, `klas` FROM `tblGebruiker` WHERE `internNr` = :internNr";
-            
                 try {
+                    $query = "SELECT internnrGebruiker FROM `tblAccounts` WHERE idPlatform = 2 AND internnrGebruiker = :NR";
+                    $values = [":NR" => $leerlingIntNr];
+                
                     $res = $pdo->prepare($query);
-                    $res->bindParam(':internNr', $leerlingIntNr, PDO::PARAM_INT);
-                    $res->execute();
-                    $namenLeerlingen[] = $res->fetch(PDO::FETCH_ASSOC);
-                } catch (PDOException $e) {
-                    // Logt eventuele databasefouten
-                    file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    $res->execute($values);
+                    $row = $res->fetch(PDO::FETCH_ASSOC);
                 }
+                catch (PDOException $e) {
+                    // Log eventuele databasefouten en geef een foutmelding weer
+                    file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+                }
+
+                
+                if ($row["internnrGebruiker"] == null) {
+                    $query = "SELECT `naam`, `voornaam`, `klas` FROM `tblGebruiker` WHERE `internNr` = :internNr";
+                
+                    try {
+                        $res = $pdo->prepare($query);
+                        $res->bindParam(':internNr', $leerlingIntNr, PDO::PARAM_INT);
+                        $res->execute();
+                        $namenLeerlingen[] = $res->fetch(PDO::FETCH_ASSOC);
+                    } catch (PDOException $e) {
+                        // Logt eventuele databasefouten
+                        file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    }
+                }     
+                else {       
+                    array_push($tabel, array("User met internNr '$leerlingIntNr' bestaat al", "warning"));         
+                } 
             }
 
             // Voor elke gebruiker worden acties uitgevoerd
