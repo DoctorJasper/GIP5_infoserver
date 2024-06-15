@@ -69,33 +69,22 @@ define('beheer_inschrijvingen', 65536);
 
             <!-- Right elements -->
             <div class="d-flex align-items-center">                
-                <!-- Avatar -->
-                
-                <div class="dropdown">
-                    <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow user-container" href="#" id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-                        <?php 
-                            $foto = $ss->ophalenfoto($_SESSION['internalnr']); 
-                        ?>
-                        <img
-                            src="data:image/png;base64,<?php echo $foto; ?>" 
-                            class="rounded-circle" 
-                            height="30px" 
-                            width="30px"
-                            loading="lazy" 
-                        />
-                        <span class="user-name text-black">
-                            <?php echo $_SESSION['voornaam'] . ' ' . $_SESSION['naam']; ?>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                        <li>
-                            <a class="dropdown-item" href="https://www.go-atheneumoudenaarde.be/epay/public/" target="_blank">mijn E-pay</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="logout.php">Logout</a>
-                        </li>
-                    </ul>
-                </div>
+                <!-- Avatar -->                
+                <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow user-container" href="#" id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
+                    <?php 
+                        $foto = $ss->ophalenfoto($_SESSION['internalnr']); 
+                    ?>
+                    <img
+                        src="data:image/png;base64,<?php echo $foto; ?>" 
+                        class="rounded-circle" 
+                        height="30px" 
+                        width="30px"
+                        loading="lazy" 
+                    />
+                    <span class="user-name text-black">
+                        <?php echo $_SESSION['voornaam'] . ' ' . $_SESSION['naam']; ?>
+                    </span>
+                </a>
             </div>
             <!-- Right elements -->
         </div>
