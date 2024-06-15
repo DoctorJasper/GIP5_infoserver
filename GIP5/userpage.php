@@ -115,8 +115,6 @@
             <div class="col-sm-6">
                 <div class="video-container">
                     <ul class="video-list">
-                        <li></li>
-                        <li></li>
                         <li class="video-item">
                             <video src="tutorials/Eminem - Lose Yourself [HD].mp4" controls></video>
                             <p>eminem</p>
