@@ -46,7 +46,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
         foreach ($leerlingenIntNr as $leerlingIntNr) {
             try {
                 $query = "SELECT internnrGebruiker FROM `tblAccounts` WHERE idPlatform = 1 AND internnrGebruiker = :NR";
-                $values = [":NR" => $intNr];
+                $values = [":NR" => $leerlingIntNr];
             
                 $res = $pdo->prepare($query);
                 $res->execute($values);
