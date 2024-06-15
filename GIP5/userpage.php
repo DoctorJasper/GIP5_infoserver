@@ -58,6 +58,7 @@
         background-color: #f4f4f4;
         margin: 0;
         padding: 0;
+        overflow-x: hidden;
     }
     #card {
         margin-left: 75px;
@@ -66,6 +67,44 @@
     }
     .pagecard {
         padding: 25px;
+    }
+
+    .video-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        padding: 20px;
+        background-color: #333;
+    }
+
+    .video-list {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        animation: scrollVideos 20s linear infinite;
+    }
+
+    .video-item {
+        flex: 0 0 auto;
+        margin-right: 10px;
+    }
+
+    video {
+        width: 300px;
+        height: 200px;
+        border: 2px solid #fff;
+        border-radius: 5px;
+    }
+
+    /* Keyframes for auto-scrolling effect */
+    @keyframes scrollVideos {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-300px * 3)); /* Adjust this value based on the number of videos */
+        }
     }
 </style>
 <?php 
@@ -86,6 +125,19 @@ else {
         <div class="card-body">
             <p><strong>Intern Number:</strong> <?php echo $row[0]["internNr"]; ?></p>
             <div class="col-sm-6">
+                <div class="video-container">
+                    <ul class="video-list">
+                        <li class="video-item">
+                            <video src="video1.mp4" controls></video>
+                        </li>
+                        <li class="video-item">
+                            <video src="video2.mp4" controls></video>
+                        </li>
+                        <li class="video-item">
+                            <video src="video3.mp4" controls></video>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="col-sm-6">
                 <?php if (!$post) : ;?>
@@ -133,6 +185,7 @@ else {
 </div>
 
 <?php require('../footer1.php'); ?>
+<script src="scripts.js"></script>
 <script>
     function myFunction() {
         var x = document.getElementById("myPasswd");
