@@ -40,17 +40,32 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
     global $pdo, $toast, $tabel, $timestamp; // Haal de pdo, toast, ... op van de globale variabelen
     $namenLeerlingen = []; // Initialiseer een array voor leerlingennamen
 
+    try {
+        $query = "SELECT internnrGebruiker FROM `tblAccounts` WHERE idPlatform = 1";
+    
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+        $row = $res->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch (PDOException $e) {
+        // Log eventuele databasefouten en geef een foutmelding weer
+        file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+    }
+
+
     // Als de actie 'toevoegen' is
     if ($actie == "toevoegen") {
         // Loop door elk leerlingen interne nummer
         foreach ($leerlingenIntNr as $leerlingIntNr) {
+            
             // Bereid een query voor om de naam, voornaam en klas van de leerling op te halen
             $query = "SELECT `naam`, `voornaam`, `klas` FROM `tblGebruiker` WHERE `internNr` = :internNr";
+            $values = [":internNr" => $leerlingIntNr];
         
             try {
                 $res = $pdo->prepare($query); // Bereid de query voor
-                $res->bindParam(':internNr', $leerlingIntNr, PDO::PARAM_INT); // Bind de parameter
-                $res->execute(); // Voer de query uit
+                $res->execute($values); // Voer de query uit
                 $namenLeerlingen[$leerlingIntNr] = $res->fetch(PDO::FETCH_ASSOC); // Haal de resultaten op en voeg deze toe aan de array
             } catch (PDOException $e) {
                 file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND); // Log eventuele databasefouten
@@ -60,79 +75,85 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
         // Loop door elke leerling en voer acties uit
         foreach ($namenLeerlingen as $leerlingIntNr => $naamLeerling) {
             // Maak gebruikersnaam aan (kleine letters)
-            $username = strtolower($naamLeerling["voornaam"]);
+            if (in_array($leerlingIntNr, $row["internnrGebruiker"])) {
+                header("Location: userOverview.php");
+                exit;
+            }
+            else {
+                $username = strtolower($naamLeerling["voornaam"]);
 
-            // Genereer een willekeurig wachtwoord
-            $password = mt_rand(1000, 9999);
-            $teller = 0;
-
-            // Haal de commando's op om gebruikers toe te voegen en wachtwoorden te wijzigen
-            $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'check'";
-            $query1 = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'toevoegen'";
-            $query2 = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'password'";
-        
-            try {
-                while(true) {
-                    $res = $pdo->prepare($query); // Bereid de query voor
+                // Genereer een willekeurig wachtwoord
+                $password = mt_rand(1000, 9999);
+                $teller = 0;
+    
+                // Haal de commando's op om gebruikers toe te voegen en wachtwoorden te wijzigen
+                $query = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'check'";
+                $query1 = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'toevoegen'";
+                $query2 = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'password'";
+            
+                try {
+                    while(true) {
+                        $res = $pdo->prepare($query); // Bereid de query voor
+                        $res->execute(); // Voer de query uit
+                        $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
+                        $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
+    
+                        $output = shell_exec($commando);
+                        
+                        if ($output != null) {
+                            $teller++;
+                            $username = $username . substr($username, 0, $teller);
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                
+                    $res = $pdo->prepare($query1); // Bereid de query voor
                     $res->execute(); // Voer de query uit
                     $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
                     $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
-
-                    $output = shell_exec($commando);
-                    
-                    if ($output != null) {
-                        $teller++;
-                        $username = $username . substr($username, 0, $teller);
-                    }
-                    else {
-                        break;
-                    }
+                    $commando = str_replace("wachtwoord", $password, $commando); // Vervang placeholders met het wachtwoord
+    
+                    // Voer het commando uit en log het
+                    file_put_contents("log.txt", $timestamp . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
+                    exec($commando);
+    
+                    // Sla het wachtwoord op in een tekstbestand
+                    file_put_contents("pw.txt",$username.":".$password);
+    
+                    // Haal het commando op om het wachtwoord te wijzigen en voer het uit
+                    $res = $pdo->prepare($query2); // Bereid de query voor
+                    $res->execute(); // Voer de query uit
+                    $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
+                    $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
+                    file_put_contents("log.txt", $timestamp . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND); // Log het commando
+                    exec($commando); // Voer het commando uit
+    
+                    // Geef een succesmelding weer
+                    array_push($tabel, array("Linux gebruiker $username toegevoegd", "success"));
+    
+                } catch (PDOException $e) {
+                    // Log eventuele databasefouten en geef een foutmelding weer
+                    file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    array_push($tabel, array("Gefaald om Linux gebruiker $username aan te maken", "danger"));
                 }
-            
-                $res = $pdo->prepare($query1); // Bereid de query voor
-                $res->execute(); // Voer de query uit
-                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
-                $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
-                $commando = str_replace("wachtwoord", $password, $commando); // Vervang placeholders met het wachtwoord
-
-                // Voer het commando uit en log het
-                file_put_contents("log.txt", $timestamp . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);
-                exec($commando);
-
-                // Sla het wachtwoord op in een tekstbestand
-                file_put_contents("pw.txt",$username.":".$password);
-
-                // Haal het commando op om het wachtwoord te wijzigen en voer het uit
-                $res = $pdo->prepare($query2); // Bereid de query voor
-                $res->execute(); // Voer de query uit
-                $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
-                $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
-                file_put_contents("log.txt", $timestamp . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND); // Log het commando
-                exec($commando); // Voer het commando uit
-
-                // Geef een succesmelding weer
-                array_push($tabel, array("Linux gebruiker $username toegevoegd", "success"));
-
-            } catch (PDOException $e) {
-                // Log eventuele databasefouten en geef een foutmelding weer
-                file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                array_push($tabel, array("Gefaald om Linux gebruiker $username aan te maken", "danger"));
-            }
-            
-            // Insert into tblAccounts
-            $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
-            $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 1];
-
-            try {
-                $res = $pdo->prepare($query);
-                $res->execute($values);
                 
-                var_dump($leerlingIntNr);
-                array_push($tabel, array("Database user $username toegevoegd", "success"));
-            } catch (PDOException $e) {
-                array_push($tabel, array("Gefaald om database user $username toe te voegen", "danger"));
+                // Insert into tblAccounts
+                $query = "INSERT INTO `tblAccounts`(`internnrGebruiker`, `username`, `idPlatform`) VALUES (:nrGeb, :username, :idPla)";
+                $values = [":nrGeb" => $leerlingIntNr, ":username" => $username, ":idPla" => 1];
+    
+                try {
+                    $res = $pdo->prepare($query);
+                    $res->execute($values);
+                    
+                    var_dump($leerlingIntNr);
+                    array_push($tabel, array("Database user $username toegevoegd", "success"));
+                } catch (PDOException $e) {
+                    array_push($tabel, array("Gefaald om database user $username toe te voegen", "danger"));
+                }
             }
-
+            
             // mail versturen
             /*$bericht = "<html><body>";
             $bericht .= "<p>Beste,</p>";
