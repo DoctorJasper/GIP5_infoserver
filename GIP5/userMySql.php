@@ -101,10 +101,10 @@
                         $res = $pdo->prepare($query2); // Bereid de query voor
                         $res->execute(); // Voer de query uit                        
                         $row = $res->fetchAll(PDO::FETCH_ASSOC);
-                        var_dump($row);
-                        die();
+
+                        $usernames = array_column($row, 'username'); //array van usernames
                         
-                        if (in_array($username, $row)) {
+                        if (in_array($username, $usernames)) {
                             $teller++;
                             $username = $username . substr($naamLeerling["naam"], 0, $teller);
                         }
