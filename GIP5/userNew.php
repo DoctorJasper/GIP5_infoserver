@@ -252,24 +252,6 @@
         checkboxes.forEach(function(checkbox) {
             checkbox.checked = source.checked;
         });
-
-        let checkbox = document.getElementById(id)
-        if(checkbox.checked == true) {
-            <?php if(!$deleted) : ?>
-                button1.style.display = "block";
-                console.log("ok, <?php echo $isChecked;?>");
-            <?php else : ?>
-                button2.style.display = "block";
-                console.log("ok, <?php echo $isChecked;?>");
-            <?php endif; ?>
-        } else {
-            button1.style.display = "none";
-            console.log("niet ok, <?php echo $isChecked;?>");
-
-            button2.style.display = "none";
-            console.log("ok, <?php echo $isChecked;?>");
-        }
-        updateLinks();
     }
 </script>
 <?php require('../footer2.php') ;?>
