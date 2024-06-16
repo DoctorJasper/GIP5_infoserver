@@ -88,9 +88,6 @@
                 $voornaam = ucfirst(strtolower($naamLeerling["voornaam"]));
                 //$voornaam = str_replace("-", "", $voornaam);
                 $username = "0" . substr($klas, 0, 2) . strtolower(substr($klas, 2)) . $voornaam;
-                var_dump($naamLeerling);
-                die();
-                $interNr = $naamLeerling["internNr"];
 
                 // Genereert een willekeurig wachtwoord
                 $randomNumber = mt_rand(1000, 9999);
@@ -104,6 +101,8 @@
                         $res = $pdo->prepare($query2); // Bereid de query voor
                         $res->execute(); // Voer de query uit                        
                         $row = $res->fetchAll(PDO::FETCH_ASSOC);
+                        var_dump($row);
+                        die();
                         
                         if (in_array($username, $row)) {
                             $teller++;
