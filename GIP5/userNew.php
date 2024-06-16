@@ -173,7 +173,7 @@
                                                     $exists = 0;
                                                 }
                                             }?>
-                                            <input class="form-check-input checkbox" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" <?php if($exists == "1") echo "disabled" ;?>>
+                                            <input class="form-check-input checkbox" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" <?php if($exists == "0") echo "checked" ;?> <?php if($exists == "1") echo "disabled" ;?>>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -232,7 +232,6 @@
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
-                                </form>
                             </tbody>
                         </table>
                     </div>
