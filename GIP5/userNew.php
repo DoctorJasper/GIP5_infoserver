@@ -173,7 +173,7 @@
                                                     $exists = 0;
                                                 }
                                             }?>
-                                            <input class="form-check-input checkbox" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" <?php if($exists == "0") echo "checked" ;?> <?php if($exists == "1") echo "disabled" ;?>>
+                                            <input class="form-check-input checkbox" type="checkbox" name="leerlingen[]" value="<?php echo $row['internnummer']?>" <?php if($exists == "1") echo "disabled" ;?>>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -246,11 +246,13 @@
 <?php require('../footer1.php') ;?>
 <script>
     function selectAll(id) {
+        let source = document.getElementById(id);
         let checkboxes = document.getElementsByName('leerlingen[]');
-        let source = document.querySelector('input[type="checkbox"]');
 
         checkboxes.forEach(function(checkbox) {
-            checkbox.checked = source.checked;
+            if (!checkbox.disabled) { //zorg ervoor dat uitgeschakelde checkboxes niet zijn enable/disabled
+                checkbox.checked = source.checked;
+            }
         });
     }
 </script>
