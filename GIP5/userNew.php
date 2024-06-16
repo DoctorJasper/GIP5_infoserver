@@ -152,7 +152,6 @@
                         <table class="table align-middle mb-0 bg-white">
                             <thead class="bg-light">
                                 <tr>
-                                    <th><input class="form-check-input shadow-sm rounded" type="checkbox" id="selectAll" onclick="selectAll(this.id)" title="Select all"/></th>
                                     <th>Selecteer</th>
                                     <th>Naam</th>
                                     <th>Internnr</th>
@@ -232,6 +231,7 @@
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
+                                </form>
                             </tbody>
                         </table>
                     </div>
@@ -244,15 +244,6 @@
 <!-- FOOTER -->
 <?php require('../footer1.php') ;?>
 <script>
-    function selectAll(id) {
-        let source = document.getElementById(id);
-        let checkboxes = document.getElementsByName('leerlingen[]');
 
-        checkboxes.forEach(function(checkbox) {
-            if (!checkbox.disabled) { //zorg ervoor dat uitgeschakelde checkboxes niet zijn enable/disabled
-                checkbox.checked = source.checked;
-            }
-        });
-    }
 </script>
 <?php require('../footer2.php') ;?>
