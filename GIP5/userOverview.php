@@ -96,8 +96,6 @@
                     <?php if ($deleted): ?>
                         <a href="userOverview.php"><i class="fas fa-users fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="actieve gebruikers"></i></a>  
                     <?php else: ?>
-                        <a href="userNew.php"><i class="fas fa-user-plus fs-3 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="nieuwe gebruiker"></i></a>                
-                        &nbsp;
                         <a href="userOverview.php?deleted"><i class="fas fa-users-slash fs-3 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>               
                     <?php endif; ?>
                 </span>
