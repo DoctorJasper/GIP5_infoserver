@@ -2,7 +2,7 @@
     require('../header.php');
 
     // Commented out to allow easy debugging
-    if (!isset($_SESSION["firstname"])) {
+    if (!isset($_SESSION["voornaam"])) {
         header("Location: ../index.php");
         exit;
     }
