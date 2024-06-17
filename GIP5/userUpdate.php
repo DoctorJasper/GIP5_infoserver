@@ -16,7 +16,6 @@
     $klasarray = $ss->ophalenKlassen(); 
 
     require('../startHTML.php');
-    require('../navbar.php');
 
     $showAlert = false; // Variabele om waarschuwingen te tonen
     $post = false; // Variabele om te controleren of het een POST-verzoek is
@@ -80,6 +79,7 @@
             $showAlert = true;
         }
     }
+    require('../navbar.php');
 ?>
 <br><br>
 <div class="container mt-5">

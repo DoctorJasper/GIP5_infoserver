@@ -2,10 +2,10 @@
     require('../header.php');
 
     // Commented out to allow easy debugging
-    // if (!isset($_SESSION["firstname"])) {
-    //     header("Location: ../index.php");
-    //     exit;
-    // }
+    if (!isset($_SESSION["firstname"])) {
+        header("Location: ../index.php");
+        exit;
+    }
     
     require('../inc/config.php'); // Vereist het config.php bestand
     require('../classes/class.smartschool.php'); // Vereist de Smartschool klasse
@@ -169,7 +169,7 @@
                 <?php if (!$post) : ;?>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <div class="card pagecard">
-                            <span class="badge bg-warning text-dark"><h3>Linux</h3></span><br>
+                            <span class="badge bg-warning text-white"><h3>Linux</h3></span><br>
                             <div class="d-flex align-items-center mb-3">
                                 <h3>
                                     <strong>Username:</strong> <?php echo isset($row[0]["username"]) ? $row[0]["username"] : "nog geen account"; ?>
@@ -183,7 +183,7 @@
                     <br>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <div class="card pagecard">
-                            <span class="badge bg-success text-dark"><h3>MySQL</h3></span><br>
+                            <span class="badge bg-success text-white"><h3>MySQL</h3></span><br>
                             <div class="d-flex align-items-center mb-3">
                                 <h3>
                                     <strong>Username:</strong> <?php echo isset($row[1]["username"]) ? $row[1]["username"] : "nog geen account"; ?>
