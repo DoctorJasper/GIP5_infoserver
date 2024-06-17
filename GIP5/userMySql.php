@@ -65,11 +65,11 @@
                 
                 if ($row["internnrGebruiker"] == null) {
                     $query = "SELECT `naam`, `voornaam`, `klas` FROM `tblGebruiker` WHERE `internNr` = :internNr";
+                    $values = [":internNr" => $leerlingIntNr];
                 
                     try {
                         $res = $pdo->prepare($query);
-                        $res->bindParam(':internNr', $leerlingIntNr, PDO::PARAM_INT);
-                        $res->execute();
+                        $res->execute($values);
                         $namenLeerlingen[] = $res->fetch(PDO::FETCH_ASSOC);
                     } catch (PDOException $e) {
                         // Logt eventuele databasefouten
@@ -82,7 +82,7 @@
             }
 
             // Voor elke gebruiker worden acties uitgevoerd
-            foreach ($namenLeerlingen as $naamLeerling) {
+            foreach ($namenLeerlingen as $leerlingIntNr => $naamLeerling) {
                 // Maakt een gebruikersnaam op basis van de klas en voornaam
                 $klas = $naamLeerling["klas"];
                 $voornaam = ucfirst(strtolower($naamLeerling["voornaam"]));
