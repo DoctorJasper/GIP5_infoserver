@@ -34,7 +34,7 @@
         // Voer de query uit
         try {
             $res = $pdo->prepare($query);
-            $res->execute();    
+            $res->execute($values);    
             $row = $res->fetch(PDO::FETCH_ASSOC); // Haal de resultaten op als een associatieve array
         } catch (PDOException $e) {
             // Log de fout en toon een foutmelding
@@ -58,12 +58,13 @@
             // Template voor de UPDATE query
             $query = "UPDATE `tblGebruiker`
                       SET `internNr` = '$internNr', `naam` = '$naam',`voornaam` = '$voornaam',`email` = '$email',`admin` = '$admin'
-                      WHERE `idGeb` = '$idGeb'";
+                      WHERE `idGeb` = :idGeb";
+            $values = [":idGeb" => $idGeb]
 
             // Voer de query uit
             try {
                 $res2 = $pdo->prepare($query);
-                $res2->execute();
+                $res2->execute($values);
                 header("Location: userOverview.php"); // Redirect naar het overzicht
                 exit;
             } catch (PDOException $e) {
