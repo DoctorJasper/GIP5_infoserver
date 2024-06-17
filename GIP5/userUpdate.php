@@ -59,7 +59,7 @@
             $query = "UPDATE `tblGebruiker`
                       SET `internNr` = '$internNr', `naam` = '$naam',`voornaam` = '$voornaam',`email` = '$email',`admin` = '$admin'
                       WHERE `idGeb` = :idGeb";
-            $values = [":idGeb" => $idGeb]
+            $values = [":idGeb" => $idGeb];
 
             // Voer de query uit
             try {
