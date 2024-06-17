@@ -47,7 +47,6 @@
         // Als het een POST-verzoek is
         $post = true;
         $idGeb = $_POST["idGeb"]; // Haal gegevens uit het POST-verzoek
-        $internNr = trim($_POST["internNr"]);
         $naam = trim($_POST["naam"]); 
         $voornaam = trim($_POST["voornaam"]);
         $email = trim($_POST["email"]);
@@ -57,7 +56,7 @@
         if (strlen($naam) >= 2 || strlen($voornaam) >= 2) {
             // Template voor de UPDATE query
             $query = "UPDATE `tblGebruiker`
-                      SET `internNr` = '$internNr', `naam` = '$naam',`voornaam` = '$voornaam',`email` = '$email',`admin` = '$admin'
+                      SET `naam` = '$naam',`voornaam` = '$voornaam',`email` = '$email',`admin` = '$admin'
                       WHERE `idGeb` = :idGeb";
             $values = [":idGeb" => $idGeb];
 
@@ -94,11 +93,6 @@
             <?php endif; ?>
             <p><br></p>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <div class="mb-3">
-                    <input type="hidden" class="from-control" name="idGeb" value="<?php if(!$post) echo $id ;?>">
-                    <label for="InternNr" class="form-label">Intern nummer</label>
-                    <input type="text" class="form-control" id="InternNr" name="internNr" value="<?php if (!$post) echo $row['internNr']; ?>" required>
-                </div>
                 <div class="mb-3">
                     <label for="Naam" class="form-label">Naam</label>
                     <input type="text" class="form-control" id="Naam" name="naam" value="<?php if (!$post) echo $row['naam']; ?>" required>
