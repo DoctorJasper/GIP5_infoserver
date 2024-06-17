@@ -70,7 +70,7 @@
                     try {
                         $res = $pdo->prepare($query);
                         $res->execute($values);
-                        $namenLeerlingen[] = $res->fetch(PDO::FETCH_ASSOC);
+                        $namenLeerlingen[$leerlingIntNr] = $res->fetch(PDO::FETCH_ASSOC);
                     } catch (PDOException $e) {
                         // Logt eventuele databasefouten
                         file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
