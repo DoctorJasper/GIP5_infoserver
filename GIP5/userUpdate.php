@@ -62,6 +62,8 @@
             // Voer de query uit
             try {
                 $res2 = $pdo->prepare($query);
+                var_dump($res2);
+                die();
                 $res2->execute($values);
                 header("Location: userOverview.php"); // Redirect naar het overzicht
                 exit;
