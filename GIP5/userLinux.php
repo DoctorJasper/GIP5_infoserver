@@ -26,14 +26,15 @@ if (!isset($_GET["users"]) || $_GET["users"] == "") {
     header("Location: userOverview.php");
     exit;
 }
+else {    
+    $users = $_GET["users"];
+    $leerlingenIntNr = explode(',', $users);
+}
+
 
 // Controleer of er een POST-verzoek is gedaan en of de actie is ingesteld
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actie"])) { 
     $actie = $_POST["actie"];
-    $users = $_GET["users"];
-    $leerlingenIntNr = explode(',', $users);
-    var_dump($leerlingenIntNr);
-    die();
     handleAction($actie, $leerlingenIntNr, $ss); // Roep de handleAction functie aan
 }
 
