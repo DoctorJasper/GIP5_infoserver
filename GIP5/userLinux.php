@@ -39,11 +39,11 @@
     
     # user lijst -----------------------------------------------------------------------------------------
     foreach ($leerlingenIntNr as $leerlingIntNr) {
+        var_dump("ok");
+        die();
         try {
             $query = "SELECT `naam`,`voornaam`,`klas` FROM `tblGebruiker` WHERE `internNr` = :NR";
             $values = [":NR" => $leerlingIntNr];
-            var_dump($query);
-            die();
         
             $res2 = $pdo->prepare($query);
             $res2->execute($values);
