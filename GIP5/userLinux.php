@@ -26,36 +26,37 @@
         $toast->set("fa-exclamation-triangle", "Opmerking", "", "U moet eerst een gebruiker selecteren", "warning");
         header("Location: userOverview.php");
         exit;
-    }
+    } 
 
     // Controleer of er een POST-verzoek is gedaan en of de actie is ingesteld
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actie"])) { 
-        $actie = $_POST["actie"];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+        if (isset($_POST["actie"])) {
+            $actie = $_POST["actie"];
+        }
+        
         $users = $_GET["users"];
         $leerlingenIntNr = explode(',', $users);
         handleAction($actie, $leerlingenIntNr, $ss); // Roep de handleAction functie aan
-    }
 
-    
-    var_dump("ok");
-    die();
-    # user lijst -----------------------------------------------------------------------------------------
-    foreach ($leerlingenIntNr as $leerlingIntNr) {
-        try {
-            $query = "SELECT `naam`,`voornaam`,`klas` FROM `tblGebruiker` WHERE `internNr` = :NR";
-            $values = [":NR" => $leerlingIntNr];
-        
-            $res2 = $pdo->prepare($query);
-            $res2->execute($values);
-            $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
+        # user lijst -----------------------------------------------------------------------------------------
+        foreach ($leerlingenIntNr as $leerlingIntNr) {
+            try {
+                $query = "SELECT `naam`,`voornaam`,`klas` FROM `tblGebruiker` WHERE `internNr` = :NR";
+                $values = [":NR" => $leerlingIntNr];
+            
+                $res = $pdo->prepare($query);
+                $res->execute($values);
+                $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
+            }
+            catch (PDOException $e) {
+                // Log eventuele databasefouten en geef een foutmelding weer
+                file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+            } 
         }
-        catch (PDOException $e) {
-            // Log eventuele databasefouten en geef een foutmelding weer
-            file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-        } 
     }
 
+       
     // Functie om de actie te verwerken
     function handleAction($actie, $leerlingenIntNr, $ss) {
         global $pdo, $toast, $tabel, $timestamp; // Haal de pdo, toast, ... op van de globale variabelen
