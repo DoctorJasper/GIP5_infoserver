@@ -64,8 +64,6 @@
             try {
                 $res2 = $pdo->prepare($query);
                 $res2->execute($values);
-                var_dump($res2);
-                die();
                 header("Location: userOverview.php"); // Redirect naar het overzicht
                 exit;
             } catch (PDOException $e) {
