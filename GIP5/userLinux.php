@@ -29,14 +29,9 @@
     } 
 
     // Controleer of er een POST-verzoek is gedaan en of de actie is ingesteld
-    if ($_SERVER["REQUEST_METHOD"] == "POST") { 
-        if (isset($_POST["actie"])) {
-            $actie = $_POST["actie"];
-        }
-        
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {       
         $users = $_GET["users"];
         $leerlingenIntNr = explode(',', $users);
-        handleAction($actie, $leerlingenIntNr, $ss); // Roep de handleAction functie aan
 
         # user lijst -----------------------------------------------------------------------------------------
         foreach ($leerlingenIntNr as $leerlingIntNr) {
@@ -53,6 +48,11 @@
                 file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
             } 
+        }     
+        
+        if (isset($_POST["actie"])) {
+            $actie = $_POST["actie"];
+            handleAction($actie, $leerlingenIntNr, $ss); // Roep de handleAction functie aan
         }
     }
 
