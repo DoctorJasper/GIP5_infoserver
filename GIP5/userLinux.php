@@ -36,6 +36,26 @@
         handleAction($actie, $leerlingenIntNr, $ss); // Roep de handleAction functie aan
     }
 
+    
+    # user lijst -----------------------------------------------------------------------------------------
+    foreach ($leerlingenIntNr as $leerlingIntNr) {
+        try {
+            $query = "SELECT `naam`,`voornaam`,`klas` FROM `tblGebruiker` WHERE `internNr` = :NR";
+            $values = [":NR" => $leerlingIntNr];
+        
+            $res2 = $pdo->prepare($query);
+            $res2->execute($values);
+            $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
+            var_dump($gebruikers);
+            die();
+        }
+        catch (PDOException $e) {
+            // Log eventuele databasefouten en geef een foutmelding weer
+            file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        } 
+    }
+
     // Functie om de actie te verwerken
     function handleAction($actie, $leerlingenIntNr, $ss) {
         global $pdo, $toast, $tabel, $timestamp; // Haal de pdo, toast, ... op van de globale variabelen
@@ -241,26 +261,6 @@
             }
         }
     }
-
-    # user lijst -----------------------------------------------------------------------------------------
-    foreach ($leerlingenIntNr as $leerlingIntNr) {
-        try {
-            $query = "SELECT `naam`,`voornaam`,`klas` FROM `tblGebruiker` WHERE `internNr` = :NR";
-            $values = [":NR" => $leerlingIntNr];
-        
-            $res2 = $pdo->prepare($query);
-            $res2->execute($values);
-            $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
-            var_dump($gebruikers);
-            die();
-        }
-        catch (PDOException $e) {
-            // Log eventuele databasefouten en geef een foutmelding weer
-            file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-        } 
-    }
-
 ?>
 
 <?php require('../startHTML.php'); ?>
