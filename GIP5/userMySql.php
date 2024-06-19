@@ -247,7 +247,7 @@
         margin-top: 40px;
     }
     #scrollable-table {
-        height: 300px;
+        height: 250px;
         overflow-y: auto;
         margin-bottom: 20px;
     }
@@ -265,6 +265,7 @@
         <h3 class="ml-5">Beheer MySql accounts</h3>
     </div>
     <div class="card-body">
+        <a href="userOverview.php"><button class="btn btn-primary">terug</button></a>
         <div class="row center">
             <div class="col-sm-4">
                 <div class="card">
