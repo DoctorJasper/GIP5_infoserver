@@ -267,27 +267,6 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
         margin-right: 75px; 
         margin-top: 40px;
     }
-    .action-btn {
-        width: 120px;
-        height: 120px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 10px;
-    }
-    .action-btn i {
-        font-size: 48px;
-    }
-    .btn-success {
-        background-color: #28a745;
-        border: none;
-        color: white;
-    }
-    .btn-danger {
-        background-color: #dc3545;
-        border: none;
-        color: white;
-    }
     #scrollable-table {
         height: 300px;
         overflow-y: auto;
