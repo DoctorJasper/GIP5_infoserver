@@ -318,10 +318,12 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                         </form>
                     </div>
                     <div class="card-body">    
-                        <?php foreach ($tabel as $line) : ?>
-                            <span class="badge bg-<?php echo $line[1] ;?>"><h3><?php echo $line[0] ;?></h3></span>
-                            <p></p>
-                        <?php endforeach; ?>
+                        <div id="scrollable-table">   
+                            <?php foreach ($tabel as $line) : ?>
+                                <span class="badge bg-<?php echo $line[1] ;?>"><h3><?php echo $line[0] ;?></h3></span>
+                                <p></p>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             </div>
