@@ -153,7 +153,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             }
             
             // mail versturen
-            /*$bericht = "<html><body>";
+            $bericht = "<html><body>";
             $bericht .= "<p>Beste,</p>";
             $bericht .= "<p></p>";
             $bericht .= "<p>Dit is uw huidige linux wachtwoord: <strong>" . htmlspecialchars($password) . "</strong></p>";
@@ -171,7 +171,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 $message = "Bericht is goed verzonden.";
             } else {
                 $message = "Bericht is niet verzonden.";
-            }*/
+            }
         }
     }
 
