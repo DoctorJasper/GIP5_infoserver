@@ -19,6 +19,7 @@
     $actie = ""; // Initialiseer de actie variabele
 
     $tabel = []; // Initialiseer een array voor de table
+    $gebruikers = [];
 
     // Controleer of er gebruikers zijn geselecteerd, zo niet, geef een opmerking en stuur de gebruiker terug naar het overzicht
     if (!isset($_GET["users"]) || $_GET["users"] == "") {
