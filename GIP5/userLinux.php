@@ -249,6 +249,7 @@
         
             $res2 = $pdo->prepare($query);
             $res2->execute($values);
+            $row2 = $res->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $e) {
             // Log eventuele databasefouten en geef een foutmelding weer
