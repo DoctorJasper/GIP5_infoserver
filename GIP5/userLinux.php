@@ -86,7 +86,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             // Genereer een willekeurig wachtwoord
             $password = "";
             for ($i = 0; $i < 6; $i++) {
-                $password .= $passwdCharacter[rand(strlen($passwdCharacter) - 1)];
+                $password .= $passwdCharacter[rand(0, strlen($passwdCharacter) - 1)];
             }
 
             $teller = 0;
