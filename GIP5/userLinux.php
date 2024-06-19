@@ -294,7 +294,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
         color: white;
     }
     #scrollable-table {
-        height: 400px;
+        height: 350px;
         overflow-y: auto;
         margin-bottom: 20px;
     }
