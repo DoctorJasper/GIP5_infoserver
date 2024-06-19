@@ -312,7 +312,7 @@
                             <h3 class="ml-5">Users</h3>
                         </div>
                         <div class="card-body">
-                            <?php if ($res->rowCount() != 0) : ?>
+                            <?php if ($res2->rowCount() != 0) : ?>
                                 <?php while($row2 = $res2->fetch(PDO::FETCH_ASSOC)) : ?>
                                     <div class="d-flex align-items-center mb-3">
                                         <p><?php echo $row2["voornaam"] . $row2["naam"];?></p>
