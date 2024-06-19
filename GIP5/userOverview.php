@@ -92,8 +92,7 @@
                 <div class="ms-auto">
                     <button type="submit" form="form1" id="delete" name="btnDeleteUsers" class="btn btn-danger me-2" style="display: none">verwijderen</button>
                     <button type="submit" form="form1" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>     
-                </div>                
-                <div class="ms-auto">
+                    &nbsp;
                     <span>                        
                         <?php if ($deleted): ?>
                             <a href="userOverview.php"><i class="fas fa-users fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="actieve gebruikers"></i></a>  
