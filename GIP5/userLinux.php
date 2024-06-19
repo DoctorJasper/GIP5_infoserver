@@ -89,7 +89,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 }
             }      
             else {       
-                array_push($tabel, array("User met internNr '$leerlingIntNr' bestaat al", "warning"));         
+                array_push($tabel, array("User met internnummer '$leerlingIntNr' bestaat al", "warning"));         
             }      
         }
 
