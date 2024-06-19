@@ -313,7 +313,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                         <div class="d-flex align-items-center mb-3">
                             <?php foreach ($gebruikers as $gebruiker) : ?>
                                 <p><?php echo $gebruiker["voornaam"] . $gebruiker["naam"];?></p>
-                                <span class="ms-auto"><?php echo $gebruiker["klas"];?></span>
+                                <p class="ms-auto"><?php echo $gebruiker["klas"];?></p>
                             <?php endforeach; ?>
                         </div>
                     </div>
