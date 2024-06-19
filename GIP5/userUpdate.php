@@ -111,6 +111,7 @@
                     <input class="form-check-input" name="admin" type="checkbox" role="switch" id="flexSwitchCheckDefault" <?php if (!$post) { if(isset($row["admin"]) && $row["admin"] == 1) echo "checked"; };?>>
                     <label class="form-check-label" for="flexSwitchCheckDefault">Admin</label>
                 </div>
+                <input type="hidden" name="idGeb" id="IdGeb" value="<?php if (!$post) echo $row['idGeb']; ?>">
                 <br>
                 <button type="submit" class="btn btn-success">Gebruiker updaten</button>
             </form>
