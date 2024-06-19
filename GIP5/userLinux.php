@@ -251,6 +251,8 @@
             $res2 = $pdo->prepare($query);
             $res2->execute($values);
             $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
+            var_dump($gebruikers);
+            die();
         }
         catch (PDOException $e) {
             // Log eventuele databasefouten en geef een foutmelding weer
@@ -315,7 +317,6 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <?php foreach ($gebruikers as $gebruiker) : ?>
-                                    <?php var_dump($gebruiker) ;?>
                                     <p><?php echo $gebruiker["voornaam"] . $gebruiker["naam"];?></p>
                                     <p class="ms-auto"><?php echo $gebruiker["klas"];?></p>
                                 <?php endforeach; ?>
