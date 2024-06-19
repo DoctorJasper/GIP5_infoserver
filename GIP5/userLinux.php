@@ -316,6 +316,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <?php foreach ($gebruikers as $gebruiker) : ?>
+                                    <?php var_dump($gebruiker);?>
                                     <p><?php echo $gebruiker["voornaam"] . $gebruiker["naam"];?></p>
                                     <p class="ms-auto"><?php echo $gebruiker["klas"];?></p>
                                 <?php endforeach; ?>
