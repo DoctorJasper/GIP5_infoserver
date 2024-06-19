@@ -249,7 +249,7 @@
         
             $res2 = $pdo->prepare($query);
             $res2->execute($values);
-            $row2 = $res->fetch(PDO::FETCH_ASSOC);
+            $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $e) {
             // Log eventuele databasefouten en geef een foutmelding weer
@@ -313,8 +313,10 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <p><?php echo $row2["voornaam"] . $row2["naam"];?></p>
-                                <p class="ms-auto"><?php echo $row2["klas"];?></p>
+                                <?php foreach ($gebruikers as $gebruiker) : ?>
+                                    <p><?php echo $gebruiker["voornaam"] . $gebruiker["naam"];?></p>
+                                    <p class="ms-auto"><?php echo $gebruiker["klas"];?></p>
+                                <?php endforeach; ?>
                             </div>                     
                         </div>
                     </div>       
