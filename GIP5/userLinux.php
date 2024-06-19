@@ -37,17 +37,11 @@ else {
         $res = $pdo->prepare($query);
         $res->execute();        
         $gebruikers = $res->fetchAll(PDO::FETCH_ASSOC);
-
-        // Succesmelding
-        $toast->set("fa-exclamation-triangle", "Gebruikers","", "Gebruikers met internnummer '$idSorted' geactiveerd","success");
-        // Loggen van de actie
-        file_put_contents("log.txt", $timestamp." || Gebruikers met internnummer '$idSorted' geactiveerd".PHP_EOL, FILE_APPEND);
     } catch (PDOException $e) 
     {   
-        // Foutmelding als de query mislukt
-        $toast->set("fa-exclamation-triangle", "Error","", "Gefaald om gebruikers met internnummer '$idSorted' te activeren","danger");
-        // Loggen van de fout
-        file_put_contents("log.txt", $timestamp." || Activeren van gebruikers met internnummer '$idSorted' mislukt".PHP_EOL, FILE_APPEND);
+        // Log eventuele databasefouten en geef een foutmelding weer
+        file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+        $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
     }
 }
 
