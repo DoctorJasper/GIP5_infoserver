@@ -87,7 +87,7 @@
             FROM tblGebruiker g
             JOIN tblAccounts a ON g.internNr = a.internnrGebruiker
             JOIN tblPlatform p ON a.idPlatform = p.idPlt
-            WHERE g.internNr = :intNr";
+            WHERE g.internNr = :intNr ORDER BY a.username DESC";
 
     $values = [":intNr" => $_SESSION["internalnr"]];
 
