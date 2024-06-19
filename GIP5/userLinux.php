@@ -111,8 +111,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 $res = $pdo->prepare($query1); // Bereid de query voor
                 $res->execute(); // Voer de query uit
                 $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
-                $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaam
-                $commando = str_replace("wachtwoord", $password, $commando); // Vervang placeholders met het wachtwoord
+                $commando = str_replace("gebruikersnaam", $username, $commando); // Vervang placeholders met de gebruikersnaamx
 
                 // Voer het commando uit en log het
                 file_put_contents("log.txt", $timestamp . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND);

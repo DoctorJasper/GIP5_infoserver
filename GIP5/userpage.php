@@ -53,6 +53,28 @@
                     file_put_contents("log.txt", $timestamp . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 }
             }
+            if($platform == "Linux") {
+                $query2 = "SELECT `commandos` FROM `tblCommandos` WHERE `idPlatform` = 1 AND `type` = 'update'";
+
+                try {
+
+                    file_put_contents("pw.txt",$username.":".$newPasswd);
+
+                    // Haal het commando op om het wachtwoord te wijzigen en voer het uit
+                    $res = $pdo->prepare($query2); // Bereid de query voor
+                    $res->execute(); // Voer de query uit
+                    $commando = $res->fetch(PDO::FETCH_ASSOC)['commandos']; // Haal het commando op
+                    file_put_contents("log.txt", $timestamp . " || Command to execute: " . $commando . PHP_EOL, FILE_APPEND); // Log het commando
+                    exec($commando); // Voer het commando uit
+    
+                    // Geef een succesmelding weer
+                    array_push($tabel, array("Linux gebruiker $username toegevoegd", "success"));
+                } 
+                catch (Exception $e) {
+                    // Logt eventuele commando-uitvoeringsfouten
+                    file_put_contents("log.txt", $timestamp . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                }
+            }
         }
         else {
             $post = true;
