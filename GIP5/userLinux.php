@@ -42,12 +42,12 @@
         try {
             $query = "SELECT `naam`,`voornaam`,`klas` FROM `tblGebruiker` WHERE `internNr` = :NR";
             $values = [":NR" => $leerlingIntNr];
+            var_dump($query);
+            die();
         
             $res2 = $pdo->prepare($query);
             $res2->execute($values);
             $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
-            var_dump($query);
-            die();
         }
         catch (PDOException $e) {
             // Log eventuele databasefouten en geef een foutmelding weer
