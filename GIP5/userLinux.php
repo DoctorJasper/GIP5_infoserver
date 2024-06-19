@@ -314,7 +314,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
         <div class="row center">
             <div class="col-sm-4">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-success text-white">
                         <h3 class="ml-5">Users</h3>
                     </div>
                     <div class="card-body">  
@@ -330,21 +330,27 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 </div>
             </div>
             <div class="col-sm-8 text-center">
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?users=' . $_GET['users']; ?>">
-                    <div class="button-container">
-                        <button type="submit" name="actie" value="toevoegen" class="btn btn-success action-btn">
-                            <i class="fas fa-square-check" data-bs-toggle="tooltip" data-bs-placement="top" title="Toevoegen user"></i>
-                        </button>
-                        <button type="submit" name="actie" value="verwijderen" class="btn btn-danger action-btn">
-                            <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijderen user"></i>
-                        </button>
+                <div class="card">
+                    <div class="card-header">
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?users=' . $_GET['users']; ?>">
+                            <div class="button-container">
+                                <button type="submit" name="actie" value="toevoegen" class="btn btn-success action-btn">
+                                    <i class="fas fa-square-check" data-bs-toggle="tooltip" data-bs-placement="top" title="Toevoegen user"></i>
+                                </button>
+                                <button type="submit" name="actie" value="verwijderen" class="btn btn-danger action-btn">
+                                    <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijderen user"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
-                <br><br>
-                <?php foreach ($tabel as $line) : ?>
-                    <span class="badge bg-<?php echo $line[1] ;?>"><h3><?php echo $line[0] ;?></h3></span>
-                    <p></p>
-                <?php endforeach; ?>
+                    <div class="card-body">    
+                        <br>
+                        <?php foreach ($tabel as $line) : ?>
+                            <span class="badge bg-<?php echo $line[1] ;?>"><h3><?php echo $line[0] ;?></h3></span>
+                            <p></p>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
