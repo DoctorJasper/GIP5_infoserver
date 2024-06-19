@@ -29,6 +29,8 @@ if (!isset($_GET["users"]) || $_GET["users"] == "") {
 else {    
     $users = $_GET["users"];
     $leerlingenIntNr = explode(',', $users);
+    var_dump($users);
+    die();
 }
 
 
