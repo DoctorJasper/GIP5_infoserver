@@ -267,6 +267,9 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
         margin-right: 75px; 
         margin-top: 40px;
     }
+    .terug {
+        margin-left: 75px;
+    }
     #scrollable-table {
         height: 250px;
         overflow-y: auto;
@@ -285,7 +288,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
         <h3 class="ml-5">Beheer Linux accounts</h3>
     </div>
     <div class="card-body">
-        <a href="userOverview.php"><button class="btn btn-primary">terug</button></a>
+        <a href="userOverview.php"><button class="btn btn-primary terug">terug</button></a>
         <div class="row center">
             <div class="col-sm-4">
                 <div class="card">
