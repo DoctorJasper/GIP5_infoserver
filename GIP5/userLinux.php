@@ -293,6 +293,14 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
         border: none;
         color: white;
     }
+    #scrollable-table {
+        height: 400px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
+    body {
+        overflow: hidden;
+    }
 </style>
 
 <?php require('../navbar.php'); ?>
@@ -309,13 +317,15 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                     <div class="card-header bg-primary text-white">
                         <h3 class="ml-5">Users</h3>
                     </div>
-                    <div class="card-body">                        
+                    <div class="card-body">  
+                        <div id="scrollable-table">                      
                             <?php foreach ($gebruikers as $gebruiker) : ?>
                                 <div class="d-flex align-items-center mb-3">
                                     <p class="fw-bold"><?php echo $gebruiker["voornaam"] . " " . $gebruiker["naam"];?></p>
                                     <p class="ms-auto"><?php echo $gebruiker["klas"];?></p>
                                 </div>
                             <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             </div>
