@@ -37,10 +37,10 @@
     }
 
     
+    var_dump("ok");
+    die();
     # user lijst -----------------------------------------------------------------------------------------
     foreach ($leerlingenIntNr as $leerlingIntNr) {
-        var_dump("ok");
-        die();
         try {
             $query = "SELECT `naam`,`voornaam`,`klas` FROM `tblGebruiker` WHERE `internNr` = :NR";
             $values = [":NR" => $leerlingIntNr];
