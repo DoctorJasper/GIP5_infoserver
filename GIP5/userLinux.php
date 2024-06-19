@@ -317,8 +317,8 @@
                             <div class="d-flex align-items-center mb-3">
                                 <?php foreach ($gebruikers as $gebruiker) : ?>
                                     <?php var_dump($gebruiker);?>
-                                    <p><?php echo $gebruiker["voornaam"] . $gebruiker["naam"];?></p>
-                                    <p class="ms-auto"><?php echo $gebruiker["klas"];?></p>
+                                    <p><?php echo $gebruiker . $gebruiker;?></p>
+                                    <p class="ms-auto"><?php echo $gebruiker;?></p>
                                 <?php endforeach; ?>
                             </div>                     
                         </div>
