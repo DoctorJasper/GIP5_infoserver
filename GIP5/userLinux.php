@@ -46,7 +46,7 @@
             $res2 = $pdo->prepare($query);
             $res2->execute($values);
             $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
-            var_dump($gebruikers);
+            var_dump($query);
             die();
         }
         catch (PDOException $e) {
