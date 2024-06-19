@@ -310,12 +310,12 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                         <h3 class="ml-5">Users</h3>
                     </div>
                     <div class="card-body">                        
-                        <div class="d-flex align-items-center mb-3">
                             <?php foreach ($gebruikers as $gebruiker) : ?>
-                                <p><?php echo $gebruiker["voornaam"] . $gebruiker["naam"];?></p>
-                                <p class="ms-auto"><?php echo $gebruiker["klas"];?></p>
+                                <div class="d-flex align-items-center mb-3">
+                                    <p><?php echo $gebruiker["voornaam"] . $gebruiker["naam"];?></p>
+                                    <p class="ms-auto"><?php echo $gebruiker["klas"];?></p>
+                                </div>
                             <?php endforeach; ?>
-                        </div>
                     </div>
                 </div>
             </div>
