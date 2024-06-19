@@ -305,7 +305,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             </div>
             <div class="col-sm-8 text-center">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-info">
                         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?users=' . $_GET['users']; ?>">
                             <button type="submit" name="actie" value="toevoegen" class="btn btn-success action-btn">
                                 toevoegen
