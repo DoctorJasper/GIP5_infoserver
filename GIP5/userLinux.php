@@ -76,13 +76,19 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
             }      
         }
 
+        $passwdCharacter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
         // Loop door elke leerling en voer acties uit
         foreach ($namenLeerlingen as $leerlingIntNr => $naamLeerling) {
             // Maak gebruikersnaam aan (kleine letters)
             $username = strtolower($naamLeerling["voornaam"]);
 
             // Genereer een willekeurig wachtwoord
-            $password = mt_rand(1000, 9999);
+            $password = "";
+            for ($i = 0; $i < 6; $i++) {
+                $password .= $passwdCharacter[rand(strlen($passwdCharacter) - 1)];
+            }
+
             $teller = 0;
 
             // Haal de commando's op om gebruikers toe te voegen en wachtwoorden te wijzigen
@@ -119,7 +125,8 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
 
                 // Sla het wachtwoord op in een tekstbestand
                 file_put_contents("pw.txt",$username.":".$password);
-
+                file_put_contents("log.txt", $timestamp . " || Passwd data: " . $username . ": " . $password . PHP_EOL, FILE_APPEND); // Log het commando
+                
                 // Haal het commando op om het wachtwoord te wijzigen en voer het uit
                 $res = $pdo->prepare($query2); // Bereid de query voor
                 $res->execute(); // Voer de query uit
@@ -151,25 +158,29 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 array_push($tabel, array("Gefaald om database user $username toe te voegen", "danger"));
             }
             
-            // mail versturen
-            $bericht = "<html><body>";
-            $bericht .= "<p>Beste,</p>";
-            $bericht .= "<p></p>";
-            $bericht .= "<p>Dit is uw huidige linux wachtwoord: <strong>" . htmlspecialchars($password) . "</strong></p>";
-            $bericht .= "<p><a href='http://83.217.67.87/gip/GIP5/userpage.php?id=$leerlingIntNr'>Klik hier om uw wachtwoord te veranderen</a>.</p>";
-            $bericht .= "<p></p>";
-            $bericht .= "<p>mvg</p>";
-            $bericht .= "</body></html>";
+            $sendMail = false;
 
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-            // Assuming $ss->bericht function supports headers
-            $result = $ss->bericht("115759", $leerlingIntNr, "Linux Code", $bericht, $headers);
-            if ($result) {
-                $message = "Bericht is goed verzonden.";
-            } else {
-                $message = "Bericht is niet verzonden.";
+            if ($sendMail) {
+                // mail versturen
+                $bericht = "<html><body>";
+                $bericht .= "<p>Beste,</p>";
+                $bericht .= "<p></p>";
+                $bericht .= "<p>Dit is uw huidige linux wachtwoord: <strong>" . htmlspecialchars($password) . "</strong></p>";
+                $bericht .= "<p><a href='http://83.217.67.87/gip/GIP5/userpage.php?id=$leerlingIntNr'>Klik hier om uw wachtwoord te veranderen</a>.</p>";
+                $bericht .= "<p></p>";
+                $bericht .= "<p>mvg</p>";
+                $bericht .= "</body></html>";
+    
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    
+                // Assuming $ss->bericht function supports headers
+                $result = $ss->bericht("115759", $leerlingIntNr, "Linux Code", $bericht, $headers);
+                if ($result) {
+                    $message = "Bericht is goed verzonden.";
+                } else {
+                    $message = "Bericht is niet verzonden.";
+                }
             }
         }
     }
