@@ -89,17 +89,19 @@
                 <!-- BUTTON: KIEZEN WELK ACCOUNT --> 
                 <button type="button" class="btn btn-success me-2" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts">accounts aanmaken</button>
 
-
-                <span class="ms-auto">
+                <div class="ms-auto">
                     <button type="submit" form="form1" id="delete" name="btnDeleteUsers" class="btn btn-danger me-2" style="display: none">verwijderen</button>
                     <button type="submit" form="form1" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>
-                    
-                    <?php if ($deleted): ?>
-                        <a href="userOverview.php"><i class="fas fa-users fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="actieve gebruikers"></i></a>  
-                    <?php else: ?>
-                        <a href="userOverview.php?deleted"><i class="fas fa-users-slash fs-3 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>               
-                    <?php endif; ?>
-                </span>
+                        
+                    <span>
+                        
+                        <?php if ($deleted): ?>
+                            <a href="userOverview.php"><i class="fas fa-users fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="actieve gebruikers"></i></a>  
+                        <?php else: ?>
+                            <a href="userOverview.php?deleted"><i class="fas fa-users-slash fs-3 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="verwijderde gebruikers"></i></a>               
+                        <?php endif; ?>
+                    </span>
+                </div>
             </div>
            <br>
             <div id="scrollable-table">
