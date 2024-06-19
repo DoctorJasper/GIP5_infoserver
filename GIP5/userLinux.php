@@ -29,34 +29,32 @@
     } 
 
     // Controleer of er een POST-verzoek is gedaan en of de actie is ingesteld
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {       
         $users = $_GET["users"];
         $leerlingenIntNr = explode(',', $users);
 
-        # user lijst -----------------------------------------------------------------------------------------
-        foreach ($leerlingenIntNr as $leerlingIntNr) {
-            try {
-                $query = "SELECT `naam`,`voornaam`,`klas` FROM `tblGebruiker` WHERE `internNr` = :NR";
-                $values = [":NR" => $leerlingIntNr];
-            
-                $res = $pdo->prepare($query);
-                $res->execute($values);
-                $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
-
-                var_dump($gebruikers);
-                die();
-            }
-            catch (PDOException $e) {
-                // Log eventuele databasefouten en geef een foutmelding weer
-                file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
-            } 
-        }     
+    # user lijst -----------------------------------------------------------------------------------------
+    foreach ($leerlingenIntNr as $leerlingIntNr) {
+        try {
+            $query = "SELECT `naam`,`voornaam`,`klas` FROM `tblGebruiker` WHERE `internNr` = :NR";
+            $values = [":NR" => $leerlingIntNr];
         
-        if (isset($_POST["actie"])) {
-            $actie = $_POST["actie"];
-            handleAction($actie, $leerlingenIntNr, $ss); // Roep de handleAction functie aan
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+            $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
+
+            var_dump($gebruikers);
+            die();
         }
+        catch (PDOException $e) {
+            // Log eventuele databasefouten en geef een foutmelding weer
+            file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        } 
+    }     
+        
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actie"])) {      
+        $actie = $_POST["actie"];
+        handleAction($actie, $leerlingenIntNr, $ss); // Roep de handleAction functie aan
     }
 
        
