@@ -31,12 +31,28 @@
         header("Location: userOverview.php");
         exit;
     }
+    else {    
+        $users = $_GET["users"];
+        $leerlingenIntNr = explode(',', $users);
+    
+        $query = "SELECT `voornaam`, `naam`, `klas` FROM `tblGebruiker` WHERE `internNr` IN($users)";
+    
+        // Uitvoeren van de query
+        try {
+            $res = $pdo->prepare($query);
+            $res->execute();        
+            $gebruikers = $res->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) 
+        {   
+            // Log eventuele databasefouten en geef een foutmelding weer
+            file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+        }
+    }
 
     // Als het verzoeksmethode POST is en er een actie is ingesteld, wordt de actie afgehandeld
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actie"])) { 
         $actie = $_POST["actie"];
-        $users = $_GET["users"];
-        $leerlingenIntNr = explode(',', $users);
         handleAction($actie, $leerlingenIntNr);
     }
 
@@ -260,26 +276,54 @@
 
 <?php require('../navbar.php'); ?>
 
+
 <br><br>
-<div class="row center">
-    <div class="col-sm-12 text-center">
-        <div class="card">
-            <div class="card-body">
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?users=' . $_GET['users']; ?>">
-                    <div class="button-container">
-                        <button type="submit" name="actie" value="toevoegen" class="btn btn-success action-btn">
-                            <i class="fas fa-square-check" data-bs-toggle="tooltip" data-bs-placement="top" title="Toevoegen user"></i>
-                        </button>
-                        <button type="submit" name="actie" value="verwijderen" class="btn btn-danger action-btn">
-                            <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijderen user"></i>
-                        </button>
+<div class="card">
+    <div class="card-header bg-primary text-white text-center">
+        <h3 class="ml-5">Beheer MySql accounts</h3>
+    </div>
+    <div class="card-body">
+        <div class="row center">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h3 class="ml-5">Users</h3>
                     </div>
-                </form>
-                <br><br>
-                <?php foreach ($tabel as $line) : ?>
-                    <span class="badge bg-<?php echo $line[1] ;?>"><h3><?php echo $line[0] ;?></h3></span>
-                    <p></p>
-                <?php endforeach; ?>
+                    <div class="card-body">  
+                        <div id="scrollable-table">                      
+                            <?php foreach ($gebruikers as $gebruiker) : ?>
+                                <div class="d-flex align-items-center mb-3">
+                                    <p class="fw-bold"><?php echo $gebruiker["voornaam"] . " " . $gebruiker["naam"];?></p>
+                                    <p class="ms-auto"><?php echo $gebruiker["klas"];?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 text-center">
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?users=' . $_GET['users']; ?>">
+                            <button type="submit" name="actie" value="toevoegen" class="btn btn-success action-btn">
+                                toevoegen
+                                <i class="fas fa-square-check" data-bs-toggle="tooltip" data-bs-placement="top" title="Toevoegen user"></i>
+                            </button>
+                            <button type="submit" name="actie" value="verwijderen" class="btn btn-danger action-btn">
+                                verwijderen
+                                <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Verwijderen user"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="card-body">    
+                        <div id="scrollable-table">   
+                            <?php foreach ($tabel as $line) : ?>
+                                <span class="badge bg-<?php echo $line[1] ;?>"><h3><?php echo $line[0] ;?></h3></span>
+                                <p></p>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
