@@ -46,7 +46,6 @@
     } else {
         // Als het een POST-verzoek is
         $post = true;
-        $idGeb = $_POST["idGeb"]; // Haal gegevens uit het POST-verzoek
         $naam = trim($_POST["naam"]); 
         $voornaam = trim($_POST["voornaam"]);
         $email = trim($_POST["email"]);
