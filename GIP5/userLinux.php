@@ -29,8 +29,28 @@ if (!isset($_GET["users"]) || $_GET["users"] == "") {
 else {    
     $users = $_GET["users"];
     $leerlingenIntNr = explode(',', $users);
-    var_dump($users);
-    die();
+
+    $query = "SELECT `voornaam`, `naam`, `klas` FROM `tblGebruiker` WHERE `internNr` IN($users)";
+
+    // Uitvoeren van de query
+    try {
+        $res = $pdo->prepare($query);
+        $res->execute();        
+        $gebruikers = $res->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($gebruikers);
+        die();
+
+        // Succesmelding
+        $toast->set("fa-exclamation-triangle", "Gebruikers","", "Gebruikers met internnummer '$idSorted' geactiveerd","success");
+        // Loggen van de actie
+        file_put_contents("log.txt", $timestamp." || Gebruikers met internnummer '$idSorted' geactiveerd".PHP_EOL, FILE_APPEND);
+    } catch (PDOException $e) 
+    {   
+        // Foutmelding als de query mislukt
+        $toast->set("fa-exclamation-triangle", "Error","", "Gefaald om gebruikers met internnummer '$idSorted' te activeren","danger");
+        // Loggen van de fout
+        file_put_contents("log.txt", $timestamp." || Activeren van gebruikers met internnummer '$idSorted' mislukt".PHP_EOL, FILE_APPEND);
+    }
 }
 
 
