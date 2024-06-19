@@ -42,6 +42,9 @@
                 $res = $pdo->prepare($query);
                 $res->execute($values);
                 $gebruikers = $res->fetch(PDO::FETCH_ASSOC);
+
+                var_dump($gebruikers);
+                die();
             }
             catch (PDOException $e) {
                 // Log eventuele databasefouten en geef een foutmelding weer
