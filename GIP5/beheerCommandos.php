@@ -239,6 +239,7 @@
     <div class="container-fluid">
         <div class="card-body">
             <div class="row">
+                <!-- Linux --------------------------------------------------------------------------------------------------------------------------------- -->
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header bg-warning">
@@ -285,7 +286,7 @@
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
-                                                <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
+                                                <textarea id="text1" class="md-textarea form-control" name="linux2" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
                                                 &nbsp;
                                                 <span class="badge badge-secondary">verwijderen</span>
                                             </div>
@@ -309,7 +310,7 @@
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
-                                                <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
+                                                <textarea id="text1" class="md-textarea form-control" name="linux3" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
                                                 &nbsp;
                                                 <span class="badge badge-secondary">password</span>
                                             </div>
@@ -333,7 +334,7 @@
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
-                                                <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[5]["commandos"]; ?></textarea>
+                                                <textarea id="text1" class="md-textarea form-control" name="linux4" rows="2" disabled><?php echo $row[5]["commandos"]; ?></textarea>
                                                 &nbsp;
                                                 <span class="badge badge-secondary">update</span>
                                             </div>
@@ -348,7 +349,7 @@
                                         <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[7]["commandos"]; ?></textarea>
                                             &nbsp;
-                                            <span class="badge badge-secondary">update</span>
+                                            <span class="badge badge-secondary">check</span>
                                         </div>
                                     </div>
                                 <?php elseif ($command == "linux5") : ?>
@@ -357,9 +358,9 @@
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
-                                                <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[7]["commandos"]; ?></textarea>
+                                                <textarea id="text1" class="md-textarea form-control" name="linux5" rows="2" disabled><?php echo $row[7]["commandos"]; ?></textarea>
                                                 &nbsp;
-                                                <span class="badge badge-secondary">update</span>
+                                                <span class="badge badge-secondary">check</span>
                                             </div>
                                         </div>
                                     </form>
@@ -368,6 +369,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- MySQl --------------------------------------------------------------------------------------------------------------------------------- -->
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header bg-success bg-gradient">
@@ -378,7 +381,11 @@
                                 <a href="beheerCommandos.php?comm=MySql"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="5" disabled><?php echo $row[1]["commandos"]; ?></textarea>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[1]["commandos"]; ?></textarea>
+                                        &nbsp;
+                                        <span class="badge badge-secondary">toevoegen</span>
+                                    </div>
                                 </div>
                             <?php elseif ($command == "MySql") : ?>
                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
@@ -386,6 +393,8 @@
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
                                         <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql" rows="5"><?php echo $row[1]["commandos"]; ?></textarea>
+                                        &nbsp;
+                                        <span class="badge badge-secondary">toevoegen</span>
                                     </div>
                                 </form>
                             <?php endif; ?>
@@ -395,6 +404,8 @@
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
                                     <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
+                                    &nbsp;
+                                    <span class="badge badge-secondary">verwijderen</span>
                                 </div>
                             <?php elseif ($command == "MySql2") : ?>
                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
@@ -402,6 +413,8 @@
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
                                         <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql2" rows="2"><?php echo $row[4]["commandos"]; ?></textarea>
+                                        &nbsp;
+                                        <span class="badge badge-secondary">verwijderen</span>
                                     </div>
                                 </form>
                             <?php endif; ?>
@@ -411,6 +424,8 @@
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
                                     <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[6]["commandos"]; ?></textarea>
+                                    &nbsp;
+                                    <span class="badge badge-secondary">update</span>
                                 </div>
                             <?php elseif ($command == "MySql3") : ?>
                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
@@ -418,6 +433,8 @@
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
                                         <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql3" rows="2"><?php echo $row[6]["commandos"]; ?></textarea>
+                                        &nbsp;
+                                        <span class="badge badge-secondary">update</span>
                                     </div>
                                 </form>
                             <?php endif; ?>
