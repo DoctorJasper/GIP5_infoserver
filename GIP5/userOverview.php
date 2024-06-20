@@ -76,8 +76,8 @@
         overflow: hidden;
     }
     .dropdown-menu {
-        left: 0 !important;
-        right: auto !important;
+        left: auto !important;
+        right: 0 !important;
     }
 </style>
 <?php require('../navbar.php') ;?>
