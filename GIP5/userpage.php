@@ -179,7 +179,7 @@
                             <h4>PhpMyAdmin</h4>
                         </li>
                         <li class="video-item">
-                            <video src="tutorials/Untitled video - Made with Clipchamp.mp4" controls></video>
+                            <video src="tutorials/Untitled video - Made with Clipchamp (2).mp4" controls></video>
                             <h4>FileZilla</h4>
                         </li>
                         <li class="video-item">
