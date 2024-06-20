@@ -29,10 +29,10 @@
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["naam"])) {  
-        $query = $query . "ORDER BY $_GET['naam']";
+        $query = $query . "ORDER BY " . $_GET['naam'];
     } 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["klas"])) {  
-        $query = $query . "ORDER BY $_GET['klas']";
+        $query = $query . "ORDER BY " . $_GET['klas'];
     } 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["linux"])) {  
     } 
