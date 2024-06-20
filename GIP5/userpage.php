@@ -144,7 +144,6 @@
         border-radius: 5px;
     }
 
-    /* Keyframes for auto-scrolling effect */
     @keyframes scrollVideos {
         0% {
             transform: translateX(0);
@@ -153,10 +152,10 @@
             transform: translateX(0);
         }
         85% {
-            transform: translateX(calc(-400px * 3)); /* Adjust this value based on the number of videos */
+            transform: translateX(calc(-400px * 3));
         }
         100% {
-            transform: translateX(calc(-400px * 3)); /* Adjust this value based on the number of videos */
+            transform: translateX(calc(-400px * 3));
         }
     }
 </style>
@@ -173,8 +172,8 @@
                 <div class="video-container">
                     <ul class="video-list">
                         <li class="video-item">
-                            <video src="tutorials/Eminem - Lose Yourself [HD].mp4" controls></video>
-                            <h4>Tutorial 1</h4>
+                            <video src="tutorials/MySQL_Tutorial_-_Made_with_Clipchamp_1718826012466.mp4" controls></video>
+                            <h4>PhpMyAdmin</h4>
                         </li>
                         <li class="video-item">
                             <video src="video2.mp4" controls></video>
