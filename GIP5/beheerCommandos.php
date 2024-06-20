@@ -288,7 +288,7 @@
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
-                                                <textarea id="text1" class="md-textarea form-control" name="linux2" rows="2"><?php echo $row[2]["commandos"]; ?></textarea>
+                                                <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux2" rows="2"><?php echo $row[2]["commandos"]; ?></textarea>
                                                 &nbsp;
                                                 <span class="badge badge-secondary">verwijderen</span>
                                             </div>
@@ -312,7 +312,7 @@
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
-                                                <textarea id="text1" class="md-textarea form-control" name="linux3" rows="2"><?php echo $row[3]["commandos"]; ?></textarea>
+                                                <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux3" rows="2"><?php echo $row[3]["commandos"]; ?></textarea>
                                                 &nbsp;
                                                 <span class="badge badge-secondary">password</span>
                                             </div>
@@ -336,7 +336,7 @@
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
-                                                <textarea id="text1" class="md-textarea form-control" name="linux4" rows="2"><?php echo $row[5]["commandos"]; ?></textarea>
+                                                <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux4" rows="2"><?php echo $row[5]["commandos"]; ?></textarea>
                                                 &nbsp;
                                                 <span class="badge badge-secondary">update</span>
                                             </div>
@@ -360,7 +360,7 @@
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
-                                                <textarea id="text1" class="md-textarea form-control" name="linux5" rows="2"><?php echo $row[7]["commandos"]; ?></textarea>
+                                                <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux5" rows="2"><?php echo $row[7]["commandos"]; ?></textarea>
                                                 &nbsp;
                                                 <span class="badge badge-secondary">check</span>
                                             </div>
