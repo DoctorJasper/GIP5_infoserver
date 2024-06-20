@@ -22,7 +22,7 @@
 
     // Initialiseer de variabelen
     $command = "";
-    $delay = 1;
+    $delay = 0.5;
 
     // Query om commando's op te halen uit de database
     $query = "SELECT commandos FROM `tblCommandos` c, `tblPlatform` p WHERE c.`idPlatform`=p.`idPlt`";
@@ -82,7 +82,7 @@
             // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
             $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'Linux DeleteUser' bewerkt","success");
             file_put_contents("log.txt", $timestamp." || Command veld van 'Linux DeleteUser' bewerkt".PHP_EOL, FILE_APPEND);
-            header("Location: beheerCommandos.php");
+            header("Refresh: $delay");
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
