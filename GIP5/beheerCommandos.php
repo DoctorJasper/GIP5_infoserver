@@ -256,7 +256,7 @@
                                         <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
                                             &nbsp;
-                                            <span class="badge badge-secondary">toevoegen</span>
+                                            <span class="badge badge-secondary">verwijderen</span>
                                         </div>
                                     </div>
                                 <?php elseif ($command == "linux2") : ?>
@@ -267,7 +267,7 @@
                                             <div class="d-flex align-items-center mb-3">
                                                 <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
                                                 &nbsp;
-                                                <span class="badge badge-secondary">toevoegen</span>
+                                                <span class="badge badge-secondary">verwijderen</span>
                                             </div>
                                         </div>
                                     </form>
@@ -280,7 +280,7 @@
                                         <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
                                             &nbsp;
-                                            <span class="badge badge-secondary">toevoegen</span>
+                                            <span class="badge badge-secondary">password</span>
                                         </div>
                                     </div>
                                 <?php elseif ($command == "linux3") : ?>
@@ -291,7 +291,7 @@
                                             <div class="d-flex align-items-center mb-3">
                                                 <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
                                                 &nbsp;
-                                                <span class="badge badge-secondary">toevoegen</span>
+                                                <span class="badge badge-secondary">password</span>
                                             </div>
                                         </div>
                                     </form>
@@ -304,7 +304,7 @@
                                         <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
                                             &nbsp;
-                                            <span class="badge badge-secondary">toevoegen</span>
+                                            <span class="badge badge-secondary">update</span>
                                         </div>
                                     </div>
                                 <?php elseif ($command == "linux4") : ?>
@@ -315,7 +315,7 @@
                                             <div class="d-flex align-items-center mb-3">
                                                 <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
                                                 &nbsp;
-                                                <span class="badge badge-secondary">toevoegen</span>
+                                                <span class="badge badge-secondary">update</span>
                                             </div>
                                         </div>
                                     </form>
