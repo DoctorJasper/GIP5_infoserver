@@ -129,7 +129,7 @@
         margin: 0;
         padding: 0;
         list-style: none;
-        animation: scrollVideos 10s linear infinite;
+        animation: scrollVideos 20s linear infinite;
     }
 
     .video-item {
