@@ -29,7 +29,7 @@
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["sort"])) {  
-        if ($_GET["sort"] == "naam") {
+        if ($_GET["sort"] == "voornaam") {
             $query = $query . " ORDER BY " . $_GET['sort'];      
         }  
         if ($_GET["sort"] == "klas") {
@@ -41,7 +41,7 @@
                       LEFT JOIN `tblAccounts` a ON g.`internNr` = a.`internnrGebruiker` 
                       LEFT JOIN `tblPlatform` p ON a.`idPlatform` = p.`idPlt` AND p.`platform` = 'Linux' 
                       WHERE g.`active` = 1 GROUP BY g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin` 
-                      ORDER BY MAX(p.`platform`) DESC";
+                      ORDER BY MAX(p.`platform`) DESC, g.`voornaam` ASC";
         }
         if ($_GET["sort"] == "mysql") {
             $query = "SELECT g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin`, MAX(p.`platform`) AS `platform` 
@@ -49,7 +49,7 @@
                       LEFT JOIN `tblAccounts` a ON g.`internNr` = a.`internnrGebruiker` 
                       LEFT JOIN `tblPlatform` p ON a.`idPlatform` = p.`idPlt` AND p.`platform` = 'MySql' 
                       WHERE g.`active` = 1 GROUP BY g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin` 
-                      ORDER BY MAX(p.`platform`) DESC";
+                      ORDER BY MAX(p.`platform`) DESC, g.`voornaam` ASC";
         }
     } 
     
@@ -137,7 +137,7 @@
                                                 Sort by
                                             </h6>
                                             <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=naam">naam                                                  
+                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=voornaam">voornaam                                                  
                                             </a>
                                             <a class="list-group-item list-group-item-action"
                                                 href="<?php echo $path ?>GIP5/userOverview.php?sort=klas">klas 
