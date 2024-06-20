@@ -117,7 +117,7 @@
        
             <div class="d-flex align-items-center mb-3">
                 <!-- BUTTON: KIEZEN WELK ACCOUNT --> 
-                <button type="button" class="btn btn-success me-2" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts">accounts aanmaken</button>
+                <button type="button" class="btn btn-success me-2" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts">accounts beheren</button>
 
                 <div class="ms-auto">
                     <button type="submit" form="form1" id="delete" name="btnDeleteUsers" class="btn btn-danger me-2" style="display: none">verwijderen</button>
@@ -125,7 +125,7 @@
                     <div class="dropdown">
                         <a href="#" aria-expanded="false" id="sortDropdownMenu" class="nav-link dropdown-toggle"
                             data-mdb-dropdown-init role="button">
-                            <i class="fas fa-align-justify"></i>
+                            <i class="fas fa-align-justify text-primary fs-3"></i>
                         </a>                            
                         <div class="dropdown-menu w-75 mt-0" aria-labelledby="sortDropdownMenu"
                             style="border-top-right-radius: 0">
