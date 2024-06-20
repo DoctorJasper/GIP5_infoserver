@@ -225,12 +225,11 @@
                             <h4 class="text-white">Linux</h4>
                         </div>
                         <div class="card-body"> 
-                            <div class="d-flex align-items-center mb-3">
                                 <?php if ($command != "linux") : ?>
                                     <a href="beheerCommandos.php?comm=linux"><button type="button" class="btn btn-primary">Edit</button></a>
                                     <p></p>
-                                    <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <div class="ms-auto">
+                                    <div class="md-form amber-textarea active-amber-textarea-2">                                        
+                                        <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[0]["commandos"]; ?></textarea>
                                             <span class="badge badge-secondary">toevoegen</span>
                                         </div>
