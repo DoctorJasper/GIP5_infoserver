@@ -179,8 +179,8 @@
                             <h4>PhpMyAdmin</h4>
                         </li>
                         <li class="video-item">
-                            <video src="video2.mp4" controls></video>
-                            <h4>Tutorial 2</h4>
+                            <video src="tutorials/Untitled video - Made with Clipchamp.mp4" controls></video>
+                            <h4>FileZilla</h4>
                         </li>
                         <li class="video-item">
                             <video src="video3.mp4" controls></video>
