@@ -28,6 +28,18 @@
         $deleted = false;
     }
 
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["naam"])) {  
+        $query = $query . "ORDER BY $_GET['naam']";
+    } 
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["klas"])) {  
+        $query = $query . "ORDER BY $_GET['klas']";
+    } 
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["linux"])) {  
+    } 
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["mysql"])) {  
+    } 
+    
+
     // Uitvoeren van de query
     try{
         $res = $pdo->prepare($query);
@@ -102,7 +114,7 @@
                             <i class="fas fa-align-justify"></i>
                         </a>                            
                         <div class="dropdown-menu w-75 mt-0" aria-labelledby="sortDropdownMenu"
-                            style="border-top-left-radius: 0">
+                            style="border-top-right-radius: 0">
                             <div class="container">
                                 <div class="row my-4">
                                     <div class="col-md-1 col-lg-auto mb-3 mb-lg-0">
