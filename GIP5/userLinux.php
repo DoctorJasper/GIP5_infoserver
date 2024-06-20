@@ -173,32 +173,7 @@ function handleAction($actie, $leerlingenIntNr, $ss) {
                 array_push($tabel, array("Database user $username toegevoegd", "success"));
             } catch (PDOException $e) {
                 array_push($tabel, array("Gefaald om database user $username toe te voegen", "danger"));
-            }
-            
-            $sendMail = false;
-
-            if ($sendMail) {
-                // mail versturen
-                $bericht = "<html><body>";
-                $bericht .= "<p>Beste,</p>";
-                $bericht .= "<p></p>";
-                $bericht .= "<p>Dit is uw huidige linux wachtwoord: <strong>" . htmlspecialchars($password) . "</strong></p>";
-                $bericht .= "<p><a href='http://83.217.67.87/gip/GIP5/userpage.php?id=$leerlingIntNr'>Klik hier om uw wachtwoord te veranderen</a>.</p>";
-                $bericht .= "<p></p>";
-                $bericht .= "<p>mvg</p>";
-                $bericht .= "</body></html>";
-    
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    
-                // Assuming $ss->bericht function supports headers
-                $result = $ss->bericht("115759", $leerlingIntNr, "Linux Code", $bericht, $headers);
-                if ($result) {
-                    $message = "Bericht is goed verzonden.";
-                } else {
-                    $message = "Bericht is niet verzonden.";
-                }
-            }
+            }            
         }
     }
 
