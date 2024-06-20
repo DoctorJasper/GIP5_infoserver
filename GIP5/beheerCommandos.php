@@ -159,8 +159,6 @@
         try {
             // Bereid de update query voor en voer deze uit
             $res = $pdo->prepare($query);
-            var_dump($res);
-            die();
             $res->execute();
 
             // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
