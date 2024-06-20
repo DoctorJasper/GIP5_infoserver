@@ -97,7 +97,7 @@
                             data-mdb-dropdown-init role="button">
                             <i class="fas fa-align-justify"></i>
                         </a>                            
-                        <div class="dropdown-menu w-100 mt-0" aria-labelledby="navbarDropdownMenu"
+                        <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdownMenu"
                             style="border-top-left-radius: 0; border-top-right-radius: 0;">
                             <div class="container">
                                 <div class="row my-4">
