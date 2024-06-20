@@ -182,6 +182,10 @@
                             <video src="tutorials/Untitled video - Made with Clipchamp.mp4" controls></video>
                             <h4>FileZilla</h4>
                         </li>
+                        <li class="video-item">
+                            <video src="tutorials/Untitled video - Made with Clipchamp.mp4" controls></video>
+                            <h4>FileZilla</h4>
+                        </li>
                     </ul>
                 </div>
             </div>
