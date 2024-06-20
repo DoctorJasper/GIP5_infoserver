@@ -30,6 +30,8 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["naam"])) {  
         $query = $query . "ORDER BY " . $_GET['naam'];
+        var_dump($query);
+        die();
     } 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["klas"])) {  
         $query = $query . "ORDER BY " . $_GET['klas'];
