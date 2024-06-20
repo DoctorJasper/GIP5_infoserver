@@ -149,7 +149,7 @@
                                                 href="<?php echo $path ?>GIP5/userOverview.php?sort=mysql">MySql
                                             </a>
                                             <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php">deafault
+                                                href="<?php echo $path ?>GIP5/userOverview.php">standaard
                                             </a>
                                         </div>
                                     </div>
