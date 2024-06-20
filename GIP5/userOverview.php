@@ -92,9 +92,6 @@
                 <div class="ms-auto">
                     <button type="submit" form="form1" id="delete" name="btnDeleteUsers" class="btn btn-danger me-2" style="display: none">verwijderen</button>
                     <button type="submit" form="form1" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>     
-                    
-                </div>
-                <span>       
                     <div class="dropdown position-static">
                         <i class="fas fa-align-justify dropdown text-primary">  
                             <a href="#" aria-expanded="false" id="navbarDropdownMenu" class="nav-link  dropdown-toggle"
@@ -133,6 +130,9 @@
                             </div>
                         </i> 
                     </div> 
+                </div>
+                <span>       
+                    
                     
                     &nbsp;
                     <?php if ($deleted): ?>
