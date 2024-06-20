@@ -231,7 +231,7 @@
                                     <div class="md-form amber-textarea active-amber-textarea-2">                                        
                                         <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[0]["commandos"]; ?></textarea>
-                                            <br>
+                                            &nbsp;
                                             <span class="badge badge-secondary">toevoegen</span>
                                         </div>
                                     </div>
@@ -242,7 +242,7 @@
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
                                                 <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="2"><?php echo $row[0]["commandos"]; ?></textarea>
-                                                <br>
+                                                &nbsp;
                                                 <span class="badge badge-secondary">toevoegen</span>
                                             </div>
                                         </div>
@@ -255,7 +255,7 @@
                                     <div class="md-form amber-textarea active-amber-textarea-2">
                                         <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
-                                            <br>
+                                            &nbsp;
                                             <span class="badge badge-secondary">toevoegen</span>
                                         </div>
                                     </div>
@@ -266,7 +266,7 @@
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
                                                 <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
-                                                <br>
+                                                &nbsp;
                                                 <span class="badge badge-secondary">toevoegen</span>
                                             </div>
                                         </div>
@@ -279,7 +279,7 @@
                                     <div class="md-form amber-textarea active-amber-textarea-2">
                                         <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
-                                            <br>
+                                            &nbsp;
                                             <span class="badge badge-secondary">toevoegen</span>
                                         </div>
                                     </div>
@@ -290,7 +290,7 @@
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
                                                 <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
-                                                <br>
+                                                &nbsp;
                                                 <span class="badge badge-secondary">toevoegen</span>
                                             </div>
                                         </div>
@@ -303,7 +303,7 @@
                                     <div class="md-form amber-textarea active-amber-textarea-2">
                                         <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
-                                            <br>
+                                            &nbsp;
                                             <span class="badge badge-secondary">toevoegen</span>
                                         </div>
                                     </div>
@@ -314,7 +314,7 @@
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
                                                 <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
-                                                <br>
+                                                &nbsp;
                                                 <span class="badge badge-secondary">toevoegen</span>
                                             </div>
                                         </div>
