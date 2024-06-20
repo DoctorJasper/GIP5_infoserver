@@ -221,11 +221,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="card-header bg-warning">
-                                <h4 class="text-white">Linux</h4>
-                            </div>
-                            <div class="card-body"> 
+                        <div class="card-header bg-warning">
+                            <h4 class="text-white">Linux</h4>
+                        </div>
+                        <div class="card-body"> 
+                            <div class="d-flex align-items-center mb-3">
                                 <?php if ($command != "linux") : ?>
                                     <a href="beheerCommandos.php?comm=linux"><button type="button" class="btn btn-primary">Edit</button></a>
                                     <p></p>
