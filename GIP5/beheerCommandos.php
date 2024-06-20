@@ -129,6 +129,26 @@
             file_put_contents("log.txt", $timestamp." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
         }
     }
+    else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux5"])) {
+        $text = $_POST["linux5"];
+        // Update het commando in de database
+        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = 'update'";
+
+        try {
+            // Bereid de update query voor en voer deze uit
+            $res = $pdo->prepare($query);
+            $res->execute();
+
+            // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
+            $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'Linux CheckUser' bewerkt","success");
+            file_put_contents("log.txt", $timestamp." || Command veld van 'Linux CheckUser' bewerkt".PHP_EOL, FILE_APPEND);
+            header("Refresh: $delay");
+        } catch (PDOException $e) {
+            // Bij een fout, stel een melding in en log de fout
+            $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
+            file_put_contents("log.txt", $timestamp." || Database query error: ".$e->getMessage().PHP_EOL, FILE_APPEND);
+        }
+    }
     // Controleer of de request methode POST is en of de 'MySql' parameter is ingesteld
     else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["MySql"])) {
         $text = $_POST["MySql"];
@@ -302,7 +322,7 @@
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
                                         <div class="d-flex align-items-center mb-3">
-                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
+                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[5]["commandos"]; ?></textarea>
                                             &nbsp;
                                             <span class="badge badge-secondary">update</span>
                                         </div>
@@ -313,7 +333,31 @@
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
                                             <div class="d-flex align-items-center mb-3">
-                                                <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
+                                                <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[5]["commandos"]; ?></textarea>
+                                                &nbsp;
+                                                <span class="badge badge-secondary">update</span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <?php endif; ?>
+                                <br><br>
+                                <?php if ($command != "linux5") : ?>
+                                    <a href="beheerCommandos.php?comm=linux5"><button type="button" class="btn btn-primary">Edit</button></a>
+                                    <p></p>
+                                    <div class="md-form amber-textarea active-amber-textarea-2">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[7]["commandos"]; ?></textarea>
+                                            &nbsp;
+                                            <span class="badge badge-secondary">update</span>
+                                        </div>
+                                    </div>
+                                <?php elseif ($command == "linux5") : ?>
+                                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                        <button type="submit" class="btn btn-success">Toepassen</button>
+                                        <p></p>
+                                        <div class="md-form amber-textarea active-amber-textarea-2">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[7]["commandos"]; ?></textarea>
                                                 &nbsp;
                                                 <span class="badge badge-secondary">update</span>
                                             </div>
