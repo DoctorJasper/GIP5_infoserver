@@ -221,73 +221,99 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header bg-warning">
-                            <h4 class="text-white">Linux</h4>
-                        </div>
-                        <div class="card-body"> 
-                            <?php if ($command != "linux") : ?>
-                                <a href="beheerCommandos.php?comm=linux"><button type="button" class="btn btn-primary">Edit</button></a>
-                                <p></p>
-                                <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[0]["commandos"]; ?></textarea>
-                                </div>
-                            <?php elseif ($command == "linux") : ?>
-                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                                    <button type="submit" class="btn btn-success">Toepassen</button>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="card-header bg-warning">
+                                <h4 class="text-white">Linux</h4>
+                            </div>
+                            <div class="card-body"> 
+                                <?php if ($command != "linux") : ?>
+                                    <a href="beheerCommandos.php?comm=linux"><button type="button" class="btn btn-primary">Edit</button></a>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="2"><?php echo $row[0]["commandos"]; ?></textarea>
+                                        <div class="ms-auto">
+                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[0]["commandos"]; ?></textarea>
+                                            <span class="badge badge-secondary">toevoegen</span>
+                                        </div>
                                     </div>
-                                </form>
-                            <?php endif; ?>
-                            <br><br>
-                            <?php if ($command != "linux2") : ?>
-                                <a href="beheerCommandos.php?comm=linux2"><button type="button" class="btn btn-primary">Edit</button></a>
-                                <p></p>
-                                <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
-                                </div>
-                            <?php elseif ($command == "linux2") : ?>
-                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                                    <button type="submit" class="btn btn-success">Toepassen</button>
+                                <?php elseif ($command == "linux") : ?>
+                                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                        <button type="submit" class="btn btn-success">Toepassen</button>
+                                        <p></p>
+                                        <div class="md-form amber-textarea active-amber-textarea-2">
+                                            <div class="ms-auto">
+                                                <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="2"><?php echo $row[0]["commandos"]; ?></textarea>
+                                                <span class="badge badge-secondary">toevoegen</span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <?php endif; ?>
+                                <br><br>
+                                <?php if ($command != "linux2") : ?>
+                                    <a href="beheerCommandos.php?comm=linux2"><button type="button" class="btn btn-primary">Edit</button></a>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux2" rows="2"><?php echo $row[2]["commandos"]; ?></textarea>
+                                        <div class="ms-auto">
+                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
+                                            <span class="badge badge-secondary">toevoegen</span>
+                                        </div>
                                     </div>
-                                </form>
-                            <?php endif; ?>
-                            <br><br>
-                            <?php if ($command != "linux3") : ?>
-                                <a href="beheerCommandos.php?comm=linux3"><button type="button" class="btn btn-primary">Edit</button></a>
-                                <p></p>
-                                <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
-                                </div>
-                            <?php elseif ($command == "linux3") : ?>
-                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                                    <button type="submit" class="btn btn-success">Toepassen</button>
+                                <?php elseif ($command == "linux2") : ?>
+                                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                        <button type="submit" class="btn btn-success">Toepassen</button>
+                                        <p></p>
+                                        <div class="md-form amber-textarea active-amber-textarea-2">
+                                        <div class="ms-auto">
+                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
+                                            <span class="badge badge-secondary">toevoegen</span>
+                                        </div>
+                                    </div>
+                                    </form>
+                                <?php endif; ?>
+                                <br><br>
+                                <?php if ($command != "linux3") : ?>
+                                    <a href="beheerCommandos.php?comm=linux3"><button type="button" class="btn btn-primary">Edit</button></a>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux3" rows="2"><?php echo $row[3]["commandos"]; ?></textarea>
+                                        <div class="ms-auto">
+                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
+                                            <span class="badge badge-secondary">toevoegen</span>
+                                        </div>
                                     </div>
-                                </form>
-                            <?php endif; ?>
-                            <br><br>
-                            <?php if ($command != "linux4") : ?>
-                                <a href="beheerCommandos.php?comm=linux4"><button type="button" class="btn btn-primary">Edit</button></a>
-                                <p></p>
-                                <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[5]["commandos"]; ?></textarea>
-                                </div>
-                            <?php elseif ($command == "linux4") : ?>
-                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                                    <button type="submit" class="btn btn-success">Toepassen</button>
+                                <?php elseif ($command == "linux3") : ?>
+                                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                        <button type="submit" class="btn btn-success">Toepassen</button>
+                                        <p></p>
+                                        <div class="md-form amber-textarea active-amber-textarea-2">
+                                        <div class="ms-auto">
+                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
+                                            <span class="badge badge-secondary">toevoegen</span>
+                                        </div>
+                                    </div>
+                                    </form>
+                                <?php endif; ?>
+                                <br><br>
+                                <?php if ($command != "linux4") : ?>
+                                    <a href="beheerCommandos.php?comm=linux4"><button type="button" class="btn btn-primary">Edit</button></a>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux4" rows="2"><?php echo $row[5]["commandos"]; ?></textarea>
+                                        <div class="ms-auto">
+                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
+                                            <span class="badge badge-secondary">toevoegen</span>
+                                        </div>
                                     </div>
-                                </form>
-                            <?php endif; ?>
+                                <?php elseif ($command == "linux4") : ?>
+                                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                        <button type="submit" class="btn btn-success">Toepassen</button>
+                                        <p></p>
+                                        <div class="md-form amber-textarea active-amber-textarea-2">
+                                            <div class="ms-auto">
+                                                <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
+                                                <span class="badge badge-secondary">toevoegen</span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
