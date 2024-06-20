@@ -94,7 +94,47 @@
                     <button type="submit" form="form1" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>     
                     
                 </div>
-                <span>                        
+                <span>       
+                    <div class="dropdown position-static">
+                        <i class="fas fa-align-justify dropdown text-primary">  
+                            <a href="#" aria-expanded="false" id="navbarDropdownMenu" class="nav-link  dropdown-toggle"
+                                data-mdb-dropdown-init role="button">
+                                <i class="ffas fa-align-justify"></i>
+                            </a>                            
+                            <div class="dropdown-menu w-100 mt-0" aria-labelledby="navbarDropdownMenu"
+                                style="border-top-left-radius: 0; border-top-right-radius: 0;">
+                                <div class="container">
+                                    <div class="row my-4">
+                                        <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                                            <div class="list-group list-group-flush">
+                                                <h6 class="mb-0 list-group-item text-uppercase font-weight-bold">
+                                                    Sort by
+                                                </h6>
+                                                <a class="list-group-item list-group-item-action"
+                                                    href="<?php echo $path ?>GIP5/userOverview.php?sort=naam">
+                                                    <i class="fas fa-file-export ps-1 pe-3"></i>naam
+                                                </a>
+                                                <a class="list-group-item list-group-item-action"
+                                                    href="<?php echo $path ?>GIP5/userOverview.php?sort=klas">
+                                                    <i class="fas fa-file-export ps-1 pe-3"></i>klas
+                                                </a>
+                                                <a class="list-group-item list-group-item-action"
+                                                    href="<?php echo $path ?>GIP5/userOverview.php?sort=linux">
+                                                    <i class="fas fa-file-export ps-1 pe-3"></i>Linux user
+                                                </a>
+                                                <a class="list-group-item list-group-item-action"
+                                                    href="<?php echo $path ?>GIP5/userOverview.php?sort=mysql">
+                                                    <i class="fas fa-file-export ps-1 pe-3"></i>MySql user
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </i> 
+                    </div> 
+                    
+                    &nbsp;
                     <?php if ($deleted): ?>
                         <a href="userOverview.php"><i class="fas fa-users fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="actieve gebruikers"></i></a>  
                     <?php else: ?>
