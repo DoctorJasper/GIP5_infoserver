@@ -184,7 +184,9 @@
                         </li>
                         <li class="video-item">
                             <video src="video3.mp4" controls></video>
-                            <h4>Tutorial 3</h4>
+                            <h4>Linux</h4>
+                        </li>
+                        <li class="video-item">
                         </li>
                     </ul>
                 </div>
