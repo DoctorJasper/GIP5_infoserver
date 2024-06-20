@@ -43,14 +43,16 @@
                     catch (PDOException $e) {
                         // Logt eventuele databasefouten
                         file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                        array_push($tabel, array("Gefaal om mySql user $username toe te voegen", "danger"));
+                        $toast->set("fa-exclamation-triangle", "Error","", "Password kon niet geüpdatet worden","danger");
                     }
                 } catch (PDOException $e) {
                     // Logt eventuele databasefouten
                     file_put_contents("log.txt", $timestamp . " || Database query error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    $toast->set("fa-exclamation-triangle", "Error","", "Password kon niet geüpdatet worden","danger");
                 } catch (Exception $e) {
                     // Logt eventuele commando-uitvoeringsfouten
                     file_put_contents("log.txt", $timestamp . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    $toast->set("fa-exclamation-triangle", "Error","", "Password kon niet geüpdatet worden","danger");
                 }
             }
             if($platform == "Linux") {
@@ -68,11 +70,12 @@
                     exec($commando); // Voer het commando uit
     
                     // Geef een succesmelding weer
-                    array_push($tabel, array("Linux gebruiker $username toegevoegd", "success"));
+                    $toast->set("fa-exclamation-triangle", "Note","", "Password is geüpdatet","success");                
                 } 
                 catch (Exception $e) {
                     // Logt eventuele commando-uitvoeringsfouten
                     file_put_contents("log.txt", $timestamp . " || Command execution error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                    $toast->set("fa-exclamation-triangle", "Error","", "Password kon niet geüpdatet worden","danger");
                 }
             }
         }
