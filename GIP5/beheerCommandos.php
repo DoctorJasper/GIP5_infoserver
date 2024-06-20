@@ -231,6 +231,7 @@
                                     <div class="md-form amber-textarea active-amber-textarea-2">                                        
                                         <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[0]["commandos"]; ?></textarea>
+                                            <br>
                                             <span class="badge badge-secondary">toevoegen</span>
                                         </div>
                                     </div>
@@ -239,8 +240,9 @@
                                         <button type="submit" class="btn btn-success">Toepassen</button>
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
-                                            <div class="ms-auto">
+                                            <div class="d-flex align-items-center mb-3">
                                                 <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="linux" rows="2"><?php echo $row[0]["commandos"]; ?></textarea>
+                                                <br>
                                                 <span class="badge badge-secondary">toevoegen</span>
                                             </div>
                                         </div>
@@ -251,8 +253,9 @@
                                     <a href="beheerCommandos.php?comm=linux2"><button type="button" class="btn btn-primary">Edit</button></a>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <div class="ms-auto">
+                                        <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
+                                            <br>
                                             <span class="badge badge-secondary">toevoegen</span>
                                         </div>
                                     </div>
@@ -261,11 +264,12 @@
                                         <button type="submit" class="btn btn-success">Toepassen</button>
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <div class="ms-auto">
-                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
-                                            <span class="badge badge-secondary">toevoegen</span>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[2]["commandos"]; ?></textarea>
+                                                <br>
+                                                <span class="badge badge-secondary">toevoegen</span>
+                                            </div>
                                         </div>
-                                    </div>
                                     </form>
                                 <?php endif; ?>
                                 <br><br>
@@ -273,8 +277,9 @@
                                     <a href="beheerCommandos.php?comm=linux3"><button type="button" class="btn btn-primary">Edit</button></a>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <div class="ms-auto">
+                                        <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
+                                            <br>
                                             <span class="badge badge-secondary">toevoegen</span>
                                         </div>
                                     </div>
@@ -283,11 +288,12 @@
                                         <button type="submit" class="btn btn-success">Toepassen</button>
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <div class="ms-auto">
-                                            <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
-                                            <span class="badge badge-secondary">toevoegen</span>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[3]["commandos"]; ?></textarea>
+                                                <br>
+                                                <span class="badge badge-secondary">toevoegen</span>
+                                            </div>
                                         </div>
-                                    </div>
                                     </form>
                                 <?php endif; ?>
                                 <br><br>
@@ -295,8 +301,9 @@
                                     <a href="beheerCommandos.php?comm=linux4"><button type="button" class="btn btn-primary">Edit</button></a>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <div class="ms-auto">
+                                        <div class="d-flex align-items-center mb-3">
                                             <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
+                                            <br>
                                             <span class="badge badge-secondary">toevoegen</span>
                                         </div>
                                     </div>
@@ -305,8 +312,9 @@
                                         <button type="submit" class="btn btn-success">Toepassen</button>
                                         <p></p>
                                         <div class="md-form amber-textarea active-amber-textarea-2">
-                                            <div class="ms-auto">
+                                            <div class="d-flex align-items-center mb-3">
                                                 <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
+                                                <br>
                                                 <span class="badge badge-secondary">toevoegen</span>
                                             </div>
                                         </div>
