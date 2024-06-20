@@ -102,13 +102,12 @@
                             <div class="container">
                                 <div class="row my-4">
                                     <div class="col-md-1 col-lg-auto mb-3 mb-lg-0">
-                                        <div class="list-group list-group-flush">
+                                        <div class="list-group list-group-flush float-start">
                                             <h6 class="mb-0 list-group-item text-uppercase font-weight-bold">
                                                 Sort by
                                             </h6>
                                             <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=naam">
-                                                <p>naam</p>                                                    
+                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=naam">naam                                                  
                                             </a>
                                             <a class="list-group-item list-group-item-action"
                                                 href="<?php echo $path ?>GIP5/userOverview.php?sort=klas">klas 
