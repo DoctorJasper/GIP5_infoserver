@@ -109,19 +109,19 @@
                                                 </h6>
                                                 <a class="list-group-item list-group-item-action"
                                                     href="<?php echo $path ?>GIP5/userOverview.php?sort=naam">
-                                                    <i class="fas fa-file-export ps-1 pe-3"></i>naam
+                                                    naam
                                                 </a>
                                                 <a class="list-group-item list-group-item-action"
                                                     href="<?php echo $path ?>GIP5/userOverview.php?sort=klas">
-                                                    <i class="fas fa-file-export ps-1 pe-3"></i>klas
+                                                    klas
                                                 </a>
                                                 <a class="list-group-item list-group-item-action"
                                                     href="<?php echo $path ?>GIP5/userOverview.php?sort=linux">
-                                                    <i class="fas fa-file-export ps-1 pe-3"></i>Linux user
+                                                    Linux user
                                                 </a>
                                                 <a class="list-group-item list-group-item-action"
                                                     href="<?php echo $path ?>GIP5/userOverview.php?sort=mysql">
-                                                    <i class="fas fa-file-export ps-1 pe-3"></i>MySql user
+                                                    MySql user
                                                 </a>
                                             </div>
                                         </div>
