@@ -39,13 +39,13 @@
             $query = "SELECT g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin` AS `platform` FROM `tblGebruiker` g 
                       LEFT JOIN `tblAccounts` a ON g.`internNr` = a.`internnrGebruiker` 
                       LEFT JOIN `tblPlatform` p ON a.`idPlatform` = p.`idPlt` AND p.`platform` = 'Linux' 
-                      WHERE g.`active` = 1 GROUP BY g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin`"
+                      WHERE g.`active` = 1 GROUP BY g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin`";
         }
         if ($_GET["sort"] == "mysql") {
             $query = "SELECT g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin` AS `platform` FROM `tblGebruiker` g 
                       LEFT JOIN `tblAccounts` a ON g.`internNr` = a.`internnrGebruiker` 
                       LEFT JOIN `tblPlatform` p ON a.`idPlatform` = p.`idPlt` AND p.`platform` = 'MySql' 
-                      WHERE g.`active` = 1 GROUP BY g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin`"
+                      WHERE g.`active` = 1 GROUP BY g.`idGeb`, g.`internNr`, g.`naam`, g.`voornaam`, g.`klas`, g.`email`, g.`active`, g.`admin`";
         }
     } 
     
