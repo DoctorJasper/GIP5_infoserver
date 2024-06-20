@@ -392,9 +392,11 @@
                                     <button type="submit" class="btn btn-success">Toepassen</button>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql" rows="5"><?php echo $row[1]["commandos"]; ?></textarea>
-                                        &nbsp;
-                                        <span class="badge badge-secondary">toevoegen</span>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql" rows="5"><?php echo $row[1]["commandos"]; ?></textarea>
+                                            &nbsp;
+                                            <span class="badge badge-secondary">toevoegen</span>
+                                        </div>
                                     </div>
                                 </form>
                             <?php endif; ?>
@@ -403,18 +405,22 @@
                                 <a href="beheerCommandos.php?comm=MySql2"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
                                 <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
-                                    &nbsp;
-                                    <span class="badge badge-secondary">verwijderen</span>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[4]["commandos"]; ?></textarea>
+                                        &nbsp;
+                                        <span class="badge badge-secondary">verwijderen</span>
+                                    </div>
                                 </div>
                             <?php elseif ($command == "MySql2") : ?>
                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                     <button type="submit" class="btn btn-success">Toepassen</button>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql2" rows="2"><?php echo $row[4]["commandos"]; ?></textarea>
-                                        &nbsp;
-                                        <span class="badge badge-secondary">verwijderen</span>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql2" rows="2"><?php echo $row[4]["commandos"]; ?></textarea>
+                                            &nbsp;
+                                            <span class="badge badge-secondary">verwijderen</span>
+                                        </div>
                                     </div>
                                 </form>
                             <?php endif; ?>
@@ -422,19 +428,23 @@
                             <?php if ($command != "MySql3") : ?>
                                 <a href="beheerCommandos.php?comm=MySql3"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <p></p>
-                                <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[6]["commandos"]; ?></textarea>
-                                    &nbsp;
-                                    <span class="badge badge-secondary">update</span>
+                                <div class="md-form amber-textarea active-amber-textarea-2">                                    
+                                    <div class="d-flex align-items-center mb-3">
+                                        <textarea id="text1" class="md-textarea form-control" rows="2" disabled><?php echo $row[6]["commandos"]; ?></textarea>
+                                        &nbsp;
+                                        <span class="badge badge-secondary">update</span>
+                                    </div>
                                 </div>
                             <?php elseif ($command == "MySql3") : ?>
                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                     <button type="submit" class="btn btn-success">Toepassen</button>
                                     <p></p>
                                     <div class="md-form amber-textarea active-amber-textarea-2">
-                                        <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql3" rows="2"><?php echo $row[6]["commandos"]; ?></textarea>
-                                        &nbsp;
-                                        <span class="badge badge-secondary">update</span>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <textarea id="text1" class="bg-dark br-gradient text-white md-textarea form-control" name="MySql3" rows="2"><?php echo $row[6]["commandos"]; ?></textarea>
+                                            &nbsp;
+                                            <span class="badge badge-secondary">update</span>
+                                        </div>
                                     </div>
                                 </form>
                             <?php endif; ?>
