@@ -41,8 +41,6 @@
     // Uitvoeren van de query
     try{
         $res = $pdo->prepare($query);
-        var_dump($res);
-        die();
         $res->execute();
     }catch(PDOException $e){
         // Foutafhandeling bij databasequeryfouten
