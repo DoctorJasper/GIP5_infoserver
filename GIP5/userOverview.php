@@ -28,17 +28,17 @@
         $deleted = false;
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["naam"])) {  
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["sort"])) {  
         $query = $query . "ORDER BY " . $_GET['naam'];
         var_dump($query);
         die();
     } 
-    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["klas"])) {  
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["sort"])) {  
         $query = $query . "ORDER BY " . $_GET['klas'];
     } 
-    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["linux"])) {  
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["sort"])) {  
     } 
-    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["mysql"])) {  
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["sort"])) {  
     } 
     
 
