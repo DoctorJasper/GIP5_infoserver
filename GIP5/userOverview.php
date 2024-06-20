@@ -92,12 +92,8 @@
                 <div class="ms-auto">
                     <button type="submit" form="form1" id="delete" name="btnDeleteUsers" class="btn btn-danger me-2" style="display: none">verwijderen</button>
                     <button type="submit" form="form1" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>     
-                    <div class="dropdown position-static">
-                        <i class="fas fa-align-justify dropdown text-primary">  
-                            <a href="#" aria-expanded="false" id="navbarDropdownMenu" class="nav-link  dropdown-toggle"
-                                data-mdb-dropdown-init role="button">
-                                <i class="ffas fa-align-justify"></i>
-                            </a>                            
+                    <div class="dropdown">
+                        <i class="fas fa-align-justify dropdown text-primary">                                                     
                             <div class="dropdown-menu w-100 mt-0" aria-labelledby="navbarDropdownMenu"
                                 style="border-top-left-radius: 0; border-top-right-radius: 0;">
                                 <div class="container">
