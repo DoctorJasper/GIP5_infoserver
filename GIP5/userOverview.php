@@ -118,40 +118,39 @@
             <div class="d-flex align-items-center mb-3">
                 <!-- BUTTON: KIEZEN WELK ACCOUNT --> 
                 <button type="button" class="btn btn-success me-2" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#Accounts">accounts beheren</button>
-
-                <div class="ms-auto">
+                <div class="ms-auto">  
                     <button type="submit" form="form1" id="delete" name="btnDeleteUsers" class="btn btn-danger me-2" style="display: none">verwijderen</button>
-                    <button type="submit" form="form1" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>     
-                    <div class="dropdown">
-                        <a href="#" aria-expanded="false" id="sortDropdownMenu" class="dropdown-toggle text-primary fs-3"
-                            data-mdb-dropdown-init role="button">
-                            <i class="fas fa-align-justify text-primary fs-3"></i>
-                        </a>                            
-                        <div class="dropdown-menu w-75 mt-0" aria-labelledby="sortDropdownMenu"
-                            style="border-top-right-radius: 0">
-                            <div class="container">
-                                <div class="row my-4">
-                                    <div class="col-md-1 col-lg-auto mb-3 mb-lg-0">
-                                        <div class="list-group list-group-flush float-start">
-                                            <h6 class="mb-0 list-group-item text-uppercase font-weight-bold">
-                                                Sort by
-                                            </h6>
-                                            <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=voornaam">voornaam                                                  
-                                            </a>
-                                            <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=klas">klas 
-                                            </a>
-                                            <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=linux">Linux
-                                            </a>
-                                            <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=mysql">MySql
-                                            </a>
-                                            <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php">standaard
-                                            </a>
-                                        </div>
+                    <button type="submit" form="form1" id="activeer" name="btnAcivateUsers" class="btn btn-success" style="display: none">activeren</button>                   
+                </div>
+                <div class="dropdown">
+                    <a href="#" aria-expanded="false" id="sortDropdownMenu" class="dropdown-toggle text-primary fs-3"
+                        data-mdb-dropdown-init role="button">
+                        <i class="fas fa-align-justify text-primary fs-3"></i>
+                    </a>                            
+                    <div class="dropdown-menu w-75 mt-0" aria-labelledby="sortDropdownMenu"
+                        style="border-top-right-radius: 0">
+                        <div class="container">
+                            <div class="row my-4">
+                                <div class="col-md-1 col-lg-auto mb-3 mb-lg-0">
+                                    <div class="list-group list-group-flush float-start">
+                                        <h6 class="mb-0 list-group-item text-uppercase font-weight-bold">
+                                            Sort by
+                                        </h6>
+                                        <a class="list-group-item list-group-item-action"
+                                            href="<?php echo $path ?>GIP5/userOverview.php?sort=voornaam">voornaam                                                  
+                                        </a>
+                                        <a class="list-group-item list-group-item-action"
+                                            href="<?php echo $path ?>GIP5/userOverview.php?sort=klas">klas 
+                                        </a>
+                                        <a class="list-group-item list-group-item-action"
+                                            href="<?php echo $path ?>GIP5/userOverview.php?sort=linux">Linux
+                                        </a>
+                                        <a class="list-group-item list-group-item-action"
+                                            href="<?php echo $path ?>GIP5/userOverview.php?sort=mysql">MySql
+                                        </a>
+                                        <a class="list-group-item list-group-item-action"
+                                            href="<?php echo $path ?>GIP5/userOverview.php">standaard
+                                        </a>
                                     </div>
                                 </div>
                             </div>
