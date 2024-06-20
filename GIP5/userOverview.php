@@ -97,11 +97,11 @@
                             data-mdb-dropdown-init role="button">
                             <i class="fas fa-align-justify"></i>
                         </a>                            
-                        <div class="dropdown-menu w-100 mt-0" aria-labelledby="navbarDropdownMenu"
+                        <div class="dropdown-menu w-75 mt-0" aria-labelledby="navbarDropdownMenu"
                             style="border-top-left-radius: 0">
                             <div class="container">
                                 <div class="row my-4">
-                                    <div class="col-md-1 col-lg-auto mb-3 mb-lg-0">
+                                    <div class="col-md-1 col-lg-auto mb-0 mb-lg-3">
                                         <div class="list-group list-group-flush float-start">
                                             <h6 class="mb-0 list-group-item text-uppercase font-weight-bold">
                                                 Sort by
