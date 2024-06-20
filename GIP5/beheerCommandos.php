@@ -132,7 +132,7 @@
     else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["linux5"])) {
         $text = $_POST["linux5"];
         // Update het commando in de database
-        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = 'update'";
+        $query = "UPDATE `tblCommandos` SET `commandos`= '". $text . "' WHERE idPlatform = 1 AND type = 'check'";
 
         try {
             // Bereid de update query voor en voer deze uit
@@ -158,6 +158,8 @@
         try {
             // Bereid de update query voor en voer deze uit
             $res = $pdo->prepare($query);
+            var_dump($res);
+            die();
             $res->execute();
 
             // Stel een melding in en log de wijziging, ververs de pagina na een korte vertraging
