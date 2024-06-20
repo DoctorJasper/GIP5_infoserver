@@ -98,7 +98,7 @@
                             <i class="fas fa-align-justify"></i>
                         </a>                            
                         <div class="dropdown-menu w-100 mt-0" aria-labelledby="navbarDropdownMenu"
-                            style="border-top-left-radius: 0; border-top-right-radius: 0;">
+                            style="border-top-left-radius: 0">
                             <div class="container">
                                 <div class="row my-4">
                                     <div class="col-md-1 col-lg-auto mb-3 mb-lg-0">
@@ -111,16 +111,13 @@
                                                 <p>naam</p>                                                    
                                             </a>
                                             <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=klas">
-                                                <p>klas</p>  
+                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=klas">klas 
                                             </a>
                                             <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=linux">
-                                                <p>Linux</p>  
+                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=linux">Linux
                                             </a>
                                             <a class="list-group-item list-group-item-action"
-                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=mysql">
-                                                <p>MySql</p>  
+                                                href="<?php echo $path ?>GIP5/userOverview.php?sort=mysql">MySql
                                             </a>
                                         </div>
                                     </div>
