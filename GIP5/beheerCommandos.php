@@ -62,6 +62,7 @@
             // Stel een melding in en log de wijziging
             $toast->set("fa-exclamation-triangle", "Melding","", "Command veld van 'Linux AddUser' bewerkt","success");
             file_put_contents("log.txt", $timestamp." || Command veld van 'Linux AddUser' bewerkt".PHP_EOL, FILE_APPEND);
+            header("Refresh: $delay");
         } catch (PDOException $e) {
             // Bij een fout, stel een melding in en log de fout
             $toast->set("fa-exclamation-triangle", "Error","", "Database query error","danger");
