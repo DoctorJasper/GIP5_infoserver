@@ -44,6 +44,8 @@
     // Controleer of de request methode GET is en of de 'comm' parameter is ingesteld
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["comm"])) {
         $command = $_GET["comm"];
+        var_dump($command);
+        die();
     }
 
     //-- POST ------------------------------------------------------------------------------------------
