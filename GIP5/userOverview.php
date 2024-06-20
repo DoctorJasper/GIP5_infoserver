@@ -101,7 +101,7 @@
                             style="border-top-left-radius: 0; border-top-right-radius: 0;">
                             <div class="container">
                                 <div class="row my-4">
-                                    <div class="col-md-4 col-lg-1 mb-3 mb-lg-0">
+                                    <div class="col-md-1 col-lg-auto mb-3 mb-lg-0">
                                         <div class="list-group list-group-flush">
                                             <h6 class="mb-0 list-group-item text-uppercase font-weight-bold">
                                                 Sort by
